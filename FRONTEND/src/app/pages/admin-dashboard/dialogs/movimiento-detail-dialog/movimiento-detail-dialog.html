@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Movimiento #{{ data.movimiento.id }}</h2>
+
+<mat-dialog-content class="detail-grid">
+    <div class="detail-field">
+        <span class="detail-label">Fecha</span>
+        <strong>{{ data.movimiento.fecha | date: 'dd/MM/yyyy, hh:mm a' }}</strong>
+    </div>
+
+    <div class="detail-field">
+        <span class="detail-label">Usuario</span>
+        <strong>{{ data.movimiento.usuario_nombre || data.movimiento.usuario_correo || 'Usuario #' + data.movimiento.usuario_id }}</strong>
+        @if (data.movimiento.usuario_correo) {
+        <span class="detail-sub">{{ data.movimiento.usuario_correo }}</span>
+        }
+    </div>
+
+    <div class="detail-field">
+        <span class="detail-label">Tipo</span>
+        <mat-chip [class.chip-ingreso]="data.movimiento.tipo === 'INGRESO'" [class.chip-gasto]="data.movimiento.tipo === 'GASTO'" [class.chip-transferencia]="data.movimiento.tipo === 'TRANSFERENCIA'">
+            {{ data.movimiento.tipo }}
+        </mat-chip>
+    </div>
+
+    <div class="detail-field">
+        <span class="detail-label">Categoría</span>
+        <strong>{{ data.movimiento.categoria || 'Sin categoría' }}</strong>
+    </div>
+
+    <div class="detail-field">
+        <span class="detail-label">Monto</span>
+        <strong>{{money(data.movimiento.monto,data.movimiento.moneda)}}</strong>
+    </div>
+
+    <div class="detail-field">
+        <span class="detail-label">Cuenta origen</span>
+        <strong>{{ data.movimiento.cuenta_origen || '-' }}</strong>
+    </div>
+
+    <div class="detail-field">
+        <span class="detail-label">Cuenta destino</span>
+        <strong>{{ data.movimiento.cuenta_destino || '-' }}</strong>
+    </div>
+
+    <div class="detail-field detail-field-full">
+        <span class="detail-label">Descripción</span>
+        <strong>{{ data.movimiento.descripcion || '-' }}</strong>
+    </div>
+
+    <div class="detail-field">
+        <span class="detail-label">Estado</span>
+        <mat-chip [class.status-up]="!data.movimiento.deleted_at" [class.status-down]="!!data.movimiento.deleted_at">
+            {{ data.movimiento.deleted_at ? 'Eliminado' : 'Activo' }}
+        </mat-chip>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="button" (click)="cerrar()">Cerrar</button>
+</mat-dialog-actions>

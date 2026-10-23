@@ -1,0 +1,7 @@
+{
+ "name":"asistente-financiero",
+ "version":"2.3.0",
+ "private":true,
+ "engines":{"node":"24.x"},
+ "scripts":{"build":"node BACKEND/scripts/prepare-cloud.cjs && npm run build --prefix FRONTEND"}
+}

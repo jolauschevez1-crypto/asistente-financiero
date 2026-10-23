@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>Editar movimiento #{{ data.movimiento.id }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+    <mat-dialog-content class="edit-movimiento-grid">
+        <mat-form-field appearance="outline">
+            <mat-label>Categoría</mat-label>
+            <mat-select formControlName="categoria" (selectionChange)="actualizarCategoriaPersonalizada()">
+                @for (categoria of opcionesCategorias(); track categoria) {
+                <mat-option [value]="categoria">{{ categoria }}</mat-option>
+                }
+                <mat-option [value]="categoriaPersonalizadaValue">Otra categoría…</mat-option>
+            </mat-select>
+            @if (form.controls.categoria.invalid) {
+            <mat-error>Selecciona una categoría válida.</mat-error>
+            }
+        </mat-form-field>
+
+        @if (form.controls.categoria.value === categoriaPersonalizadaValue) {
+        <mat-form-field appearance="outline">
+            <mat-label>Nueva categoría</mat-label>
+            <input matInput formControlName="categoriaPersonalizada" maxlength="100" autocomplete="off" />
+            @if (form.controls.categoriaPersonalizada.invalid) {
+            <mat-error>Escribe una categoría de hasta 100 caracteres; no puede contener solo espacios.</mat-error>
+            }
+        </mat-form-field>
+        }
+        @if (avisoCategorias()) {
+        <p class="full" role="status">{{ avisoCategorias() }}</p>
+        }
+
+        <mat-form-field appearance="outline">
+            <mat-label>Monto · {{data.movimiento.moneda || "USD"}}</mat-label>
+            <input matInput type="number" min="0.01" step="0.01" formControlName="monto" />
+            @if (form.controls.monto.hasError('required')) {
+            <mat-error>El monto es obligatorio.</mat-error>
+            } @else if (form.controls.monto.hasError('min')) {
+            <mat-error>El monto debe ser mayor a 0.</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Cuenta origen</mat-label>
+            <input matInput formControlName="cuenta_origen" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Cuenta destino</mat-label>
+            <input matInput formControlName="cuenta_destino" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Método de pago</mat-label>
+            <input matInput formControlName="metodo_pago" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput rows="3" formControlName="descripcion"></textarea>
+        </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-stroked-button type="button" (click)="cancelar()">Cancelar</button>
+        <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </mat-dialog-actions>
+</form>

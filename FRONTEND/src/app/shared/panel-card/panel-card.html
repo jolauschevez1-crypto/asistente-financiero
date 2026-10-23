@@ -1,0 +1,12 @@
+<section class="panel-card">
+    <header class="panel-card-header">
+        @if (icon) {
+        <mat-icon>{{ icon }}</mat-icon>
+        }
+        <h2>{{ titulo }}</h2>
+    </header>
+
+    <div class="panel-card-body">
+        <ng-content />
+    </div>
+</section>

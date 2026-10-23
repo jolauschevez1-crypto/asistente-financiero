@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Historial de cuenta</h2>
+
+<mat-dialog-content class="history-grid">
+    <div class="history-item">
+        <mat-icon>event</mat-icon>
+        <div>
+            <span class="history-label">Fecha de registro</span>
+            <strong>{{ data.usuario.created_at ? (data.usuario.created_at | date: 'dd/MM/yyyy, hh:mm a') : 'No disponible' }}</strong>
+        </div>
+    </div>
+
+    <div class="history-item">
+        <mat-icon>login</mat-icon>
+        <div>
+            <span class="history-label">Último acceso</span>
+            <strong>{{ data.usuario.ultimo_login ? (data.usuario.ultimo_login | date: 'dd/MM/yyyy, hh:mm a') : 'Nunca ha iniciado sesión' }}</strong>
+        </div>
+    </div>
+
+    <div class="history-item">
+        <mat-icon>verified_user</mat-icon>
+        <div>
+            <span class="history-label">Estado actual</span>
+            <mat-chip [class.status-up]="!data.usuario.deleted_at" [class.status-down]="!!data.usuario.deleted_at">
+                {{ data.usuario.deleted_at ? 'Inactivo' : 'Activo' }}
+            </mat-chip>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="button" (click)="cerrar()">Cerrar</button>
+</mat-dialog-actions>

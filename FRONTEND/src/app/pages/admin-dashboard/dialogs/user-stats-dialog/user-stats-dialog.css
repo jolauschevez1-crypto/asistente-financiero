@@ -1,0 +1,43 @@
+.stats-content {
+    min-width: 480px;
+    display: grid;
+    gap: 16px;
+    padding-top: 8px;
+}
+
+.stats-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.stats-kpi {
+    display: grid;
+    gap: 4px;
+    padding: 12px;
+    border-radius: var(--radius-md, 10px);
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.stats-kpi span {
+    font-size: var(--text-xs, 11px);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--app-text-muted, #9fb1c8);
+}
+
+.stats-kpi strong {
+    font-size: var(--text-md, 18px);
+    color: var(--app-text-primary, #f8fafc);
+}
+
+.stats-empty {
+    padding: 20px;
+    text-align: center;
+    color: var(--app-text-muted, #9fb1c8);
+}
+
+.stats-error {
+    color: var(--app-danger-text, #f87171);
+}

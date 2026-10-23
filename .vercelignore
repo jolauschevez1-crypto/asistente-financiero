@@ -1,0 +1,14 @@
+**/node_modules
+**/.env
+**/.env.*
+**/data
+**/temp
+**/logs
+**/dist
+**/.angular
+**/tests
+**/*.spec.ts
+EVIDENCIAS_LOCALES
+*.zip
+*.log
+LEEME_LOCAL.md

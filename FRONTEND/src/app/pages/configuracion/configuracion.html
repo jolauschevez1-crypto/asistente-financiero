@@ -1,0 +1,88 @@
+<main class="configuracion-shell">
+    <header class="topbar">
+        <div>
+            <p>Administrador</p>
+            <h1>Configuración</h1>
+        </div>
+    </header>
+
+    <app-notice tipo="danger" [mensaje]="error()" />
+
+    @if (cargando()) {
+    <app-skeleton variant="text" height="18px" />
+    <app-skeleton variant="text" height="18px" />
+    <app-skeleton variant="text" height="18px" />
+    } @else {
+    <div class="config-grid">
+
+        <app-panel-card titulo="Configuración de la aplicación" icon="computer"><p>Idioma: español · Cada usuario elige la moneda de su cuenta.</p><p class="hint">La moneda se elige al registrarse o desde Mi perfil, antes de tener actividad financiera.</p></app-panel-card>
+
+        <app-panel-card titulo="Marca" icon="badge">
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre del sistema</mat-label>
+                <input matInput [ngModel]="nombreSistema()" (ngModelChange)="nombreSistema.set($event)" placeholder="Asistente Financiero" />
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="button" [disabled]="guardando()" (click)="guardarMarca()">
+                Guardar marca
+            </button>
+        </app-panel-card>
+
+        <app-panel-card titulo="Servicios externos" icon="smart_toy"><p>IA, Telegram, Google y correo están desactivados en esta versión.</p><p class="hint">Los módulos financieros funcionan de forma independiente. La IA se incorporará en una etapa posterior.</p></app-panel-card>
+
+        <app-panel-card titulo="Respaldo" icon="cloud_download">
+            <p class="hint">Descarga un archivo JSON con todos los datos: usuarios, carteras, movimientos, grupos, presupuestos, recordatorios, deudas, metas y configuración. El archivo contiene información privada; consérvalo en un lugar seguro.</p>
+            <button mat-stroked-button type="button" (click)="descargarRespaldo()">
+                <mat-icon>download</mat-icon> Descargar respaldo
+            </button>
+        </app-panel-card>
+
+        <app-panel-card titulo="Restaurar respaldo" icon="restore">
+            <p class="hint danger-hint">Acción destructiva: reemplaza TODOS los datos actuales por el contenido del archivo. Esta acción no se puede deshacer.</p>
+
+            <div class="campo">
+                <input type="file" accept="application/json" (change)="onArchivoSeleccionado($event)" />
+            </div>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Escribe RESTAURAR para confirmar</mat-label>
+                <input matInput [ngModel]="confirmacionRestaurar()" (ngModelChange)="confirmacionRestaurar.set($event)" />
+            </mat-form-field>
+
+            <button
+                mat-raised-button
+                color="warn"
+                type="button"
+                [disabled]="!archivoRestaurar() || confirmacionRestaurar() !== 'RESTAURAR' || restaurando()"
+                (click)="restaurarRespaldo()"
+            >
+                Restaurar respaldo
+            </button>
+        </app-panel-card>
+
+        <app-panel-card titulo="Seguridad" icon="lock">
+            <p class="hint">Cambiar la contraseña de tu propia cuenta de administrador.</p>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Nueva contraseña</mat-label>
+                <input matInput type="password" [ngModel]="nuevaPassword()" (ngModelChange)="nuevaPassword.set($event)" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Confirmar contraseña</mat-label>
+                <input matInput type="password" [ngModel]="confirmarPassword()" (ngModelChange)="confirmarPassword.set($event)" />
+            </mat-form-field>
+
+            <button
+                mat-raised-button
+                color="primary"
+                type="button"
+                [disabled]="!nuevaPassword() || !confirmarPassword() || cambiandoPassword()"
+                (click)="cambiarPassword()"
+            >
+                Cambiar mi contraseña
+            </button>
+        </app-panel-card>
+    </div>
+    }
+</main>

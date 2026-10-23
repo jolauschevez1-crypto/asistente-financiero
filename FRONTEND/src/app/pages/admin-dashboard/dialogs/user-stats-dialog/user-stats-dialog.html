@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Estadísticas de {{ data.usuario.nombre || data.usuario.correo }}</h2>
+
+<mat-dialog-content class="stats-content">
+    @if (error()) {
+    <p class="stats-error">{{ error() }}</p>
+    } @if (cargando()) {
+    <app-skeleton variant="text" height="24px" />
+    <app-skeleton variant="chart" height="220px" />
+    } @else {
+    <div class="stats-kpi-row">
+        <div class="stats-kpi">
+            <span>Balance total</span>
+            <strong>{{money((estadisticas()?.balanceTotal || 0),estadisticas()?.moneda || data.usuario.moneda)}}</strong>
+        </div>
+        <div class="stats-kpi">
+            <span>Movimientos este mes</span>
+            <strong>{{ estadisticas()?.resumenMes?.length || 0 }}</strong>
+        </div>
+        <div class="stats-kpi">
+            <span>Categorías con gasto</span>
+            <strong>{{ estadisticas()?.gastosCategoriaMes?.length || 0 }}</strong>
+        </div>
+    </div>
+
+    @if ((estadisticas()?.gastosCategoriaMes?.length || 0) > 0) {
+    <app-chart-card titulo="Gastos por categoría (mes actual)" icon="pie_chart" [options]="gastosCategoriaOptions()" />
+    } @else {
+    <p class="stats-empty">Sin gastos registrados este mes.</p>
+    }
+    }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" type="button" (click)="cerrar()">Cerrar</button>
+</mat-dialog-actions>

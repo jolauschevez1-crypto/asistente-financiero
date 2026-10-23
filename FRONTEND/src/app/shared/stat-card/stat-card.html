@@ -1,0 +1,28 @@
+<article class="stat-card" [class]="'accent-' + accent">
+    <div class="stat-icon">
+        <mat-icon>{{ icon }}</mat-icon>
+    </div>
+
+    <div class="stat-body">
+        <span class="stat-label">{{ label }}</span>
+
+        @if (loading) {
+        <app-skeleton variant="text" width="70%" height="26px" />
+        <app-skeleton variant="text" width="40%" height="14px" />
+        } @else {
+        <strong class="stat-value" [matTooltip]="value">{{ value }}</strong>
+
+        @if (variacion !== null) {
+        <span
+            class="stat-variacion"
+            [class.positive]="variacion >= 0"
+            [class.negative]="variacion < 0"
+            [matTooltip]="'Comparado con el mes anterior'"
+        >
+            <mat-icon>{{ variacion >= 0 ? 'trending_up' : 'trending_down' }}</mat-icon>
+            {{ variacion >= 0 ? '+' : '' }}{{ variacion }}%
+        </span>
+        }
+        }
+    </div>
+</article>

@@ -1,0 +1,38 @@
+.history-grid {
+    display: grid;
+    gap: 16px;
+    min-width: 360px;
+    padding-top: 8px;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.history-item mat-icon {
+    color: var(--app-accent-on-surface, #38bdf8);
+}
+
+.history-item div {
+    display: grid;
+    gap: 2px;
+}
+
+.history-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--app-text-muted, #9fb1c8);
+}
+
+mat-chip.status-up {
+    --mat-chip-label-text-color: #4ade80;
+    background: rgba(74, 222, 128, 0.14) !important;
+}
+
+mat-chip.status-down {
+    --mat-chip-label-text-color: #f87171;
+    background: rgba(248, 113, 113, 0.14) !important;
+}

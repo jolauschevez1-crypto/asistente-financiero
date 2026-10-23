@@ -1,0 +1,11 @@
+.edit-movimiento-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 16px;
+    min-width: 460px;
+    padding-top: 8px;
+}
+
+.edit-movimiento-grid .full {
+    grid-column: 1 / -1;
+}

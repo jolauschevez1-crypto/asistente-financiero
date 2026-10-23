@@ -1,0 +1,25 @@
+const express=require('express');
+const cors=require('cors');
+const helmet=require('helmet');
+const path=require('node:path');
+const fs=require('node:fs');
+const runtime=require('./utils/runtimeConfig').runtimeConfig();
+const app=express();
+app.disable('x-powered-by');
+if(runtime.cloud)app.set('trust proxy',1);
+app.use(helmet({crossOriginOpenerPolicy:{policy:'same-origin-allow-popups'},contentSecurityPolicy:{directives:{defaultSrc:["'self'"],scriptSrc:["'self'",'https://accounts.google.com/gsi/client'],styleSrc:["'self'","'unsafe-inline'",'https://accounts.google.com/gsi/style'],imgSrc:["'self'",'data:','blob:','https://lh3.googleusercontent.com'],frameSrc:['https://accounts.google.com/gsi/'],connectSrc:runtime.cloud?["'self'",'https://accounts.google.com/gsi/']:["'self'",'https://accounts.google.com/gsi/','http://localhost:*','http://127.0.0.1:*'],fontSrc:["'self'",'data:'],upgradeInsecureRequests:runtime.cloud?[]:null}},hsts:runtime.cloud?{maxAge:31536000,includeSubDomains:true}:false}));
+app.use(cors({origin(origin,callback){if(runtime.allowsOrigin(origin))return callback(null,true);callback(Object.assign(new Error('Origen no permitido.'),{status:403}));}}));
+app.use('/api',(req,res,next)=>{res.set('Cache-Control','private, no-store');next();});
+app.use(express.json({limit:runtime.cloud?'4mb':'20mb'}));
+app.use(express.urlencoded({extended:false,limit:'3mb'}));
+app.use(require('./middlewares/sanitizarMiddleware'));
+app.use('/api',require('./middlewares/rateLimitMiddleware').limiterGlobal,require('./routes'));
+app.use('/api',(req,res)=>res.status(404).json({success:false,message:'Ruta de API no encontrada.'}));
+const frontend=path.resolve(__dirname,'../../FRONTEND/dist/FRONTEND/browser');
+if(!runtime.cloud&&fs.existsSync(path.join(frontend,'index.html'))){
+ app.use(express.static(frontend));
+ app.get('*',(req,res)=>res.sendFile(path.join(frontend,'index.html')));
+}else app.get('/',(req,res)=>res.json({estado:'Disponible',mensaje:'API del Asistente Financiero.',url:'/api/health'}));
+app.use((req,res)=>res.status(404).json({success:false,message:'Ruta no encontrada.'}));
+app.use(require('./middlewares/errorMiddleware'));
+module.exports=app;

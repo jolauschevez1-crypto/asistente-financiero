@@ -1,0 +1,18 @@
+.notice {
+    margin: var(--space-md, 12px) 0;
+    padding: var(--space-sm, 11px) var(--space-md, 14px);
+    border-radius: var(--radius-sm, 6px);
+    font-weight: var(--font-weight-bold, 700);
+}
+
+.notice.success {
+    border: 1px solid var(--app-success-border, #bbf7d0);
+    background: var(--app-success-bg, #f0fdf4);
+    color: var(--app-success-text, #166534);
+}
+
+.notice.danger {
+    border: 1px solid var(--app-danger-border, #fecaca);
+    background: var(--app-danger-bg, #fef2f2);
+    color: var(--app-danger-text, #991b1b);
+}

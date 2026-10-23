@@ -1,0 +1,12 @@
+node_modules/
+/dist/
+/out-tsc/
+.angular/
+.angular/cache/
+*tsnuildinfo.
+/coverage/
+Thumbs.db
+.vscode/
+.idea/
+npm-debug.log*
+yan-error.log*

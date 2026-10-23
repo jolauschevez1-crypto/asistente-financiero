@@ -1,0 +1,54 @@
+<main class="login-page">
+  <section class="intro">
+    <span class="eyebrow">ASISTENTE FINANCIERO</span>
+    <h1>Tu dinero,<br>más claro.</h1>
+    <p>Organiza tus carteras, planifica gastos y avanza hacia tus metas desde un mismo lugar.</p>
+    <div class="intro-features"><span>Carteras y movimientos</span><span>Presupuestos y metas</span><span>Gastos compartidos</span></div>
+  </section>
+  <section class="login-panel" aria-label="Acceso al asistente financiero">
+    <div class="brand-block"><span class="mark" aria-hidden="true">AF</span><div><h2>{{ modo() === 'registro' ? 'Crea tu cuenta' : modo() === 'login' ? 'Bienvenido' : 'Recupera tu acceso' }}</h2><p>Tus finanzas, organizadas en tu propia cuenta.</p></div></div>
+    <p *ngIf="mensaje()" class="alert success" role="status">{{ mensaje() }}</p>
+    <p *ngIf="error()" class="alert" role="alert">{{ error() }}</p>
+    <form *ngIf="modo() === 'login'" [formGroup]="form" (ngSubmit)="ingresar()" class="login-form">
+      <label for="login-email">Correo electrónico</label><input id="login-email" type="email" formControlName="correo" autocomplete="email" maxlength="254" placeholder="tu@correo.com" />
+      <label for="login-password">Contraseña</label><input id="login-password" [type]="verPassword() ? 'text' : 'password'" formControlName="password" autocomplete="current-password" />
+      <label class="show-password"><input type="checkbox" [checked]="verPassword()" (change)="toggleVerPassword()" /> Mostrar contraseña</label>
+      <button type="submit" [disabled]="cargando()">{{ cargando() ? 'Entrando…' : 'Entrar' }}</button>
+      <button class="link-btn" type="button" (click)="mostrarRegistro()">Crear una cuenta</button>
+      <button class="link-btn" type="button" (click)="mostrarRecuperacion()">Olvidé mi contraseña</button>
+    </form>
+    @if(modo() === 'login'){<app-google-signin />}
+    <form *ngIf="modo() === 'registro'" [formGroup]="registroForm" (ngSubmit)="registrar()" class="login-form">
+      <label for="register-name">Nombre</label><input id="register-name" formControlName="nombre" autocomplete="name" minlength="2" maxlength="100" />
+      <span class="field-error" *ngIf="registroForm.controls.nombre.touched && registroForm.controls.nombre.invalid">Escribe de 2 a 100 caracteres: solo letras, espacios, guiones y apóstrofes.</span>
+      <label for="register-email">Correo electrónico</label><input id="register-email" type="email" formControlName="correo" autocomplete="email" maxlength="254" />
+      <span class="field-error" *ngIf="registroForm.controls.correo.touched && registroForm.controls.correo.invalid">Ingresa un correo válido, por ejemplo nombre@dominio.com.</span>
+      <label for="register-currency">País o moneda de tus finanzas</label>
+      <select id="register-currency" formControlName="moneda" aria-describedby="currency-help">@for(moneda of monedas;track moneda.codigo){<option [value]="moneda.codigo">{{moneda.region}} · {{moneda.codigo}} — {{moneda.nombre}}</option>}</select>
+      <small id="currency-help">Registrarás tus importes en esta moneda, sin conversiones automáticas. Podrás cambiarla antes de tener actividad financiera.</small>
+      <label for="birth-date">Fecha de nacimiento <span class="optional">(opcional)</span></label><input id="birth-date" type="date" formControlName="fechaNacimiento" [max]="hoy" aria-describedby="birth-help" />
+      <small id="birth-help">No se exige una edad mínima. Si la indicas, debe ser una fecha real y no futura.</small>
+      <span class="field-error" *ngIf="registroForm.controls.fechaNacimiento.touched && registroForm.controls.fechaNacimiento.invalid">Revisa la fecha de nacimiento.</span>
+      <label for="register-password">Contraseña</label><input id="register-password" [type]="verPassword() ? 'text' : 'password'" formControlName="password" autocomplete="new-password" aria-describedby="password-help" />
+      <small id="password-help">De 10 caracteres a 72 bytes. Debe ser distinta de tu nombre y correo.</small>
+      <label for="register-confirm">Confirmar contraseña</label><input id="register-confirm" [type]="verPassword() ? 'text' : 'password'" formControlName="confirmarPassword" autocomplete="new-password" />
+      <label class="show-password"><input type="checkbox" [checked]="verPassword()" (change)="toggleVerPassword()" /> Mostrar contraseñas</label>
+      <button type="submit" [disabled]="cargando()">{{ cargando() ? 'Creando…' : 'Crear cuenta' }}</button>
+      <button class="link-btn" type="button" (click)="mostrarLogin()">Ya tengo una cuenta</button>
+    </form>
+    <form *ngIf="modo() === 'recuperar'" [formGroup]="recuperacionForm" (ngSubmit)="solicitarCodigo()" class="login-form">
+      <p class="helper">La recuperación por correo requiere configurar el envío de mensajes. En la instalación local puedes solicitar ayuda al administrador.</p>
+      <label for="recover-email">Correo electrónico</label><input id="recover-email" type="email" formControlName="correo" autocomplete="email" />
+      <button type="submit" [disabled]="cargando()">{{ cargando() ? 'Solicitando…' : 'Solicitar código' }}</button><button class="link-btn" type="button" (click)="mostrarLogin()">Volver a iniciar sesión</button>
+    </form>
+    <form *ngIf="modo() === 'codigo'" [formGroup]="codigoForm" (ngSubmit)="verificarCodigo()" class="login-form">
+      <label for="recovery-code">Código de verificación</label><input id="recovery-code" formControlName="codigoIngresado" inputmode="numeric" autocomplete="one-time-code" maxlength="6" />
+      <button type="submit" [disabled]="cargando()">{{ cargando() ? 'Verificando…' : 'Verificar código' }}</button><button class="link-btn" type="button" (click)="mostrarRecuperacion()">Solicitar otro código</button>
+    </form>
+    <form *ngIf="modo() === 'nueva'" [formGroup]="nuevaPasswordForm" (ngSubmit)="cambiarPassword()" class="login-form">
+      <label for="new-password">Nueva contraseña</label><input id="new-password" type="password" formControlName="nuevaContrasena" autocomplete="new-password" /><small>Al menos 10 caracteres; como máximo 72 bytes.</small>
+      <label for="new-confirm">Confirmar contraseña</label><input id="new-confirm" type="password" formControlName="confirmarContrasena" autocomplete="new-password" />
+      <button type="submit" [disabled]="cargando()">{{ cargando() ? 'Guardando…' : 'Guardar contraseña' }}</button><button class="link-btn" type="button" (click)="mostrarLogin()">Volver al inicio</button>
+    </form>
+  </section>
+</main>

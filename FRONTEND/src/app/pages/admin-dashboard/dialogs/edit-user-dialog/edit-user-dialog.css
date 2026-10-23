@@ -1,0 +1,6 @@
+.edit-user-grid {
+    display: grid;
+    gap: 4px;
+    min-width: 360px;
+    padding-top: 8px;
+}

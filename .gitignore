@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Cloudflare Wrangler cache
+.wrangler/
+
+# Builds
+dist/
+.angular/
+
+# Private local runtime
+.env
+.env.*
+!.env.example
+**/data/
+**/.angular/
+**/node_modules/
+**/dist/
+**/logs/
+EVIDENCIAS_LOCALES/
+.vercel/
+*.private.*
+*.log
+*.zip
+*.sqlite*
+*.db
+*.pem
+*.key
+*.p12
+*.pfx

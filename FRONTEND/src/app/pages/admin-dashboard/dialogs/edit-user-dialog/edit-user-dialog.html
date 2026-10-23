@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Editar usuario</h2>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+    <mat-dialog-content class="edit-user-grid">
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" placeholder="Nombre del usuario" /> @if (form.controls.nombre.hasError('maxlength')) {
+            <mat-error>El nombre es demasiado largo.</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Correo</mat-label>
+            <input matInput type="email" formControlName="correo" placeholder="correo@dominio.com" /> @if (form.controls.correo.hasError('required')) {
+            <mat-error>El correo es obligatorio.</mat-error>
+            } @else if (form.controls.correo.hasError('email')) {
+            <mat-error>Ingresa un correo válido.</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="rol">
+                <mat-option value="ADMINISTRADOR">Administrador</mat-option>
+                <mat-option value="USUARIO">Usuario</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-stroked-button type="button" (click)="cancelar()">Cancelar</button>
+        <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </mat-dialog-actions>
+</form>

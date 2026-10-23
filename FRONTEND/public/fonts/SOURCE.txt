@@ -1,0 +1,4 @@
+Material Symbols Outlined, Google Fonts. Apache License 2.0.
+https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=block
+https://raw.githubusercontent.com/google/material-design-icons/master/LICENSE
+Local copy for offline use.

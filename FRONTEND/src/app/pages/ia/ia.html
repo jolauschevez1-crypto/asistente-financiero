@@ -1,0 +1,82 @@
+<main class="ia-shell">
+    <header class="topbar">
+        <div>
+            <p>TU COPILOTO FINANCIERO</p>
+            <h1>Entiende tu dinero.</h1><span class="ia-subtitle">Una conversación para ver tus finanzas con más claridad.</span>
+        </div>
+    </header>
+
+    <p role="status" class="ia-status">{{ estadoIA() }}</p>
+    @if (habilitada()) {
+    <p class="ia-privacy">Al consultar, se envían tu pregunta y un resumen de tus finanzas a Groq. La IA puede equivocarse y no modifica tus movimientos.</p>
+    <app-panel-card titulo="Asistente financiero" icon="smart_toy">
+        <mat-tab-group animationDuration="200ms" (selectedTabChange)="onTabChange($event.index)">
+            <mat-tab label="Preguntar a la IA">
+                <div class="chat-shell">
+                    <div class="chat-mensajes">
+                        @if (mensajes().length === 0) {
+                        <p class="empty">Pregúntale a la IA sobre tus finanzas: "¿Cuánto gasté este mes?", "¿Cómo va mi balance?", etc.</p>
+                        }
+                        @for (mensaje of mensajes(); track mensaje.timestamp) {
+                        <div class="burbuja" [class.burbuja-user]="mensaje.rol === 'user'" [class.burbuja-ia]="mensaje.rol === 'ia'">
+                            <p>{{ mensaje.texto }}</p>
+                        </div>
+                        }
+                        @if (enviandoPregunta()) {
+                        <div class="burbuja burbuja-ia burbuja-cargando">
+                            <mat-progress-bar mode="indeterminate" />
+                        </div>
+                        }
+                    </div>
+
+                    <app-notice tipo="danger" [mensaje]="errorChat()" />
+
+                    <div class="chat-input-row">
+                        <mat-form-field appearance="outline" class="chat-input">
+                            <mat-label>Escribe tu pregunta</mat-label>
+                            <input
+                                matInput
+                                [ngModel]="preguntaActual()"
+                                (ngModelChange)="preguntaActual.set($event)"
+                                (keydown.enter)="enviarPregunta()"
+                                [disabled]="enviandoPregunta()"
+                            />
+                        </mat-form-field>
+                        <button mat-flat-button color="primary" (click)="enviarPregunta()" [disabled]="enviandoPregunta() || !preguntaActual().trim()">
+                            <mat-icon>send</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-tab>
+
+            @for (seccion of secciones; track seccion.clave) {
+            <mat-tab [label]="seccion.titulo">
+                <div class="seccion-shell">
+                    @if (cargando()[seccion.clave]) {
+                    <app-skeleton variant="text" height="20px" />
+                    <app-skeleton variant="text" height="20px" width="90%" />
+                    <app-skeleton variant="text" height="20px" width="75%" />
+                    } @else if (errores()[seccion.clave]) {
+                    <app-notice tipo="danger" [mensaje]="errores()[seccion.clave]" />
+                    <button mat-stroked-button (click)="cargarSeccion(seccion.clave)">Reintentar</button>
+                    } @else if (resultados()[seccion.clave]) {
+                    <p class="ia-texto">{{ resultados()[seccion.clave]?.respuesta }}</p>
+                    <p class="muted">
+                        Basado en {{ resultados()[seccion.clave]?.meta?.movimientos_analizados }} movimientos
+                        @if (resultados()[seccion.clave]?.meta?.periodo_desde) {
+                        (desde {{ resultados()[seccion.clave]?.meta?.periodo_desde | date: 'dd/MM/yyyy' }} hasta
+                        {{ resultados()[seccion.clave]?.meta?.periodo_hasta | date: 'dd/MM/yyyy' }})
+                        }
+                    </p>
+                    <button mat-stroked-button (click)="regenerar(seccion.clave)">
+                        <mat-icon>refresh</mat-icon>
+                        Actualizar análisis
+                    </button>
+                    }
+                </div>
+            </mat-tab>
+            }
+        </mat-tab-group>
+    </app-panel-card>
+    }
+</main>

@@ -1,0 +1,30 @@
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
+@if (!network.enLinea()) {<div class="offline-banner" role="status">Sin conexión a Internet. Si usas la instalación local, mantén el servidor encendido; en la versión web, vuelve a conectarte.</div>}
+@if (showLayout) {
+  <header class="site-header">
+    <div class="topbar">
+      <a class="brand" [routerLink]="auth.isAdmin() ? '/admin' : '/panel'" aria-label="Ir al inicio"><span class="brand-symbol" aria-hidden="true">AF</span><span>{{brand()}}<small>Tu dinero, con claridad</small></span></a>
+      <div class="header-actions">
+        <a routerLink="/perfil" class="tool-button global-currency" [attr.aria-label]="'Moneda de tu cuenta: '+currency.codigo()+'. Ver preferencias'">{{currency.codigo()}} <span aria-hidden="true">⌄</span></a>
+        <button type="button" class="tool-button" (click)="toggleTheme()" [attr.aria-label]="tema()==='claro'?'Activar tema oscuro':'Activar tema claro'">{{tema()==='claro'?'☾':'☀'}}<span class="desktop-label">Tema</span></button>
+        <button type="button" class="tool-button" (click)="toggleAccessibility()" [attr.aria-expanded]="accessibilityOpen()" aria-controls="accessibility-panel" aria-label="Opciones de accesibilidad">Aa<span class="desktop-label">Accesibilidad</span></button>
+        <a routerLink="/perfil" class="profile-link" [attr.aria-label]="'Ver perfil de '+displayName"><span class="avatar">{{displayName.slice(0,1).toUpperCase()}}</span><span class="desktop-label">{{displayName}}</span></a>
+        <button type="button" class="tool-button" (click)="logout()">Salir</button>
+        <button id="menu-toggle" type="button" class="menu-toggle" (click)="toggleMobile()" [attr.aria-expanded]="mobileOpen()" aria-controls="main-navigation" [attr.aria-label]="mobileOpen()?'Cerrar navegación':'Abrir navegación'">{{mobileOpen()?'✕':'☰'}}</button>
+      </div>
+    </div>
+    @if(accessibilityOpen()) {<div id="accessibility-panel" class="accessibility-panel" aria-label="Preferencias de accesibilidad"><button type="button" (click)="toggleText()" [attr.aria-pressed]="largeText()">Texto grande: {{largeText()?'activado':'desactivado'}}</button><button type="button" (click)="toggleContrast()" [attr.aria-pressed]="contrast()">Alto contraste: {{contrast()?'activado':'desactivado'}}</button></div>}
+    <nav id="main-navigation" class="navbar" [class.mobile-open]="mobileOpen()" aria-label="Navegación principal">
+      @if(auth.isAdmin()) {
+        <a routerLink="/admin" routerLinkActive="active" ariaCurrentWhenActive="page">Administración</a>
+        <a routerLink="/estadisticas" routerLinkActive="active" ariaCurrentWhenActive="page">Estadísticas</a>
+        <a routerLink="/configuracion" routerLinkActive="active" ariaCurrentWhenActive="page">Configuración</a>
+      }
+      @for(link of links;track link.route){
+        @if(link.route!='/usuario'||!auth.isAdmin()){<a [routerLink]="link.route" routerLinkActive="active" ariaCurrentWhenActive="page">{{link.label}}</a>}
+      }
+    </nav>
+  </header>
+  <main id="main-content" tabindex="-1" class="main-content"><router-outlet /></main>
+  <footer class="site-footer"><span>Asistente Financiero</span><span>Organiza · Decide · Avanza</span></footer>
+} @else {<main id="main-content" tabindex="-1"><router-outlet /></main>}

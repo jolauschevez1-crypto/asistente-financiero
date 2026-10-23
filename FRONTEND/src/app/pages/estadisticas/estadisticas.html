@@ -1,0 +1,97 @@
+<main class="estadisticas-shell">
+    <header class="topbar">
+        <div>
+            <p>Administrador</p>
+            <h1>Estadísticas</h1>
+        </div>
+    </header>
+    <section class="currency-filter"><label for="stats-currency">Moneda de las estadísticas</label> <select id="stats-currency" [value]="monedaInforme()" (change)="cambiarMonedaInforme($any($event.target).value)">@for(c of monedas;track c.codigo){<option [value]="c.codigo">{{c.codigo}} — {{c.nombre}}</option>}</select><p>Solo se agregan importes en la moneda seleccionada.</p></section>
+
+    <app-notice tipo="danger" [mensaje]="error()" />
+
+    <!-- ============================================================ -->
+    <!-- KPIs: Mayor gasto / Mayor ingreso / Promedio diario / Promedio mensual -->
+    <!-- ============================================================ -->
+    <section class="kpi-grid">
+        @if (cargando()) {
+        @for (i of [0, 1, 2, 3]; track i) {
+        <app-stat-card [style.--i]="i" label="" value="" [loading]="true" />
+        }
+        } @else {
+        <app-stat-card [style.--i]="0" label="Mayor gasto" [value]="mayorGastoValor()" icon="arrow_downward" accent="danger" />
+        <app-stat-card [style.--i]="1" label="Mayor ingreso" [value]="mayorIngresoValor()" icon="arrow_upward" accent="success" />
+        <app-stat-card [style.--i]="2" label="Promedio diario" [value]="promedioDiarioValor()" icon="today" accent="cyan" />
+        <app-stat-card [style.--i]="3" label="Promedio mensual" [value]="promedioMensualValor()" icon="calendar_month" accent="blue" />
+        }
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Graficos                                                       -->
+    <!-- ============================================================ -->
+    <section class="charts-grid" #chartsSection>
+        @defer (on viewport(chartsSection)) {
+        <app-chart-card titulo="Categorias mas utilizadas (Pie)" icon="pie_chart" [options]="pieOptions()" [loading]="cargando()" />
+        <app-chart-card titulo="Ingresos vs Gastos (Bar)" icon="bar_chart" [options]="barOptions()" [loading]="cargando()" />
+        <app-chart-card titulo="Tendencia mensual (Line)" icon="show_chart" [options]="lineOptions()" [loading]="cargando()" />
+        <app-chart-card titulo="Categorias mas utilizadas (Radar)" icon="radar" [options]="radarOptions()" [loading]="cargando()" />
+        <app-chart-card titulo="Usuarios mas activos (Donut)" icon="donut_large" [options]="donutUsuariosOptions()" [loading]="cargando()" />
+        <app-chart-card titulo="Balance mensual (Area)" icon="area_chart" [options]="areaOptions()" [loading]="cargando()" />
+        <app-chart-card titulo="Calendario financiero" icon="calendar_view_month" [options]="calendarioOptions()" [loading]="cargando()" />
+        } @placeholder {
+        <div style="display: contents">
+            <app-skeleton variant="chart" height="280px" />
+            <app-skeleton variant="chart" height="280px" />
+            <app-skeleton variant="chart" height="280px" />
+            <app-skeleton variant="chart" height="280px" />
+            <app-skeleton variant="chart" height="280px" />
+            <app-skeleton variant="chart" height="280px" />
+            <app-skeleton variant="chart" height="280px" />
+        </div>
+        }
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Categorias mas utilizadas / Usuarios mas activos (listas)      -->
+    <!-- ============================================================ -->
+    <section class="dashboard-columns">
+        <app-panel-card titulo="Categorias mas utilizadas" icon="category">
+            @if (cargando()) {
+            <app-skeleton variant="text" height="18px" />
+            <app-skeleton variant="text" height="18px" />
+            <app-skeleton variant="text" height="18px" />
+            } @else {
+            <mat-list class="activity-list">
+                @for (cat of categoriasMasUtilizadas(); track cat.categoria) {
+                <mat-list-item>
+                    <span class="activity-icon" matListItemIcon><mat-icon>category</mat-icon></span>
+                    <div matListItemTitle>{{ cat.categoria }}</div>
+                    <div matListItemLine class="muted">{{ cat.cantidad }} movimientos · {{money(cat.monto_total,monedaInforme())}}</div>
+                </mat-list-item>
+                } @empty {
+                <p class="empty">Sin categorias registradas.</p>
+                }
+            </mat-list>
+            }
+        </app-panel-card>
+
+        <app-panel-card titulo="Usuarios mas activos" icon="group">
+            @if (cargando()) {
+            <app-skeleton variant="text" height="18px" />
+            <app-skeleton variant="text" height="18px" />
+            <app-skeleton variant="text" height="18px" />
+            } @else {
+            <mat-list class="activity-list">
+                @for (u of usuariosMasActivos(); track u.id) {
+                <mat-list-item>
+                    <span class="activity-icon" matListItemIcon><mat-icon>person</mat-icon></span>
+                    <div matListItemTitle>{{ u.nombre || u.correo || 'Usuario #' + u.id }}</div>
+                    <div matListItemLine class="muted">{{ u.cantidad_movimientos }} movimientos · {{money(u.monto_total,monedaInforme())}}</div>
+                </mat-list-item>
+                } @empty {
+                <p class="empty">Sin usuarios activos registrados.</p>
+                }
+            </mat-list>
+            }
+        </app-panel-card>
+    </section>
+</main>

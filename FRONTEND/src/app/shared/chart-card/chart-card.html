@@ -1,0 +1,20 @@
+<app-panel-card [titulo]="titulo" [icon]="icon">
+    @if (loading) {
+    <app-skeleton variant="chart" height="260px" />
+    } @else {
+    <apx-chart
+        [series]="options.series ?? []"
+        [chart]="options.chart!"
+        [xaxis]="options.xaxis ?? {}"
+        [labels]="options.labels ?? []"
+        [colors]="options.colors ?? []"
+        [dataLabels]="options.dataLabels ?? {}"
+        [stroke]="options.stroke ?? {}"
+        [tooltip]="options.tooltip ?? {}"
+        [legend]="options.legend ?? {}"
+        [plotOptions]="options.plotOptions ?? {}"
+        [fill]="options.fill ?? {}"
+        [grid]="options.grid ?? {}"
+    />
+    }
+</app-panel-card>

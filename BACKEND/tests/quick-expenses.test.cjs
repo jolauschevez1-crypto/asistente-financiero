@@ -1,0 +1,11 @@
+'use strict';
+process.env.DB_ENGINE='pglite';process.env.PGLITE_DATA_DIR='memory://';
+const {test,before,after}=require('node:test');const assert=require('node:assert/strict');
+const db=require('../src/config/db');const f=require('../src/finance/service');const {parseExpenses}=require('../src/finance/quick-expenses');
+let uid,other,w;
+before(async()=>{await require('../scripts/init-local').initialize();[uid,other]=(await db.query("INSERT INTO usuarios(nombre,correo) VALUES('Carga','carga@example.test'),('Otra','otra@example.test') RETURNING id")).rows.map(r=>r.id);w=await f.createWallet(uid,{nombre:'Pruebas rápidas',saldo_inicial:100});});
+after(()=>db.pool.end());
+test('interpreta decimales, miles y separadores sin evaluar código',()=>{assert.deepEqual(parseExpenses('café 2.50, gasolina 1.2k y pan 3'),[{descripcion:'café',monto:'2.50'},{descripcion:'gasolina',monto:'1200.00'},{descripcion:'pan',monto:'3.00'}]);for(const t of ['café','pan -2','taxi 1e3','agua 0','gasolina 1000000k','pan 2.333'])assert.throws(()=>parseExpenses(t));});
+test('límite de carga evita lotes excesivos',()=>{assert.throws(()=>parseExpenses(Array(31).fill('pan 1').join(',')));assert.equal(parseExpenses('pan 1\nleche 2').length,2);});
+test('lote concurrente se guarda una sola vez y exige propietario',async()=>{const b={texto:'pan 2.50, bus 3',cuenta_id:w.id,idempotencia:'quick-test-001'};const results=await Promise.all([f.quickExpenses(uid,b),f.quickExpenses(uid,b)]);assert.deepEqual(results[0].movimientos,results[1].movimientos);assert.equal(results.filter(r=>r.repetido).length,1);assert.equal((await f.listWallets(uid))[0].saldo_actual,'94.50');await assert.rejects(()=>f.quickExpenses(other,b),{status:404});await assert.rejects(()=>f.quickExpenses(uid,{...b,texto:'pan 3'}),{code:'IDEMPOTENCIA_CONFLICTO'});});
+test('saldo insuficiente no deja gastos parciales y permite reintentar',async()=>{const b={texto:'gasto 50, gasto 80',cuenta_id:w.id,idempotencia:'quick-test-002'};const previous=(await f.listWallets(uid))[0].saldo_actual;await assert.rejects(()=>f.quickExpenses(uid,b),{code:'SALDO_INSUFICIENTE'});assert.equal((await f.listWallets(uid))[0].saldo_actual,previous);assert.equal((await db.query('SELECT * FROM fin_cargas_rapidas WHERE idempotencia=$1',[b.idempotencia])).rows.length,0);});

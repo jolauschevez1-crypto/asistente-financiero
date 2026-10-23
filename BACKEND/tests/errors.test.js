@@ -1,0 +1,6 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const middleware=require('../src/middlewares/errorMiddleware');
+function response(error){let result;const res={status(n){this.statusCode=n;return this;},json(value){result={status:this.statusCode,...value};}};middleware(error,{method:'GET',path:'/api/prueba'},res,()=>{});return result;}
+test('errores públicos ocultan SQL, stack, rutas y detalles internos incluso en desarrollo',()=>{const mode=process.env.NODE_ENV;process.env.NODE_ENV='development';try{const r=response(new Error('SELECT password FROM usuarios; C:/secreto/config.js'));assert.equal(r.status,500);assert.equal(r.stack,undefined);assert(!JSON.stringify(r).includes('SELECT'));assert(!JSON.stringify(r).includes('secreto'));}finally{process.env.NODE_ENV=mode;}});
+test('restricciones de base y JSON inválido devuelven mensajes de validación sin detalle SQL',()=>{const r=response(Object.assign(new Error('duplicate key in usuarios_correo_ci'),{code:'23505'}));assert.equal(r.status,409);assert(!r.message.includes('usuarios_correo'));assert.equal(response(Object.assign(new Error('Unexpected token'),{status:400,type:'entity.parse.failed'})).message,'El cuerpo de la solicitud debe ser JSON válido.');});

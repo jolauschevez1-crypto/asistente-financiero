@@ -1,0 +1,52 @@
+{
+  "name": "asistente-financiero-backend",
+  "version": "2.0.0",
+  "description": "Asistente Financiero local con PostgreSQL embebido",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "migrate:ultimo-login": "node scripts/migrate-ultimo-login.js",
+    "migrate:configuracion": "node scripts/migrate-configuracion.js",
+    "migrate:auditoria": "node scripts/migrate-auditoria.js",
+    "migrate:indices": "node scripts/migrate-indices-rendimiento.js",
+    "db:init": "node scripts/init-local.js",
+    "db:seed": "node scripts/seed-local.js",
+    "password:local": "node scripts/reset-password-local.js",
+    "test": "node --test tests/*.test.js tests/*.test.cjs"
+  },
+  "keywords": [
+    "nodejs",
+    "telegram",
+    "bot",
+    "groq",
+    "whisper",
+    "finance"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.10",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "axios": "^1.6.8",
+    "bcryptjs": "^3.0.0",
+    "cloudinary": "^2.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.5.2",
+    "express-validator": "^7.3.2",
+    "fluent-ffmpeg": "^2.1.3",
+    "form-data": "^4.0.0",
+    "google-auth-library": "^10.9.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.10.0",
+    "node-telegram-bot-api": "^0.66.0",
+    "nodemailer": "^9.0.2",
+    "pdfkit": "^0.19.1",
+    "pg": "^8.11.5",
+    "xss": "^1.0.15"
+  }
+}

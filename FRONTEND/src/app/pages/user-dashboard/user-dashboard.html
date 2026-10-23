@@ -1,0 +1,200 @@
+<main class="user-shell">
+  <header class="topbar">
+    <div>
+      <p>{{ usuario()?.nombre || usuario()?.correo }}</p>
+      <h1>Mis carteras y diario</h1>
+    </div>
+    <span class="currency-label">{{usuario()?.moneda || 'USD'}} · Moneda de tu cuenta</span>
+  </header>
+
+  <app-notice tipo="danger" [mensaje]="error()" />
+
+  <nav class="navbar" aria-label="Secciones de usuario">
+    <app-quick-load (saved)="cargarDatos()" />
+    <button type="button" [class.active]="seccionActiva() === 'cuentas'" (click)="cambiarSeccion('cuentas')">
+      Cuentas
+    </button>
+    <button type="button" [class.active]="seccionActiva() === 'movimientos'" (click)="cambiarSeccion('movimientos')">
+      Historial
+    </button>
+    <button type="button" [class.active]="seccionActiva() === 'crear-cuenta'" (click)="cambiarSeccion('crear-cuenta')">
+      Nueva cartera
+    </button>
+    <button type="button" [class.active]="seccionActiva() === 'nuevo-movimiento'" (click)="cambiarSeccion('nuevo-movimiento')">
+      Nuevo movimiento
+    </button>
+  </nav>
+
+  <section class="metrics">
+    <article class="balance-card">
+      <span>Balance total</span>
+      <strong>{{ money(balanceTotal(), usuario()?.moneda) }}</strong>
+    </article>
+    <article>
+      <span>Cuentas</span>
+      <strong>{{ totalCuentas() }}</strong>
+    </article>
+    <article>
+      <span>Movimientos</span>
+      <strong>{{ totalMovimientos() }}</strong>
+    </article>
+  </section>
+
+  @if (seccionActiva() !== 'movimientos') {
+    <section class="panel-section">
+      <div class="section-title">
+        <h2>Mis carteras</h2>
+        <button class="ghost-btn" type="button" (click)="cargarCuentas()">Recargar</button>
+      </div>
+
+      @if (cargando()) {
+        <p class="muted">Cargando cuentas...</p>
+      } @else {
+        <div class="accounts-grid">
+          @for (cuenta of cuentas(); track cuenta.nombre) {
+            <article class="account-card" [class.low-balance-card]="esSaldoBajo(cuenta)">
+              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <span>{{ cuenta.nombre }}</span>
+                <span *ngIf="esSaldoBajo(cuenta)" class="badge-low-balance" [title]="'Saldo menor a '+money(10, usuario()?.moneda)">Saldo Bajo</span>
+              </div>
+              <strong [class.negative]="saldoCuenta(cuenta) < 0">{{ money(saldoCuenta(cuenta), usuario()?.moneda) }}</strong>
+            </article>
+          } @empty {
+            <p class="empty">Aun no tienes cuentas registradas.</p>
+          }
+        </div>
+      }
+    </section>
+  }
+
+  @if (seccionActiva() === 'movimientos') {
+    <section class="panel-section">
+      <div class="section-title">
+        <h2>Historial de movimientos</h2>
+        <div style="display: flex; gap: 8px;">
+          <button class="ghost-btn" type="button" (click)="exportarCsv()" title="Exportar historial a archivo CSV">Exportar CSV</button>
+          <button class="ghost-btn" type="button" (click)="cargarMovimientos()">Recargar</button>
+        </div>
+      </div>
+
+      <div class="preset-filter-group" style="display: flex; gap: 8px; margin-bottom: 16px;">
+        <button type="button" class="preset-btn" [class.active]="filtroPresetFecha() === 'todo'" (click)="filtroPresetFecha.set('todo')">Todo</button>
+        <button type="button" class="preset-btn" [class.active]="filtroPresetFecha() === 'mes'" (click)="filtroPresetFecha.set('mes')">Este Mes</button>
+        <button type="button" class="preset-btn" [class.active]="filtroPresetFecha() === 'semana'" (click)="filtroPresetFecha.set('semana')">Esta Semana</button>
+      </div>
+
+      <label class="search-field">Buscar movimientos<input [formControl]="busquedaControl" placeholder="Concepto o categoría" maxlength="100"></label>
+      <div class="diary">
+        @for (m of movimientosFiltrados(); track m.id) {
+          <article class="diary-row"><span class="movement-icon" [class.income]="m.tipo==='INGRESO'" aria-hidden="true">{{m.tipo==='INGRESO'?'↓':m.tipo==='TRANSFERENCIA'?'↔':'↑'}}</span><div><strong>{{m.descripcion || m.categoria || tipoMovimiento(m)}}</strong><small>{{m.cuenta_origen || m.cuenta_destino}} · {{m.categoria}} · {{m.fecha | date:'dd MMM yyyy'}}</small></div><strong [class.positive]="m.tipo==='INGRESO'">{{m.tipo==='GASTO'?'−':m.tipo==='INGRESO'?'+':''}}{{money(m.monto,usuario()?.moneda)}}</strong></article>
+        } @empty {<p class="empty">No hay movimientos con estos filtros.</p>}
+      </div>
+    </section>
+  }
+
+  @if (seccionActiva() === 'crear-cuenta') {
+    <div class="movement-overlay"><section class="panel-section form-panel movement-dialog" role="dialog" aria-modal="true" aria-labelledby="wallet-title" cdkTrapFocus [cdkTrapFocusAutoCapture]="true" (keydown.escape)="!guardandoCuenta() && cambiarSeccion('cuentas')">
+      <h2 id="wallet-title">Crear nueva cartera</h2><app-notice tipo="danger" [mensaje]="error()" />
+      <form [formGroup]="cuentaForm" (ngSubmit)="crearCuenta()">
+        <label>
+          Nombre de la cartera
+          <input formControlName="nombre" placeholder="Efectivo, Banco, Ahorros" />
+          <span *ngIf="cuentaForm.controls.nombre.touched && cuentaForm.controls.nombre.hasError('required')" class="field-error">El nombre de la cuenta es obligatorio.</span>
+          <span *ngIf="cuentaForm.controls.nombre.touched && cuentaForm.controls.nombre.hasError('minlength')" class="field-error">El nombre debe tener al menos 2 caracteres.</span>
+        </label>
+        <label>Saldo inicial · {{usuario()?.moneda || 'USD'}}<input type="number" inputmode="decimal" min="0" max="999999999.99" step="0.01" formControlName="saldo_inicial" placeholder="0.00"></label><small>El saldo inicial se registra como ingreso de apertura.</small><div class="movement-actions"><button type="button" class="cancel-movement" [disabled]="guardandoCuenta()" (click)="cambiarSeccion('cuentas')">Cancelar</button><button type="submit" [disabled]="guardandoCuenta()">
+          {{ guardandoCuenta() ? 'Creando...' : 'Guardar cartera' }}
+        </button></div>
+      </form>
+    </section></div>
+  }
+
+  @if (seccionActiva() === 'nuevo-movimiento') {
+    <div class="movement-overlay"><section class="panel-section form-panel movement-dialog" role="dialog" aria-modal="true" aria-labelledby="movement-title" cdkTrapFocus [cdkTrapFocusAutoCapture]="true" (keydown.escape)="!guardandoMovimiento() && cambiarSeccion('cuentas')">
+      <div class="dialog-heading"><h2 id="movement-title">Nuevo movimiento</h2><button type="button" aria-label="Cerrar nuevo movimiento" [disabled]="guardandoMovimiento()" (click)="cambiarSeccion('cuentas')">×</button></div>
+      <app-notice tipo="danger" [mensaje]="error()" />
+      <form class="movement-form" [formGroup]="movimientoForm" (ngSubmit)="registrarMovimiento()">
+        <div class="type-segments" role="group" aria-label="Tipo de movimiento">
+          <button type="button" [attr.aria-pressed]="movimientoForm.controls.tipo.value==='GASTO'" (click)="movimientoForm.controls.tipo.setValue('GASTO')">Gasto</button>
+          <button type="button" [attr.aria-pressed]="movimientoForm.controls.tipo.value==='INGRESO'" (click)="movimientoForm.controls.tipo.setValue('INGRESO')">Ingreso</button>
+          <button type="button" [attr.aria-pressed]="movimientoForm.controls.tipo.value==='TRANSFERENCIA'" (click)="movimientoForm.controls.tipo.setValue('TRANSFERENCIA')">Traspaso</button>
+        </div>
+        <label>Concepto, ¿en qué fue?<input formControlName="descripcion" maxlength="500" placeholder="Ej. Compra del supermercado"></label>
+        <label>
+          Categoría
+          <select formControlName="categoria" (change)="actualizarCategoriaPersonalizada()" aria-describedby="categoria-ayuda">
+            @for (categoria of opcionesCategorias(); track categoria) {
+              <option [value]="categoria">{{ categoria }}</option>
+            }
+            <option [value]="categoriaPersonalizadaValue">Otra categoría…</option>
+          </select>
+          <small id="categoria-ayuda">Elige una categoría o agrega una nueva.</small>
+          @if (avisoCategorias()) { <small role="status">{{ avisoCategorias() }}</small> }
+          <span *ngIf="movimientoForm.controls.categoria.touched && movimientoForm.controls.categoria.invalid" class="field-error">Selecciona una categoría válida.</span>
+        </label>
+        @if (movimientoForm.controls.categoria.value === categoriaPersonalizadaValue) {
+          <label>
+            Nueva categoría
+            <input formControlName="categoriaPersonalizada" maxlength="100" placeholder="Por ejemplo, Mascotas" autocomplete="off" />
+            @if (movimientoForm.controls.categoriaPersonalizada.touched && movimientoForm.controls.categoriaPersonalizada.invalid) {
+              <span class="field-error">Escribe una categoría de hasta 100 caracteres; no puede contener solo espacios.</span>
+            }
+          </label>
+        }
+        <label>
+          Monto · {{usuario()?.moneda || 'USD'}}
+          <input type="number" inputmode="decimal" min="0.01" max="999999999.99" step="0.01" formControlName="monto" />
+          <span *ngIf="movimientoForm.controls.monto.touched && movimientoForm.controls.monto.hasError('required')" class="field-error">El monto es obligatorio.</span>
+          <span *ngIf="movimientoForm.controls.monto.touched && (movimientoForm.controls.monto.hasError('min') || movimientoForm.controls.monto.value <= 0)" class="field-error">El monto debe ser mayor a 0.</span>
+        </label>
+        <label>
+          Cartera del movimiento
+          <select formControlName="cuenta_origen">
+            <option value="">Selecciona una cuenta</option>
+            @for (cuenta of cuentas(); track cuenta.nombre) {
+              <option [value]="cuenta.nombre">{{ cuenta.nombre }} · {{money(saldoCuenta(cuenta), usuario()?.moneda)}}</option>
+            }
+          </select>
+          <span *ngIf="movimientoForm.controls.cuenta_origen.touched && movimientoForm.controls.cuenta_origen.hasError('required')" class="field-error">La cuenta origen es obligatoria.</span>
+        </label>
+        @if(movimientoForm.controls.tipo.value==='TRANSFERENCIA'){<label>
+          Cartera destino
+          <select formControlName="cuenta_destino">
+            <option value="">Sin destino</option>
+            @for (cuenta of cuentas(); track cuenta.nombre) {
+              <option [value]="cuenta.nombre">{{ cuenta.nombre }} · {{money(saldoCuenta(cuenta), usuario()?.moneda)}}</option>
+            }
+          </select>
+          <span *ngIf="movimientoForm.controls.tipo.value === 'TRANSFERENCIA' && movimientoForm.controls.cuenta_destino.touched && !movimientoForm.controls.cuenta_destino.value" class="field-error">Debes seleccionar una cuenta destino para transferencias.</span>
+          <span *ngIf="movimientoForm.controls.tipo.value === 'TRANSFERENCIA' && movimientoForm.controls.cuenta_origen.value && movimientoForm.controls.cuenta_destino.value && movimientoForm.controls.cuenta_origen.value === movimientoForm.controls.cuenta_destino.value" class="field-error">La cuenta destino no puede ser igual a la de origen.</span>
+        </label>
+        }<label>
+          Método de pago
+          <select formControlName="metodo_pago"><option value="EFECTIVO">Efectivo</option><option value="TARJETA">Tarjeta</option><option value="TRANSFERENCIA">Transferencia</option></select>
+        </label>
+
+        <div class="movement-actions"><button type="button" class="cancel-movement" [disabled]="guardandoMovimiento()" (click)="cambiarSeccion('cuentas')">Cancelar</button><button type="submit" [disabled]="guardandoMovimiento() || cuentas().length === 0">
+          {{ guardandoMovimiento() ? 'Registrando...' : 'Aplicar movimiento' }}
+        </button></div>
+      </form>
+    </section></div>
+  }
+
+  @if(seccionActiva() !== 'movimientos'){<section class="panel-section recent-section">
+    <div class="section-title">
+      <h2>Diario reciente</h2>
+    </div>
+    <div class="recent-list">
+      @for (movimiento of ultimosMovimientos(); track movimiento.id) {
+        <article>
+          <span class="chip">{{ movimiento.descripcion || movimiento.categoria || tipoMovimiento(movimiento) }}</span>
+          <strong>{{ money(movimiento.monto, usuario()?.moneda) }}</strong>
+          <small>{{ movimiento.fecha ? (movimiento.fecha | date: 'dd/MM/yyyy, hh:mm a') : '-' }}</small>
+        </article>
+      } @empty {
+        <p class="empty">Tus ultimos movimientos apareceran aqui.</p>
+      }
+    </div>
+  </section>
+}
+</main>

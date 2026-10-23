@@ -1,0 +1,759 @@
+<main class="admin-shell" (click)="limpiarAvisos()">
+    <header class="topbar">
+        <div>
+            <p>Administrador</p>
+            <h1>Control financiero</h1>
+        </div>
+        <button mat-stroked-button type="button" (click)="cerrarSesion()">Salir</button>
+    </header>
+    <section class="currency-filter"><label for="admin-currency">Moneda de indicadores, movimientos globales y reportes</label> <select id="admin-currency" [value]="monedaInforme()" (change)="cambiarMonedaInforme($any($event.target).value)">@for(c of monedas;track c.codigo){<option [value]="c.codigo">{{c.codigo}} — {{c.nombre}}</option>}</select><p>Los totales, el listado global y sus exportaciones incluyen solamente la moneda elegida. Cada usuario y movimiento conserva su propia divisa.</p></section>
+
+
+    <app-notice tipo="danger" [mensaje]="error()" />
+    <app-notice tipo="danger" [mensaje]="errorDashboard()" />
+
+    @if (vistaActiva() === 'dashboard') {
+    <!-- ============================================================ -->
+    <!-- KPI: 8 tarjetas superiores                                    -->
+    <!-- ============================================================ -->
+    <section class="kpi-grid">
+        @if (cargandoDashboard() && kpiCards().length === 0) {
+        @for (i of [0, 1, 2, 3, 4, 5, 6, 7]; track i) {
+        <app-stat-card [style.--i]="i" label="" value="" [loading]="true" />
+        }
+        } @else {
+        @for (kpi of kpiCards(); track kpi.label; let i = $index) {
+        <app-stat-card
+            [style.--i]="i"
+            [label]="kpi.label"
+            [value]="kpi.value"
+            [icon]="kpi.icon"
+            [accent]="kpi.accent"
+            [variacion]="kpi.variacion"
+        />
+        }
+        }
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Actividad reciente + panel de estado del sistema              -->
+    <!-- ============================================================ -->
+    <section class="dashboard-columns">
+        <app-panel-card titulo="Actividad Reciente" icon="history">
+            <mat-tab-group animationDuration="200ms">
+                <mat-tab label="Movimientos">
+                    @if (cargandoDashboard()) {
+                    <app-skeleton variant="text" height="18px" />
+                    <app-skeleton variant="text" height="18px" />
+                    <app-skeleton variant="text" height="18px" />
+                    } @else {
+                    <mat-list class="activity-list">
+                        @for (mov of ultimosMovimientosGlobales(); track mov.id) {
+                        <mat-list-item>
+                            <span class="activity-icon" matListItemIcon [class.negative]="mov.tipo === 'GASTO'">
+                                <mat-icon>{{ mov.tipo === 'GASTO' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+                            </span>
+                            <div matListItemTitle>{{ mov.usuario_nombre || mov.usuario_correo || 'Usuario' }} · {{ mov.categoria || 'Sin categoria' }}</div>
+                            <div matListItemLine class="muted">{{ mov.fecha | date: 'dd/MM/yyyy, hh:mm a' }} · {{ money(mov.monto, mov.moneda) }}</div>
+                        </mat-list-item>
+                        } @empty {
+                        <p class="empty">Sin movimientos recientes.</p>
+                        }
+                    </mat-list>
+                    }
+                </mat-tab>
+
+                <mat-tab label="Usuarios nuevos">
+                    @if (cargandoDashboard()) {
+                    <app-skeleton variant="text" height="18px" />
+                    <app-skeleton variant="text" height="18px" />
+                    } @else {
+                    <mat-list class="activity-list">
+                        @for (usuario of ultimosUsuariosGlobales(); track usuario.id) {
+                        <mat-list-item>
+                            <span class="activity-icon" matListItemIcon><mat-icon>person_add</mat-icon></span>
+                            <div matListItemTitle>{{ usuario.nombre || usuario.correo || 'Usuario #' + usuario.id }}</div>
+                            <div matListItemLine class="muted">{{ usuario.created_at | date: 'dd/MM/yyyy, hh:mm a' }}</div>
+                        </mat-list-item>
+                        } @empty {
+                        <p class="empty">Sin usuarios recientes.</p>
+                        }
+                    </mat-list>
+                    }
+                </mat-tab>
+
+                <mat-tab label="Inicios de sesion">
+                    @if (cargandoDashboard()) {
+                    <app-skeleton variant="text" height="18px" />
+                    <app-skeleton variant="text" height="18px" />
+                    } @else {
+                    <mat-list class="activity-list">
+                        @for (login of ultimosLoginsGlobales(); track login.id) {
+                        <mat-list-item>
+                            <span class="activity-icon" matListItemIcon><mat-icon>login</mat-icon></span>
+                            <div matListItemTitle>{{ login.nombre || login.correo }}</div>
+                            <div matListItemLine class="muted">{{ login.ultimo_login | date: 'dd/MM/yyyy, hh:mm a' }}</div>
+                        </mat-list-item>
+                        } @empty {
+                        <p class="empty">Todavia no hay inicios de sesion registrados.</p>
+                        }
+                    </mat-list>
+                    }
+                </mat-tab>
+            </mat-tab-group>
+        </app-panel-card>
+
+        <app-panel-card titulo="Estado del sistema" icon="dns" class="side-panel">
+            <div class="system-clock">
+                <strong>{{ horaActual() | date: 'HH:mm:ss' }}</strong>
+                <span class="muted">{{ horaActual() | date: 'fullDate' }}</span>
+            </div>
+
+            <div class="system-status">
+                <mat-chip-set>
+                    <mat-chip [class.status-up]="dashboardData()?.servidor?.estado === 'UP'" matTooltip="Estado del servidor de la API">
+                        <mat-icon matChipAvatar>dns</mat-icon>
+                        Servidor: {{ dashboardData()?.servidor?.estado || (cargandoDashboard() ? '...' : 'DOWN') }}
+                    </mat-chip>
+                    <mat-chip [class.status-up]="dashboardData()?.baseDatos?.estado === 'UP'" matTooltip="Estado de la base de datos">
+                        <mat-icon matChipAvatar>storage</mat-icon>
+                        Base de datos: {{ dashboardData()?.baseDatos?.estado || (cargandoDashboard() ? '...' : 'DOWN') }}
+                    </mat-chip>
+                </mat-chip-set>
+
+                @if (dashboardData()?.servidor?.uptimeSegundos) {
+                <p class="muted uptime">Uptime: {{ (dashboardData()!.servidor.uptimeSegundos / 60) | number: '1.0-0' }} min</p>
+                }
+            </div>
+        </app-panel-card>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- Graficos                                                       -->
+    <!-- ============================================================ -->
+    <section class="charts-grid" #dashboardChartsSection>
+        @defer (on viewport(dashboardChartsSection)) {
+        <app-chart-card titulo="Ingresos vs Gastos" icon="bar_chart" [options]="ingresosVsGastosOptions()" [loading]="cargandoDashboard()" />
+        <app-chart-card titulo="Balance mensual" icon="show_chart" [options]="balanceMensualOptions()" [loading]="cargandoDashboard()" />
+        <app-chart-card titulo="Movimientos por dia" icon="calendar_view_week" [options]="movimientosPorDiaOptions()" [loading]="cargandoDashboard()" />
+        <app-chart-card titulo="Categorias mas utilizadas" icon="pie_chart" [options]="categoriasOptions()" [loading]="cargandoDashboard()" />
+        <app-chart-card titulo="Top usuarios" icon="leaderboard" [options]="topUsuariosOptions()" [loading]="cargandoDashboard()" />
+        } @placeholder {
+        <div style="display: contents">
+            <app-skeleton variant="chart" height="280px" />
+            <app-skeleton variant="chart" height="280px" />
+            <app-skeleton variant="chart" height="280px" />
+            <app-skeleton variant="chart" height="280px" />
+            <app-skeleton variant="chart" height="280px" />
+        </div>
+        }
+    </section>
+    }
+
+    <!-- ============================================================ -->
+    <!-- Selector de vista: Dashboard / Usuarios / Movimientos / Reportes -->
+    <!-- ============================================================ -->
+    <div class="vista-switcher">
+        <button mat-stroked-button type="button" [class.active]="vistaActiva() === 'dashboard'" (click)="cambiarVista('dashboard')">
+            <mat-icon>dashboard</mat-icon> Dashboard
+        </button>
+        <button mat-stroked-button type="button" [class.active]="vistaActiva() === 'usuarios'" (click)="cambiarVista('usuarios')">
+            <mat-icon>group</mat-icon> Usuarios
+        </button>
+        <button mat-stroked-button type="button" [class.active]="vistaActiva() === 'movimientos-global'" (click)="cambiarVista('movimientos-global')">
+            <mat-icon>swap_horiz</mat-icon> Movimientos
+        </button>
+        <button mat-stroked-button type="button" [class.active]="vistaActiva() === 'reportes'" (click)="cambiarVista('reportes')">
+            <mat-icon>bar_chart</mat-icon> Reportes
+        </button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- Gestion de usuarios y movimientos (funcionalidad existente)   -->
+    <!-- ============================================================ -->
+    @if (vistaActiva() === 'usuarios') {
+    <section class="workspace">
+        <aside class="users-pane users-pane--wide">
+            <div class="section-title">
+                <h2>Usuarios</h2>
+                <button mat-icon-button type="button" matTooltip="Recargar usuarios" (click)="cargarUsuarios()">
+                    <mat-icon>refresh</mat-icon>
+                </button>
+            </div>
+
+            <form class="filters-toolbar" [formGroup]="filtrosForm">
+                <mat-form-field appearance="outline" class="filter-search">
+                    <mat-label>Buscar por nombre o correo</mat-label>
+                    <mat-icon matPrefix>search</mat-icon>
+                    <input matInput formControlName="texto" placeholder="correo@dominio.com" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="filter-select">
+                    <mat-label>Rol</mat-label>
+                    <mat-select [value]="filtroRol()" (selectionChange)="onFiltroRolChange($event.value)">
+                        <mat-option value="">Todos</mat-option>
+                        <mat-option value="ADMINISTRADOR">Administrador</mat-option>
+                        <mat-option value="USUARIO">Usuario</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="filter-select">
+                    <mat-label>Estado</mat-label>
+                    <mat-select [value]="filtroEstado()" (selectionChange)="onFiltroEstadoChange($event.value)">
+                        <mat-option value="">Todos</mat-option>
+                        <mat-option value="activo">Activo</mat-option>
+                        <mat-option value="inactivo">Inactivo</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+
+            @if (cargandoUsuarios()) {
+            <app-skeleton variant="text" height="18px" />
+            <app-skeleton variant="text" height="18px" />
+            <app-skeleton variant="text" height="18px" />
+            } @else {
+            <div class="table-wrap users-table-wrap">
+                <table mat-table [dataSource]="usuarios()" matSort [matSortActive]="sortActive()" [matSortDirection]="sortDirection()" (matSortChange)="onSortChange($event)">
+
+                    <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                        <td mat-cell *matCellDef="let u" (click)="seleccionarUsuario(u)">{{ u.nombre || 'Sin nombre' }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="correo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+                        <td mat-cell *matCellDef="let u" (click)="seleccionarUsuario(u)">{{ u.correo }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="telegram">
+                        <th mat-header-cell *matHeaderCellDef>Telegram</th>
+                        <td mat-cell *matCellDef="let u">{{ u.telegram_id || '-' }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef>Estado</th>
+                        <td mat-cell *matCellDef="let u">
+                            <mat-chip [class.status-up]="!usuarioDeshabilitado(u)" [class.status-down]="usuarioDeshabilitado(u)">
+                                {{ usuarioDeshabilitado(u) ? 'Inactivo' : 'Activo' }}
+                            </mat-chip>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="created_at">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Registro</th>
+                        <td mat-cell *matCellDef="let u">{{ u.created_at ? (u.created_at | date: 'dd/MM/yyyy, hh:mm a') : '-' }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ultimo_login">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ultimo acceso</th>
+                        <td mat-cell *matCellDef="let u">{{ u.ultimo_login ? (u.ultimo_login | date: 'dd/MM/yyyy, hh:mm a') : 'Nunca' }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="movimientos_count">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Movimientos</th>
+                        <td mat-cell *matCellDef="let u">{{ u.movimientos_count }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="balance_total">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Balance</th>
+                        <td mat-cell *matCellDef="let u">{{ money(u.balance_total, u.moneda) }}</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="acciones">
+                        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                        <td mat-cell *matCellDef="let u">
+                            <button mat-icon-button [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="abrirEditarUsuario(u)"><mat-icon>edit</mat-icon><span>Editar</span></button>
+                                <button mat-menu-item (click)="abrirVerHistorial(u)"><mat-icon>history</mat-icon><span>Ver historial</span></button>
+                                <button mat-menu-item (click)="abrirVerEstadisticas(u)"><mat-icon>insights</mat-icon><span>Ver estadisticas</span></button>
+                                <button mat-menu-item (click)="verMovimientosUsuario(u)"><mat-icon>receipt_long</mat-icon><span>Ver movimientos</span></button>
+                                <button mat-menu-item (click)="abrirRestablecerPassword(u)"><mat-icon>key</mat-icon><span>Restablecer contrasena</span></button>
+                                <button mat-menu-item (click)="toggleEstadoUsuario(u)">
+                                    <mat-icon>{{ usuarioDeshabilitado(u) ? 'lock_open' : 'lock' }}</mat-icon>
+                                    <span>{{ usuarioDeshabilitado(u) ? 'Activar' : 'Desactivar' }}</span>
+                                </button>
+                                <button mat-menu-item class="danger-item" (click)="eliminarUsuario(u)"><mat-icon>delete</mat-icon><span>Eliminar</span></button>
+                            </mat-menu>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                        mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                        [class.active-row]="usuarioSeleccionado()?.id === row.id"
+                        [class.disabled-row]="usuarioDeshabilitado(row)"
+                    ></tr>
+                </table>
+
+                @if (usuarios().length === 0) {
+                <p class="empty">No se encontraron usuarios con los filtros aplicados.</p>
+                }
+            </div>
+
+            <app-paginator
+                [length]="totalUsuarios()"
+                [pageSize]="pageSize()"
+                [pageIndex]="pageIndex()"
+                (paginaCambiada)="onPageChange($event)"
+            />
+            }
+        </aside>
+
+        <section class="detail-pane">
+            @if (usuarioSeleccionado(); as usuario) {
+            <div class="detail-shell">
+                <aside class="section-sidebar" aria-label="Funciones del administrador">
+                    <button type="button" [class.active]="seccionActiva() === 'balances'" (click)="cambiarSeccion('balances')">
+              <mat-icon>account_balance_wallet</mat-icon>
+              <span>Cuentas y balances</span>
+            </button>
+                    <button type="button" [class.active]="seccionActiva() === 'movimientos'" (click)="cambiarSeccion('movimientos')">
+              <mat-icon>receipt_long</mat-icon>
+              <span>Movimientos</span>
+            </button>
+                </aside>
+
+                <div class="detail-body">
+                    <div class="detail-header">
+                        <div>
+                            <p>Usuario #{{ usuario.id }}</p>
+                            <h2>
+                                {{ usuario.nombre || usuario.correo }} @if (usuarioDeshabilitado(usuario)) {
+                                <span class="status-pill">Deshabilitado</span> }
+                            </h2>
+                        </div>
+                        <div class="detail-actions">
+                            <button mat-stroked-button type="button" (click)="cargarBalanceUsuario(usuario.id)">Recargar balance</button>
+                        </div>
+                    </div>
+
+                    <div class="detail-content">
+                        @if (seccionActiva() === 'balances') {
+                        <section class="panel-section">
+                            <div class="balance-summary">
+                                <span>Balance total</span>
+                                <strong>{{ money(balanceTotalSeleccionado(), balanceSeleccionado()?.moneda || usuarioSeleccionado()?.moneda) }}</strong>
+                            </div>
+
+                            <div class="accounts-grid">
+                                @for (cuenta of cuentasSeleccionadas(); track cuenta.nombre) {
+                                <article class="account-card">
+                                    <span>{{ cuenta.nombre }}</span>
+                                    <strong [class.negative]="saldoCuenta(cuenta) < 0">{{ money(saldoCuenta(cuenta), balanceSeleccionado()?.moneda || usuarioSeleccionado()?.moneda) }}</strong>
+                                </article>
+                                } @empty {
+                                <p class="empty">Este usuario no tiene cuentas registradas.</p>
+                                }
+                            </div>
+                        </section>
+                        } @if (seccionActiva() === 'movimientos') {
+                        <section class="panel-section">
+                            <div class="section-title movements-title">
+                                <h2>Registros financieros</h2>
+                                <button mat-icon-button type="button" matTooltip="Recargar movimientos" (click)="cargarMovimientos(usuario.id)">
+                                    <mat-icon>refresh</mat-icon>
+                                </button>
+                            </div>
+
+                            @if (cargandoMovimientos()) {
+                            <app-skeleton variant="text" height="18px" />
+                            <app-skeleton variant="text" height="18px" />
+                            <app-skeleton variant="text" height="18px" />
+                            } @else {
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Tipo</th>
+                                            <th>Categoria</th>
+                                            <th>Cuenta origen</th>
+                                            <th>Cuenta destino</th>
+                                            <th>Monto</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (movimiento of movimientos(); track movimiento.id) {
+                                        <tr>
+                                            <td>{{ movimiento.fecha ? (movimiento.fecha | date: 'dd/MM/yyyy, hh:mm a') : '-' }}</td>
+                                            <td><span class="chip">{{ tipoMovimiento(movimiento) }}</span></td>
+                                            <td>{{ movimiento.categoria || '-' }}</td>
+                                            <td>{{ movimiento.cuenta_origen || '-' }}</td>
+                                            <td>{{ movimiento.cuenta_destino || '-' }}</td>
+                                            <td>{{ money(movimiento.monto, movimiento.moneda || usuarioSeleccionado()?.moneda) }}</td>
+                                            <td class="actions">
+                                                <button mat-icon-button type="button" matTooltip="Editar" (click)="editarMovimiento(movimiento)">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                                <button mat-icon-button type="button" matTooltip="Eliminar" (click)="eliminarMovimiento(movimiento)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        } @empty {
+                                        <tr>
+                                            <td colspan="7" class="empty">Este usuario no tiene movimientos disponibles.</td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            }
+                        </section>
+                        }
+                    </div>
+                </div>
+            </div>
+            } @else {
+            <p class="empty">Selecciona un usuario para administrar sus datos.</p>
+            }
+        </section>
+    </section>
+    }
+
+    <!-- ============================================================ -->
+    <!-- Movimientos (todos los usuarios) - modulo global nuevo        -->
+    <!-- ============================================================ -->
+    @if (vistaActiva() === 'movimientos-global') {
+    <section class="workspace movimientos-global-workspace">
+        <div class="section-title">
+            <h2>Movimientos (todos los usuarios)</h2>
+            <button mat-icon-button type="button" matTooltip="Recargar" (click)="cargarMovimientosGlobal()">
+                <mat-icon>refresh</mat-icon>
+            </button>
+        </div>
+
+        <form class="filters-toolbar" [formGroup]="filtrosMovimientosGlobalForm">
+            <mat-form-field appearance="outline" class="filter-search">
+                <mat-label>Buscar (descripcion, usuario, categoria)</mat-label>
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput formControlName="texto" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-select">
+                <mat-label>Rango de fecha</mat-label>
+                <mat-select [value]="filtroRangoFechaMg()" (selectionChange)="onFiltroRangoFechaChangeMg($event.value)">
+                    <mat-option value="">Todos</mat-option>
+                    <mat-option value="hoy">Hoy</mat-option>
+                    <mat-option value="semana">Semana</mat-option>
+                    <mat-option value="mes">Mes</mat-option>
+                    <mat-option value="anio">Año</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-search">
+                <mat-label>Usuario</mat-label>
+                <input matInput formControlName="buscarUsuario" [matAutocomplete]="autoUsuario" placeholder="correo@dominio.com" />
+                <mat-autocomplete #autoUsuario="matAutocomplete" (optionSelected)="seleccionarUsuarioFiltroMg($event.option.value)">
+                    @for (u of usuariosSugeridosMg(); track u.id) {
+                    <mat-option [value]="u">{{ u.nombre || u.correo }}</mat-option>
+                    }
+                </mat-autocomplete>
+                @if (filtroUsuarioMg()) {
+                <button mat-icon-button matSuffix type="button" (click)="limpiarFiltroUsuarioMg()">
+                    <mat-icon>close</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-select">
+                <mat-label>Categoria</mat-label>
+                <mat-select [value]="filtroCategoriaMg()" (selectionChange)="onFiltroCategoriaChangeMg($event.value)">
+                    <mat-option value="">Todas</mat-option>
+                    @for (cat of categoriasDisponibles(); track cat) {
+                    <mat-option [value]="cat">{{ cat }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-select">
+                <mat-label>Tipo</mat-label>
+                <mat-select [value]="filtroTipoMg()" (selectionChange)="onFiltroTipoChangeMg($event.value)">
+                    <mat-option value="">Todos</mat-option>
+                    <mat-option value="INGRESO">Ingreso</mat-option>
+                    <mat-option value="GASTO">Gasto</mat-option>
+                    <mat-option value="TRANSFERENCIA">Transferencia</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-monto">
+                <mat-label>Monto min.</mat-label>
+                <input matInput type="number" formControlName="montoMin" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="filter-monto">
+                <mat-label>Monto max.</mat-label>
+                <input matInput type="number" formControlName="montoMax" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="filter-select">
+                <mat-label>Estado</mat-label>
+                <mat-select [value]="filtroEstadoMg()" (selectionChange)="onFiltroEstadoChangeMg($event.value)">
+                    <mat-option value="activo">Activo</mat-option>
+                    <mat-option value="eliminado">Eliminado</mat-option>
+                    <mat-option value="todos">Todos</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-stroked-button type="button" (click)="exportarMovimientosGlobal()">
+                <mat-icon>download</mat-icon> Exportar CSV
+            </button>
+        </form>
+
+        @if (cargandoMovimientosGlobal()) {
+        <app-skeleton variant="text" height="18px" />
+        <app-skeleton variant="text" height="18px" />
+        <app-skeleton variant="text" height="18px" />
+        } @else {
+        <div class="table-wrap movimientos-global-table-wrap">
+            <table mat-table [dataSource]="movimientosGlobal()" matSort [matSortActive]="sortActiveMg()" [matSortDirection]="sortDirectionMg()" (matSortChange)="onSortChangeMg($event)">
+
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+                    <td mat-cell *matCellDef="let m">{{ m.fecha | date: 'dd/MM/yyyy, hh:mm a' }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="usuario">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+                    <td mat-cell *matCellDef="let m">{{ m.usuario_nombre || m.usuario_correo }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="categoria">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</th>
+                    <td mat-cell *matCellDef="let m">{{ m.categoria || '-' }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="tipo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+                    <td mat-cell *matCellDef="let m">
+                        <mat-chip [class.chip-ingreso]="m.tipo === 'INGRESO'" [class.chip-gasto]="m.tipo === 'GASTO'" [class.chip-transferencia]="m.tipo === 'TRANSFERENCIA'">
+                            {{ m.tipo }}
+                        </mat-chip>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="monto">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Monto</th>
+                    <td mat-cell *matCellDef="let m">{{ money(m.monto, m.moneda) }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="descripcion">
+                    <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+                    <td mat-cell *matCellDef="let m">{{ m.descripcion || '-' }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef>Estado</th>
+                    <td mat-cell *matCellDef="let m">
+                        <mat-chip [class.status-up]="!m.deleted_at" [class.status-down]="!!m.deleted_at">
+                            {{ m.deleted_at ? 'Eliminado' : 'Activo' }}
+                        </mat-chip>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                    <td mat-cell *matCellDef="let m">
+                        <button mat-icon-button [matMenuTriggerFor]="menuMg">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menuMg="matMenu">
+                            <button mat-menu-item (click)="abrirVerDetalleMovimiento(m)"><mat-icon>visibility</mat-icon><span>Ver detalle</span></button>
+                            <button mat-menu-item [disabled]="!!m.deleted_at" (click)="abrirEditarMovimientoGlobal(m)"><mat-icon>edit</mat-icon><span>Editar</span></button>
+                            <button mat-menu-item [disabled]="!!m.deleted_at" (click)="duplicarMovimientoGlobal(m)"><mat-icon>content_copy</mat-icon><span>Duplicar</span></button>
+                            <button mat-menu-item class="danger-item" [disabled]="!!m.deleted_at" (click)="eliminarMovimientoGlobal(m)"><mat-icon>delete</mat-icon><span>Eliminar</span></button>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsMg"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsMg" [class.disabled-row]="row.deleted_at"></tr>
+            </table>
+
+            @if (movimientosGlobal().length === 0) {
+            <p class="empty">No se encontraron movimientos con los filtros aplicados.</p>
+            }
+        </div>
+
+        <app-paginator
+            [length]="totalMovimientosGlobal()"
+            [pageSize]="pageSizeMg()"
+            [pageIndex]="pageIndexMg()"
+            (paginaCambiada)="onPageChangeMg($event)"
+        />
+        }
+    </section>
+    }
+
+    <!-- ============================================================ -->
+    <!-- Reportes (modulo nuevo)                                       -->
+    <!-- ============================================================ -->
+    @if (vistaActiva() === 'reportes') {
+    <section class="workspace reportes-workspace">
+        <div class="section-title">
+            <h2>Reportes</h2>
+            <button mat-icon-button type="button" matTooltip="Recargar" (click)="cargarReporte()">
+                <mat-icon>refresh</mat-icon>
+            </button>
+        </div>
+
+        <app-notice tipo="danger" [mensaje]="errorReporte()" />
+
+        <form class="filters-toolbar" [formGroup]="filtrosReporteForm">
+            <mat-form-field appearance="outline" class="filter-select">
+                <mat-label>Tipo de reporte</mat-label>
+                <mat-select [value]="tipoReporteSeleccionado()" (selectionChange)="onTipoReporteChange($event.value)">
+                    @for (t of tiposReporte; track t.value) {
+                    <mat-option [value]="t.value">{{ t.label }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            @if (requiereAnio()) {
+            <mat-form-field appearance="outline" class="filter-monto">
+                <mat-label>Año</mat-label>
+                <input matInput type="number" [value]="anioReporte()" (change)="onAnioReporteChange($any($event.target).value)" />
+            </mat-form-field>
+            }
+
+            @if (requiereRangoAnios()) {
+            <mat-form-field appearance="outline" class="filter-monto">
+                <mat-label>Año desde</mat-label>
+                <input matInput type="number" [value]="anioDesdeReporte()" (change)="onAnioDesdeReporteChange($any($event.target).value)" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="filter-monto">
+                <mat-label>Año hasta</mat-label>
+                <input matInput type="number" [value]="anioHastaReporte()" (change)="onAnioHastaReporteChange($any($event.target).value)" />
+            </mat-form-field>
+            }
+
+            @if (requiereRangoFechas()) {
+            <mat-form-field appearance="outline" class="filter-monto">
+                <mat-label>Desde</mat-label>
+                <input matInput type="date" [value]="fechaDesdeReporte()" (change)="onFechaDesdeReporteChange($any($event.target).value)" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="filter-monto">
+                <mat-label>Hasta</mat-label>
+                <input matInput type="date" [value]="fechaHastaReporte()" (change)="onFechaHastaReporteChange($any($event.target).value)" />
+            </mat-form-field>
+            }
+
+            @if (requiereUsuario()) {
+            <mat-form-field appearance="outline" class="filter-search">
+                <mat-label>Usuario</mat-label>
+                <input matInput formControlName="buscarUsuario" [matAutocomplete]="autoUsuarioReporte" placeholder="correo@dominio.com" />
+                <mat-autocomplete #autoUsuarioReporte="matAutocomplete" (optionSelected)="seleccionarUsuarioReporte($event.option.value)">
+                    @for (u of usuariosSugeridosReporte(); track u.id) {
+                    <mat-option [value]="u">{{ u.nombre || u.correo }}</mat-option>
+                    }
+                </mat-autocomplete>
+                @if (usuarioReporte()) {
+                <button mat-icon-button matSuffix type="button" (click)="limpiarUsuarioReporte()">
+                    <mat-icon>close</mat-icon>
+                </button>
+                }
+            </mat-form-field>
+            }
+
+            <button mat-stroked-button type="button" (click)="exportarReporteActual('csv')">
+                <mat-icon>description</mat-icon> CSV
+            </button>
+            <button mat-stroked-button type="button" (click)="exportarReporteActual('excel')">
+                <mat-icon>grid_on</mat-icon> Excel
+            </button>
+            <button mat-stroked-button type="button" (click)="exportarReporteActual('pdf')">
+                <mat-icon>picture_as_pdf</mat-icon> PDF
+            </button>
+        </form>
+
+        @if (cargandoReporte()) {
+        <app-skeleton variant="text" height="18px" />
+        <app-skeleton variant="text" height="18px" />
+        <app-skeleton variant="text" height="18px" />
+        } @else {
+        <div class="reporte-resumen-grid">
+            @for (tarjeta of resumenReporteCards(); track tarjeta.label) {
+            <div class="reporte-resumen-card">
+                <span class="muted">{{ tarjeta.label }}</span>
+                <strong>{{ tarjeta.value }}</strong>
+            </div>
+            }
+        </div>
+
+        @if (chartOptionsReporte(); as opciones) {
+        <section class="charts-grid" #reporteChartSection>
+            @defer (on viewport(reporteChartSection)) {
+            <app-chart-card titulo="Gráfico" icon="bar_chart" [options]="opciones" />
+            } @placeholder {
+            <app-skeleton variant="chart" height="280px" />
+            }
+        </section>
+        }
+
+        <div class="table-wrap reporte-table-wrap">
+            <table mat-table [dataSource]="filasTablaReporte()">
+                @for (columna of columnasTablaReporte(); track columna.key) {
+                <ng-container [matColumnDef]="columna.key">
+                    <th mat-header-cell *matHeaderCellDef>{{ columna.label }}</th>
+                    <td mat-cell *matCellDef="let fila">{{ fila[columna.key] }}</td>
+                </ng-container>
+                }
+                <tr mat-header-row *matHeaderRowDef="columnasTablaReporteKeys()"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnasTablaReporteKeys()"></tr>
+            </table>
+
+            @if (filasTablaReporte().length === 0) {
+            <p class="empty">No hay datos para este reporte con los filtros aplicados.</p>
+            }
+        </div>
+        }
+    </section>
+    }
+
+    @if (movimientoEditando(); as movimiento) {
+    <section class="modal-backdrop">
+        <form class="modal" [formGroup]="movimientoForm" (ngSubmit)="guardarMovimiento()">
+            <div class="section-title">
+                <h2>Editar movimiento #{{ movimiento.id }}</h2>
+                <button mat-icon-button type="button" matTooltip="Cerrar" (click)="movimientoEditando.set(null)">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Categoria</mat-label>
+                <input matInput formControlName="categoria" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Monto</mat-label>
+                <input matInput type="number" min="0.01" step="0.01" formControlName="monto" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Cuenta origen</mat-label>
+                <input matInput formControlName="cuenta_origen" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Cuenta destino</mat-label>
+                <input matInput formControlName="cuenta_destino" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Metodo de pago</mat-label>
+                <input matInput formControlName="metodo_pago" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full">
+                <mat-label>Descripcion</mat-label>
+                <textarea matInput rows="3" formControlName="descripcion"></textarea>
+            </mat-form-field>
+
+            <div class="modal-actions">
+                <button mat-stroked-button type="button" (click)="movimientoEditando.set(null)">Cancelar</button>
+                <button mat-raised-button color="primary" type="submit">Guardar movimiento</button>
+            </div>
+        </form>
+    </section>
+    }
+</main>
