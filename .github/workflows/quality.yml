@@ -1,0 +1,21 @@
+name: Verificar aplicación
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            BACKEND/package-lock.json
+            FRONTEND/package-lock.json
+      - run: npm ci --prefix BACKEND
+      - run: npm test --prefix BACKEND
+      - run: npm ci --prefix FRONTEND
+      - run: npm run build --prefix FRONTEND
+      - run: npm test --prefix FRONTEND -- --watch=false --browsers=ChromeHeadless
