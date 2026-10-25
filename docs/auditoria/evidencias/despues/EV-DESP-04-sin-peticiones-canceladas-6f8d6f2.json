@@ -1,0 +1,16 @@
+{
+ "fecha": "2026-10-25T14:56:01.454Z",
+ "flujo": "login → panel → carteras → presupuestos → usuario → perfil",
+ "resultados": [
+  {
+   "viewport": 1366,
+   "peticiones_fallidas": [],
+   "errores": []
+  },
+  {
+   "viewport": 390,
+   "peticiones_fallidas": [],
+   "errores": []
+  }
+ ]
+}
