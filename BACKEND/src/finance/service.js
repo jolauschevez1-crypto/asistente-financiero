@@ -187,6 +187,8 @@ async function panel(uid,month,moneda){const m=v.month(month||v.today().slice(0,
  const gastos=await mc.valuate(flows.filter(f=>f.tipo==='GASTO').map(f=>({moneda:f.moneda,dia:f.dia,cents:v.dbCents(f.total)})),base);
  const flujos=[...new Set(flows.map(f=>f.moneda))].sort().map(cur=>{const sum=t=>flows.filter(f=>f.moneda===cur&&f.tipo===t).reduce((a,f)=>a+v.dbCents(f.total),0);return {moneda:cur,ingresos:v.money(sum('INGRESO')),gastos:v.money(sum('GASTO'))};});
  const tasas=fx.status(snap,v.today());
+ // Tasa de cada moneda a la de presentación (12 decimales), para estimaciones en pantalla.
+ const tasasABase=Object.fromEntries(currency.monedas.map(m=>[m.codigo,fx.quote(snap,m.codigo,base)?.tasa??null]));
  const alerts=[];
  if(perCurrency.size>1||[...perCurrency.keys()].some(c=>c!==base)){
   if(tasas.estado==='desactualizada')alerts.push({tipo:'aviso',mensaje:`Las tasas de referencia tienen ${tasas.antiguedad_dias} días (cotización del ${tasas.fecha_cotizacion}). El total es aproximado.`});
@@ -198,7 +200,7 @@ async function panel(uid,month,moneda){const m=v.month(month||v.today().slice(0,
  const ingresoSinTasa=ingresos.sin_tasa.length>0,gastoSinTasa=gastos.sin_tasa.length>0;
  return {moneda:base,mes:m,saldo_total:v.money(total),saldo_total_completo:sinConvertir.length===0,saldos_por_moneda:saldos,saldos_sin_convertir:sinConvertir,
   ingresos:v.money(ingresos.cents),gastos:v.money(gastos.cents),neto:v.money(ingresos.cents-gastos.cents),flujos_completos:!ingresoSinTasa&&!gastoSinTasa,
-  flujos_por_moneda:flujos,flujos_sin_tasa:{ingresos:ingresos.sin_tasa,gastos:gastos.sin_tasa},tasas,
+  flujos_por_moneda:flujos,flujos_sin_tasa:{ingresos:ingresos.sin_tasa,gastos:gastos.sin_tasa},tasas,tasas_a_base:tasasABase,
   carteras:wallets,presupuestos:budgets,recurrentes:recurring,deudas:debts,metas:goals,grupos:groups,alertas:alerts};
 }
 module.exports={quickExpenses,listWallets,listCategories,createWallet,listBudgets,createBudget,updateBudget,deleteBudget,listRecurring,saveRecurring,disableRecurring,confirmRecurring,listDebts,createDebt,addPayment,listPayments,deleteDebt,listGoals,createGoal,addContribution,listContributions,deleteGoal,listGroups,createGroup,addMember,groupDetail,groupExpense,settleGroup,panel,movement};

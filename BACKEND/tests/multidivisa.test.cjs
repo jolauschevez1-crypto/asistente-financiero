@@ -106,6 +106,7 @@ test('panel en USD por defecto consolida USD y EUR, separa COP sin tasa y permit
  assert.deepEqual(d.saldos_sin_convertir,[{moneda:'COP',saldo:'1000.00'}]);
  assert.deepEqual(d.saldos_por_moneda.map(x=>[x.moneda,x.saldo,x.convertido]),[['COP','1000.00',null],['EUR','50.00','55.56'],['USD','100.00','100.00']]);
  assert.equal(d.tasas.estado,'vigente');assert.equal(d.tasas.antiguedad_dias,1);assert.equal(d.tasas.fuente,fx.FUENTE);
+ assert.equal(d.tasas_a_base.EUR,'1.111111111111');assert.equal(d.tasas_a_base.USD,'1');assert.equal(d.tasas_a_base.COP,null);
  assert.ok(d.alertas.some(a=>/COP/.test(a.mensaje)));
  // Ingresos de apertura del mes: 100 USD + 50 EUR; COP sin tasa queda aparte.
  assert.equal(d.ingresos,'155.56');assert.equal(d.flujos_completos,false);assert.deepEqual(d.flujos_sin_tasa.ingresos,[{moneda:'COP',monto:'1000.00'}]);
