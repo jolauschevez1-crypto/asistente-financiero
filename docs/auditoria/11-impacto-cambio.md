@@ -8,6 +8,7 @@
 | CR-02 | 2026-10-25 | Usuario | Contraseña de al menos 10 caracteres (el usuario confirmó 10) con mayúscula, número y carácter especial, que no sea ni contenga el nombre ni el correo. Además, campos de texto solo con texto y campos numéricos solo con números |
 | CR-03 | 2026-10-25 | Usuario: "desactiva que quede para otra version" | Telegram fuera de esta versión |
 | CR-04 | 2026-10-25 | Usuario, con 6 capturas de referencia: "en todos los modulos salga asi la opcion de escoger monedas, y si yo aplasto euro se ponga todo en euro", "para crear cartera no salga la moneda", "quita el modulo moviemintos", "quita el metodo de pago en todo lado", "quita del navbar la moneda de cambio", "ponlos en el navbar los botones de accesibilidad", "en perfil unicamente q va a en perfil", "q use otros colores no me gusta ese verde" | **Moneda de visualización por módulo y simplificación.** Ver §8 |
+| CR-05 | 2026-10-25 | Usuario: "aqui un logo tambien", "en la url puedes quitarle el seven?" y "el cuenta de google no debe ir primero?" | Logo propio, botón de Google al inicio del login y dirección sin «seven». Ver §9 |
 
 ## 2. Requisitos afectados
 
@@ -97,3 +98,11 @@ El cambio pasa de "riesgo de diseño" en la línea base a "implementado y probad
 - Un importe convertido puede leerse como dinero real en esa moneda. Mitigación: aviso bajo el título, original al lado y la palabra "referencia".
 - Si `/finanzas/tasas` falla, los importes se muestran en su moneda original (no se inventa una tasa).
 
+
+## 9. CR-05: logo, acceso con Google y dirección (2026-10-25)
+
+- **Logo:** se sustituye el icono por defecto de Angular y el cuadro «AF» por un logo propio (`favicon.svg`, `favicon.ico`, `apple-touch-icon.png`) en la pestaña, la barra superior y el login. Sin efecto en requisitos funcionales. Evidencia EV-LOGO-01/02.
+- **Login (RF-01, RNF-03):** «Continuar con Google» pasa arriba del formulario, a todo el ancho, con un separador «o con tu correo» y el tema oscuro de Google. El flujo OAuth no cambia. Evidencia EV-LOGIN-01, con el botón de Google simulado; el iframe real queda por confirmar en producción.
+- **Dirección:** `asistente-financiero.vercel.app`, `asistentefinanciero.vercel.app` y `mi-asistente-financiero.vercel.app` ya pertenecen a otras cuentas de Vercel (respuesta 409 de la API). El usuario eligió mantener `asistente-financiero-seven.vercel.app`. RNF-08 no cambia.
+- **Pruebas:** frontend 60/60, axe 60 escaneos 0 violaciones, teclado 21/21, desborde 0. Ninguna prueba queda invalidada.
+- **Decisión:** no cambia (sigue CONDITIONAL GO, ver 12).

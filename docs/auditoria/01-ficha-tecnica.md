@@ -6,9 +6,9 @@
 | Repositorio | `jolauschevez1-crypto/asistente-financiero` |
 | Rama de trabajo | `claude/project-thread-noiuro` (ver desvío en §5) |
 | Línea base | `f3504d3`, el mismo commit que estaba en producción al empezar (despliegue `dpl_DXhimEwhkZdoV2Txosgmg6vmRwKT`) |
-| Producción | https://asistente-financiero-seven.vercel.app (proyecto de Vercel `asistente-financiero`) |
+| Producción | https://asistente-financiero-seven.vercel.app (proyecto de Vercel `asistente-financiero`). Versión auditada en producción: `5514da0` (despliegue `dpl_6ErENcDY1tUXAxgrVnip4Z1KRFSC`, ver EV-PROD-01). Las direcciones sin «seven» (`asistente-financiero.vercel.app` y otras) pertenecen a otras cuentas de Vercel |
 | Equipo | [Integrante 1], [Integrante 2], [Integrante 3], [Integrante 4]. Docente: Ing. Jimmy Molina Ríos, Ph.D. Asistencia técnica: Claude (asistente de IA) |
-| Periodo | 2026-10-25 (línea base 05:09Z; última evidencia 14:52Z) |
+| Periodo | 2026-10-25 (línea base 05:09Z; última evidencia 17:50Z) |
 
 ## 1. Arquitectura
 
@@ -56,5 +56,5 @@ El resto de los commits son de documentación y evidencias.
 ## 5. Desvíos respecto de la consigna
 
 - **Ramas:** la consigna pide `feature/multidivisa`, `feature/redesign-ui`, `audit/baseline` y `audit/lab`. El entorno de trabajo solo autoriza a subir la rama `claude/project-thread-noiuro`, así que todo el trabajo está ahí, en commits pequeños con los prefijos pedidos.
-- **Rama `audit/lab`:** no se creó porque no hizo falta sembrar defectos. Hubo 14 defectos reales (ver `04-registro-defectos.csv`).
+- **Rama `audit/lab`:** no se creó porque no hizo falta sembrar defectos. Hubo 15 defectos reales (ver `04-registro-defectos.csv`).
 - **Preview de Vercel:** el proyecto no tiene variables para Preview, así que una vista previa no tendría base de datos. Las pruebas de sistema y de carga se hicieron en local.

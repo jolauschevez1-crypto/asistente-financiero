@@ -15,11 +15,11 @@ Responsables: [Integrante 1] es el líder de calidad, [Integrante 2] el desarrol
 | Seguridad | Sondeo OWASP; npm audit | [Integrante 1] | Controles fallidos; vulnerabilidades críticas/altas | Conteo | 0 y 0 | EV-SEG-01..03 | VERDE · Cumple |
 | Accesibilidad WCAG 2.2 AA | axe, teclado, reflujo y lector de pantalla | [Integrante 3] | Violaciones; controles de teclado aprobados | Conteo; % | 0; 100 % | EV-A11Y-01/02 | AMARILLO · Lector de pantalla no evaluado |
 | Rendimiento | Carga ×5; Core Web Vitals | [Integrante 3] | p95 API; LCP; CLS | ms; ms; índice | ≤ 500 ms; escritorio ≤ 2500 ms y móvil ≤ 4000 ms en producción; ≤ 0,1 | EV-REN-01/02 | AMARILLO · Local OK; móvil en producción pendiente |
-| Defectos bajo control | Registro, corrección y regresión | [Integrante 1] | Críticos abiertos; tasa de cierre; DRE | Conteo; % | 0; ≥ 90 %; ≥ 90 % | 04, 05 | AMARILLO · Cierre 80 % hasta verificar D-08/D-09 |
+| Defectos bajo control | Registro, corrección y regresión | [Integrante 1] | Críticos abiertos; tasa de cierre; DRE | Conteo; % | 0; ≥ 90 %; ≥ 90 % | 04, 05 | ROJO para GO · 0 críticos, pero cierre 53 % y DRE 67 % (5 defectos escaparon a producción, D-15 de severidad Alta) |
 | Regresión | CI con build, pruebas y verificación de iconos | [Integrante 2] | Pruebas en verde | % | 100 % | EV-PRU-01/02; quality.yml | VERDE · Cumple |
 | Cobertura | Matriz de trazabilidad | [Integrante 1] | Requisitos con todos sus casos aprobados | % | 100 % para GO | 10 | AMARILLO · 84 % (21/25) |
-| Revisiones | R1–R6 y RTF | [Integrante 1] | Revisiones ejecutadas / planificadas | % | 100 % | 06 | AMARILLO · R1–R6 6/6; RTF 0/1 |
-| Liberación segura | Migración aditiva, despliegue y verificación en producción | [Integrante 4] | Datos perdidos; verificación en la URL | Conteo; sí/no | 0; sí | CP-46 | ROJO · Pendiente del OK del usuario |
+| Revisiones | R1–R7 y RTF | [Integrante 1] | Revisiones ejecutadas / planificadas | % | 100 % | 06 | AMARILLO · R1–R7 7/7; RTF 0/1 |
+| Liberación segura | Migración aditiva, despliegue y verificación en producción | [Integrante 4] | Datos perdidos; verificación en la URL | Conteo; sí/no | 0; sí | CP-46; EV-PROD-01 | AMARILLO · 4 despliegues con OK del usuario, migración aplicada, paquete igual al probado; falta la verificación con sesión |
 
 **Semáforo** (Semana 5 Clase 2, d.22):
 - VERDE · cumple el umbral con evidencia;

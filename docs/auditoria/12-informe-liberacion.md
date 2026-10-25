@@ -1,106 +1,98 @@
-# 12 · Informe de liberación
+# 12 · Informe ejecutivo de liberación
 
-**Estado del informe:** BORRADOR PREVIO A PRODUCCIÓN (2026-10-25, commit `6f8d6f2` + documentación). Se completa después del despliegue con los resultados de CP-13, CP-40 y CP-46.
+**Fecha de corte:** 2026-10-25 18:00Z. **Versión en producción:** `5514da0` (https://asistente-financiero-seven.vercel.app, ver EV-PROD-01).
 
 ## 1. Decisión
 
-**Decisión para publicar: CONDITIONAL GO.** Equivale a "aprobado con condiciones" (Semana 2 Clase 2).
+**CONDITIONAL GO** ("aprobado con condiciones", Semana 2 Clase 2). El producto ya está publicado con el OK del usuario; la decisión dice si puede aceptarse como versión de calidad.
 
-- **Sustento:**
-  - Todos los criterios de integridad, exactitud y seguridad se cumplen con evidencia local.
-  - No hay defectos críticos ni altos abiertos.
-  - Las 129 pruebas automáticas pasan (69 backend, 60 frontend, tras CR-04 y D-15).
-- **Por qué todavía no es GO:**
-  - Faltan evidencias de producción: la tasa real de Frankfurter, la migración aplicada y el LCP móvil.
-  - Falta la RTF con el equipo.
-  - Falta la prueba con lector de pantalla.
-  - Al revisar la versión publicada aparecieron 4 defectos de interfaz (D-11 a D-14), ya publicados en `b24d805`. Después la persona usuaria encontró en producción D-15 (Alta): el formulario rechazaba cualquier nombre con letras y no dejaba crear carteras. Está corregido en la rama y falta publicarlo. Con estos 5 escapados la DRE es 67 %, por debajo del umbral de 90 % (05 §1). Ninguno afecta saldos, tasas ni seguridad de acceso.
+**Por qué no es NO-GO**
+- Integridad de saldos: 0 descuadres y 0 saldos negativos con carga ×5, concurrencia e idempotencia (EV-REN-02; BE 10, 42, 59, 60).
+- Exactitud: no se suman monedas sin tasa; aritmética en centavos con redondeo half-up igual en cliente y servidor (CP-08, CP-15, CP-21, CP-30).
+- Seguridad: sondeo OWASP 20/20 y 0 vulnerabilidades críticas o altas (EV-SEG-01..03).
+- Regresión: 129/129 pruebas automáticas (69 backend, 60 frontend).
+- Accesibilidad automatizable: axe 60 escaneos con 0 violaciones; teclado y reflujo 21/21.
+- 0 defectos críticos. Ningún defecto afectó saldos, tasas ni control de acceso.
+- La versión probada es la que corre en producción (EV-PROD-01).
 
-Los riesgos críticos no se promediaron. Cada uno se evaluó por separado (§3).
+**Por qué no es GO**
+1. **Falta evidencia en producción** de la tasa real con fecha ≤ 4 días (CP-13), del cron autorizado (D-08) y del LCP móvil (CP-40). Cobertura de requisitos: 21/25 = 84 % (umbral 100 %).
+2. **DRE 67 %** (umbral ≥ 90 %): 5 defectos llegaron a producción (D-11 a D-15). El más grave, D-15 (Alta), impedía crear carteras y lo encontró el usuario.
+3. **Tasa de cierre 53 %** (umbral ≥ 90 %): D-08, D-09 y D-11 a D-15 están corregidos y publicados pero falta verificarlos en producción.
+4. **Revisión técnica formal no realizada** (06 §3) y **lector de pantalla no evaluado** (CP-37).
+
+Los riesgos críticos no se promediaron: cada uno se evaluó por separado (§3).
 
 ### Condiciones para pasar a GO
+1. Con una sesión en producción: el panel muestra el sello «Tasas de referencia BCE del …» con fecha ≤ 4 días (CP-13) y el cron responde 200 (D-08).
+2. LCP móvil ≤ 4 s medido en la URL oficial (CP-40).
+3. El usuario confirma que crear «Ecuabet» funciona (D-15) y se revisan en producción D-09 y D-11 a D-14. Con eso la tasa de cierre llega a 100 %.
+4. RTF con roles, acta y seguimiento (06 §3) y revisión con lector de pantalla (CP-37).
 
-1. El usuario da el OK y se despliega la rama en el proyecto actual de Vercel (CP-46).
-2. En producción se cumple lo siguiente:
-   - el login funciona;
-   - `/api/finanzas/tasas` devuelve la fuente `frankfurter-bce` con fecha de cotización ≤ 4 días (CP-13);
-   - el panel muestra el total con su sello de tasa;
-   - el cron autorizado responde 200 (D-08);
-   - el LCP móvil es ≤ 4 s (CP-40).
-3. D-08 y D-09 pasan a CERRADO, con lo que la tasa de cierre llega al 100 %.
-4. La decisión vuelve a NO-GO si en producción falla cualquiera de estos puntos: login, integridad de saldos o tasas.
+**Vuelve a NO-GO** si en producción falla el login, la integridad de saldos o las tasas.
 
-**Condiciones académicas, que no bloquean la publicación pero sí el GO pleno del expediente:**
-- RTF con roles y acta (06 §3).
-- Revisión con lector de pantalla (CP-37).
+## 2. Línea base y versión evaluada
 
-## 2. Línea base y cambios
-
-| | Línea base `f3504d3` | Esta versión |
+| | Línea base `f3504d3` | Versión `5514da0` |
 |---|---|---|
-| Moneda | Una por usuario, bloqueada tras la actividad | Una por cartera; panel consolidado en USD/EUR/MXN; conversión explícita y trazable |
+| Moneda | Una por usuario, bloqueada tras la actividad | Una por cartera; selector de moneda de visualización en cada módulo (USD, EUR, MXN); conversión explícita y trazable |
 | Tasas | No había | BCE vía Frankfurter, cron diario y refresco perezoso, última tasa válida con su antigüedad |
-| Interfaz | Sidebar | Barra superior, menú móvil accesible, login rediseñado, modal "Crear nueva cartera", estilo Wise/Steep |
+| Interfaz | Sidebar, verde | Barra superior con botones de accesibilidad, menú móvil accesible, paleta azul sobre negro, logo propio, Movimientos dentro de Carteras |
+| Login | Google al final | «Continuar con Google» primero, con separador |
 | Contraseña | Política anterior | Mínimo 10 caracteres, mayúscula, minúscula, número y carácter especial, sin nombre ni correo |
-| Telegram | Opcional | Desactivado en esta versión |
-| Pruebas | 56 backend y 38 frontend | 69 backend y 54 frontend; 47 casos documentados |
+| Telegram | Opcional | Fuera de esta versión |
+| Pruebas | 56 backend y 38 frontend | 69 backend y 60 frontend; 48 casos documentados |
 | Dependencias | Críticas y altas | 0 críticas/altas; 2 moderadas aceptadas |
 
 ## 3. Criterios de liberación
 
 | Criterio | Estado | Evidencia |
 |---|---|---|
-| Build e instalación (`npm ci`, `ng build`) | CUMPLE | EV-PRU-02; CI quality.yml |
-| Login | CUMPLE en local; Google verificado por el usuario en producción (versión anterior) | CP-01, CP-02 |
+| Build e instalación | CUMPLE | EV-PRU-02; registros de build en Vercel |
+| Login | CUMPLE en local; el usuario usa la app en producción con sesión iniciada (testimonial) | CP-01, CP-02 |
 | Base de pruebas aislada | CUMPLE | 01 §3 |
-| USD/EUR | CUMPLE | CP-07, CP-08 |
+| USD/EUR por cartera | CUMPLE | CP-07, CP-08 |
 | Tasas verificables con fecha | CUMPLE con el proveedor simulado; **producción pendiente** | CP-11, CP-13 |
-| Respaldo seguro sin tasa o con proveedor caído | CUMPLE | CP-14, CP-15 |
+| Respaldo sin tasa o con proveedor caído | CUMPLE | CP-14, CP-15 |
 | Historial preservado | CUMPLE | CP-19 |
 | Conversión explícita | CUMPLE | CP-18 |
 | Autorización y aislamiento | CUMPLE | CP-31..CP-34 |
-| Pruebas críticas | CUMPLE (129/129) | EV-PRU-01/02 |
-| Sin defectos críticos | CUMPLE (0 críticos; el único alto está cerrado) | 04 |
-| Escritorio y móvil | CUMPLE | CP-27, CP-42, CP-43 |
-| Regresión | CUMPLE | 05 §2 |
-| Verificación en producción | **PENDIENTE** | CP-46 |
+| Pruebas críticas | CUMPLE (129/129) | EV-PRU-01/02 y ejecuciones posteriores (05 §2) |
+| Sin defectos críticos abiertos | CUMPLE (0 críticos; D-15 Alta publicado, falta confirmarlo) | 04 |
+| Escritorio y móvil | CUMPLE | CP-27, CP-42, CP-43, EV-CR04-01 |
+| Migración sin pérdida de datos | CUMPLE (aditiva, aplicada en producción) | CP-45, EV-PROD-01 |
+| Verificación en producción | **PARCIAL** | CP-46, EV-PROD-01 |
+| DRE ≥ 90 % | **NO CUMPLE** (67 %) | 05 §1 |
+| Cierre de no conformidades ≥ 90 % | **NO CUMPLE** (53 %) | 05 §1 |
 
 ## 4. Riesgos que quedan
 
-- **Límite global de 300 peticiones cada 15 minutos por IP:**
-  - Puede afectar a usuarios detrás de la misma IP pública (EV-REN-03).
-  - Recomendación: vigilar las respuestas 429 en los registros de Vercel. Si aparecen, ampliar el límite o usar como clave el usuario autenticado.
-- **uuid moderado vía exceljs (riesgo aceptado):** exceljs no usa la ruta afectada (EV-SEG-02).
-- **Datos personales en el historial de git (D-13):** la plantilla de Perfil tenía escritos el correo y un identificador de Telegram de una persona real. Se quitaron del código, pero siguen en commits anteriores y en las versiones ya desplegadas. Recomendación: avisar a esa persona y decidir con ella si se reescribe el historial (requiere `push --force`, que este trabajo no usa).
+- **Límite de 300 peticiones cada 15 minutos por IP:** puede afectar a usuarios que comparten IP pública (EV-REN-03). Vigilar respuestas 429.
+- **uuid moderado vía exceljs (aceptado):** exceljs no usa la ruta afectada (EV-SEG-02).
+- **Datos personales en el historial de git (D-13):** se quitaron del código, pero siguen en commits antiguos. Avisar a la persona afectada y decidir con ella si se reescribe el historial.
 - **Solo Chromium probado:** Firefox y Safari no se evaluaron.
-- **Tasas de producción:** dependen de la disponibilidad de Frankfurter. Si falla, se usa la última tasa válida con su antigüedad.
+- **Dependencia de Frankfurter:** si falla, se usa la última tasa válida con su antigüedad.
+- **Formularios sin prueba de interfaz real:** D-15 escapó porque ninguna prueba escribía en el formulario. Se añadió CP-48; conviene extender la técnica a metas, deudas y grupos.
 
-## 5. Seguridad y accesibilidad
+## 5. Estado de entregables
 
-- **Seguridad:** el sondeo OWASP pasó 20/20 (A01, A02, A05, A06, A07, A08 y A10). No se encontraron secretos expuestos en el repositorio ni en las evidencias. Las variables de Vercel se revisaron sin descifrar.
-- **Accesibilidad:** axe no dio violaciones en 60 escaneos y las pruebas de teclado y reflujo pasaron 15/15. Esto **no** equivale a cumplimiento completo de WCAG, porque falta la revisión manual con lector de pantalla.
-
-## 6. Estado de fases y entregables
-
-| Entregable | Archivo | Estado |
+| Entregable de la consigna | Archivo | Estado |
 |---|---|---|
-| Revisión del material | 00 | Completo |
-| Ficha técnica | 01 | Completo |
-| Requisitos | 02 | Completo (25) |
-| Modelos Garvin/McCall/ISO 9126 | 03 | Completo (46 filas; 2 NO APLICA y 2 NO EVALUADO justificados) |
-| Registro de defectos | 04 | Completo (14 reales; 0 sembrados) |
-| Métricas | 05 | Completo; horas-persona NO EVALUADO |
-| Revisión formal | 06 | R1–R6 ejecutadas; RTF PENDIENTE |
-| Plan SQA | 07 | Completo |
-| Plan de pruebas | 08 | Completo |
-| Casos y evidencias | 09, evidencias/ | 43/47 ejecutados |
-| Trazabilidad | 10 | Completo (cobertura 84 %) |
-| Impacto del cambio | 11 | Completo |
-| Decisión | 12 | Borrador previo a producción |
-| Defensa | 13 | Completo |
+| 1. Expediente técnico inicial | 01, 02 | Completo |
+| 2. Auditoría Garvin, McCall, ISO/IEC 9126 | 03, 03b | Completo (46 filas; 2 NO APLICA y 2 NO EVALUADO justificados) |
+| 3. Registro, clasificación y métricas de defectos | 04, 05 | Completo (15 reales, 0 sembrados); horas-persona NO EVALUADO |
+| 4. Revisión técnica formal | 06 | R1–R7 ejecutadas como revisiones individuales; **RTF PENDIENTE** |
+| 5. Plan SQA | 07 | Completo |
+| 6. Estrategia y plan de pruebas | 08 | Completo |
+| 7. Casos y evidencias | 09, evidencias/ | 44 de 48 ejecutados y aprobados, 1 parcial, 3 pendientes |
+| 8. Matriz maestra de trazabilidad | 10 | Completo (cobertura 84 %) |
+| 9. Impacto del cambio | 11 | Completo (CR-01 a CR-05) |
+| 10. Informe de decisión | 12 | Este documento |
+| 11. Repositorio de evidencias | evidencias/ | Completo e indexado (README) |
+| 12. Defensa técnica | 13 | Guion y respuestas preparados; la defensa la hace el equipo |
 
-## 7. Vercel
+## 6. Vercel
 
-- **Proyecto y dominio:** `asistente-financiero`, dominio https://asistente-financiero-seven.vercel.app. No se crearon otros proyectos ni dominios.
-- **Variables cambiadas el 2026-10-25 con OK del usuario:** se creó `CRON_SECRET` (sensible) y se cambió `APP_ORIGIN` al dominio oficial.
-- **Despliegue:** pendiente del OK del usuario.
+- Proyecto `asistente-financiero` y dominio `asistente-financiero-seven.vercel.app`. No se crearon otros proyectos. Las direcciones sin «seven» están ocupadas por otras cuentas.
+- Variables cambiadas con OK del usuario: `CRON_SECRET` creada (sensible) y `APP_ORIGIN` apuntando al dominio oficial.
+- Cuatro despliegues a producción, cada uno con el OK del usuario (EV-PROD-01).
