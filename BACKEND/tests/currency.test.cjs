@@ -59,26 +59,26 @@ test('preferencias están autenticadas, aisladas por usuario y no convierten cif
  for(const body of [{},{moneda:'cop'},{moneda:null},{moneda:123}])assert.equal((await request('/finanzas/preferencias',{method:'PATCH',token:sign(a.id),body})).status,400);
 });
 
-test('todos los módulos fijan moneda y eliminar actividad no permite reinterpretar el historial',async()=>{
- const creators=[
-  u=>finance.createWallet(u.id,{nombre:'Apertura',saldo_inicial:20}),
-  u=>ledger.create({usuario_id:u.id,tipo:'INGRESO',monto:20,cuenta_origen:'Efectivo'}),
-  u=>finance.createBudget(u.id,{categoria_id:cat,mes:'2026-10',limite:20}),
-  async u=>finance.saveRecurring(u.id,{nombre:'Fijo',tipo:'GASTO',monto:20,categoria_id:cat,cuenta_id:(await finance.createWallet(u.id,{nombre:'Vacía'})).id,frecuencia:'MENSUAL',proxima_fecha:'2026-10-01'}),
-  u=>finance.createDebt(u.id,{nombre:'Deuda',contraparte:'Persona',tipo:'PAGAR',monto:20}),
-  u=>finance.createGoal(u.id,{nombre:'Meta',objetivo:20}),
-  u=>finance.createGroup(u.id,{nombre:'Grupo'}),
- ];
- for(const create of creators) {
-  const u=await user('COP');await create(u);
-  assert.equal((await currency.getPreferences(u.id)).puede_cambiar,false);
-  await assert.rejects(currency.updatePreferences(u.id,{moneda:'USD'}),{status:409,code:'MONEDA_BLOQUEADA'});
-  assert.equal((await currency.updatePreferences(u.id,{moneda:'COP'})).moneda,'COP');
+// v3 (multidivisa): la moneda del usuario es de presentación. Cambiarla nunca reetiqueta importes.
+test('la moneda de presentación cambia con actividad en todos los módulos sin reetiquetar importes',async()=>{
+ const u=await user('COP');
+ const wallet=await finance.createWallet(u.id,{nombre:'Apertura',saldo_inicial:20});
+ await ledger.create({usuario_id:u.id,tipo:'INGRESO',monto:20,cuenta_origen:'Efectivo'});
+ await finance.createBudget(u.id,{categoria_id:cat,mes:'2026-10',limite:20});
+ await finance.saveRecurring(u.id,{nombre:'Fijo',tipo:'GASTO',monto:20,categoria_id:cat,cuenta_id:(await finance.createWallet(u.id,{nombre:'Vacía'})).id,frecuencia:'MENSUAL',proxima_fecha:'2026-10-01'});
+ await finance.createDebt(u.id,{nombre:'Deuda',contraparte:'Persona',tipo:'PAGAR',monto:20});
+ await finance.createGoal(u.id,{nombre:'Meta',objetivo:20});
+ await finance.createGroup(u.id,{nombre:'Grupo'});
+ assert.equal((await currency.getPreferences(u.id)).puede_cambiar,true);
+ assert.equal((await currency.updatePreferences(u.id,{moneda:'USD'})).moneda,'USD');
+ for(const table of ['cuentas','movimientos','fin_presupuestos','fin_recurrentes','fin_deudas','fin_metas']) {
+  const r=(await db.query(`SELECT DISTINCT moneda FROM ${table} WHERE usuario_id=$1`,[u.id])).rows.map(x=>x.moneda);
+  assert.deepEqual(r,['COP'],table);
  }
- const u=await user('MXN'),debt=await finance.createDebt(u.id,{nombre:'Temporal',contraparte:'Persona',tipo:'PAGAR',monto:3});
- await finance.deleteDebt(u.id,debt.id);await initialize();
- assert.equal((await currency.getPreferences(u.id)).puede_cambiar,false);
- await assert.rejects(db.query('UPDATE usuarios SET moneda_fijada=FALSE,moneda=$1 WHERE id=$2',['USD',u.id]),{code:'P0001'});
+ assert.equal((await db.query('SELECT moneda FROM fin_grupos WHERE propietario_id=$1',[u.id])).rows[0].moneda,'COP');
+ assert.equal((await finance.listWallets(u.id)).find(w=>w.id===wallet.id).saldo_actual,'20.00');
+ // Una cartera con actividad no cambia de moneda por SQL directo: solo mediante conversión.
+ await assert.rejects(db.query("UPDATE cuentas SET moneda='USD' WHERE id=$1",[wallet.id]),{code:'P0001'});
 });
 
 test('operación rechazada revierte también el bloqueo de moneda',async()=>{
@@ -88,7 +88,7 @@ test('operación rechazada revierte también el bloqueo de moneda',async()=>{
  assert.equal((await currency.updatePreferences(u.id,{moneda:'MXN'})).moneda,'MXN');
 });
 
-test('preferencia y primera actividad concurrentes se serializan; nunca se relabelan importes existentes',async()=>{
+test('preferencia y primera actividad concurrentes terminan ambas; la deuda conserva su moneda',async()=>{
  const u=await user('COP');
  const activity=db.withTransaction(async c=>{
   await c.query('SELECT id FROM usuarios WHERE id=$1 FOR UPDATE',[u.id]);
@@ -96,31 +96,30 @@ test('preferencia y primera actividad concurrentes se serializan; nunca se relab
  });
  const change=currency.updatePreferences(u.id,{moneda:'USD'});
  const results=await Promise.allSettled([activity,change]);
- assert.equal(results[0].status,'fulfilled');assert.equal(results[1].status,'rejected');
- assert.equal(results[1].reason.status,409);assert.equal((await currency.getPreferences(u.id)).moneda,'COP');
- assert.equal((await finance.listDebts(u.id))[0].monto,'25.00');
+ assert.deepEqual(results.map(r=>r.status),['fulfilled','fulfilled']);
+ assert.equal((await currency.getPreferences(u.id)).moneda,'USD');
+ const [debt]=await finance.listDebts(u.id);assert.equal(debt.monto,'25.00');assert.equal(debt.moneda,'COP');
 });
 
-test('grupos conservan divisa y rechazan mezcla tanto en API como en SQL directo',async()=>{
+test('grupos llevan su propia moneda contable; los miembros pueden presentar en otra',async()=>{
  const owner=await user('COP'),same=await user('COP'),other=await user('MXN');
  const group=await finance.createGroup(owner.id,{nombre:'Compartido COP'});assert.equal(group.moneda,'COP');
  await finance.addMember(owner.id,group.id,{correo:same.correo});
- assert.equal((await currency.getPreferences(same.id)).puede_cambiar,false);
- await assert.rejects(finance.addMember(owner.id,group.id,{correo:other.correo}),{status:409,code:'MONEDA_GRUPO'});
- await assert.rejects(db.query('INSERT INTO fin_miembros(grupo_id,usuario_id) VALUES($1,$2)',[group.id,other.id]),{code:'P0001'});
+ await finance.addMember(owner.id,group.id,{correo:other.correo});
  await assert.rejects(db.query('UPDATE fin_grupos SET moneda=$1 WHERE id=$2',['MXN',group.id]),{code:'P0001'});
+ const eur=await finance.createGroup(other.id,{nombre:'Viaje EUR',moneda:'EUR'});assert.equal(eur.moneda,'EUR');
+ await assert.rejects(finance.createGroup(other.id,{nombre:'Inválido',moneda:'ZZZ'}),{status:400});
  await finance.groupExpense(owner.id,group.id,{monto:10.01,descripcion:'Reparto',idempotencia:'currency-expense-001'});
  const detail=await finance.groupDetail(owner.id,group.id);
- assert.equal(detail.grupo.moneda,'COP');assert.equal(detail.gastos[0].monto,'10.01');
- assert.equal((await currency.getPreferences(other.id)).puede_cambiar,true);
+ assert.equal(detail.grupo.moneda,'COP');assert.equal(detail.gastos[0].monto,'10.01');assert.equal(detail.miembros.length,3);
 });
 
 test('administración separa COP de USD y conserva etiqueta en todas las familias de reportes',async()=>{
  const cop=await user('COP'),usd=await user('USD');
  await finance.createWallet(cop.id,{nombre:'Prueba de informe',saldo_inicial:12345});
  await finance.createWallet(usd.id,{nombre:'Prueba de informe',saldo_inicial:67});
- // Expected totals come from each owner's currency, not from the code under test.
- const expected=Number((await db.query("SELECT SUM(c.saldo_actual) AS total FROM cuentas c JOIN usuarios u ON u.id=c.usuario_id WHERE u.moneda='COP'")).rows[0].total);
+ // v3: el oráculo agrupa por la moneda de cada cartera (ya no por la del usuario).
+ const expected=Number((await db.query("SELECT SUM(saldo_actual) AS total FROM cuentas WHERE moneda='COP' AND deleted_at IS NULL")).rows[0].total);
  const dashboard=await request('/reportes/web/dashboard-admin?moneda=COP');
  assert.equal(dashboard.status,200,JSON.stringify(dashboard.data));assert.equal(dashboard.data.data.moneda,'COP');assert.equal(dashboard.data.data.kpis.balanceGlobal.valor,expected);
  assert.ok(dashboard.data.data.actividadReciente.ultimosMovimientos.every(m=>m.usuario_id!==usd.id));
