@@ -26,6 +26,7 @@ router.use('/movimientos', movimientosRoutes);
 router.use('/reportes', reportesRoutes);
 router.use('/usuarios', usuariosRoutes);
 router.use('/finanzas', require('./financeRoutes'));
+router.use('/tasas', require('./tasasRoutes'));
 
 /**
  * @route GET /api/health
@@ -35,7 +36,7 @@ router.get('/health', (req, res) => {
     res.status(200).json({
         success: true,
         service: 'asistente-financiero',
-        version: '2.3.0',
+        version: '3.0.0',
         timestamp: new Date().toISOString(),
         status: 'UP'
     });
