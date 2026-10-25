@@ -219,8 +219,18 @@ module.exports = {
     /**
      * Invoca la función para listar el historial de movimientos.
      */
+    // Incluye la moneda de cada movimiento y, en traspasos entre monedas, el importe y la tasa guardados.
     OBTENER_HISTORIAL: `
-        SELECT * FROM fx_listar_historial_movimientos($1);
+        SELECT m.id, m.usuario_id, t.nombre AS tipo, c.nombre AS categoria, m.monto, m.moneda,
+               m.monto_destino, m.moneda_destino, m.tasa, m.tasa_fecha,
+               co.nombre AS cuenta_origen, cd.nombre AS cuenta_destino, m.descripcion, m.metodo_pago, m.fecha, m.deleted_at
+        FROM movimientos m
+        JOIN tipos_movimiento t ON t.id = m.tipo_movimiento_id
+        LEFT JOIN categorias c ON c.id = m.categoria_id
+        LEFT JOIN cuentas co ON co.id = m.cuenta_origen_id
+        LEFT JOIN cuentas cd ON cd.id = m.cuenta_destino_id
+        WHERE m.usuario_id = $1 AND m.deleted_at IS NULL
+        ORDER BY m.fecha DESC, m.id DESC LIMIT 100;
     `,
 
     // ==========================================

@@ -108,6 +108,9 @@ test('panel en USD por defecto consolida USD y EUR, separa COP sin tasa y permit
  assert.equal(d.tasas.estado,'vigente');assert.equal(d.tasas.antiguedad_dias,1);assert.equal(d.tasas.fuente,fx.FUENTE);
  assert.equal(d.tasas_a_base.EUR,'1.111111111111');assert.equal(d.tasas_a_base.USD,'1');assert.equal(d.tasas_a_base.COP,null);
  assert.ok(d.alertas.some(a=>/COP/.test(a.mensaje)));
+ assert.deepEqual(d.tendencia,[{mes:today().slice(0,7),ingresos:'155.56',gastos:'0.00',completo:false}]);assert.deepEqual(d.gastos_categoria,[]);
+ const h=(await request('/movimientos',{token:sign(u.id)})).data.data;
+ assert.deepEqual(h.map(x=>x.moneda).sort(),['COP','EUR','USD']);
  // Ingresos de apertura del mes: 100 USD + 50 EUR; COP sin tasa queda aparte.
  assert.equal(d.ingresos,'155.56');assert.equal(d.flujos_completos,false);assert.deepEqual(d.flujos_sin_tasa.ingresos,[{moneda:'COP',monto:'1000.00'}]);
  const e=(await request('/finanzas/panel?moneda=EUR',{token:sign(u.id)})).data.data;

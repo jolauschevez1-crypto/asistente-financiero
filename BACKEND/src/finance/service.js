@@ -186,6 +186,24 @@ async function panel(uid,month,moneda){const m=v.month(month||v.today().slice(0,
  const ingresos=await mc.valuate(flows.filter(f=>f.tipo==='INGRESO').map(f=>({moneda:f.moneda,dia:f.dia,cents:v.dbCents(f.total)})),base);
  const gastos=await mc.valuate(flows.filter(f=>f.tipo==='GASTO').map(f=>({moneda:f.moneda,dia:f.dia,cents:v.dbCents(f.total)})),base);
  const flujos=[...new Set(flows.map(f=>f.moneda))].sort().map(cur=>{const sum=t=>flows.filter(f=>f.moneda===cur&&f.tipo===t).reduce((a,f)=>a+v.dbCents(f.total),0);return {moneda:cur,ingresos:v.money(sum('INGRESO')),gastos:v.money(sum('GASTO'))};});
+ // Tendencia de 6 meses y gastos por categoría, valorados con la tasa del día de cada movimiento.
+ const desde=new Date(Date.UTC(Number(m.slice(0,4)),Number(m.slice(5,7))-6,1)).toISOString().slice(0,7);
+ const [hist,cats]=await Promise.all([
+  rows(db,`SELECT t.nombre AS tipo,m.moneda,to_char(m.fecha AT TIME ZONE 'America/Guayaquil','YYYY-MM') AS mes,(m.fecha AT TIME ZONE 'America/Guayaquil')::date AS dia,SUM(m.monto) AS total
+   FROM movimientos m JOIN tipos_movimiento t ON t.id=m.tipo_movimiento_id WHERE m.usuario_id=$1 AND m.deleted_at IS NULL AND t.nombre IN ('INGRESO','GASTO')
+   AND to_char(m.fecha AT TIME ZONE 'America/Guayaquil','YYYY-MM')>$2 AND to_char(m.fecha AT TIME ZONE 'America/Guayaquil','YYYY-MM')<=$3 GROUP BY 1,2,3,4`,[uid,desde,m]),
+  rows(db,`SELECT COALESCE(c.nombre,'Otros') AS categoria,m.moneda,(m.fecha AT TIME ZONE 'America/Guayaquil')::date AS dia,SUM(m.monto) AS total,COUNT(*)::int AS cantidad
+   FROM movimientos m JOIN tipos_movimiento t ON t.id=m.tipo_movimiento_id LEFT JOIN categorias c ON c.id=m.categoria_id WHERE m.usuario_id=$1 AND m.deleted_at IS NULL AND t.nombre='GASTO'
+   AND to_char(m.fecha AT TIME ZONE 'America/Guayaquil','YYYY-MM')=$2 GROUP BY 1,2,3`,[uid,m])]);
+ const toGroup=f=>({moneda:f.moneda,dia:f.dia,cents:v.dbCents(f.total)});
+ const tendencia=[];for(const mes of [...new Set(hist.map(h=>h.mes))].sort()){
+  const i=await mc.valuate(hist.filter(h=>h.mes===mes&&h.tipo==='INGRESO').map(toGroup),base),g=await mc.valuate(hist.filter(h=>h.mes===mes&&h.tipo==='GASTO').map(toGroup),base);
+  tendencia.push({mes,ingresos:v.money(i.cents),gastos:v.money(g.cents),completo:!i.sin_tasa.length&&!g.sin_tasa.length});
+ }
+ const categorias=[];for(const cat of [...new Set(cats.map(c=>c.categoria))].sort()){
+  const list=cats.filter(c=>c.categoria===cat),r=await mc.valuate(list.map(toGroup),base);
+  categorias.push({categoria:cat,cantidad:list.reduce((a,c)=>a+c.cantidad,0),monto_total:v.money(r.cents),sin_tasa:r.sin_tasa});
+ }
  const tasas=fx.status(snap,v.today());
  // Tasa de cada moneda a la de presentación (12 decimales), para estimaciones en pantalla.
  const tasasABase=Object.fromEntries(currency.monedas.map(m=>[m.codigo,fx.quote(snap,m.codigo,base)?.tasa??null]));
@@ -200,7 +218,7 @@ async function panel(uid,month,moneda){const m=v.month(month||v.today().slice(0,
  const ingresoSinTasa=ingresos.sin_tasa.length>0,gastoSinTasa=gastos.sin_tasa.length>0;
  return {moneda:base,mes:m,saldo_total:v.money(total),saldo_total_completo:sinConvertir.length===0,saldos_por_moneda:saldos,saldos_sin_convertir:sinConvertir,
   ingresos:v.money(ingresos.cents),gastos:v.money(gastos.cents),neto:v.money(ingresos.cents-gastos.cents),flujos_completos:!ingresoSinTasa&&!gastoSinTasa,
-  flujos_por_moneda:flujos,flujos_sin_tasa:{ingresos:ingresos.sin_tasa,gastos:gastos.sin_tasa},tasas,tasas_a_base:tasasABase,
+  flujos_por_moneda:flujos,flujos_sin_tasa:{ingresos:ingresos.sin_tasa,gastos:gastos.sin_tasa},tasas,tasas_a_base:tasasABase,tendencia,gastos_categoria:categorias,
   carteras:wallets,presupuestos:budgets,recurrentes:recurring,deudas:debts,metas:goals,grupos:groups,alertas:alerts};
 }
 module.exports={quickExpenses,listWallets,listCategories,createWallet,listBudgets,createBudget,updateBudget,deleteBudget,listRecurring,saveRecurring,disableRecurring,confirmRecurring,listDebts,createDebt,addPayment,listPayments,deleteDebt,listGoals,createGoal,addContribution,listContributions,deleteGoal,listGroups,createGroup,addMember,groupDetail,groupExpense,settleGroup,panel,movement};
