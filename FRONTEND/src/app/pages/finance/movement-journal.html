@@ -1,0 +1,49 @@
+<section class="journal" aria-labelledby="journal-title">
+  <header class="journal-head">
+    <div><h2 id="journal-title">Diario de movimientos</h2><p class="muted">Lo último que pasó con tu plata</p></div>
+    <div class="journal-tools">
+      <div class="chips" role="group" aria-label="Periodo">
+        <button type="button" [attr.aria-pressed]="periodo()==='todo'" (click)="periodo.set('todo');visibles.set(8)">Todo</button>
+        <button type="button" [attr.aria-pressed]="periodo()==='mes'" (click)="periodo.set('mes');visibles.set(8)">Este mes</button>
+        <button type="button" [attr.aria-pressed]="periodo()==='semana'" (click)="periodo.set('semana');visibles.set(8)">Esta semana</button>
+      </div>
+      <button type="button" class="ghost" (click)="exportCsv()">Exportar CSV</button>
+    </div>
+  </header>
+  <label class="search"><span class="sr-only">Buscar en el diario</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input [formControl]="busquedaControl" placeholder="Buscar por concepto, categoría o cartera" maxlength="100"></label>
+
+  <div class="diary">
+    @if(cargando()&&!movimientos().length){<p class="empty" role="status">Cargando tu diario…</p>}
+    @for(m of filtrados().slice(0,visibles());track m.id){
+      <article class="diary-row">
+        <span class="movement-icon" [class.income]="m.tipo==='INGRESO'" [class.transfer]="m.tipo==='TRANSFERENCIA'" aria-hidden="true">{{icon(m)}}</span>
+        <div class="row-text"><strong class="clamp">{{m.descripcion||m.categoria||m.tipo}}</strong><small class="clamp">{{detail(m)}}</small></div>
+        <div class="amount"><strong class="num" [class.positive]="m.tipo==='INGRESO'">{{sign(m)}}{{show(m.monto,m.moneda)}}</strong>@if(original(m); as o){<small class="num">{{o}}</small>}@if(m.monto_destino&&m.moneda_destino&&m.moneda_destino!==m.moneda){<small class="num">llegan {{show(m.monto_destino,m.moneda_destino)}}</small>}</div>
+      </article>
+    }@empty{@if(!cargando()){<p class="empty">{{movimientos().length?'No hay movimientos con estos filtros.':'Tus movimientos aparecerán aquí. Usa «Nuevo movimiento» para registrar el primero.'}}</p>}}
+  </div>
+  @if(filtrados().length>visibles()){<button type="button" class="more" (click)="visibles.set(visibles()+12)">Ver más ({{filtrados().length-visibles()}})</button>}
+</section>
+
+@if(abierto()){
+  <div class="overlay"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="movement-title" cdkTrapFocus [cdkTrapFocusAutoCapture]="true" (keydown.escape)="close()">
+    <header class="dialog-head"><h2 id="movement-title">Nuevo movimiento</h2><button type="button" class="icon-button" (click)="close()" [disabled]="guardando()" aria-label="Cerrar">×</button></header>
+    @if(error()){<p class="feedback" role="alert">{{error()}}</p>}
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="segments" role="group" aria-label="Tipo de movimiento">
+        <button type="button" [attr.aria-pressed]="form.controls.tipo.value==='GASTO'" (click)="form.controls.tipo.setValue('GASTO')">Gasto</button>
+        <button type="button" [attr.aria-pressed]="form.controls.tipo.value==='INGRESO'" (click)="form.controls.tipo.setValue('INGRESO')">Ingreso</button>
+      </div>
+      <label>Concepto<input formControlName="descripcion" maxlength="250" placeholder="Ej. Compra del supermercado"></label>
+      <label>Cartera<select formControlName="cuenta"><option value="" disabled>Selecciona una cartera</option>@for(w of wallets;track w.id){<option [value]="w.nombre">{{w.nombre}} · {{show(w.saldo_actual,w.moneda)}}</option>}</select>
+        @if(form.controls.cuenta.touched&&form.controls.cuenta.invalid){<span class="field-error">Elige la cartera del movimiento.</span>}</label>
+      <label>Monto · {{walletCurrency()}}<input type="number" inputmode="decimal" min="0.01" max="999999999.99" step="0.01" formControlName="monto" placeholder="0.00">
+        @if(form.controls.monto.touched&&form.controls.monto.invalid){<span class="field-error">Escribe un monto mayor que cero, con hasta dos decimales.</span>}</label>
+      <label>Categoría<select formControlName="categoria" (change)="updateCustomCategory()">@for(c of categorias();track c){<option [value]="c">{{c}}</option>}<option [value]="custom">Otra categoría…</option></select></label>
+      @if(form.controls.categoria.value===custom){<label>Nueva categoría<input formControlName="categoriaPersonalizada" maxlength="100" placeholder="Ej. Mascotas" autocomplete="off">
+        @if(form.controls.categoriaPersonalizada.touched&&form.controls.categoriaPersonalizada.invalid){<span class="field-error">Escribe una categoría de hasta 100 caracteres.</span>}</label>}
+      <p class="note">Se guarda en la moneda de la cartera elegida. Para mover dinero entre carteras usa «Transferir».</p>
+      <div class="actions"><button type="button" class="text" (click)="close()" [disabled]="guardando()">Cancelar</button><button type="submit" class="primary" [disabled]="guardando()">{{guardando()?'Guardando…':'Guardar'}}</button></div>
+    </form>
+  </section></div>
+}

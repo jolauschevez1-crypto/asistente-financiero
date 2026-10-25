@@ -9,7 +9,7 @@ describe('Moneda de la cuenta',()=>{
  const usuario=signal({id:1,moneda:'COP'});
  beforeEach(()=>{
   usuario.set({id:1,moneda:'COP'});
-  TestBed.configureTestingModule({providers:[provideHttpClient(),provideHttpClientTesting(),{provide:AuthService,useValue:{usuario,actualizarUsuarioLocal:(data:{moneda:string})=>usuario.update(u=>({...u,...data}))}}]});
+  TestBed.configureTestingModule({providers:[provideHttpClient(),provideHttpClientTesting(),{provide:AuthService,useValue:{usuario,isAdmin:()=>false,actualizarUsuarioLocal:(data:{moneda:string})=>usuario.update(u=>({...u,...data}))}}]});
   service=TestBed.inject(CurrencyService);http=TestBed.inject(HttpTestingController);
  });
  afterEach(()=>http.verify());
@@ -41,5 +41,15 @@ describe('Moneda de la cuenta',()=>{
   service.load();usuario.set({id:2,moneda:'PEN'});
   http.expectOne('/api/finanzas/preferencias').flush({success:true,data:{moneda:'COP',puede_cambiar:true,motivo:null,monedas:[]}});
   expect(usuario().moneda).toBe('PEN');expect(service.preferencias()).toBeNull();
+ });
+ it('muestra importes en la moneda elegida con la tasa del servidor; sin tasa, en su moneda',()=>{
+  usuario.set({id:1,moneda:'EUR'});TestBed.tick();
+  http.expectOne('/api/finanzas/tasas?moneda=EUR').flush({success:true,data:{moneda:'EUR',tasas_a:{USD:'0.9',EUR:'1',MXN:'0.05'},fecha_cotizacion:'2026-10-23'}});
+  expect(service.converted('10.00','USD')).toBe('9.00');
+  expect(service.converted('5','EUR')).toBe('5.00');
+  expect(service.display('10','USD')).toBe('EUR\u00a09,00');
+  expect(service.converted('1000','COP')).toBeNull();
+  expect(service.display('1000','COP')).toContain('COP');
+  expect(service.tasasFecha()).toBe('2026-10-23');
  });
 });

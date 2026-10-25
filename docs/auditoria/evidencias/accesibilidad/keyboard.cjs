@@ -28,12 +28,12 @@ const active=p=>p.evaluate(()=>{const e=document.activeElement;if(!e)return null
  await p.keyboard.press('Escape');await p.waitForTimeout(150);a=await active(p);
  rec('K-09','Escape cierra el menú de usuario y devuelve el foco al botón',!(await p.locator('#user-menu').count())&&a.id==='user-menu-button',JSON.stringify(a));
  // Diálogo
- const btn=p.getByRole('button',{name:'Crear nueva cartera'}).first();await btn.focus();await p.keyboard.press('Enter');await p.waitForTimeout(400);a=await active(p);
- rec('K-10','Al abrir "Crear nueva cartera" el foco entra en el diálogo',a&&a.enDialogo,JSON.stringify(a));
+ const btn=p.getByRole('button',{name:/Nueva cartera/}).first();await btn.focus();await p.keyboard.press('Enter');await p.waitForTimeout(400);a=await active(p);
+ rec('K-10','Al abrir "Crear nueva cartera" el foco entra en el diálogo (botón «Nueva cartera» desde CR-04)',a&&a.enDialogo,JSON.stringify(a));
  let fuera=0;for(let i=0;i<25;i++){await p.keyboard.press('Tab');a=await active(p);if(!a.enDialogo)fuera++;}
  rec('K-11','Tab queda contenido dentro del diálogo modal',fuera===0,`${fuera} focos fuera en 25 Tabs`);
  await p.keyboard.press('Escape');await p.waitForTimeout(400);a=await active(p);
- rec('K-12','Escape cierra el diálogo y devuelve el foco al botón que lo abrió',!(await p.locator('mat-dialog-container,[role=dialog]').count())&&/Crear nueva cartera/.test(a.texto),JSON.stringify(a));
+ rec('K-12','Escape cierra el diálogo y devuelve el foco al botón que lo abrió',!(await p.locator('mat-dialog-container,[role=dialog]').count())&&/Nueva cartera/.test(a.texto),JSON.stringify(a));
  await ctx.close();
  // Móvil
  ctx=await b.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});p=await login(ctx);
@@ -44,7 +44,7 @@ const active=p=>p.evaluate(()=>{const e=document.activeElement;if(!e)return null
  await ctx.close();
  // Reflujo 320 px
  ctx=await b.newContext({viewport:{width:320,height:640}});p=await login(ctx);const anchas=[];
- for(const r of ['/panel','/carteras','/presupuestos','/recurrentes','/deudas','/metas','/grupos','/usuario','/perfil','/ia']){await p.goto(base+r,{waitUntil:'networkidle'});await p.waitForTimeout(300);
+ for(const r of ['/panel','/carteras','/presupuestos','/recurrentes','/deudas','/metas','/grupos','/perfil','/ia']){await p.goto(base+r,{waitUntil:'networkidle'});await p.waitForTimeout(300);
   const w=await p.evaluate(()=>document.documentElement.scrollWidth);if(w>320)anchas.push(`${r}:${w}px`);}
  rec('K-15','Reflujo a 320 px sin desplazamiento horizontal en las 10 vistas',anchas.length===0,anchas.join(', ')||'todas 320 px');
  await ctx.close();await b.close();

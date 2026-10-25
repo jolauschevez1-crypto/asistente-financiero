@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { adminGuard } from './core/admin.guard';
 import { authGuard } from './core/auth.guard';
-import { userGuard } from './core/user.guard';
 
 export const routes: Routes = [
   ...(['panel', 'carteras', 'presupuestos', 'recurrentes', 'deudas', 'metas', 'grupos'] as const).map(section => ({
@@ -31,11 +30,8 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/ia/ia').then((m) => m.Ia),
     canActivate: [authGuard],
   },
-  {
-    path: 'usuario',
-    loadComponent: () => import('./pages/user-dashboard/user-dashboard').then((m) => m.UserDashboard),
-    canActivate: [userGuard],
-  },
+  // El antiguo módulo Movimientos vive ahora dentro de Carteras.
+  { path: 'usuario', pathMatch: 'full', redirectTo: 'carteras' },
   {
     path: 'perfil',
     loadComponent: () => import('./pages/perfil/perfil').then((m) => m.Perfil),

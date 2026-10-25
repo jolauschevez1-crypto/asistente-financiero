@@ -23,7 +23,7 @@ Las fórmulas son las de Semana 3 Clase 2 y Semana 5 Clase 2 (ver `00-revision-m
 | Casos ejecutados | Casos con resultado | 47 − 4 no ejecutados | **43** | — | No ejecutados: CP-13, CP-40 y CP-46 (producción, a la espera del OK de despliegue) y CP-37 (lector de pantalla) |
 | Casos aprobados / fallidos / bloqueados | Conteo por estado | — | **43 / 0 / 0** | Fallidos críticos = 0 | — |
 | Ejecuciones repetidas | Reejecuciones registradas | K-12 falló y luego pasó (D-06); axe se ejecutó 3 veces (antes y después de D-04 y D-05); carga 1u y 5u | — | — | Se informan como ejecuciones, no como casos nuevos |
-| Aprobación de pruebas automáticas | aprobadas / ejecutadas × 100 | Backend 69/69; frontend 55/55 | **100 %** (124/124) | 100 % | Línea base: 56 en backend y 38 en frontend (EV-BASE-05/06). La prueba 55 cubre el formato de moneda con el código delante |
+| Aprobación de pruebas automáticas | aprobadas / ejecutadas × 100 | Backend 69/69; frontend 59/59 (tras CR-04) | **100 %** (128/128) | 100 % | Línea base: 56 en backend y 38 en frontend (EV-BASE-05/06). La prueba 55 cubre el formato de moneda con el código delante |
 | Cobertura de requisitos | requisitos con todos sus casos ejecutados y aprobados / requisitos aplicables × 100 | 21 / 25 | **84 %** | 100 % antes de declarar GO | Faltan RF-06 (tasa real en producción), RNF-03 (lector de pantalla), RNF-04 (LCP móvil en producción) y RNF-08 (despliegue). Los 25 requisitos tienen al menos un caso aprobado |
 
 **Por qué 47 casos.** Hay al menos un caso por requisito (25). A eso se suman los casos que exige el riesgo:

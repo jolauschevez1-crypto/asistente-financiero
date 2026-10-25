@@ -1,8 +1,10 @@
 import { QuickLoad } from '../../shared/quick-load';
+import { CurrencyPicker } from '../../shared/currency-picker';
+import { MovementJournal } from './movement-journal';
 import { DecimalInput } from '../../shared/decimal-input';
 import { ChartCard } from '../../shared/chart-card/chart-card';
 import { buildCategoriasOptions, buildIngresosVsGastosOptions } from '../../shared/chart-card/chart-builders';
-import { Component, DestroyRef, ChangeDetectorRef, effect, inject, untracked } from '@angular/core';
+import { Component, DestroyRef, ChangeDetectorRef, ViewChild, effect, inject, untracked } from '@angular/core';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -25,7 +27,7 @@ type ApiError = { status?: number; error?: { message?: string; code?: string } }
 /** Importes de distintas monedas llevados a la moneda de presentación con la tasa vigente. */
 export interface Estimate { total: string; sinTasa: { moneda: string; monto: string }[] }
 
-@Component({selector: 'app-finance', imports: [CommonModule, FormsModule, RouterLink, CdkTrapFocus, ChartCard, DecimalInput, QuickLoad], templateUrl: './finance.html', styleUrl: './finance.css'})
+@Component({selector: 'app-finance', imports: [CommonModule, FormsModule, RouterLink, CdkTrapFocus, ChartCard, DecimalInput, QuickLoad, CurrencyPicker, MovementJournal], templateUrl: './finance.html', styleUrl: './finance.css'})
 export class FinancePage {
   readonly api = inject(FinanceService);
   private readonly cdr = inject(ChangeDetectorRef);
@@ -53,9 +55,11 @@ export class FinancePage {
   confirmation: { message:string; proceed:()=>void } | null = null;
   confirmAction(){const action=this.confirmation?.proceed;this.confirmation=null;action?.();}
   private loadGeneration = 0;
-  readonly titles: Record<FinanceSection, string> = {panel:'Panel general',carteras:'Mis carteras',presupuestos:'Presupuestos',recurrentes:'Ingresos y gastos fijos',deudas:'Deudas y cobros',metas:'Metas de ahorro',grupos:'Gastos compartidos'};
+  @ViewChild(MovementJournal) private journal?: MovementJournal;
+  openMovement(){this.closeDialogs();this.journal?.open();}
+  readonly titles: Record<FinanceSection, string> = {panel:'Panel general',carteras:'Mis carteras y diario',presupuestos:'Presupuestos',recurrentes:'Ingresos y gastos fijos',deudas:'Deudas y cobros',metas:'Metas de ahorro',grupos:'Gastos compartidos'};
   readonly descriptions: Record<FinanceSection, string> = {
-    panel:'Tu patrimonio en una sola moneda, con la tasa y la fecha a la vista.',carteras:'Cada cartera guarda su propia moneda. Transfiere o convierte cuando lo decidas.',
+    panel:'Todo tu dinero en la moneda que elijas arriba, con la tasa y la fecha a la vista.',carteras:'Tus carteras y lo último que pasó con tu plata, en un solo lugar.',
     presupuestos:'Define un límite por categoría y observa tus gastos del mes.',recurrentes:'Organiza tus vencimientos. Cada movimiento requiere tu confirmación.',
     deudas:'Lleva el control de lo que debes y de lo que te deben.',metas:'Ahorra para algo importante, con una cartera dedicada a cada meta.',
     grupos:'Comparte gastos con otras personas y lleva las cuentas claras.'};
@@ -65,7 +69,7 @@ export class FinancePage {
     let first=true;effect(()=>{this.moneda.presentacion();if(first){first=false;return;}untracked(()=>{if(this.section==='panel')this.load();});});
   }
   private closeDialogs(){this.formOpen=false;this.editingId=null;this.selectedAction=null;this.actionQuote=null;this.history=null;this.transferOpen=false;this.transferQuote=null;this.conversionWallet=null;this.conversionQuote=null;}
-  private emptyForm(): EntryForm {return {nombre:'',monto:'',moneda:this.moneda.codigo(),categoria_id:'',cuenta_id:'',tipo:this.section==='deudas'?'PAGAR':'GASTO',frecuencia:'MENSUAL',fecha:localDate(),contraparte:'',mes:this.month};}
+  private emptyForm(): EntryForm {return {nombre:'',monto:'',moneda:this.moneda.presentacion(),categoria_id:'',cuenta_id:'',tipo:this.section==='deudas'?'PAGAR':'GASTO',frecuencia:'MENSUAL',fecha:localDate(),contraparte:'',mes:this.month};}
   private emptyAction(): ActionForm {return {monto:'',cuenta_id:'',descripcion:'',correo:'',hacia_id:'',fecha:localDate()};}
   private emptyTransfer(): TransferForm {return {origen_id:'',destino_id:'',monto:'',descripcion:''};}
 
@@ -79,6 +83,22 @@ export class FinancePage {
   percent(value: Money): number { return Math.min(100,Math.max(0,Number(value)||0)); }
   walletById(id: number | string): Wallet | undefined {return this.wallets.find(w=>w.id===Number(id));}
   walletCurrency(id: number | string): string {return this.walletById(id)?.moneda||this.moneda.codigo();}
+  /** Importe de un registro mostrado en la moneda elegida en el selector (si no hay tasa, en la suya). */
+  show(value: Money | null | undefined, code?: string | null): string {return this.moneda.display(value,code||this.base);}
+  /** Suma de las carteras en la moneda elegida; las que no tienen tasa se nombran aparte. */
+  get walletsTotal(): string {
+    const parts: string[] = []; const missing: string[] = [];
+    for(const w of this.wallets){const v=this.moneda.converted(w.saldo_actual,w.moneda);if(v===null)missing.push(this.fmt(w.saldo_actual,w.moneda));else parts.push(v);}
+    return this.fmt(sum(parts),this.moneda.presentacion())+(missing.length?` (más ${missing.join(' · ')} sin tasa)`:'');
+  }
+  /** Aviso bajo el título cuando algún importe se está mostrando convertido. */
+  get convertNote(): string {
+    const target=this.moneda.presentacion();
+    const codes=this.section==='panel'?(this.panel?.saldos_por_moneda||[]).map(s=>s.moneda):this.section==='carteras'?this.wallets.map(w=>w.moneda):this.section==='presupuestos'?this.budgets.map(b=>b.moneda):this.section==='recurrentes'?this.recurring.map(r=>r.moneda):this.section==='deudas'?this.debts.map(d=>d.moneda):this.section==='metas'?this.goals.map(g=>g.moneda):this.group?[this.group.grupo.moneda]:this.groups.map(g=>g.moneda);
+    if(!codes.some(c=>c&&c!==target))return '';
+    const fecha=this.moneda.tasasFecha();
+    return `Importes mostrados en ${target} con la tasa de referencia del BCE${fecha?' del '+this.date(fecha):''}. Lo que tienes guardado y tu historial no cambian.`;
+  }
   /** Equivalente en la moneda de presentación con la tasa vigente; null si no hay tasa. */
   toBase(value: Money | null | undefined, code: string): string | null {
     if(value===null||value===undefined)return null;
@@ -156,7 +176,7 @@ export class FinancePage {
   }
   get walletCurrencies(): number {return new Set(this.wallets.map(w=>w.moneda)).size;}
   /** Frente de la tarjeta de cartera: un tono por moneda para distinguirlas de un vistazo. */
-  walletTone(code: string): string {return ({USD:'tone-forest',EUR:'tone-ocean',MXN:'tone-clay',COP:'tone-plum'} as Record<string,string>)[code]||'tone-slate';}
+  walletTone(code: string): string {return ({USD:'tone-blue',EUR:'tone-indigo',MXN:'tone-violet',COP:'tone-amber'} as Record<string,string>)[code]||'tone-slate';}
   get liquidBar(): number {return compare(this.liquid.total,'0')>0?100:0;}
   get sharesLabel(): string {return this.currencyShares.map(s=>`${s.moneda} ${s.pct.toFixed(0)} %`).join(', ');}
   /** Color de la leyenda: el mismo segmento que en la barra, o gris si la moneda no tiene tasa. */

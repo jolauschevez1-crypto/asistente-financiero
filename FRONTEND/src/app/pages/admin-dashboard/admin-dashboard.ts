@@ -218,7 +218,6 @@ export class AdminDashboard implements OnInit {
   readonly displayedColumns = [
     'nombre',
     'correo',
-    'telegram',
     'estado',
     'created_at',
     'ultimo_login',
@@ -465,6 +464,7 @@ export class AdminDashboard implements OnInit {
     cuenta_origen: [''],
     cuenta_destino: [''],
     descripcion: [''],
+    // Sin campo visible: se conserva el valor guardado para que editar no lo sobrescriba.
     metodo_pago: [''],
   });
 

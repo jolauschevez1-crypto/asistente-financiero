@@ -2,18 +2,18 @@
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .login-page{min-height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--app-bg-page-start)}
 
-/* Lado de marca: bosque con titular lima (9,4:1) */
-.intro{display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,6vw,96px);background:#163300;color:#e8f6dd}
-.eyebrow{font-size:.875rem;font-weight:700;color:#9fe870}
-.intro h1{margin:24px 0;max-width:12ch;font-size:clamp(2.5rem,5vw,4.25rem);line-height:1.02;letter-spacing:-.035em;font-weight:800;color:#9fe870}
+/* Lado de marca: negro con halo azul y titular azul claro (9:1) */
+.intro{display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,6vw,96px);background:radial-gradient(700px 520px at 85% 15%,#1f6fe55c,transparent 65%),radial-gradient(600px 480px at 100% 100%,#7c3aed33,transparent 60%),#000;color:#dbe7f7}
+.eyebrow{font-size:.875rem;font-weight:700;color:#6fb0ff}
+.intro h1{margin:24px 0;max-width:12ch;font-size:clamp(2.5rem,5vw,4.25rem);line-height:1.02;letter-spacing:-.035em;font-weight:800;color:#fff;background:linear-gradient(100deg,#b9dbff,#fff 55%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .intro p{max-width:440px;margin:0;font-size:1.125rem;line-height:1.6}
 .intro-features{display:flex;flex-wrap:wrap;gap:8px;margin:32px 0 0;padding:0;list-style:none}
-.intro-features li{padding:8px 14px;border:1px solid #9fe87066;border-radius:999px;font-size:.875rem}
+.intro-features li{padding:8px 14px;border:1px solid #6fb0ff59;background:#ffffff0a;border-radius:999px;font-size:.875rem}
 
 /* Formulario */
 .login-panel{align-self:center;justify-self:center;width:min(480px,100% - 32px);margin:32px 0;padding:clamp(24px,4vw,40px);background:var(--app-bg-card);border:1px solid var(--af-border);border-radius:20px;box-sizing:border-box}
 .brand-block{display:flex;align-items:center;gap:14px;margin-bottom:24px}
-.mark{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;border-radius:12px;background:#9fe870;color:#163300;font-weight:800}
+.mark{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;border-radius:12px;background:radial-gradient(circle at 30% 30%,#8cc4ff,#1f6fe5 60%,#0b3fa0);color:#fff;font-weight:800;box-shadow:0 6px 18px #1f6fe566}
 .brand-block h2{margin:0;font-size:1.5rem;letter-spacing:-.02em}
 .brand-block p{margin:4px 0 0;font-size:.875rem;color:var(--af-muted);line-height:1.5}
 .login-form{display:flex;flex-direction:column;gap:8px}

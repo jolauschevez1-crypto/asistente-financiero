@@ -9,7 +9,7 @@ Sigue el formato de defensa de 3 minutos del taller (MAT-21). Cada respuesta ind
 3. **Cómo lo medimos (40 s).**
    - Tres modelos de calidad (03): Garvin con 8 dimensiones, McCall con 11 factores e ISO/IEC 9126 con 27 subcaracterísticas.
    - 47 casos (09).
-   - 124 pruebas automáticas en verde.
+   - 128 pruebas automáticas en verde.
    - Carga ×5 con 0 descuadres.
    - OWASP 20/20 y axe con 0 violaciones.
 4. **Qué encontramos (40 s).**

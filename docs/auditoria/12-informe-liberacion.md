@@ -9,7 +9,7 @@
 - **Sustento:**
   - Todos los criterios de integridad, exactitud y seguridad se cumplen con evidencia local.
   - No hay defectos críticos ni altos abiertos.
-  - Las 124 pruebas automáticas pasan.
+  - Las 128 pruebas automáticas pasan (69 backend, 59 frontend, tras CR-04).
 - **Por qué todavía no es GO:**
   - Faltan evidencias de producción: la tasa real de Frankfurter, la migración aplicada y el LCP móvil.
   - Falta la RTF con el equipo.
@@ -59,7 +59,7 @@ Los riesgos críticos no se promediaron. Cada uno se evaluó por separado (§3).
 | Historial preservado | CUMPLE | CP-19 |
 | Conversión explícita | CUMPLE | CP-18 |
 | Autorización y aislamiento | CUMPLE | CP-31..CP-34 |
-| Pruebas críticas | CUMPLE (124/124) | EV-PRU-01/02 |
+| Pruebas críticas | CUMPLE (128/128) | EV-PRU-01/02 |
 | Sin defectos críticos | CUMPLE (0 críticos; el único alto está cerrado) | 04 |
 | Escritorio y móvil | CUMPLE | CP-27, CP-42, CP-43 |
 | Regresión | CUMPLE | 05 §2 |

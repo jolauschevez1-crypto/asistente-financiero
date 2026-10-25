@@ -89,6 +89,9 @@ test('cron de tasas exige CRON_SECRET y, si el proveedor falla, se conserva la Ã
  const u=await user('USD');const t=await request('/finanzas/tasas',{token:sign(u.id)});
  assert.equal(t.status,200);assert.equal(t.data.data.fecha_cotizacion,daysAgo(1));assert.equal(t.data.data.estado,'vigente');
  assert.deepEqual(t.data.data.tasas,[{par:'USD/EUR',tasa:'0.9'},{par:'USD/MXN',tasa:'18'}]);
+ const eur=await request('/finanzas/tasas?moneda=EUR',{token:sign(u.id)});
+ assert.equal(eur.data.data.moneda,'EUR');assert.deepEqual(eur.data.data.tasas_a,{USD:'0.9',EUR:'1',MXN:'0.05'});
+ assert.equal((await request('/finanzas/tasas?moneda=COP',{token:sign(u.id)})).data.data.tasas_a,undefined);
  delete process.env.CRON_SECRET;delete process.env.FX_PROVIDER_URL;
 });
 

@@ -311,7 +311,8 @@ label,
 }
 
 .vista-switcher button.active {
-    background-image: #163300 !important;
+    background-image: none !important;
+    background-color: #1f6fe5 !important;
     border-color: transparent !important;
     color: #ffffff !important;
     box-shadow: var(--shadow-elevation-2);
@@ -672,7 +673,7 @@ button {
     padding: 0 14px;
     border: 0;
     border-radius: 8px;
-    background: #163300;
+    background: #1f6fe5;
     color: #ffffff;
     font-weight: 800;
     cursor: pointer;

@@ -53,7 +53,7 @@ describe('Panel multidivisa', () => {
   });
 });
 
-describe('Diálogo Crear nueva cartera (accesibilidad)', () => {
+describe('Diálogo Nueva cartera (accesibilidad)', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FinancePage],
@@ -68,7 +68,7 @@ describe('Diálogo Crear nueva cartera (accesibilidad)', () => {
 
   it('mantiene el botón que abre el diálogo para que el foco vuelva a él al cerrar', () => {
     const fixture = TestBed.createComponent(FinancePage); fixture.detectChanges();
-    const opener = () => Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('button')).find(b => b.textContent?.trim() === 'Crear nueva cartera');
+    const opener = () => Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('button')).find(b => b.textContent?.replace('+', '').trim() === 'Nueva cartera');
     const before = opener();
     expect(before).toBeTruthy();
     fixture.componentInstance.openForm(); fixture.detectChanges();

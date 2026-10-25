@@ -3,7 +3,7 @@ const {chromium}=require('playwright');const fs=require('fs');
 const axeSrc=fs.readFileSync(require.resolve('axe-core/axe.min.js'),'utf8');
 const [base,out]=process.argv.slice(2);
 const tags=['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa'];
-const routes=['/panel','/carteras','/presupuestos','/recurrentes','/deudas','/metas','/grupos','/usuario','/perfil','/ia'];
+const routes=['/panel','/carteras','/presupuestos','/recurrentes','/deudas','/metas','/grupos','/perfil','/ia'];
 const views=[{name:'escritorio',viewport:{width:1366,height:850}},{name:'movil',viewport:{width:390,height:844},isMobile:true,hasTouch:true}];
 (async()=>{const browser=await chromium.launch();const results=[];
  const scan=async(page,meta)=>{await page.waitForTimeout(500);await page.addScriptTag({content:axeSrc});
@@ -20,9 +20,10 @@ const views=[{name:'escritorio',viewport:{width:1366,height:850}},{name:'movil',
   await page.click('button[type=submit]');await page.waitForURL(/panel/,{timeout:15000});await page.waitForLoadState('networkidle');
   for(const r of routes){await page.goto(base+r,{waitUntil:'networkidle'});await scan(page,meta(r));}
   await page.goto(base+'/carteras',{waitUntil:'networkidle'});
-  await page.getByRole('button',{name:'Crear nueva cartera'}).first().click();await scan(page,meta('/carteras#dialogo-crear'));await page.getByRole('button',{name:'Cancelar'}).click();
-  await page.getByRole('button',{name:'Transferir'}).first().click();await scan(page,meta('/carteras#dialogo-transferir'));await page.getByRole('button',{name:'Cancelar'}).click();
-  await page.getByRole('button',{name:'Convertir moneda'}).nth(2).click();await page.getByRole('button',{name:'Ver cotización'}).click();await page.waitForTimeout(600);await scan(page,meta('/carteras#dialogo-convertir'));await page.getByRole('button',{name:'Cancelar'}).click();
+  await page.getByRole('button',{name:/Nueva cartera/}).first().click();await scan(page,meta('/carteras#dialogo-crear'));await page.getByRole('button',{name:'Cancelar'}).click();
+  await page.getByRole('button',{name:/Nuevo movimiento/}).click();await scan(page,meta('/carteras#dialogo-movimiento'));await page.getByRole('button',{name:'Cancelar'}).click();
+  await page.getByRole('button',{name:'Transferir',exact:true}).first().click();await scan(page,meta('/carteras#dialogo-transferir'));await page.getByRole('button',{name:'Cancelar'}).click();
+  await page.getByRole('button',{name:/Cambiar la moneda guardada/}).nth(2).click();await page.getByRole('button',{name:'Ver cotización'}).click();await page.waitForTimeout(600);await scan(page,meta('/carteras#dialogo-convertir'));await page.getByRole('button',{name:'Cancelar'}).click();
   if(v.name==='movil'){await page.locator('#menu-toggle').click();await scan(page,meta('menu-movil'));}
   else{await page.locator('#user-menu-button').click();await scan(page,meta('menu-usuario'));}
   await ctx.close();}

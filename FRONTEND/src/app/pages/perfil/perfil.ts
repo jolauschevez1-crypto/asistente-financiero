@@ -8,7 +8,6 @@ import { AuthService } from '../../core/auth.service';
 import { UsuarioPerfil } from '../../core/models';
 import { SnackbarService } from '../../core/snackbar.service';
 import { nonBlank, passwordLength, PERSON_NAME } from '../../core/input-validation';
-import { CurrencySettings } from '../../shared/currency-settings/currency-settings';
 
 type PerfilTab = 'datos' | 'seguridad' | 'google';
 
@@ -26,7 +25,6 @@ const coincidenPasswordsValidator: ValidatorFn = (control: AbstractControl): Val
     DatePipe,
     MatButtonModule,
     MatIconModule,
-    CurrencySettings,
   ],
   templateUrl: './perfil.html',
   styleUrl: './perfil.css',

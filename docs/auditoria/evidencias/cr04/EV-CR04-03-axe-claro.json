@@ -1,0 +1,885 @@
+{
+ "herramienta": "axe-core 4.10.3",
+ "etiquetas": [
+  "wcag2a",
+  "wcag2aa",
+  "wcag21a",
+  "wcag21aa",
+  "wcag22aa"
+ ],
+ "base": "http://127.0.0.1:3102",
+ "fecha": "2026-10-25T16:21:07.800Z",
+ "resumen": {},
+ "resultados": [
+  {
+   "ruta": "/login",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 7,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".intro > p",
+      "li:nth-child(1)"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3394611064=\"\" class=\"eyebrow\">Asistente Financiero</span>",
+      "<h1 _ngcontent-ng-c3394611064=\"\">Tu dinero, en todas sus monedas, más claro.</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/panel",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 67,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"carteras\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 38,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 15,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 16,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 16,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/metas",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 16,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 16,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 15,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/ia",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 14,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 38,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-movimiento",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 38,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 38,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 41,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-usuario",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 39,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/login",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 4,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".intro > p",
+      ".mark"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3394611064=\"\" class=\"eyebrow\">Asistente Financiero</span>",
+      "<h1 _ngcontent-ng-c3394611064=\"\">Tu dinero, en todas sus monedas, más claro.</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/panel",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 60,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".heading-text > .eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 31,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 9,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 9,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/metas",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 9,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 9,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 7,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".active",
+      ".tab-btn[type=\"button\"]:nth-child(2)"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/ia",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 7,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      "div > p",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 31,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-movimiento",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 32,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 32,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 35,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-movil",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 31,
+     "targets": [
+      ".brand-mark",
+      ".brand-name",
+      ".eyebrow",
+      "h1"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3628663945=\"\" aria-hidden=\"true\" class=\"brand-mark\">AF</span>",
+      "<span _ngcontent-ng-c3628663945=\"\" class=\"brand-name\">Asistente Financiero</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  }
+ ]
+}
