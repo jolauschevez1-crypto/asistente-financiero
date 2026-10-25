@@ -48,6 +48,9 @@ async function original(client,userId,id) {
  if(!m) throw bad('Movimiento no encontrado o ya eliminado.',404);
  const table=(await client.query("SELECT to_regclass('public.fin_movimiento_vinculos') AS name")).rows[0].name;
  if(table && (await client.query('SELECT 1 FROM fin_movimiento_vinculos WHERE movimiento_id=$1',[id])).rows.length) throw bad('Este movimiento está vinculado a un módulo financiero. Adminístralo desde el módulo de origen.',409);
+ // Multidivisa: un movimiento anterior a la conversión de su cartera se conserva como historial.
+ const monedas=(await client.query('SELECT moneda FROM cuentas WHERE id = ANY($1::int[])',[[m.cuenta_origen_id,m.cuenta_destino_id].filter(Boolean)])).rows;
+ if(m.moneda_destino || monedas.some(c=>c.moneda!==m.moneda)) throw bad('Este movimiento está en una moneda distinta a la actual de la cartera; se conserva como historial y no se edita ni se anula.',409);
  return m;
 }
 async function create(data) {

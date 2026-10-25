@@ -14,6 +14,8 @@ const errorMiddleware = (err, req, res, next) => {
     '22007': [400, 'La fecha indicada tiene un formato inválido.'],
   };
   if(databaseErrors[err.code]) [status,message]=databaseErrors[err.code];
+  // P0001: reglas de integridad propias (triggers de moneda); su mensaje es público y no contiene datos.
+  if(err.code==='P0001') { status=409; message=err.message; }
   if(err.type === 'entity.parse.failed') message='El cuerpo de la solicitud debe ser JSON válido.';
   if(err.type === 'entity.too.large') message='El archivo o solicitud supera el tamaño permitido.';
   // La respuesta pública y el registro no contienen SQL, parámetros ni trazas internas.
