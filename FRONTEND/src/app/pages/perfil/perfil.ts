@@ -1,4 +1,4 @@
-import { CommonModule, DatePipe, UpperCasePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, NgZone, OnInit, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +10,7 @@ import { SnackbarService } from '../../core/snackbar.service';
 import { nonBlank, passwordLength, PERSON_NAME } from '../../core/input-validation';
 import { CurrencySettings } from '../../shared/currency-settings/currency-settings';
 
-type PerfilTab = 'datos' | 'seguridad' | 'google' | 'telegram';
+type PerfilTab = 'datos' | 'seguridad' | 'google';
 
 const coincidenPasswordsValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const nueva = control.get('nuevaPassword')?.value;
@@ -24,7 +24,6 @@ const coincidenPasswordsValidator: ValidatorFn = (control: AbstractControl): Val
     CommonModule,
     ReactiveFormsModule,
     DatePipe,
-    UpperCasePipe,
     MatButtonModule,
     MatIconModule,
     CurrencySettings,
@@ -196,12 +195,13 @@ export class Perfil implements OnInit {
     });
   }
 
+  get rolLabel(): string {
+    const rol = String(this.miPerfil()?.rol || this.usuario()?.rol || '').toUpperCase();
+    return rol === 'ADMIN' || rol === 'ADMINISTRADOR' ? 'Administrador' : 'Usuario';
+  }
+
   cambiarTab(tab: PerfilTab): void {
     this.tabActiva.set(tab);
-    if (tab === 'telegram') {
-      this.cargarPerfil();
-    }
-
   }
 
   private inicializarGoogleVincularButton(): void {

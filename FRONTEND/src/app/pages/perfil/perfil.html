@@ -1,22 +1,22 @@
 <div class="perfil-page">
   <!-- HERO HEAD HEADER -->
   <header class="perfil-hero-card">
-    <div class="avatar-glow-ring" (click)="fileInputHero.click()" title="Cambiar foto de perfil">
+    <button type="button" class="avatar-glow-ring" (click)="fileInputHero.click()" aria-label="Cambiar foto de perfil" title="Cambiar foto de perfil">
       <img *ngIf="fotoGuardada" [src]="fotoGuardada" [alt]="miPerfil()?.nombre || 'Avatar'" class="avatar-img-large" />
-      <div *ngIf="!fotoGuardada" class="avatar-circle-large">{{ avatarInitials }}</div>
-      <div class="avatar-upload-overlay">
-        <mat-icon>photo_camera</mat-icon>
-      </div>
-    </div>
-    <input #fileInputHero type="file" (change)="seleccionarFoto($event)" accept="image/png,image/jpeg" style="display: none;" />
+      <span *ngIf="!fotoGuardada" class="avatar-circle-large">{{ avatarInitials }}</span>
+      <span class="avatar-upload-overlay">
+        <mat-icon aria-hidden="true">photo_camera</mat-icon>
+      </span>
+    </button>
+    <input #fileInputHero type="file" (change)="seleccionarFoto($event)" accept="image/png,image/jpeg" hidden />
 
     <div class="hero-info">
       <h1>{{ miPerfil()?.nombre || usuario()?.nombre || 'Mi Perfil' }}</h1>
       <p class="hero-email">{{ miPerfil()?.correo || usuario()?.correo }}</p>
       <div class="hero-badges">
-        <span class="role-badge">{{ (miPerfil()?.rol || usuario()?.rol || 'USUARIO') | uppercase }}</span>
+        <span class="role-badge">{{ rolLabel }}</span>
         <span class="status-dot-badge">
-          <span class="dot"></span> ACTIVO
+          <span class="dot" aria-hidden="true"></span> Activa
         </span>
         <span class="date-badge" *ngIf="miPerfil()?.createdAt">
           Miembro desde {{ miPerfil()?.createdAt | date:'MMM yyyy' }}
@@ -25,7 +25,7 @@
     </div>
   </header>
 
-  <section class="section-card" style="margin: 24px 0"><app-currency-settings /></section>
+  <section class="section-card currency-card"><app-currency-settings /></section>
 
   <!-- NAVIGATION TABS -->
   <nav class="perfil-tabs-bar" aria-label="Pestañas de Perfil">
@@ -36,7 +36,7 @@
       (click)="cambiarTab('datos')"
     >
       <mat-icon>person</mat-icon>
-      Información Personal
+      Información personal
     </button>
     <button
       type="button"
@@ -45,7 +45,7 @@
       (click)="cambiarTab('seguridad')"
     >
       <mat-icon>lock</mat-icon>
-      Seguridad y Contraseña
+      Seguridad
     </button>
     <button
       type="button"
@@ -54,19 +54,7 @@
       (click)="cambiarTab('google')"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
-      Google Sign-In
-    </button>
-    <button
-      type="button"
-      class="tab-btn"
-      [class.active]="tabActiva() === 'telegram'"
-      (click)="cambiarTab('telegram')" [disabled]="true" title="Telegram está desactivado en esta versión"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#229ED9"/>
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.42468 11.9056C8.80218 10.4348 11.0543 9.4673 12.181 8.99706C15.3986 7.65489 16.0673 7.42168 16.503 7.41392C16.5988 7.41222 16.8132 7.43593 16.9517 7.54823C17.0686 7.64303 17.1007 7.77123 17.1161 7.86129C17.1315 7.95135 17.1498 8.15654 17.1353 8.30907C16.9696 10.0504 16.2536 14.269 15.8893 16.2163C15.7351 17.0403 15.4313 17.317 15.137 17.3441C14.4975 17.403 14.0116 16.9208 13.3917 16.5144C12.4217 15.8784 11.8732 15.4824 10.9317 14.8617C9.84368 14.1444 10.5487 13.75 11.169 13.1057C11.3314 12.9369 14.1528 10.3718 14.2074 10.1389C14.2142 10.1098 14.2206 10.0012 14.156 9.94381C14.0914 9.8864 13.9961 9.906 13.927 9.92167C13.8291 9.94386 12.2697 10.9745 9.24828 13.0135C8.80578 13.3174 8.40488 13.4654 8.04558 13.4576C7.64998 13.4491 6.88878 13.2337 6.32288 13.0496C5.62888 12.8238 5.07728 12.7046 5.12538 12.3214C5.15048 12.1218 5.42468 11.9056 5.42468 11.9056Z" fill="white"/>
-      </svg>
-      Telegram Bot
+      Google
     </button>
   </nav>
 
@@ -76,7 +64,7 @@
     @if (tabActiva() === 'datos') {
       <section class="section-card">
         <div class="card-header">
-          <h2>Foto de Perfil</h2>
+          <h2>Foto de perfil</h2>
           <p>Sube o actualiza la foto de tu perfil para personalizar tu cuenta.</p>
         </div>
 
@@ -90,7 +78,7 @@
               @if (fotoSeleccionadaBase64()) {
                 <button type="button" class="btn-upload-avatar" (click)="guardarFotoSeleccionada()" [disabled]="subiendoFoto()">
                   <mat-icon>save</mat-icon>
-                  {{ subiendoFoto() ? 'Actualizando foto...' : 'Guardar Nueva Foto' }}
+                  {{ subiendoFoto() ? 'Actualizando foto...' : 'Guardar foto' }}
                 </button>
                 <button type="button" class="btn-cancel-avatar" (click)="cancelarFotoSeleccionada()" [disabled]="subiendoFoto()">
                   Cancelar
@@ -98,38 +86,38 @@
               } @else {
                 <button type="button" class="btn-upload-avatar" (click)="fileInputTab.click()" [disabled]="subiendoFoto() || eliminandoFoto()">
                   <mat-icon>cloud_upload</mat-icon>
-                  {{ subiendoFoto() ? 'Actualizando foto...' : 'Seleccionar Nueva Foto' }}
+                  {{ subiendoFoto() ? 'Actualizando foto...' : 'Elegir foto' }}
                 </button>
                 <button *ngIf="fotoGuardada" type="button" class="btn-delete-avatar" (click)="eliminarFoto()" [disabled]="subiendoFoto() || eliminandoFoto()">
                   <mat-icon>delete_forever</mat-icon>
-                  {{ eliminandoFoto() ? 'Eliminando...' : 'Eliminar Foto' }}
+                  {{ eliminandoFoto() ? 'Eliminando...' : 'Eliminar foto' }}
                 </button>
               }
             </div>
-            <input #fileInputTab type="file" (change)="seleccionarFoto($event)" accept="image/png,image/jpeg" style="display: none;" />
+            <input #fileInputTab type="file" (change)="seleccionarFoto($event)" accept="image/png,image/jpeg" hidden />
             <span class="field-hint">
               @if (fotoSeleccionadaBase64()) {
-                <strong style="color: #38bdf8;">✓ Previsualización activa. Haz clic en "Guardar Nueva Foto" para confirmar los cambios.</strong>
+                <strong class="hint-strong">Vista previa. Pulsa «Guardar foto» para confirmar el cambio.</strong>
               } @else {
-                Formatos soportados: JPG, PNG, WEBP (Máx. 5 MB).
+                JPG o PNG, hasta 5 MB.
               }
             </span>
           </div>
         </div>
 
-        <div class="card-header" style="margin-top: 16px;">
-          <h2>Información Básica</h2>
+        <div class="card-header card-header-spaced">
+          <h2>Información básica</h2>
           <p>Gestiona tu nombre visible y consulta los datos principales de tu cuenta.</p>
         </div>
 
         <form [formGroup]="perfilForm" (ngSubmit)="guardarNombre()" class="perfil-form">
           <div class="form-group">
-            <label for="correo">Correo Electrónico (No modificable)</label>
+            <label for="correo">Correo electrónico (no se puede cambiar)</label>
             <input id="correo" type="email" [value]="miPerfil()?.correo || usuario()?.correo" disabled class="input-disabled" />
           </div>
 
           <div class="form-group">
-            <label for="nombre">Nombre Completo</label>
+            <label for="nombre">Nombre completo</label>
             <input id="nombre" type="text" formControlName="nombre" placeholder="Tu nombre" />
             <span *ngIf="perfilForm.get('nombre')?.invalid && perfilForm.get('nombre')?.touched" class="field-error">
               El nombre debe tener al menos 2 caracteres.
@@ -138,7 +126,7 @@
 
           <div class="form-actions">
             <button type="submit" class="btn-primary" [disabled]="perfilForm.invalid || guardandoNombre()">
-              {{ guardandoNombre() ? 'Guardando...' : 'Guardar Cambios' }}
+              {{ guardandoNombre() ? 'Guardando...' : 'Guardar cambios' }}
             </button>
           </div>
         </form>
@@ -149,18 +137,18 @@
     @if (tabActiva() === 'seguridad') {
       <section class="section-card">
         <div class="card-header">
-          <h2>Cambiar Contraseña</h2>
+          <h2>Cambiar contraseña</h2>
           <p>Usa al menos 10 caracteres con mayúscula, minúscula, número y un carácter especial, sin espacios y sin tu nombre ni tu correo.</p>
         </div>
 
         <form [formGroup]="passwordForm" (ngSubmit)="cambiarPassword()" class="perfil-form">
           <div class="form-group" *ngIf="miPerfil()?.tienePassword">
-            <label for="passActual">Contraseña Actual</label>
+            <label for="passActual">Contraseña actual</label>
             <input id="passActual" type="password" formControlName="passwordActual" placeholder="••••••••" />
           </div>
 
           <div class="form-group">
-            <label for="passNueva">Nueva Contraseña</label>
+            <label for="passNueva">Nueva contraseña</label>
             <input id="passNueva" type="password" formControlName="nuevaPassword" placeholder="••••••••" />
             <span *ngIf="passwordForm.get('nuevaPassword')?.invalid && passwordForm.get('nuevaPassword')?.touched" class="field-error">
               Debe tener 10 caracteres o más (máximo 72 bytes), con mayúscula, minúscula, número y carácter especial, sin espacios.
@@ -168,7 +156,7 @@
           </div>
 
           <div class="form-group">
-            <label for="passConfirm">Confirmar Nueva Contraseña</label>
+            <label for="passConfirm">Confirmar nueva contraseña</label>
             <input id="passConfirm" type="password" formControlName="confirmarPassword" placeholder="••••••••" />
             <span *ngIf="passwordForm.hasError('passwordsNoCoinciden') && (passwordForm.get('confirmarPassword')?.touched || passwordForm.get('nuevaPassword')?.touched)" class="field-error">
               Las contraseñas no coinciden.
@@ -177,7 +165,7 @@
 
           <div class="form-actions">
             <button type="submit" class="btn-primary" [disabled]="passwordForm.invalid || guardandoPassword()">
-              {{ guardandoPassword() ? 'Actualizando...' : 'Actualizar Contraseña' }}
+              {{ guardandoPassword() ? 'Actualizando...' : 'Actualizar contraseña' }}
             </button>
           </div>
         </form>
@@ -188,7 +176,7 @@
     @if (tabActiva() === 'google') {
       <section class="section-card">
         <div class="card-header">
-          <h2>Vinculación con Cuenta de Google</h2>
+          <h2>Vinculación con Google</h2>
           <p>Google está desactivado en esta versión.</p>
         </div>
 
@@ -198,7 +186,7 @@
             <div class="google-info">
               <h3>Estado de la cuenta</h3>
               <span class="status-chip" [class.linked]="miPerfil()?.tieneGoogle">
-                {{ miPerfil()?.tieneGoogle ? 'Cuenta Vinculada ✓' : 'No Vinculada' }}
+                {{ miPerfil()?.tieneGoogle ? 'Cuenta vinculada' : 'No vinculada' }}
               </span>
             </div>
           </div>
@@ -206,12 +194,12 @@
           <div class="google-action-zone">
             @if (miPerfil()?.tieneGoogle) {
               <button type="button" class="btn-danger-link" (click)="desvincularGoogle()" [disabled]="true">
-                {{ procesandoGoogle() ? 'Desvinculando...' : 'Desvincular Cuenta de Google' }}
+                {{ procesandoGoogle() ? 'Desvinculando...' : 'Desvincular cuenta de Google' }}
               </button>
             } @else {
               <button type="button" class="btn-google-link" (click)="vincularConGoogleOAuthDirecto()" [disabled]="true">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
-                Vincular con Cuenta de Google
+                Vincular con Google
               </button>
             }
           </div>
@@ -219,54 +207,5 @@
       </section>
     }
 
-    <!-- TAB 4: TELEGRAM BOT -->
-    @if (tabActiva() === 'telegram') {
-      <section class="section-card">
-        <div class="card-header">
-          <h2>Bot de Telegram (@ZzzzzzzzzzzzzxxBot)</h2>
-          <p>Interactúa con tu Asistente Financiero directamente desde Telegram en cualquier dispositivo.</p>
-        </div>
-
-        <div class="google-status-box" style="background: rgba(0, 136, 204, 0.08); border-color: rgba(0, 136, 204, 0.25);">
-          <div class="google-brand-row">
-            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#229ED9"/>
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M5.42468 11.9056C8.80218 10.4348 11.0543 9.4673 12.181 8.99706C15.3986 7.65489 16.0673 7.42168 16.503 7.41392C16.5988 7.41222 16.8132 7.43593 16.9517 7.54823C17.0686 7.64303 17.1007 7.77123 17.1161 7.86129C17.1315 7.95135 17.1498 8.15654 17.1353 8.30907C16.9696 10.0504 16.2536 14.269 15.8893 16.2163C15.7351 17.0403 15.4313 17.317 15.137 17.3441C14.4975 17.403 14.0116 16.9208 13.3917 16.5144C12.4217 15.8784 11.8732 15.4824 10.9317 14.8617C9.84368 14.1444 10.5487 13.75 11.169 13.1057C11.3314 12.9369 14.1528 10.3718 14.2074 10.1389C14.2142 10.1098 14.2206 10.0012 14.156 9.94381C14.0914 9.8864 13.9961 9.906 13.927 9.92167C13.8291 9.94386 12.2697 10.9745 9.24828 13.0135C8.80578 13.3174 8.40488 13.4654 8.04558 13.4576C7.64998 13.4491 6.88878 13.2337 6.32288 13.0496C5.62888 12.8238 5.07728 12.7046 5.12538 12.3214C5.15048 12.1218 5.42468 11.9056 5.42468 11.9056Z" fill="white"/>
-            </svg>
-            <div class="google-info">
-              <h3 style="color: #0088cc;">@ZzzzzzzzzzzzzxxBot</h3>
-              <span class="status-chip" [class.linked]="!!(miPerfil()?.telegram_id || miPerfil()?.telegramId || usuario()?.telegram_id || (usuario()?.correo === 'jpal2811@gmail.com'))">
-                {{ (miPerfil()?.telegram_id || miPerfil()?.telegramId || usuario()?.telegram_id || (usuario()?.correo === 'jpal2811@gmail.com' ? '6260643690' : null)) ? ('VINCULADO (ID: ' + (miPerfil()?.telegram_id || miPerfil()?.telegramId || usuario()?.telegram_id || '6260643690') + ')') : 'No Vinculado' }}
-              </span>
-              <button type="button" (click)="cargarPerfil()" title="Recargar estado de vinculación" style="background: none; border: none; cursor: pointer; color: #0088cc; vertical-align: middle; margin-left: 6px; display: inline-flex; align-items: center;">
-                <mat-icon style="font-size: 18px; width: 18px; height: 18px; line-height: 18px;">refresh</mat-icon>
-              </button>
-            </div>
-          </div>
-
-          <div class="google-action-zone">
-            <a
-              href="https://t.me/ZzzzzzzzzzzzzxxBot?start=vincular"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-primary"
-              style="background: linear-gradient(135deg, #0088cc, #005580); border: none; padding: 12px 24px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; border-radius: 10px; color: #ffffff;"
-            >
-              <mat-icon>launch</mat-icon>
-              Abrir Telegram Bot
-            </a>
-          </div>
-        </div>
-
-        <div style="margin-top: 16px; padding: 16px; background: var(--app-bg-surface-elevated, rgba(255, 255, 255, 0.03)); border: 1px solid var(--app-border-color, rgba(255, 255, 255, 0.08)); border-radius: 12px;">
-          <h4 style="margin: 0 0 10px 0; font-size: 0.95rem; color: var(--app-text-primary, #f8fafc);">📱 Instrucciones rápidas de vinculación:</h4>
-          <ol style="margin: 0; padding-left: 20px; color: var(--app-text-muted, #9fb1c8); font-size: 0.9rem; line-height: 1.6;">
-            <li>Haz clic en el botón azul <strong>"Abrir Telegram Bot"</strong> arriba.</li>
-            <li>En Telegram, presiona el botón <strong>INICIAR</strong> o envía <code>/start</code>.</li>
-            <li>El bot te pedirá enviar tu correo (<strong>{{ miPerfil()?.correo || usuario()?.correo }}</strong>) para vincular tu cuenta al instante.</li>
-          </ol>
-        </div>
-      </section>
-    }
   </main>
 </div>

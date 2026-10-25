@@ -23,7 +23,11 @@ export function currencyCode(value?: string | null): CurrencyCode {return CURREN
 /** Da formato a un importe en su propia moneda; nunca lo convierte. */
 export function formatCurrency(value: number | string | null | undefined, code?: string | null): string {
   const currency=currencyCode(code);const amount=Number(value);
-  return new Intl.NumberFormat(LOCALES[currency],{style:'currency',currency,currencyDisplay:'code',minimumFractionDigits:2,maximumFractionDigits:2}).format(Number.isFinite(amount)?amount:0);
+  // El código siempre va delante ("EUR 850,00"), sea cual sea la convención del país, para que las columnas se lean igual.
+  const parts=new Intl.NumberFormat(LOCALES[currency],{style:'currency',currency,currencyDisplay:'code',minimumFractionDigits:2,maximumFractionDigits:2}).formatToParts(Number.isFinite(amount)?amount:0);
+  const sign=parts.some(p=>p.type==='minusSign')?'-':'';
+  const number=parts.filter(p=>['integer','group','decimal','fraction'].includes(p.type)).map(p=>p.value).join('');
+  return `${sign}${currency}\u00a0${number}`;
 }
 
 @Injectable({providedIn:'root'})

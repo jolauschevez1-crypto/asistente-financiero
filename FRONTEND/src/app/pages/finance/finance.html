@@ -132,8 +132,8 @@
           <div><span>Resultado</span><strong class="num" [class.negative]="isNegative(panel.neto)" [class.positive]="!isNegative(panel.neto)">{{fmt(panel.neto)}}</strong></div>
           <div><span>Disponible tras pendientes</span><strong class="num">{{freePercent.toFixed(0)}} %</strong></div>
         </section>
-        @if(!panel.flujos_completos){<p class="muted note">Ingresos y gastos sin tasa, no incluidos: {{panel.flujos_sin_tasa.ingresos.length?'ingresos '+listText(panel.flujos_sin_tasa.ingresos):''}} {{panel.flujos_sin_tasa.gastos.length?'gastos '+listText(panel.flujos_sin_tasa.gastos):''}}.</p>}
-        @if(multiCurrency){<p class="muted note">Ingresos y gastos de otras monedas se valoran con la tasa de referencia del día de cada movimiento; los saldos y pendientes, con la última tasa disponible.</p>}
+        @if(!panel.flujos_completos||multiCurrency){<div class="footnotes">@if(!panel.flujos_completos){<p class="muted note">Ingresos y gastos sin tasa, no incluidos: {{flowsWithoutRate}}.</p>}
+        @if(multiCurrency){<p class="muted note">Ingresos y gastos de otras monedas se valoran con la tasa de referencia del día de cada movimiento; los saldos y pendientes, con la última tasa disponible.</p>}</div>}
 
         <div class="grid-2">
           <section class="card"><header class="card-head"><h2>Balance disponible</h2></header>

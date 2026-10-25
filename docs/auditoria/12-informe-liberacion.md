@@ -9,11 +9,12 @@
 - **Sustento:**
   - Todos los criterios de integridad, exactitud y seguridad se cumplen con evidencia local.
   - No hay defectos críticos ni altos abiertos.
-  - Las 123 pruebas automáticas pasan.
+  - Las 124 pruebas automáticas pasan.
 - **Por qué todavía no es GO:**
   - Faltan evidencias de producción: la tasa real de Frankfurter, la migración aplicada y el LCP móvil.
   - Falta la RTF con el equipo.
   - Falta la prueba con lector de pantalla.
+  - Al revisar la versión publicada aparecieron 4 defectos de interfaz (D-11 a D-14). Están corregidos en la rama y falta publicarlos. Por ellos la DRE baja a 71 %, por debajo del umbral de 90 % (05 §1). Ninguno afecta saldos, tasas ni seguridad de acceso.
 
 Los riesgos críticos no se promediaron. Cada uno se evaluó por separado (§3).
 
@@ -58,7 +59,7 @@ Los riesgos críticos no se promediaron. Cada uno se evaluó por separado (§3).
 | Historial preservado | CUMPLE | CP-19 |
 | Conversión explícita | CUMPLE | CP-18 |
 | Autorización y aislamiento | CUMPLE | CP-31..CP-34 |
-| Pruebas críticas | CUMPLE (123/123) | EV-PRU-01/02 |
+| Pruebas críticas | CUMPLE (124/124) | EV-PRU-01/02 |
 | Sin defectos críticos | CUMPLE (0 críticos; el único alto está cerrado) | 04 |
 | Escritorio y móvil | CUMPLE | CP-27, CP-42, CP-43 |
 | Regresión | CUMPLE | 05 §2 |
@@ -70,6 +71,7 @@ Los riesgos críticos no se promediaron. Cada uno se evaluó por separado (§3).
   - Puede afectar a usuarios detrás de la misma IP pública (EV-REN-03).
   - Recomendación: vigilar las respuestas 429 en los registros de Vercel. Si aparecen, ampliar el límite o usar como clave el usuario autenticado.
 - **uuid moderado vía exceljs (riesgo aceptado):** exceljs no usa la ruta afectada (EV-SEG-02).
+- **Datos personales en el historial de git (D-13):** la plantilla de Perfil tenía escritos el correo y un identificador de Telegram de una persona real. Se quitaron del código, pero siguen en commits anteriores y en las versiones ya desplegadas. Recomendación: avisar a esa persona y decidir con ella si se reescribe el historial (requiere `push --force`, que este trabajo no usa).
 - **Solo Chromium probado:** Firefox y Safari no se evaluaron.
 - **Tasas de producción:** dependen de la disponibilidad de Frankfurter. Si falla, se usa la última tasa válida con su antigüedad.
 
@@ -86,7 +88,7 @@ Los riesgos críticos no se promediaron. Cada uno se evaluó por separado (§3).
 | Ficha técnica | 01 | Completo |
 | Requisitos | 02 | Completo (25) |
 | Modelos Garvin/McCall/ISO 9126 | 03 | Completo (46 filas; 2 NO APLICA y 2 NO EVALUADO justificados) |
-| Registro de defectos | 04 | Completo (10 reales; 0 sembrados) |
+| Registro de defectos | 04 | Completo (14 reales; 0 sembrados) |
 | Métricas | 05 | Completo; horas-persona NO EVALUADO |
 | Revisión formal | 06 | R1–R6 ejecutadas; RTF PENDIENTE |
 | Plan SQA | 07 | Completo |

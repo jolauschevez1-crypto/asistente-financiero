@@ -90,6 +90,7 @@ export class FinancePage {
     for(const i of items){const v=this.toBase(i.monto,i.moneda);if(v===null)missing.set(i.moneda,[...(missing.get(i.moneda)||[]),String(i.monto)]);else parts.push(v);}
     return {total:sum(parts),sinTasa:[...missing].map(([moneda,list])=>({moneda,monto:sum(list)}))};
   }
+  get flowsWithoutRate(): string {const f=this.panel?.flujos_sin_tasa;return [f?.ingresos?.length?'ingresos '+this.listText(f.ingresos):'',f?.gastos?.length?'gastos '+this.listText(f.gastos):''].filter(Boolean).join('; ');}
   missingText(e: Estimate): string {return this.listText(e.sinTasa);}
   /** Lista importes de varias monedas sin sumarlos entre sí. */
   listText(list: {moneda: string; monto?: Money; saldo?: Money}[] | null | undefined): string {return (list||[]).map(x=>this.fmt(x.monto??x.saldo??0,x.moneda)).join(' · ');}

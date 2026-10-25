@@ -1,31 +1,20 @@
 <main class="user-shell">
-  <header class="topbar">
-    <div>
-      <p>{{ usuario()?.nombre || usuario()?.correo }}</p>
+  <header class="page-heading">
+    <div class="heading-text">
+      <p class="eyebrow">{{ usuario()?.nombre || usuario()?.correo }}</p>
       <h1>Mis carteras y diario</h1>
+      <p class="subtitle">Cada cartera muestra su propia moneda.</p>
     </div>
-    <span class="currency-label">Cada cartera muestra su propia moneda</span>
+    <div class="heading-actions">
+      <app-quick-load (saved)="cargarDatos()" />
+      <button type="button" class="secondary" (click)="cambiarSeccion('crear-cuenta')">Nueva cartera</button>
+      <button type="button" class="primary" (click)="cambiarSeccion('nuevo-movimiento')">Nuevo movimiento</button>
+    </div>
   </header>
 
   <app-notice tipo="danger" [mensaje]="error()" />
 
-  <nav class="navbar" aria-label="Secciones de usuario">
-    <app-quick-load (saved)="cargarDatos()" />
-    <button type="button" [class.active]="seccionActiva() === 'cuentas'" (click)="cambiarSeccion('cuentas')">
-      Cuentas
-    </button>
-    <button type="button" [class.active]="seccionActiva() === 'movimientos'" (click)="cambiarSeccion('movimientos')">
-      Historial
-    </button>
-    <button type="button" [class.active]="seccionActiva() === 'crear-cuenta'" (click)="cambiarSeccion('crear-cuenta')">
-      Nueva cartera
-    </button>
-    <button type="button" [class.active]="seccionActiva() === 'nuevo-movimiento'" (click)="cambiarSeccion('nuevo-movimiento')">
-      Nuevo movimiento
-    </button>
-  </nav>
-
-  <section class="metrics">
+  <section class="metrics" aria-label="Resumen de tus carteras">
     <article class="balance-card">
       <span>Saldo por moneda</span>
       @for (b of balances(); track b.moneda) {<strong class="num">{{ money(b.total, b.moneda) }}</strong>} @empty {<strong class="num">{{ money(0, usuario()?.moneda) }}</strong>}
@@ -33,13 +22,18 @@
     </article>
     <article>
       <span>Cuentas</span>
-      <strong>{{ totalCuentas() }}</strong>
+      <strong class="num">{{ totalCuentas() }}</strong>
     </article>
     <article>
       <span>Movimientos</span>
-      <strong>{{ totalMovimientos() }}</strong>
+      <strong class="num">{{ totalMovimientos() }}</strong>
     </article>
   </section>
+
+  <nav class="tabs" aria-label="Secciones de usuario">
+    <button type="button" [class.active]="seccionActiva() !== 'movimientos'" [attr.aria-pressed]="seccionActiva() !== 'movimientos'" (click)="cambiarSeccion('cuentas')">Cuentas</button>
+    <button type="button" [class.active]="seccionActiva() === 'movimientos'" [attr.aria-pressed]="seccionActiva() === 'movimientos'" (click)="cambiarSeccion('movimientos')">Historial</button>
+  </nav>
 
   @if (seccionActiva() !== 'movimientos') {
     <section class="panel-section">
@@ -54,14 +48,14 @@
         <div class="accounts-grid">
           @for (cuenta of cuentas(); track cuenta.nombre) {
             <article class="account-card" [class.low-balance-card]="esSaldoBajo(cuenta)">
-              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <div class="account-head">
                 <span class="clamp" [title]="cuenta.nombre">{{ cuenta.nombre }}</span>
                 <span *ngIf="esSaldoBajo(cuenta)" class="badge-low-balance" [title]="'Saldo menor a '+money(10, cuenta.moneda)">Saldo bajo</span>
               </div>
               <strong class="num" [class.negative]="saldoCuenta(cuenta) < 0">{{ money(saldoCuenta(cuenta), cuenta.moneda) }}</strong>
             </article>
           } @empty {
-            <p class="empty">Aun no tienes cuentas registradas.</p>
+            <p class="empty">Aún no tienes cuentas registradas.</p>
           }
         </div>
       }
@@ -72,22 +66,22 @@
     <section class="panel-section">
       <div class="section-title">
         <h2>Historial de movimientos</h2>
-        <div style="display: flex; gap: 8px;">
+        <div class="section-actions">
           <button class="ghost-btn" type="button" (click)="exportarCsv()" title="Exportar historial a archivo CSV">Exportar CSV</button>
           <button class="ghost-btn" type="button" (click)="cargarMovimientos()">Recargar</button>
         </div>
       </div>
 
-      <div class="preset-filter-group" style="display: flex; gap: 8px; margin-bottom: 16px;">
-        <button type="button" class="preset-btn" [class.active]="filtroPresetFecha() === 'todo'" (click)="filtroPresetFecha.set('todo')">Todo</button>
-        <button type="button" class="preset-btn" [class.active]="filtroPresetFecha() === 'mes'" (click)="filtroPresetFecha.set('mes')">Este Mes</button>
-        <button type="button" class="preset-btn" [class.active]="filtroPresetFecha() === 'semana'" (click)="filtroPresetFecha.set('semana')">Esta Semana</button>
+      <div class="preset-filter-group" role="group" aria-label="Periodo">
+        <button type="button" class="preset-btn" [class.active]="filtroPresetFecha() === 'todo'" [attr.aria-pressed]="filtroPresetFecha() === 'todo'" (click)="filtroPresetFecha.set('todo')">Todo</button>
+        <button type="button" class="preset-btn" [class.active]="filtroPresetFecha() === 'mes'" [attr.aria-pressed]="filtroPresetFecha() === 'mes'" (click)="filtroPresetFecha.set('mes')">Este mes</button>
+        <button type="button" class="preset-btn" [class.active]="filtroPresetFecha() === 'semana'" [attr.aria-pressed]="filtroPresetFecha() === 'semana'" (click)="filtroPresetFecha.set('semana')">Esta semana</button>
       </div>
 
       <label class="search-field">Buscar movimientos<input [formControl]="busquedaControl" placeholder="Concepto o categoría" maxlength="100"></label>
       <div class="diary">
         @for (m of movimientosFiltrados(); track m.id) {
-          <article class="diary-row"><span class="movement-icon" [class.income]="m.tipo==='INGRESO'" aria-hidden="true">{{m.tipo==='INGRESO'?'↓':m.tipo==='TRANSFERENCIA'?'↔':'↑'}}</span><div><strong>{{m.descripcion || m.categoria || tipoMovimiento(m)}}</strong><small>{{m.cuenta_origen || m.cuenta_destino}} · {{m.categoria}} · {{m.fecha | date:'dd MMM yyyy'}}</small></div><strong class="num" [class.positive]="m.tipo==='INGRESO'">{{m.tipo==='GASTO'?'−':m.tipo==='INGRESO'?'+':''}}{{money(m.monto,m.moneda)}}@if(m.monto_destino && m.moneda_destino && m.moneda_destino!==m.moneda){<small class="conversion">→ {{money(m.monto_destino,m.moneda_destino)}} · tasa {{m.tasa}}</small>}</strong></article>
+          <article class="diary-row"><span class="movement-icon" [class.income]="m.tipo==='INGRESO'" aria-hidden="true">{{m.tipo==='INGRESO'?'↓':m.tipo==='TRANSFERENCIA'?'↔':'↑'}}</span><div class="row-text"><strong class="clamp">{{m.descripcion || m.categoria || tipoMovimiento(m)}}</strong><small>{{m.cuenta_origen || m.cuenta_destino}} · {{m.categoria}} · {{m.fecha | date:'dd MMM yyyy'}}</small></div><strong class="num amount" [class.positive]="m.tipo==='INGRESO'">{{m.tipo==='GASTO'?'−':m.tipo==='INGRESO'?'+':''}}{{money(m.monto,m.moneda)}}@if(m.monto_destino && m.moneda_destino && m.moneda_destino!==m.moneda){<small class="conversion">→ {{money(m.monto_destino,m.moneda_destino)}} · tasa {{m.tasa}}</small>}</strong></article>
         } @empty {<p class="empty">No hay movimientos con estos filtros.</p>}
       </div>
     </section>
@@ -190,15 +184,11 @@
     <div class="section-title">
       <h2>Diario reciente</h2>
     </div>
-    <div class="recent-list">
+    <div class="diary recent-list">
       @for (movimiento of ultimosMovimientos(); track movimiento.id) {
-        <article>
-          <span class="chip">{{ movimiento.descripcion || movimiento.categoria || tipoMovimiento(movimiento) }}</span>
-          <strong class="num">{{ money(movimiento.monto, movimiento.moneda) }}</strong>
-          <small>{{ movimiento.fecha ? (movimiento.fecha | date: 'dd/MM/yyyy, hh:mm a') : '-' }}</small>
-        </article>
+        <article class="diary-row"><span class="movement-icon" [class.income]="movimiento.tipo==='INGRESO'" aria-hidden="true">{{movimiento.tipo==='INGRESO'?'↓':movimiento.tipo==='TRANSFERENCIA'?'↔':'↑'}}</span><div class="row-text"><strong class="clamp">{{ movimiento.descripcion || movimiento.categoria || tipoMovimiento(movimiento) }}</strong><small>{{ movimiento.fecha ? (movimiento.fecha | date: 'dd MMM yyyy, HH:mm') : '-' }}</small></div><strong class="num amount" [class.positive]="movimiento.tipo==='INGRESO'">{{movimiento.tipo==='GASTO'?'−':movimiento.tipo==='INGRESO'?'+':''}}{{ money(movimiento.monto, movimiento.moneda) }}</strong></article>
       } @empty {
-        <p class="empty">Tus ultimos movimientos apareceran aqui.</p>
+        <p class="empty">Tus últimos movimientos aparecerán aquí.</p>
       }
     </div>
   </section>

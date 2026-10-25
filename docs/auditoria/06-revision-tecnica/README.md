@@ -14,6 +14,7 @@ Se planificaron seis rondas, una por artefacto de riesgo, siguiendo Semana 4 (Cl
 | R4 | Interfaz (navegación, responsive, nombres largos) | 2026-10-25 06:15–06:30 | §2.4 | Playwright, capturas | Asistente | D-02 | Cerrado en `0baef03` |
 | R5 | Seguridad y accesibilidad | 2026-10-25 06:30–06:45 | §2.5 | Sondeo OWASP, npm audit, axe-core 4.10.3, script de teclado | Asistente | D-01, D-04, D-05, D-06 | Cerrados en `015fed5` y `19b56de` |
 | R6 | Pruebas, rendimiento y liberación (carga, configuración de Vercel) | 2026-10-25 14:45–14:55 | §2.6 | carga.cjs, vitals.cjs, variables de Vercel sin descifrar | Asistente | D-07, D-08, D-09; riesgo del límite por IP (EV-REN-03) | D-07 cerrado; D-08 y D-09 pendientes de verificar en producción |
+| R7 | Interfaz publicada, pantalla por pantalla (pulido visual pedido por el usuario) | 2026-10-25 15:10–15:30 | §2.4 | Playwright: 23 capturas antes y 24 después, desborde.cjs, axe-core, keyboard.cjs | Asistente | D-11, D-12, D-13, D-14 | Corregidos en la rama; pendientes de publicar |
 
 Las horas son aproximadas y salen de los commits y de las marcas de tiempo de las evidencias.
 

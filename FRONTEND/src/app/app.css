@@ -48,8 +48,12 @@
   .menu-toggle{display:grid}
 }
 @media (max-width:600px){
-  .bar{padding:0 16px;gap:12px}
-  .brand-name{max-width:120px;font-size:.9375rem}
+  /* La marca cede espacio: la barra nunca empuja el botón de menú fuera de la pantalla. */
+  .bar{padding:0 16px;gap:8px}
+  .brand{flex:1 1 auto;min-width:0}
+  .brand-name{max-width:none;min-width:0;font-size:.9375rem}
+  .bar-actions{gap:4px}
+  .currency-select select{padding:6px 26px 6px 12px}
   .site-footer{padding:20px 16px;flex-direction:column}
 }
 @media (prefers-reduced-motion:reduce){.burger span{transition:none}}

@@ -18,6 +18,12 @@ describe('Moneda de la cuenta',()=>{
   expect(formatCurrency(1250,'MXN')).toContain('1,250.00');
   expect(formatCurrency(1250,'USD')).toContain('USD');
  });
+ it('pone siempre el código delante, también en euros y en negativos',()=>{
+  expect(formatCurrency(850,'EUR')).toBe('EUR\u00a0850,00');
+  expect(formatCurrency(1044.44,'USD')).toBe('USD\u00a01.044,44');
+  expect(formatCurrency(-12.5,'EUR')).toBe('-EUR\u00a012,50');
+  expect(formatCurrency('abc','USD')).toBe('USD\u00a00,00');
+ });
  it('guarda en servidor y actualiza el usuario solamente al confirmar',()=>{
   service.save('MXN');expect(usuario().moneda).toBe('COP');
   const req=http.expectOne('/api/finanzas/preferencias');expect(req.request.method).toBe('PATCH');expect(req.request.body).toEqual({moneda:'MXN'});

@@ -1,0 +1,4 @@
+/panel {"w":390,"sw":390,"out":[]}
+/carteras {"w":390,"sw":390,"out":[]}
+/usuario {"w":390,"sw":390,"out":[]}
+/perfil {"w":390,"sw":390,"out":[]}

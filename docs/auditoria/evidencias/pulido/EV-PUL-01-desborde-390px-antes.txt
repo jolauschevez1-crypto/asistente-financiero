@@ -1,0 +1,5 @@
+# Salida de desborde.cjs antes de corregir D-12 (2026-10-25 15:22Z, build local con los cambios de estilo de la rama, sin la corrección de app.css)
+/panel {"w":390,"sw":390,"out":["DIV.bar-actions 399","BUTTON.menu-toggle 399"]}
+/carteras {"w":390,"sw":390,"out":["DIV.bar-actions 399","BUTTON.menu-toggle 399"]}
+/usuario {"w":390,"sw":390,"out":["DIV.bar-actions 399","BUTTON.menu-toggle 399"]}
+/perfil {"w":390,"sw":390,"out":["DIV.bar-actions 399","BUTTON.menu-toggle 399","BUTTON.tab-btn 467","svg 394","path 393","path 393"]}
