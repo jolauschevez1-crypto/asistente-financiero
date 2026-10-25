@@ -1,0 +1,122 @@
+[
+ {
+  "id": "A07-1",
+  "desc": "Registro con contraseña fuerte",
+  "resultado": "PASA",
+  "detalle": "HTTP 201"
+ },
+ {
+  "id": "A07-2",
+  "desc": "Rechaza contraseña débil",
+  "resultado": "PASA",
+  "detalle": "HTTP 400"
+ },
+ {
+  "id": "A07-3",
+  "desc": "Rechaza contraseña que contiene el nombre",
+  "resultado": "PASA",
+  "detalle": "HTTP 400"
+ },
+ {
+  "id": "A01-1",
+  "desc": "B no puede cotizar la conversión de una cartera de A",
+  "resultado": "PASA",
+  "detalle": "HTTP 404"
+ },
+ {
+  "id": "A01-2",
+  "desc": "B no puede convertir una cartera de A",
+  "resultado": "PASA",
+  "detalle": "HTTP 404"
+ },
+ {
+  "id": "A01-3",
+  "desc": "B no ve el historial de conversiones de A",
+  "resultado": "PASA",
+  "detalle": "HTTP 404"
+ },
+ {
+  "id": "A01-4",
+  "desc": "B no puede transferir desde una cartera de A",
+  "resultado": "PASA",
+  "detalle": "HTTP 404"
+ },
+ {
+  "id": "A01-5",
+  "desc": "Usuario sin rol admin no lista usuarios",
+  "resultado": "PASA",
+  "detalle": "HTTP 403"
+ },
+ {
+  "id": "A01-6",
+  "desc": "Sin token no hay acceso al panel",
+  "resultado": "PASA",
+  "detalle": "HTTP 401"
+ },
+ {
+  "id": "A08-1",
+  "desc": "Cron de tasas exige CRON_SECRET",
+  "resultado": "PASA",
+  "detalle": "HTTP 401"
+ },
+ {
+  "id": "A07-4",
+  "desc": "Rechaza JWT con alg none",
+  "resultado": "PASA",
+  "detalle": "HTTP 401"
+ },
+ {
+  "id": "A06-1",
+  "desc": "Transferencia entre monedas exige confirmar la tasa",
+  "resultado": "PASA",
+  "detalle": "HTTP 400 CONFIRMACION_REQUERIDA"
+ },
+ {
+  "id": "A06-2",
+  "desc": "Tasa distinta a la vigente se rechaza",
+  "resultado": "PASA",
+  "detalle": "HTTP 409 TASA_CAMBIADA"
+ },
+ {
+  "id": "A05-1",
+  "desc": "Nombre con SQL se rechaza por validación (y las consultas son parametrizadas)",
+  "resultado": "PASA",
+  "detalle": "HTTP 400"
+ },
+ {
+  "id": "A05-2",
+  "desc": "Nombre con marcado se rechaza",
+  "resultado": "PASA",
+  "detalle": "HTTP 400"
+ },
+ {
+  "id": "A10-1",
+  "desc": "Moneda inválida da 400 sin detalles internos",
+  "resultado": "PASA",
+  "detalle": "HTTP 400"
+ },
+ {
+  "id": "A10-2",
+  "desc": "Cuerpo no objeto da 400",
+  "resultado": "PASA",
+  "detalle": "HTTP 400"
+ },
+ {
+  "id": "A02-1",
+  "desc": "Cabeceras de seguridad (CSP, nosniff, frame)",
+  "resultado": "PASA",
+  "detalle": "csp=true nosniff=nosniff xfo=SAMEORIGIN"
+ },
+ {
+  "id": "A02-2",
+  "desc": "Sin cabecera X-Powered-By",
+  "resultado": "PASA",
+  "detalle": "x-powered-by=null"
+ },
+ {
+  "id": "A02-3",
+  "desc": "CORS rechaza origen no permitido",
+  "resultado": "PASA",
+  "detalle": "HTTP 403 acao=null"
+ }
+]
