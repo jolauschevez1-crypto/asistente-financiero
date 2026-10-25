@@ -3,7 +3,7 @@
 @if (showLayout) {
   <header class="site-header">
     <div class="bar">
-      <a class="brand" [routerLink]="auth.isAdmin() ? '/admin' : '/panel'" aria-label="Ir al inicio"><span class="brand-mark" aria-hidden="true">AF</span><span class="brand-name">{{brand()}}</span></a>
+      <a class="brand" [routerLink]="auth.isAdmin() ? '/admin' : '/panel'" aria-label="Ir al inicio"><img class="brand-mark" src="favicon.svg" alt="" width="36" height="36"><span class="brand-name">{{brand()}}</span></a>
       <nav class="nav-desktop" aria-label="Navegación principal">
         @for(link of visibleLinks;track link.route){<a [routerLink]="link.route" routerLinkActive="active" ariaCurrentWhenActive="page">{{link.label}}</a>}
       </nav>
