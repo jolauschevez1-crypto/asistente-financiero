@@ -90,11 +90,13 @@ class ReportesController {
       const usuarioId = req.usuario.id;
 
       const balanceTotal = await movimientosModel.obtenerBalanceTotal(usuarioId);
+      const balances = await movimientosModel.obtenerBalancesPorMoneda(usuarioId);
       const cuentas = await movimientosModel.listarCuentas(usuarioId);
 
       return res.status(200).json({
         success: true,
         balance_total: balanceTotal,
+        balances_por_moneda: balances,
         cuentas: cuentas
       });
     } catch (error) {

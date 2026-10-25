@@ -2,29 +2,38 @@
 @if (!network.enLinea()) {<div class="offline-banner" role="status">Sin conexión a Internet. Si usas la instalación local, mantén el servidor encendido; en la versión web, vuelve a conectarte.</div>}
 @if (showLayout) {
   <header class="site-header">
-    <div class="topbar">
-      <a class="brand" [routerLink]="auth.isAdmin() ? '/admin' : '/panel'" aria-label="Ir al inicio"><span class="brand-symbol" aria-hidden="true">AF</span><span>{{brand()}}<small>Tu dinero, con claridad</small></span></a>
-      <div class="header-actions">
-        <a routerLink="/perfil" class="tool-button global-currency" [attr.aria-label]="'Moneda de tu cuenta: '+currency.codigo()+'. Ver preferencias'">{{currency.codigo()}} <span aria-hidden="true">⌄</span></a>
-        <button type="button" class="tool-button" (click)="toggleTheme()" [attr.aria-label]="tema()==='claro'?'Activar tema oscuro':'Activar tema claro'">{{tema()==='claro'?'☾':'☀'}}<span class="desktop-label">Tema</span></button>
-        <button type="button" class="tool-button" (click)="toggleAccessibility()" [attr.aria-expanded]="accessibilityOpen()" aria-controls="accessibility-panel" aria-label="Opciones de accesibilidad">Aa<span class="desktop-label">Accesibilidad</span></button>
-        <a routerLink="/perfil" class="profile-link" [attr.aria-label]="'Ver perfil de '+displayName"><span class="avatar">{{displayName.slice(0,1).toUpperCase()}}</span><span class="desktop-label">{{displayName}}</span></a>
-        <button type="button" class="tool-button" (click)="logout()">Salir</button>
-        <button id="menu-toggle" type="button" class="menu-toggle" (click)="toggleMobile()" [attr.aria-expanded]="mobileOpen()" aria-controls="main-navigation" [attr.aria-label]="mobileOpen()?'Cerrar navegación':'Abrir navegación'">{{mobileOpen()?'✕':'☰'}}</button>
+    <div class="bar">
+      <a class="brand" [routerLink]="auth.isAdmin() ? '/admin' : '/panel'" aria-label="Ir al inicio"><span class="brand-mark" aria-hidden="true">AF</span><span class="brand-name">{{brand()}}</span></a>
+      <nav class="nav-desktop" aria-label="Navegación principal">
+        @for(link of visibleLinks;track link.route){<a [routerLink]="link.route" routerLinkActive="active" ariaCurrentWhenActive="page">{{link.label}}</a>}
+      </nav>
+      <div class="bar-actions">
+        @if(!auth.isAdmin()){<label class="currency-select"><span class="sr-only">Moneda de presentación</span><select [value]="currency.presentacion()" (change)="setCurrency($any($event.target).value)" [disabled]="currency.guardando()" title="Moneda de presentación del panel">@for(c of currency.presentables();track c.codigo){<option [value]="c.codigo">{{c.codigo}}</option>}</select></label>}
+        <div class="user-menu">
+          <button id="user-menu-button" type="button" class="avatar-button" (click)="toggleUserMenu()" [attr.aria-expanded]="userMenuOpen()" aria-controls="user-menu" [attr.aria-label]="'Menú de '+displayName"><span class="avatar" aria-hidden="true">{{displayName.slice(0,1).toUpperCase()}}</span></button>
+          @if(userMenuOpen()){
+            <div id="user-menu" class="menu-panel" role="group" aria-label="Opciones de cuenta">
+              <p class="menu-name" [title]="displayName">{{displayName}}</p>
+              <a routerLink="/perfil">Perfil y preferencias</a>
+              <button type="button" (click)="toggleTheme()" [attr.aria-pressed]="tema()==='oscuro'">Tema oscuro: {{tema()==='oscuro'?'activado':'desactivado'}}</button>
+              <button type="button" (click)="toggleText()" [attr.aria-pressed]="largeText()">Texto grande: {{largeText()?'activado':'desactivado'}}</button>
+              <button type="button" (click)="toggleContrast()" [attr.aria-pressed]="contrast()">Alto contraste: {{contrast()?'activado':'desactivado'}}</button>
+              <button type="button" class="logout" (click)="logout()">Cerrar sesión</button>
+            </div>
+          }
+        </div>
+        <button id="menu-toggle" type="button" class="menu-toggle" (click)="toggleMobile()" [attr.aria-expanded]="mobileOpen()" aria-controls="mobile-navigation"><span class="burger" [class.open]="mobileOpen()" aria-hidden="true"><span></span><span></span><span></span></span><span class="sr-only">{{mobileOpen()?'Cerrar menú':'Abrir menú'}}</span></button>
       </div>
     </div>
-    @if(accessibilityOpen()) {<div id="accessibility-panel" class="accessibility-panel" aria-label="Preferencias de accesibilidad"><button type="button" (click)="toggleText()" [attr.aria-pressed]="largeText()">Texto grande: {{largeText()?'activado':'desactivado'}}</button><button type="button" (click)="toggleContrast()" [attr.aria-pressed]="contrast()">Alto contraste: {{contrast()?'activado':'desactivado'}}</button></div>}
-    <nav id="main-navigation" class="navbar" [class.mobile-open]="mobileOpen()" aria-label="Navegación principal">
-      @if(auth.isAdmin()) {
-        <a routerLink="/admin" routerLinkActive="active" ariaCurrentWhenActive="page">Administración</a>
-        <a routerLink="/estadisticas" routerLinkActive="active" ariaCurrentWhenActive="page">Estadísticas</a>
-        <a routerLink="/configuracion" routerLinkActive="active" ariaCurrentWhenActive="page">Configuración</a>
-      }
-      @for(link of links;track link.route){
-        @if(link.route!='/usuario'||!auth.isAdmin()){<a [routerLink]="link.route" routerLinkActive="active" ariaCurrentWhenActive="page">{{link.label}}</a>}
-      }
-    </nav>
+    @if(mobileOpen()){
+      <nav id="mobile-navigation" class="nav-mobile" aria-label="Navegación principal">
+        @for(link of visibleLinks;track link.route){<a [routerLink]="link.route" routerLinkActive="active" ariaCurrentWhenActive="page">{{link.label}}</a>}
+        <a routerLink="/perfil" routerLinkActive="active" ariaCurrentWhenActive="page">Perfil y preferencias</a>
+        <button type="button" class="mobile-logout" (click)="logout()">Cerrar sesión</button>
+      </nav>
+    }
   </header>
-  <main id="main-content" tabindex="-1" class="main-content"><router-outlet /></main>
-  <footer class="site-footer"><span>Asistente Financiero</span><span>Organiza · Decide · Avanza</span></footer>
-} @else {<main id="main-content" tabindex="-1"><router-outlet /></main>}
+}
+<!-- Un único router-outlet: si estuviera dentro de cada rama, al pasar del login al panel la página se crearía dos veces y se cancelarían sus primeras peticiones. -->
+<main id="main-content" tabindex="-1" [class.main-content]="showLayout"><router-outlet /></main>
+@if (showLayout) {<footer class="site-footer"><span>{{brand()}}</span><span>Tasas de referencia del BCE vía Frankfurter. No son tasas en tiempo real.</span></footer>}

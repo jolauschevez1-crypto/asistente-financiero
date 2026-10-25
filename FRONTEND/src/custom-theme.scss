@@ -18,8 +18,8 @@ html {
   @include mat.theme((
     color: (
       theme-type: light,
-      primary: mat.$cyan-palette,
-      tertiary: mat.$green-palette,
+      primary: mat.$green-palette,
+      tertiary: mat.$chartreuse-palette,
     ),
     typography: Inter,
     density: 0,
@@ -83,7 +83,7 @@ html {
   // Colores de marca (independiente de tema).
   --app-brand-gradient-start: #2563eb;
   --app-brand-gradient-end: #0f766e;
-  --app-brand-accent: #38bdf8;
+  --app-brand-accent: var(--af-accent);
 
   // Elevaciones de sombra (construidas sobre --app-shadow-color, que si varia por tema).
   --shadow-elevation-1: 0 2px 6px var(--app-shadow-color);
@@ -112,8 +112,8 @@ $config-temas: (
     @include mat.theme((
       color: (
         theme-type: $tema-tipo,
-        primary: mat.$cyan-palette,
-        tertiary: mat.$green-palette,
+        primary: mat.$green-palette,
+        tertiary: mat.$chartreuse-palette,
       ),
       typography: Inter,
       density: 0,

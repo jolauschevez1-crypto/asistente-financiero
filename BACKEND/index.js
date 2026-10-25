@@ -6,7 +6,9 @@ async function main(){
  if(!process.env.JWT_SECRET||!process.env.REFRESH_JWT_SECRET)throw new Error('Configura secretos JWT locales antes de iniciar.');
  await initialize();
  const app=require('./src/app');
- if(process.env.TELEGRAM_ENABLED==='true')require('./src/telegram/bot');
+ // El bot de Telegram queda fuera de esta versión (decisión del propietario): su dependencia se retiró del
+// proyecto y TELEGRAM_ENABLED se ignora. El código se conserva en src/telegram para una versión futura.
+if(process.env.TELEGRAM_ENABLED==='true')console.warn('[telegram] Desactivado en esta versión: se ignora TELEGRAM_ENABLED.');
  const host=process.env.HOST||'127.0.0.1',port=Number(process.env.PORT||3001);
  const server=app.listen(port,host,()=>{console.log(`Asistente Financiero local: http://${host}:${port}`);if(process.argv.includes('--open')&&process.platform==='win32'&&host==='127.0.0.1'&&port===3001){require('node:child_process').spawn('powershell.exe',['-NoProfile','-Command',"Start-Process 'http://127.0.0.1:3001'"],{windowsHide:true,stdio:'ignore'}).unref();}});
  server.on('error',error=>{console.error(error.message);db.pool.end().finally(()=>process.exit(1));});

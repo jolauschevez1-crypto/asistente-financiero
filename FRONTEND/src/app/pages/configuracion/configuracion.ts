@@ -177,7 +177,7 @@ export class Configuracion implements OnInit {
   cambiarPassword(): void {
     const nueva = this.nuevaPassword();
     if (passwordLength({ value: nueva } as any)) {
-      this.error.set('La nueva contrasena debe tener al menos 10 caracteres y como máximo 72 bytes.');
+      this.error.set('La nueva contraseña debe tener 10 caracteres o más (máximo 72 bytes), con mayúscula, minúscula, número y carácter especial, sin espacios.');
       return;
     }
     if (nueva !== this.confirmarPassword()) {

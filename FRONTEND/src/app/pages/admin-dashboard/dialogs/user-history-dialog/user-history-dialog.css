@@ -12,7 +12,7 @@
 }
 
 .history-item mat-icon {
-    color: var(--app-accent-on-surface, #38bdf8);
+    color: var(--app-accent-on-surface, var(--af-accent));
 }
 
 .history-item div {

@@ -69,8 +69,8 @@ h2 {
 }
 
 .navbar button.active {
-    border-color: var(--app-brand-accent, #38bdf8);
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.24), rgba(56, 189, 248, 0.24));
+    border-color: var(--app-brand-accent, var(--af-accent));
+    background: var(--af-accent-soft);
     color: var(--app-accent-on-surface, #0284c7);
 }
 
@@ -91,7 +91,7 @@ h2 {
 .recent-list article {
     border: 1px solid var(--app-border-color, rgba(15, 23, 42, 0.12));
     border-radius: var(--radius-sm, 8px);
-    background: linear-gradient(135deg, var(--app-bg-card-start, #fff) 0%, var(--app-bg-card-end, #fff) 100%);
+    background: var(--app-bg-card);
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -181,7 +181,7 @@ tbody tr {
 }
 
 tbody tr:hover {
-    background-color: var(--app-overlay-soft, rgba(56, 189, 248, 0.05));
+    background-color: var(--app-overlay-soft, var(--af-accent-soft));
 }
 
 th {
@@ -237,8 +237,8 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-    outline: 3px solid rgba(56, 189, 248, 0.18);
-    border-color: var(--app-brand-accent, #38bdf8);
+    outline: 3px solid var(--af-accent-soft);
+    border-color: var(--app-brand-accent, var(--af-accent));
 }
 
 .field-error {
@@ -260,7 +260,7 @@ button {
     padding: 0 14px;
     border: 0;
     border-radius: var(--radius-sm, 6px);
-    background: linear-gradient(135deg, var(--app-brand-gradient-start, #2563eb), var(--app-brand-accent, #38bdf8));
+    background: #163300;
     color: white;
     font-weight: 800;
     cursor: pointer;
@@ -292,7 +292,7 @@ button:disabled {
     min-height: 22px;
     padding: 3px 7px;
     border-radius: var(--radius-sm, 6px);
-    background: rgba(56, 189, 248, 0.16);
+    background: var(--af-accent-soft);
     color: var(--app-accent-on-surface, #0284c7);
     font-size: 11px;
     font-weight: 800;
@@ -438,3 +438,29 @@ button:disabled {
 .user-shell{max-width:1280px;padding:42px 32px}.topbar h1{font-size:clamp(2.1rem,4vw,3.2rem);font-weight:650;letter-spacing:-.055em}.topbar p{font-weight:450;margin-bottom:10px}.currency-label{font-size:.8rem;color:var(--af-muted)}.navbar{padding:14px 0;gap:10px;background:transparent;border:0;margin-bottom:24px}.navbar button{flex:0 1 auto;padding:12px 22px;min-height:46px;background:var(--af-accent-soft);color:var(--af-accent);font-weight:600}.navbar button:last-child{background:#1879e9;color:white}.metrics{gap:1px;background:var(--af-border);border:1px solid var(--af-border);border-radius:22px;overflow:hidden;margin-bottom:30px}.metrics article{border:0;border-radius:0;background:var(--app-bg-card);box-shadow:none;padding:22px 24px}.metrics strong{font-size:1.8rem;font-weight:650}.panel-section{border:0;background:transparent;box-shadow:none;padding:0;margin:28px 0}.section-title{margin-bottom:24px}.section-title h2{font-size:1.3rem;font-weight:650}.accounts-grid{gap:20px}.account-card{min-height:205px;padding:25px;background:linear-gradient(125deg,#208af4,#1651bb);box-shadow:0 16px 36px #1468c518;border-radius:24px}.account-card:nth-child(3n+2){background:linear-gradient(125deg,#6558d9,#433692)}.account-card:nth-child(3n+3){background:linear-gradient(125deg,#127f8b,#0f566d)}.account-card span{color:#fff;font-size:1.05rem;font-weight:600;overflow-wrap:anywhere}.account-card strong{font-size:2.1rem;color:#fff;overflow-wrap:anywhere}.account-card .badge-low-balance{font-size:.6rem;background:#ffffff20;border-color:#ffffff55;color:#fff}.account-card.low-balance-card{border-left:0}.account-card>div{gap:12px;align-items:flex-start!important}.diary{background:var(--app-bg-card);border-radius:24px}.diary-row{padding:24px;gap:18px}.diary-row strong{font-weight:600}.diary-row>strong{font-size:1.05rem;white-space:nowrap}.diary-row small{color:var(--af-muted);opacity:1}.movement-dialog{padding:32px;background:var(--app-bg-card);border:1px solid var(--af-border);border-radius:28px}.movement-dialog h2{font-size:1.7rem;font-weight:650;margin-bottom:20px}.movement-dialog form{display:flex;flex-direction:column;gap:20px}.movement-dialog input,.movement-dialog select{min-height:54px;border-radius:14px;background:var(--af-input);color:var(--app-text-primary);border:1px solid var(--af-border);font-size:1rem}.movement-dialog label{font-size:.9rem;font-weight:500;color:var(--af-muted)}.movement-dialog button[type=submit]{background:#1879e9;color:#fff}.movement-dialog .movement-actions{margin-top:10px}.movement-dialog .dialog-heading h2{margin:0}.movement-dialog .dialog-heading{margin-bottom:22px}.recent-list{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--af-border);border-radius:22px;overflow:hidden}.recent-list article{border-radius:0;background:var(--app-bg-card);box-shadow:none;border:0;border-bottom:1px solid var(--af-border);padding:20px}.recent-list .chip{background:none;color:var(--app-text-primary);font-weight:600}.ghost-btn{border-radius:24px}.preset-btn{background:var(--af-soft);color:var(--af-muted);border-radius:24px}.search-field input{background:var(--af-input);color:var(--app-text-primary);border:1px solid var(--af-border);border-radius:14px;min-height:48px;margin-top:9px}.form-panel small{line-height:1.5}@media(max-width:700px){.user-shell{padding:26px 16px}.topbar{flex-wrap:wrap}.accounts-grid{grid-template-columns:1fr}.metrics article{padding:18px 12px}.metrics strong{font-size:1.15rem}.diary-row{flex-wrap:wrap;padding:18px}.diary-row>strong{margin-left:auto}.movement-dialog{padding:24px}.navbar button{flex:1}.account-card{min-height:190px}}
 
 .metrics{display:flex;flex-wrap:wrap}.metrics article{flex:1 1 170px;min-width:0}.metrics strong{overflow-wrap:anywhere}
+
+/* Multidivisa */
+.num{font-variant-numeric:tabular-nums}
+.clamp{display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;min-width:0}
+.balance-card small{font-size:.75rem;opacity:.85}
+.conversion{display:block;font-size:.75rem;font-weight:500;color:var(--af-muted)}
+.quote{padding:14px 16px;border-radius:12px;border:1px solid var(--af-accent);background:var(--af-accent-soft);font-size:.875rem}
+.quote p{margin:0 0 6px}
+
+/* Sistema visual v3: tarjetas planas, color solo en datos, lima como relleno detrás de texto bosque */
+.account-card,.account-card:nth-child(3n+2),.account-card:nth-child(3n+3){background:var(--app-bg-card);color:var(--app-text-primary);border:1px solid var(--af-border);box-shadow:none;border-radius:16px;min-height:0;padding:20px}
+.account-card span,.account-card strong{color:var(--app-text-primary)}
+.account-card strong{font-size:1.75rem;font-weight:700;letter-spacing:-.025em}
+.account-card .badge-low-balance{background:var(--af-warn-soft);border-color:transparent;color:var(--af-warn)}
+.navbar button{background:transparent;color:var(--app-text-primary);border:1px solid var(--af-border-strong);border-radius:999px;min-height:44px}
+.navbar button.active{background:var(--af-soft)}
+.navbar button:last-child,.movement-dialog button[type=submit],.form-panel button[type=submit]{background:var(--af-primary-bg);color:var(--af-primary-text);border-color:transparent}
+.type-segments button[aria-pressed=true]{background:var(--af-primary-bg);color:var(--af-primary-text);box-shadow:none}
+.movement-icon{background:var(--af-soft);color:var(--app-text-primary)}
+.movement-icon.income{background:var(--af-accent-soft);color:var(--af-accent)}
+.positive{color:var(--af-accent)}
+.preset-btn.active{background:var(--af-primary-bg);color:var(--af-primary-text);border-color:transparent}
+.movement-overlay{background:#0e0f0c99;backdrop-filter:none}
+.movement-dialog{box-shadow:none;border-radius:20px}
+.metrics{border-radius:16px}
+.balance-card strong+strong{font-size:1.25rem}

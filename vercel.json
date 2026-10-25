@@ -10,6 +10,12 @@
       "excludeFiles": "{FRONTEND/**,BACKEND/data/**,BACKEND/node_modules/@electric-sql/**,BACKEND/node_modules/@ffmpeg-installer/**}"
     }
   },
+  "crons": [
+    {
+      "path": "/api/tasas/actualizar",
+      "schedule": "30 16 * * *"
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",

@@ -6,6 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Usuario } from '../../../../core/models';
+import { passwordStrength } from '../../../../core/input-validation';
 
 export interface ResetPasswordDialogData {
   usuario: Usuario;
@@ -31,7 +32,7 @@ export class ResetPasswordDialog {
 
   readonly form = this.fb.nonNullable.group(
     {
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, passwordStrength]],
       confirmar: ['', [Validators.required]],
     },
     { validators: passwordsCoincidenValidator },

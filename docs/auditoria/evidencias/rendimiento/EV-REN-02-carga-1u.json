@@ -1,0 +1,84 @@
+{
+ "fecha": "2026-10-25T14:46:44.425Z",
+ "base": "http://127.0.0.1:3102",
+ "usuarios": 1,
+ "iteraciones": 40,
+ "duracion_s": 1.2,
+ "peticiones": 135,
+ "rps": 113,
+ "latencia_global": {
+  "p50": 7,
+  "p95": 23.3,
+  "max": 167.1
+ },
+ "por_ruta": {
+  "POST /auth/registro": {
+   "n": 1,
+   "p50": 167.1,
+   "p95": 167.1,
+   "max": 167.1
+  },
+  "POST /auth/login": {
+   "n": 1,
+   "p50": 100,
+   "p95": 100,
+   "max": 100
+  },
+  "POST /finanzas/carteras": {
+   "n": 3,
+   "p50": 6.8,
+   "p95": 12.6,
+   "max": 12.6
+  },
+  "GET /finanzas/panel": {
+   "n": 40,
+   "p50": 7.1,
+   "p95": 12.5,
+   "max": 45.7
+  },
+  "GET /finanzas/carteras": {
+   "n": 41,
+   "p50": 2.7,
+   "p95": 3.5,
+   "max": 7.2
+  },
+  "POST /finanzas/transferencias": {
+   "n": 49,
+   "p50": 8.7,
+   "p95": 28.9,
+   "max": 33
+  }
+ },
+ "errores_red": 0,
+ "fallos": [],
+ "usuarios_detalle": [
+  {
+   "vu": 0,
+   "estado": {
+    "Efectivo": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta A": {
+     "servidor": 50300,
+     "esperado": 50300
+    },
+    "Cuenta B": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta C": {
+     "servidor": 0,
+     "esperado": 0
+    }
+   },
+   "saldos_cuadran": true,
+   "sin_negativos": true,
+   "rafaga": {
+    "aceptadas": 3,
+    "rechazadas_409": 2,
+    "otras": 0
+   }
+  }
+ ]
+}

@@ -1,0 +1,58 @@
+[
+ {
+  "vista": "desktop",
+  "tipo": "tiempo-login-ms",
+  "valor": 733
+ },
+ {
+  "vista": "desktop",
+  "tipo": "tiempo-panel-ms",
+  "valor": 174
+ },
+ {
+  "vista": "desktop",
+  "tipo": "requestfailed",
+  "url": "http://127.0.0.1:3102/api/finanzas/panel?mes=2026-10&moneda=USD",
+  "error": "net::ERR_ABORTED"
+ },
+ {
+  "vista": "desktop",
+  "tipo": "requestfailed",
+  "url": "http://127.0.0.1:3102/api/finanzas/carteras",
+  "error": "net::ERR_ABORTED"
+ },
+ {
+  "vista": "desktop",
+  "tipo": "requestfailed",
+  "url": "http://127.0.0.1:3102/api/finanzas/categorias",
+  "error": "net::ERR_ABORTED"
+ },
+ {
+  "vista": "movil",
+  "tipo": "tiempo-login-ms",
+  "valor": 720
+ },
+ {
+  "vista": "movil",
+  "tipo": "tiempo-panel-ms",
+  "valor": 177
+ },
+ {
+  "vista": "movil",
+  "tipo": "requestfailed",
+  "url": "http://127.0.0.1:3102/api/finanzas/panel?mes=2026-10&moneda=USD",
+  "error": "net::ERR_ABORTED"
+ },
+ {
+  "vista": "movil",
+  "tipo": "requestfailed",
+  "url": "http://127.0.0.1:3102/api/finanzas/carteras",
+  "error": "net::ERR_ABORTED"
+ },
+ {
+  "vista": "movil",
+  "tipo": "requestfailed",
+  "url": "http://127.0.0.1:3102/api/finanzas/categorias",
+  "error": "net::ERR_ABORTED"
+ }
+]

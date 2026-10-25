@@ -1,8 +1,13 @@
 'use strict';
 function fail(message, status=400, code='VALIDACION') { const e=new Error(message); e.status=status; e.code=code; e.expose=true; throw e; }
-function text(value, label='Nombre', max=100) {
+// Nombres (carteras, metas, grupos, contrapartes): letras, números, espacios y puntuación
+// básica; sin emojis ni símbolos de marcado. `free` es para descripciones de texto libre.
+const NAME_RE=/^[\p{L}\p{M}\p{N}][\p{L}\p{M}\p{N} .,:;'’()#&\/+-]*$/u;
+function text(value, label='Nombre', max=100, free=false) {
  if(typeof value!=='string') fail(`${label} es obligatorio.`);
- const v=value.trim(); if(!v || v.length>max || /[\x00-\x1f\x7f]/.test(v)) fail(`${label}: entre 1 y ${max} caracteres válidos.`); return v;
+ const v=value.trim(); if(!v || v.length>max || /[\x00-\x1f\x7f]/.test(v)) fail(`${label}: entre 1 y ${max} caracteres válidos.`);
+ if(!free&&!NAME_RE.test(v)) fail(`${label}: usa letras, números, espacios y signos básicos (. , - ' ( ) # & /).`);
+ return v;
 }
 function id(value) { if(!/^[1-9]\d*$/.test(String(value)) || !Number.isSafeInteger(Number(value))) fail('Identificador no válido.'); return Number(value); }
 function cents(value, zero=false) {

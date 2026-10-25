@@ -1,0 +1,434 @@
+{
+ "herramienta": "axe-core 4.10.3",
+ "etiquetas": [
+  "wcag2a",
+  "wcag2aa",
+  "wcag21a",
+  "wcag21aa",
+  "wcag22aa"
+ ],
+ "base": "http://127.0.0.1:3102",
+ "fecha": "2026-10-25T06:45:32.193Z",
+ "resumen": {},
+ "resultados": [
+  {
+   "ruta": "/login",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/panel",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 10,
+     "targets": [
+      "text[y=\"33.666666666666664\"] > tspan",
+      "text[y=\"61.455\"] > tspan",
+      "text[y=\"89.24333333333333\"] > tspan",
+      "text[y=\"117.03166666666665\"] > tspan"
+     ],
+     "html": [
+      "<tspan>1200.00</tspan>",
+      "<tspan>1000.00</tspan>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/metas",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/usuario",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/ia",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 2,
+     "targets": [
+      ".quote > p:nth-child(3)",
+      ".check"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c4199991110=\"\">Los movimientos anteriores se conservan en su moneda original y dejarán de poder editarse o anularse.</p>",
+      "<label _ngcontent-ng-c4199991110=\"\" class=\"check full\"><input _ngcontent-ng-c4199991110=\"\" type=\"checkbox\" name=\"accept\" class=\"ng-untouched ng-pristine ng-vali"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-usuario",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 5,
+     "targets": [
+      ".primary",
+      ".secondary:nth-child(4)",
+      "h2[title=\"Pesos colombianos\"]",
+      "span[title=\"Peso colombiano\"] > span[aria-hidden=\"true\"]"
+     ],
+     "html": [
+      "<button _ngcontent-ng-c4199991110=\"\" type=\"button\" class=\"primary\">Crear nueva cartera</button>",
+      "<button _ngcontent-ng-c4199991110=\"\" type=\"button\" class=\"secondary\">Actualizar</button>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because it is overlapped by another element"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/login",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/panel",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 10,
+     "targets": [
+      "text[y=\"33.666666666666664\"] > tspan",
+      "text[y=\"61.455\"] > tspan",
+      "text[y=\"89.24333333333333\"] > tspan",
+      "text[y=\"117.03166666666665\"] > tspan"
+     ],
+     "html": [
+      "<tspan>1200.00</tspan>",
+      "<tspan>1000.00</tspan>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/metas",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/usuario",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 1,
+     "targets": [
+      ".tab-btn[type=\"button\"]:nth-child(3)"
+     ],
+     "html": [
+      "<button _ngcontent-ng-c2422898494=\"\" type=\"button\" class=\"tab-btn\">"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because it's partially obscured by another element"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/ia",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 1,
+     "targets": [
+      ".form-note"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c4199991110=\"\" class=\"form-note full\">Si indicas un saldo inicial, se registrará un ingreso de apertura en el historial de esta cartera.</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 4,
+     "targets": [
+      "#conversion-title",
+      ".muted.clamp",
+      ".quote > .muted",
+      ".quote > p:nth-child(3)"
+     ],
+     "html": [
+      "<h2 _ngcontent-ng-c4199991110=\"\" id=\"conversion-title\">Convertir la moneda de la cartera</h2>",
+      "<p _ngcontent-ng-c4199991110=\"\" class=\"muted clamp\" title=\"Cuenta de ahorro en euros para el viaje de fin de año con la familia\">Cuenta de ahorro en euros para "
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-movil",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  }
+ ]
+}

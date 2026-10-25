@@ -7,7 +7,7 @@ import { ApiService } from '../../core/api.service';
 import { AuthService } from '../../core/auth.service';
 import { UsuarioPerfil } from '../../core/models';
 import { SnackbarService } from '../../core/snackbar.service';
-import { nonBlank, passwordLength } from '../../core/input-validation';
+import { nonBlank, passwordLength, PERSON_NAME } from '../../core/input-validation';
 import { CurrencySettings } from '../../shared/currency-settings/currency-settings';
 
 type PerfilTab = 'datos' | 'seguridad' | 'google' | 'telegram';
@@ -143,7 +143,7 @@ export class Perfil implements OnInit {
   }
 
   readonly perfilForm = this.fb.nonNullable.group({
-    nombre: ['', [Validators.required, nonBlank, Validators.minLength(2), Validators.maxLength(100)]],
+    nombre: ['', [Validators.required, nonBlank, Validators.pattern(PERSON_NAME), Validators.minLength(2), Validators.maxLength(100)]],
   });
 
   readonly passwordForm = this.fb.nonNullable.group(

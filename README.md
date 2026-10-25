@@ -24,15 +24,18 @@ npm run build --prefix FRONTEND
 
 El proyecto incluye `vercel.json`. Conecta este repositorio al proyecto existente de Vercel y utiliza `main` como rama de producción. Los commits a `main` publicarán los cambios una vez configurada la integración Git.
 
-Configura las variables privadas directamente en Vercel: `DATABASE_URL`, `JWT_SECRET`, `REFRESH_JWT_SECRET` y, si utilizas IA, `GROQ_API_KEY`. Consulta los ejemplos sin secretos. No subas archivos `.env`, bases locales ni credenciales.
+Configura las variables privadas directamente en Vercel: `DATABASE_URL`, `JWT_SECRET`, `REFRESH_JWT_SECRET`, `CRON_SECRET` y, si utilizas IA, `GROQ_API_KEY`. Consulta los ejemplos sin secretos. No subas archivos `.env`, bases locales ni credenciales.
 
 ## Reglas del producto
 
-- Una moneda por cuenta; no se convierten importes ni se permite cambiar la moneda después de registrar actividad financiera.
+- Multidivisa: cada cartera tiene su propia moneda. El panel usa USD por defecto y el usuario elige la moneda de presentación (USD, EUR o MXN, las que tienen tasa de referencia). Cambiarla solo cambia la valoración mostrada, nunca los importes guardados.
+- Tasas de referencia del BCE vía Frankfurter, actualizadas una vez al día por un cron de Vercel (`CRON_SECRET`); no son tasas en tiempo real. Si el proveedor falla se usa la última tasa válida y se muestra su antigüedad; sin tasa, los saldos se muestran por separado y el total se rotula como parcial.
+- Los importes históricos se valoran con la tasa de su fecha. Convertir la moneda de una cartera exige vista previa y confirmación, queda registrado con tasa, fuente y fecha, y se hace en una sola transacción.
+- Contraseñas de al menos 10 caracteres con mayúscula, minúscula, número y carácter especial, sin espacios y sin contener el nombre ni el correo.
 - Los recordatorios requieren confirmación; crear un recordatorio no mueve dinero.
 - La carga rápida acepta hasta 30 gastos y guarda todo en una transacción. Los reintentos con la misma clave no duplican movimientos.
 - El asistente IA es de consulta: no realiza movimientos ni pagos.
 - Las sesiones duran 30 minutos desde el inicio; renovarlas no prolonga ese plazo.
 - Google requiere configurar el Client ID y los orígenes autorizados. Su presencia en la interfaz no acredita que la autorización externa esté completada.
 
-Las evidencias de auditoría académica se mantienen fuera del repositorio público. Los datos de prueba son ficticios.
+El expediente de auditoría está en `docs/auditoria` (sin secretos ni datos reales). Los datos de prueba son ficticios.

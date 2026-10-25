@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(material-symbols-0.ttf) format('truetype');
+  src: url(material-symbols-subset.woff2) format('woff2');
 }
 
 .material-symbols-outlined {

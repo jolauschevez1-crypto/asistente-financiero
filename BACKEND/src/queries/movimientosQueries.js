@@ -170,28 +170,43 @@ module.exports = {
      * Invoca la función para obtener el balance general.
      */
     OBTENER_BALANCE_TOTAL: `
-        SELECT fx_obtener_balance_general($1) AS balance_total;
+        SELECT moneda, COALESCE(SUM(saldo_actual), 0) AS total
+        FROM cuentas WHERE usuario_id = $1 AND deleted_at IS NULL
+        GROUP BY moneda ORDER BY moneda;
     `,
 
     /**
      * Invoca la función para obtener el resumen de hoy.
      */
     OBTENER_RESUMEN_HOY: `
-        SELECT * FROM fx_obtener_resumen_hoy($1);
+        SELECT t.nombre AS tipo, m.moneda, COALESCE(SUM(m.monto), 0) AS total
+        FROM movimientos m JOIN tipos_movimiento t ON t.id = m.tipo_movimiento_id
+        WHERE m.usuario_id = $1 AND m.deleted_at IS NULL
+          AND (m.fecha AT TIME ZONE 'America/Guayaquil')::date = (NOW() AT TIME ZONE 'America/Guayaquil')::date
+        GROUP BY t.nombre, m.moneda ORDER BY m.moneda, t.nombre;
     `,
 
     /**
      * Invoca la función para obtener el resumen del mes.
      */
     OBTENER_RESUMEN_MES: `
-        SELECT * FROM fx_obtener_resumen_mes($1);
+        SELECT t.nombre AS tipo, m.moneda, COALESCE(SUM(m.monto), 0) AS total
+        FROM movimientos m JOIN tipos_movimiento t ON t.id = m.tipo_movimiento_id
+        WHERE m.usuario_id = $1 AND m.deleted_at IS NULL
+          AND date_trunc('month', m.fecha AT TIME ZONE 'America/Guayaquil') = date_trunc('month', NOW() AT TIME ZONE 'America/Guayaquil')
+        GROUP BY t.nombre, m.moneda ORDER BY m.moneda, t.nombre;
     `,
 
     /**
      * Invoca la función para obtener gastos por categoría del mes.
      */
     OBTENER_GASTOS_CATEGORIA_MES: `
-        SELECT * FROM fx_obtener_gastos_categoria_mes($1);
+        SELECT c.nombre AS categoria, m.moneda, SUM(m.monto) AS total
+        FROM movimientos m JOIN tipos_movimiento t ON t.id = m.tipo_movimiento_id
+        LEFT JOIN categorias c ON c.id = m.categoria_id
+        WHERE m.usuario_id = $1 AND m.deleted_at IS NULL AND t.nombre = 'GASTO'
+          AND date_trunc('month', m.fecha AT TIME ZONE 'America/Guayaquil') = date_trunc('month', NOW() AT TIME ZONE 'America/Guayaquil')
+        GROUP BY c.nombre, m.moneda ORDER BY 3 DESC;
     `,
 
     /**
@@ -204,8 +219,18 @@ module.exports = {
     /**
      * Invoca la función para listar el historial de movimientos.
      */
+    // Incluye la moneda de cada movimiento y, en traspasos entre monedas, el importe y la tasa guardados.
     OBTENER_HISTORIAL: `
-        SELECT * FROM fx_listar_historial_movimientos($1);
+        SELECT m.id, m.usuario_id, t.nombre AS tipo, c.nombre AS categoria, m.monto, m.moneda,
+               m.monto_destino, m.moneda_destino, m.tasa, m.tasa_fecha,
+               co.nombre AS cuenta_origen, cd.nombre AS cuenta_destino, m.descripcion, m.metodo_pago, m.fecha, m.deleted_at
+        FROM movimientos m
+        JOIN tipos_movimiento t ON t.id = m.tipo_movimiento_id
+        LEFT JOIN categorias c ON c.id = m.categoria_id
+        LEFT JOIN cuentas co ON co.id = m.cuenta_origen_id
+        LEFT JOIN cuentas cd ON cd.id = m.cuenta_destino_id
+        WHERE m.usuario_id = $1 AND m.deleted_at IS NULL
+        ORDER BY m.fecha DESC, m.id DESC LIMIT 100;
     `,
 
     // ==========================================
@@ -240,7 +265,7 @@ module.exports = {
             cat.nombre AS categoria,
             co.nombre AS cuenta_origen,
             cd.nombre AS cuenta_destino,
-            u.moneda, u.id AS usuario_id, u.nombre AS usuario_nombre, u.correo AS usuario_correo,
+            m.moneda, m.moneda_destino, m.monto_destino, m.tasa, m.tasa_fecha, u.id AS usuario_id, u.nombre AS usuario_nombre, u.correo AS usuario_correo,
             COUNT(*) OVER() AS total_registros
         FROM movimientos m
         JOIN usuarios u ON m.usuario_id = u.id

@@ -1,0 +1,573 @@
+
+> asistente-financiero-backend@2.0.0 test
+> node --test tests/*.test.js tests/*.test.cjs
+
+TAP version 13
+# Subtest: respaldo completo conserva módulos nuevos y secuencias después de restaurar
+ok 1 - respaldo completo conserva módulos nuevos y secuencias después de restaurar
+  ---
+  duration_ms: 5842.667141
+  type: 'test'
+  ...
+# Subtest: rechaza respaldo antiguo o alterado sin eliminar datos
+ok 2 - rechaza respaldo antiguo o alterado sin eliminar datos
+  ---
+  duration_ms: 45.282689
+  type: 'test'
+  ...
+# Subtest: un error de integridad durante restauración revierte toda la operación
+ok 3 - un error de integridad durante restauración revierte toda la operación
+  ---
+  duration_ms: 189.725808
+  type: 'test'
+  ...
+# Subtest: nube exige configuración persistente y secretos independientes
+ok 4 - nube exige configuración persistente y secretos independientes
+  ---
+  duration_ms: 1.851276
+  type: 'test'
+  ...
+# Subtest: CORS de producción acepta solo dominios propios declarados
+ok 5 - CORS de producción acepta solo dominios propios declarados
+  ---
+  duration_ms: 0.481451
+  type: 'test'
+  ...
+# Subtest: dos instancias comparten límite atómico sin almacenar IP, con expiración y decremento
+ok 6 - dos instancias comparten límite atómico sin almacenar IP, con expiración y decremento
+  ---
+  duration_ms: 6160.81543
+  type: 'test'
+  ...
+# [INFO] 2026-10-25T05:36:57.910Z: Registro publico exitoso: uno@local.test.
+# [INFO] 2026-10-25T05:36:58.027Z: Registro publico exitoso: dos@local.test.
+# [INFO] 2026-10-25T05:36:58.135Z: Registro publico exitoso: admin@local.test.
+# [INFO] 2026-10-25T05:36:58.277Z: Login exitoso: usuario 1 (uno@local.test).
+# [INFO] 2026-10-25T05:36:58.384Z: Login exitoso: usuario 2 (dos@local.test).
+# [INFO] 2026-10-25T05:36:58.475Z: Login exitoso: usuario 3 (admin@local.test).
+# Subtest: esquema idempotente y once funciones históricas disponibles
+ok 7 - esquema idempotente y once funciones históricas disponibles
+  ---
+  duration_ms: 7545.593043
+  type: 'test'
+  ...
+# Subtest: registro rechaza contraseña igual a identidad, fecha imposible, futura y texto excesivo
+ok 8 - registro rechaza contraseña igual a identidad, fecha imposible, futura y texto excesivo
+  ---
+  duration_ms: 26.274309
+  type: 'test'
+  ...
+# [ERROR] 2026-10-25T05:36:58.545Z: Error en eliminarWeb (Movimiento ID: 1): Error: Movimiento no encontrado o ya eliminado.
+#     at bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at original (/home/claude/asistente-financiero/BACKEND/src/services/ledgerService.js:48:15)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+#     at async /home/claude/asistente-financiero/BACKEND/src/services/ledgerService.js:73:44
+#     at async Object.withTransaction (/home/claude/asistente-financiero/BACKEND/src/config/db.js:62:54)
+#     at async eliminarWeb (/home/claude/asistente-financiero/BACKEND/src/controllers/movimientosController.js:226:31) {
+#   status: 404,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:36:58.547Z: DELETE /api/movimientos/1 - 404 { name: 'Error', code: 'ERROR' }
+# [ERROR] 2026-10-25T05:36:58.554Z: Error en editarWeb (Movimiento ID: 1): Error: Movimiento no encontrado o ya eliminado.
+#     at bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at original (/home/claude/asistente-financiero/BACKEND/src/services/ledgerService.js:48:15)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+#     at async /home/claude/asistente-financiero/BACKEND/src/services/ledgerService.js:64:44
+#     at async Object.withTransaction (/home/claude/asistente-financiero/BACKEND/src/config/db.js:62:54)
+#     at async editarWeb (/home/claude/asistente-financiero/BACKEND/src/controllers/movimientosController.js:188:43) {
+#   status: 404,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:36:58.556Z: PUT /api/movimientos/1 - 404 { name: 'Error', code: 'ERROR' }
+# Subtest: aislamiento: otro usuario no puede borrar ni editar un movimiento ajeno
+ok 9 - aislamiento: otro usuario no puede borrar ni editar un movimiento ajeno
+  ---
+  duration_ms: 20.269834
+  type: 'test'
+  ...
+# [DEBUG] 2026-10-25T05:36:58.565Z: Registrando movimiento con payload: {
+#   usuario_id: 1,
+#   tipo: 'GASTO',
+#   categoria: 'Otros',
+#   monto: '80.00',
+#   cuenta_origen: 'Efectivo',
+#   cuenta_destino: undefined,
+#   descripcion: 'Movimiento de Otros',
+#   metodo_pago: 'EFECTIVO'
+# }
+# [INFO] 2026-10-25T05:36:58.579Z: Movimiento registrado por usuario 1: tipo=GASTO, monto=80.
+# [DEBUG] 2026-10-25T05:36:58.600Z: Registrando movimiento con payload: {
+#   usuario_id: 1,
+#   tipo: 'GASTO',
+#   categoria: 'Otros',
+#   monto: '80.00',
+#   cuenta_origen: 'Efectivo',
+#   cuenta_destino: undefined,
+#   descripcion: 'Movimiento de Otros',
+#   metodo_pago: 'EFECTIVO'
+# }
+# [ERROR] 2026-10-25T05:36:58.605Z: POST /api/movimientos - 409 { name: 'Error', code: 'ERROR' }
+# Subtest: dos gastos simultáneos de 80 con saldo100 permiten uno; transacción revierte el otro
+ok 10 - dos gastos simultáneos de 80 con saldo100 permiten uno; transacción revierte el otro
+  ---
+  duration_ms: 51.569906
+  type: 'test'
+  ...
+# [DEBUG] 2026-10-25T05:36:58.644Z: Registrando movimiento con payload: {
+#   usuario_id: 1,
+#   tipo: 'TRANSFERENCIA',
+#   categoria: 'Otros',
+#   monto: '1.00',
+#   cuenta_origen: 'Efectivo',
+#   cuenta_destino: 'Efectivo',
+#   descripcion: 'Transferencia a Efectivo',
+#   metodo_pago: 'TRANSFERENCIA'
+# }
+# [ERROR] 2026-10-25T05:36:58.651Z: POST /api/movimientos - 400 { name: 'Error', code: 'ERROR' }
+# Subtest: límite decimal y transferencia a sí mismo no alteran saldos
+ok 11 - límite decimal y transferencia a sí mismo no alteran saldos
+  ---
+  duration_ms: 43.114543
+  type: 'test'
+  ...
+# [ERROR] 2026-10-25T05:36:58.667Z: Error en eliminarWeb (Movimiento ID: 1): Error: Saldo insuficiente en Efectivo. La operación no se registró.
+#     at bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at applyEffects (/home/claude/asistente-financiero/BACKEND/src/services/ledgerService.js:18:51)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+#     at async /home/claude/asistente-financiero/BACKEND/src/services/ledgerService.js:74:3
+#     at async Object.withTransaction (/home/claude/asistente-financiero/BACKEND/src/config/db.js:62:54)
+#     at async eliminarWeb (/home/claude/asistente-financiero/BACKEND/src/controllers/movimientosController.js:226:31) {
+#   status: 409,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:36:58.669Z: DELETE /api/movimientos/1 - 409 { name: 'Error', code: 'ERROR' }
+# [INFO] 2026-10-25T05:36:58.686Z: Movimiento 2 editado por usuario 1.
+# [INFO] 2026-10-25T05:36:58.698Z: Movimiento 2 eliminado por usuario 1.
+# Subtest: editar y borrar recalculan el saldo; quitar ingreso ya consumido se rechaza
+ok 12 - editar y borrar recalculan el saldo; quitar ingreso ya consumido se rechaza
+  ---
+  duration_ms: 47.333979
+  type: 'test'
+  ...
+# [ERROR] 2026-10-25T05:36:58.725Z: Error en eliminarWeb (Movimiento ID: 3): Error: Este movimiento está vinculado a un módulo financiero. Adminístralo desde el módulo de origen.
+#     at bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at original (/home/claude/asistente-financiero/BACKEND/src/services/ledgerService.js:50:123)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+#     at async /home/claude/asistente-financiero/BACKEND/src/services/ledgerService.js:73:44
+#     at async Object.withTransaction (/home/claude/asistente-financiero/BACKEND/src/config/db.js:62:54)
+#     at async eliminarWeb (/home/claude/asistente-financiero/BACKEND/src/controllers/movimientosController.js:226:31) {
+#   status: 409,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:36:58.726Z: DELETE /api/movimientos/3 - 409 { name: 'Error', code: 'ERROR' }
+# [ERROR] 2026-10-25T05:36:58.733Z: Error en editarWeb (Movimiento ID: 3): Error: Este movimiento está vinculado a un módulo financiero. Adminístralo desde el módulo de origen.
+#     at bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at original (/home/claude/asistente-financiero/BACKEND/src/services/ledgerService.js:50:123)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+#     at async /home/claude/asistente-financiero/BACKEND/src/services/ledgerService.js:64:44
+#     at async Object.withTransaction (/home/claude/asistente-financiero/BACKEND/src/config/db.js:62:54)
+#     at async editarWeb (/home/claude/asistente-financiero/BACKEND/src/controllers/movimientosController.js:188:43) {
+#   status: 409,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:36:58.735Z: PUT /api/movimientos/3 - 409 { name: 'Error', code: 'ERROR' }
+# Subtest: un movimiento ligado a cartera/módulo no admite edición ni eliminación genérica
+ok 13 - un movimiento ligado a cartera/módulo no admite edición ni eliminación genérica
+  ---
+  duration_ms: 38.159796
+  type: 'test'
+  ...
+# Subtest: HTTP listados/reportes/admin/panel usan esquema real y restringen permisos
+ok 14 - HTTP listados/reportes/admin/panel usan esquema real y restringen permisos
+  ---
+  duration_ms: 74.676391
+  type: 'test'
+  ...
+# [ERROR] 2026-10-25T05:36:58.827Z: Error al actualizar mi perfil: Error: Nombre: ingresa texto válido de hasta 100 caracteres.
+#     at bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at Object.text (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:10:135)
+#     at actualizarMiPerfil (/home/claude/asistente-financiero/BACKEND/src/controllers/usuariosController.js:380:24)
+#     at /home/claude/asistente-financiero/BACKEND/src/utils/asyncHandler.js:12:21
+#     at Layer.handle [as handle_request] (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/layer.js:95:5)
+#     at next (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/route.js:149:13)
+#     at exports.verificarToken (/home/claude/asistente-financiero/BACKEND/src/middlewares/authMiddleware.js:13:33)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+#   status: 400,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:36:58.828Z: PUT /api/usuarios/me/perfil - 400 { name: 'Error', code: 'ERROR' }
+# [ERROR] 2026-10-25T05:36:58.832Z: POST /api/usuarios/me/avatar - 400 { name: 'Error', code: 'ERROR' }
+# [ERROR] 2026-10-25T05:36:58.835Z: POST /api/usuarios/me/avatar - 400 { name: 'Error', code: 'ERROR' }
+# Subtest: perfil actualiza nombre y fecha opcional; avatar solo acepta firma PNG/JPEG y tamaño
+ok 15 - perfil actualiza nombre y fecha opcional; avatar solo acepta firma PNG/JPEG y tamaño
+  ---
+  duration_ms: 27.189759
+  type: 'test'
+  ...
+# [ERROR] 2026-10-25T05:36:58.845Z: Error al solicitar recuperacion de password: Error: El correo está desactivado en modo local. El administrador puede restablecer la contraseña desde Usuarios o con el comando local.
+#     at bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at AuthService.solicitarRecuperacion (/home/claude/asistente-financiero/BACKEND/src/services/authService.js:14:49)
+#     at exports.solicitarRecuperacion (/home/claude/asistente-financiero/BACKEND/src/controllers/authControllers.js:256:45)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+#   status: 503,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:36:58.848Z: POST /api/auth/recuperar-password - 503 { name: 'Error', code: 'ERROR' }
+# Subtest: SMTP y Google apagados responden explícitamente sin contactar servicios
+ok 16 - SMTP y Google apagados responden explícitamente sin contactar servicios
+  ---
+  duration_ms: 11.217041
+  type: 'test'
+  ...
+# [ERROR] 2026-10-25T05:36:59.369Z: Error al verificar codigo de recuperacion: Error: Código inválido o expirado.
+#     at bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at /home/claude/asistente-financiero/BACKEND/src/services/authService.js:23:171
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+#     at async Object.withTransaction (/home/claude/asistente-financiero/BACKEND/src/config/db.js:62:54)
+#     at async exports.verificarCodigo (/home/claude/asistente-financiero/BACKEND/src/controllers/authControllers.js:277:27) {
+#   status: 400,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:36:59.370Z: POST /api/auth/verificar-codigo - 400 { name: 'Error', code: 'ERROR' }
+# [INFO] 2026-10-25T05:36:59.737Z: Contraseña actualizada via recuperacion para dos@local.test.
+# [ERROR] 2026-10-25T05:36:59.740Z: Error al cambiar password: Error: Autorización de recuperación inválida, expirada o ya utilizada.
+#     at bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at AuthService.cambiarContrasena (/home/claude/asistente-financiero/BACKEND/src/services/authService.js:32:33)
+#     at async exports.cambiarContrasena (/home/claude/asistente-financiero/BACKEND/src/controllers/authControllers.js:302:9) {
+#   status: 403,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:36:59.743Z: POST /api/auth/cambiar-password - 403 { name: 'Error', code: 'ERROR' }
+# Subtest: reset antiguo no autoriza; código produce token efímero y un solo cambio concurrente
+ok 17 - reset antiguo no autoriza; código produce token efímero y un solo cambio concurrente
+  ---
+  duration_ms: 896.609529
+  type: 'test'
+  ...
+# Subtest: token reset expirado y access token expirado nunca autorizan
+ok 18 - token reset expirado y access token expirado nunca autorizan
+  ---
+  duration_ms: 6.22208
+  type: 'test'
+  ...
+# [ERROR] 2026-10-25T05:36:59.880Z: Error al actualizar usuario: Error: Debe permanecer al menos un administrador activo.
+#     at Object.bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at /home/claude/asistente-financiero/BACKEND/src/models/usuariosModel.js:191:97
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+#     at async Object.withTransaction (/home/claude/asistente-financiero/BACKEND/src/config/db.js:62:54)
+#     at async actualizarUsuario (/home/claude/asistente-financiero/BACKEND/src/controllers/usuariosController.js:106:31) {
+#   status: 409,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:36:59.881Z: PUT /api/usuarios/3 - 409 { name: 'Error', code: 'ERROR' }
+# [ERROR] 2026-10-25T05:36:59.888Z: Error al deshabilitar usuario: Error: No puedes deshabilitar tu propia cuenta administrativa.
+#     at Object.bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at deshabilitarUsuario (/home/claude/asistente-financiero/BACKEND/src/controllers/usuariosController.js:242:63)
+#     at /home/claude/asistente-financiero/BACKEND/src/utils/asyncHandler.js:12:21
+#     at Layer.handle [as handle_request] (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/layer.js:95:5)
+#     at next (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/route.js:149:13)
+#     at validarCampos (/home/claude/asistente-financiero/BACKEND/src/middlewares/validadorMiddleware.js:28:5)
+#     at Layer.handle [as handle_request] (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/layer.js:95:5)
+#     at next (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/route.js:149:13)
+#     at middleware (/home/claude/asistente-financiero/BACKEND/node_modules/express-validator/lib/middlewares/check.js:16:13)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+#   status: 409,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:36:59.889Z: DELETE /api/usuarios/3 - 409 { name: 'Error', code: 'ERROR' }
+# [INFO] 2026-10-25T05:37:00.020Z: Login exitoso: usuario 2 (dos@local.test).
+# [INFO] 2026-10-25T05:37:00.032Z: Usuario 2 deshabilitado por admin.
+# [INFO] 2026-10-25T05:37:00.042Z: Usuario 2 reactivado por admin.
+# Subtest: contraseña actual obligatoria, admin único protegido y deshabilitación revoca sesiones
+ok 19 - contraseña actual obligatoria, admin único protegido y deshabilitación revoca sesiones
+  ---
+  duration_ms: 291.620317
+  type: 'test'
+  ...
+# [INFO] 2026-10-25T05:37:00.226Z: Login exitoso: usuario 1 (uno@local.test).
+# [ERROR] 2026-10-25T05:37:00.234Z: Error al cambiar contraseña: Error: La contraseña no puede ser igual al nombre, usuario o correo.
+#     at bad (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:1:60)
+#     at Object.password (/home/claude/asistente-financiero/BACKEND/src/utils/validation.js:16:152)
+#     at cambiarMiPassword (/home/claude/asistente-financiero/BACKEND/src/controllers/usuariosController.js:427:24)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+#   status: 400,
+#   expose: true
+# }
+# [ERROR] 2026-10-25T05:37:00.235Z: PUT /api/usuarios/me/password - 400 { name: 'Error', code: 'ERROR' }
+# [INFO] 2026-10-25T05:37:00.589Z: Login exitoso: usuario 1 (uno@local.test).
+# Subtest: cambio de contraseña del perfil escribe columna correcta y revoca sesión y refresh
+ok 20 - cambio de contraseña del perfil escribe columna correcta y revoca sesión y refresh
+  ---
+  duration_ms: 553.521898
+  type: 'test'
+  ...
+# Subtest: una API inexistente nunca devuelve HTML de SPA
+ok 21 - una API inexistente nunca devuelve HTML de SPA
+  ---
+  duration_ms: 4.404393
+  type: 'test'
+  ...
+# Subtest: sesión absoluta: no permite access ni refresh con más de treinta minutos
+ok 22 - sesión absoluta: no permite access ni refresh con más de treinta minutos
+  ---
+  duration_ms: 7.445044
+  type: 'test'
+  ...
+# Subtest: registro rechaza números en el nombre y correos sin formato válido
+ok 23 - registro rechaza números en el nombre y correos sin formato válido
+  ---
+  duration_ms: 8.630419
+  type: 'test'
+  ...
+# [INFO] 2026-10-25T05:37:00.630Z: Token refrescado: usuario 2 (dos@local.test).
+# Subtest: refresh mantiene el vencimiento original aunque aún queden segundos
+ok 24 - refresh mantiene el vencimiento original aunque aún queden segundos
+  ---
+  duration_ms: 10.280068
+  type: 'test'
+  ...
+# [INFO] 2026-10-25T05:37:01.885Z: Registro publico exitoso: registro2@example.test.
+# [INFO] 2026-10-25T05:37:02.031Z: Login exitoso: usuario 2 (registro2@example.test).
+# [INFO] 2026-10-25T05:37:02.144Z: Registro publico exitoso: registro3@example.test.
+# [INFO] 2026-10-25T05:37:02.254Z: Login exitoso: usuario 3 (registro3@example.test).
+# [INFO] 2026-10-25T05:37:02.399Z: Registro publico exitoso: registro4@example.test.
+# [INFO] 2026-10-25T05:37:02.505Z: Login exitoso: usuario 4 (registro4@example.test).
+# [ERROR] 2026-10-25T05:37:02.521Z: Error en registro publico: Error: Selecciona una moneda válida.
+#     at Object.validate (/home/claude/asistente-financiero/BACKEND/src/finance/currency.js:11:17)
+#     at exports.registroPublico (/home/claude/asistente-financiero/BACKEND/src/controllers/authControllers.js:221:31)
+#     at /home/claude/asistente-financiero/BACKEND/src/utils/asyncHandler.js:12:21
+#     at Layer.handle [as handle_request] (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/layer.js:95:5)
+#     at next (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/route.js:149:13)
+#     at validarCampos (/home/claude/asistente-financiero/BACKEND/src/middlewares/validadorMiddleware.js:28:5)
+#     at Layer.handle [as handle_request] (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/layer.js:95:5)
+#     at next (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/route.js:149:13)
+#     at middleware (/home/claude/asistente-financiero/BACKEND/node_modules/express-validator/lib/middlewares/check.js:16:13)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+#   status: 400,
+#   code: 'MONEDA_INVALIDA'
+# }
+# [ERROR] 2026-10-25T05:37:02.524Z: POST /api/auth/registro - 400 { name: 'Error', code: 'MONEDA_INVALIDA' }
+# Subtest: registro conserva COP/MXN, USD por defecto y rechaza monedas fuera del catálogo
+ok 25 - registro conserva COP/MXN, USD por defecto y rechaza monedas fuera del catálogo
+  ---
+  duration_ms: 5325.954889
+  type: 'test'
+  ...
+# Subtest: preferencias están autenticadas, aisladas por usuario y no convierten cifras
+ok 26 - preferencias están autenticadas, aisladas por usuario y no convierten cifras
+  ---
+  duration_ms: 55.80161
+  type: 'test'
+  ...
+# Subtest: todos los módulos fijan moneda y eliminar actividad no permite reinterpretar el historial
+ok 27 - todos los módulos fijan moneda y eliminar actividad no permite reinterpretar el historial
+  ---
+  duration_ms: 173.885682
+  type: 'test'
+  ...
+# Subtest: operación rechazada revierte también el bloqueo de moneda
+ok 28 - operación rechazada revierte también el bloqueo de moneda
+  ---
+  duration_ms: 9.374424
+  type: 'test'
+  ...
+# Subtest: preferencia y primera actividad concurrentes se serializan; nunca se relabelan importes existentes
+ok 29 - preferencia y primera actividad concurrentes se serializan; nunca se relabelan importes existentes
+  ---
+  duration_ms: 7.571354
+  type: 'test'
+  ...
+# Subtest: grupos conservan divisa y rechazan mezcla tanto en API como en SQL directo
+ok 30 - grupos conservan divisa y rechazan mezcla tanto en API como en SQL directo
+  ---
+  duration_ms: 54.259509
+  type: 'test'
+  ...
+# [INFO] 2026-10-25T05:37:02.851Z: El administrador con ID 1 está consultando el dashboard global.
+# [INFO] 2026-10-25T05:37:02.886Z: El administrador con ID 1 está consultando el dashboard global.
+# [INFO] 2026-10-25T05:37:03.011Z: El administrador con ID 1 está consultando el dashboard global.
+# [ERROR] 2026-10-25T05:37:03.011Z: Error al obtener el dashboard de administrador: Error: Selecciona una moneda válida.
+#     at Object.validate (/home/claude/asistente-financiero/BACKEND/src/finance/currency.js:11:17)
+#     at verDashboardAdmin (/home/claude/asistente-financiero/BACKEND/src/controllers/adminController.js:40:84)
+#     at /home/claude/asistente-financiero/BACKEND/src/utils/asyncHandler.js:12:21
+#     at Layer.handle [as handle_request] (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/layer.js:95:5)
+#     at next (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/route.js:149:13)
+#     at exports.verificarAdmin (/home/claude/asistente-financiero/BACKEND/src/middlewares/authMiddleware.js:16:179)
+#     at Layer.handle [as handle_request] (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/layer.js:95:5)
+#     at next (/home/claude/asistente-financiero/BACKEND/node_modules/express/lib/router/route.js:149:13)
+#     at exports.verificarToken (/home/claude/asistente-financiero/BACKEND/src/middlewares/authMiddleware.js:13:33)
+#     at process.processTicksAndRejections (node:internal/process/task_queues:105:5) {
+#   status: 400,
+#   code: 'MONEDA_INVALIDA'
+# }
+# [ERROR] 2026-10-25T05:37:03.011Z: GET /api/reportes/web/dashboard-admin - 400 { name: 'Error', code: 'MONEDA_INVALIDA' }
+# Subtest: administración separa COP de USD y conserva etiqueta en todas las familias de reportes
+ok 31 - administración separa COP de USD y conserva etiqueta en todas las familias de reportes
+  ---
+  duration_ms: 184.747299
+  type: 'test'
+  ...
+# [INFO] 2026-10-25T05:37:03.036Z: Exportacion CSV de movimientos globales generada por admin (3 filas).
+# Subtest: movimientos globales y exportaciones incluyen moneda, sin mezclar filas
+ok 32 - movimientos globales y exportaciones incluyen moneda, sin mezclar filas
+  ---
+  duration_ms: 40.310818
+  type: 'test'
+  ...
+# Subtest: rutas históricas Telegram exigen sesión e ignoran identificadores ajenos
+ok 33 - rutas históricas Telegram exigen sesión e ignoran identificadores ajenos
+  ---
+  duration_ms: 108.247119
+  type: 'test'
+  ...
+# [ERROR] 2026-10-25T05:36:57.145Z: GET /api/prueba - 500 { name: 'Error', code: 'ERROR' }
+# [ERROR] 2026-10-25T05:36:57.148Z: GET /api/prueba - 409 { name: 'Error', code: '23505' }
+# [ERROR] 2026-10-25T05:36:57.149Z: GET /api/prueba - 400 { name: 'Error', code: 'entity.parse.failed' }
+# Subtest: errores públicos ocultan SQL, stack, rutas y detalles internos incluso en desarrollo
+ok 34 - errores públicos ocultan SQL, stack, rutas y detalles internos incluso en desarrollo
+  ---
+  duration_ms: 3.830655
+  type: 'test'
+  ...
+# Subtest: restricciones de base y JSON inválido devuelven mensajes de validación sin detalle SQL
+ok 35 - restricciones de base y JSON inválido devuelven mensajes de validación sin detalle SQL
+  ---
+  duration_ms: 0.706742
+  type: 'test'
+  ...
+# Subtest: validación de importes y fechas rechaza exceso, exponentes, blancos y fechas imposibles
+ok 36 - validación de importes y fechas rechaza exceso, exponentes, blancos y fechas imposibles
+  ---
+  duration_ms: 3898.098989
+  type: 'test'
+  ...
+# Subtest: apertura tiene ingreso trazable en destino y aislamiento entre propietarios
+ok 37 - apertura tiene ingreso trazable en destino y aislamiento entre propietarios
+  ---
+  duration_ms: 5.67789
+  type: 'test'
+  ...
+# Subtest: presupuestos únicos, propiedad y categoría privada se validan
+ok 38 - presupuestos únicos, propiedad y categoría privada se validan
+  ---
+  duration_ms: 23.358521
+  type: 'test'
+  ...
+# Subtest: recurrencia es recordatorio hasta confirmar; concurrencia crea un solo gasto y conserva ancla mensual
+ok 39 - recurrencia es recordatorio hasta confirmar; concurrencia crea un solo gasto y conserva ancla mensual
+  ---
+  duration_ms: 58.491782
+  type: 'test'
+  ...
+# Subtest: confirmación exige consentimiento, vencimiento y saldo; ingreso usa destino
+ok 40 - confirmación exige consentimiento, vencimiento y saldo; ingreso usa destino
+  ---
+  duration_ms: 31.088494
+  type: 'test'
+  ...
+# Subtest: deudas no alteran cartera al crearse; abono concurrente idempotente y nunca sobrepaga
+ok 41 - deudas no alteran cartera al crearse; abono concurrente idempotente y nunca sobrepaga
+  ---
+  duration_ms: 31.457389
+  type: 'test'
+  ...
+# Subtest: concurrencia de dos pagos diferentes contra cartera no permite saldo negativo
+ok 42 - concurrencia de dos pagos diferentes contra cartera no permite saldo negativo
+  ---
+  duration_ms: 33.191776
+  type: 'test'
+  ...
+# Subtest: cobro aumenta destino; cartera ajena nunca se puede usar
+ok 43 - cobro aumenta destino; cartera ajena nunca se puede usar
+  ---
+  duration_ms: 16.505283
+  type: 'test'
+  ...
+# Subtest: meta usa transferencia, conserva total, impide exceso y repite sin duplicar
+ok 44 - meta usa transferencia, conserva total, impide exceso y repite sin duplicar
+  ---
+  duration_ms: 59.170594
+  type: 'test'
+  ...
+# Subtest: grupos: propietario agrega miembros, permisos y reparto exacto de 10.01 en tres
+ok 45 - grupos: propietario agrega miembros, permisos y reparto exacto de 10.01 en tres
+  ---
+  duration_ms: 62.330064
+  type: 'test'
+  ...
+# Subtest: panel incluye todas las secciones y alerta con presupuesto consumido
+ok 46 - panel incluye todas las secciones y alerta con presupuesto consumido
+  ---
+  duration_ms: 19.192538
+  type: 'test'
+  ...
+# Subtest: los límites de mes se evalúan en hora de Ecuador
+ok 47 - los límites de mes se evalúan en hora de Ecuador
+  ---
+  duration_ms: 34.451778
+  type: 'test'
+  ...
+# Subtest: editar el nombre de una recurrencia conserva el día ancla y rechaza fechas ya confirmadas
+ok 48 - editar el nombre de una recurrencia conserva el día ancla y rechaza fechas ya confirmadas
+  ---
+  duration_ms: 25.367481
+  type: 'test'
+  ...
+# Subtest: miembro inactivo conserva saldo histórico y deja de participar en gastos nuevos
+ok 49 - miembro inactivo conserva saldo histórico y deja de participar en gastos nuevos
+  ---
+  duration_ms: 38.631556
+  type: 'test'
+  ...
+# Subtest: reintento de gasto con fecha automática conserva su operación aunque cambie el día
+ok 50 - reintento de gasto con fecha automática conserva su operación aunque cambie el día
+  ---
+  duration_ms: 20.430955
+  type: 'test'
+  ...
+# [WARN] 2026-10-25T05:37:00.929Z: Solicitud de IA fallida { status: 0, code: 'ECONNABORTED' }
+# Subtest: IA local desactivada no realiza ninguna solicitud de red
+ok 51 - IA local desactivada no realiza ninguna solicitud de red
+  ---
+  duration_ms: 2.063291
+  type: 'test'
+  ...
+# Subtest: fallo de red sin response devuelve error controlado sin secretos
+ok 52 - fallo de red sin response devuelve error controlado sin secretos
+  ---
+  duration_ms: 1.849312
+  type: 'test'
+  ...
+# Subtest: interpreta decimales, miles y separadores sin evaluar código
+ok 53 - interpreta decimales, miles y separadores sin evaluar código
+  ---
+  duration_ms: 3212.924162
+  type: 'test'
+  ...
+# Subtest: límite de carga evita lotes excesivos
+ok 54 - límite de carga evita lotes excesivos
+  ---
+  duration_ms: 0.806864
+  type: 'test'
+  ...
+# Subtest: lote concurrente se guarda una sola vez y exige propietario
+ok 55 - lote concurrente se guarda una sola vez y exige propietario
+  ---
+  duration_ms: 31.068091
+  type: 'test'
+  ...
+# Subtest: saldo insuficiente no deja gastos parciales y permite reintentar
+ok 56 - saldo insuficiente no deja gastos parciales y permite reintentar
+  ---
+  duration_ms: 7.960038
+  type: 'test'
+  ...
+1..56
+# tests 56
+# suites 0
+# pass 56
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 13620.880654

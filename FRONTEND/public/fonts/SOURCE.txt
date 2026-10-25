@@ -2,3 +2,4 @@ Material Symbols Outlined, Google Fonts. Apache License 2.0.
 https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=block
 https://raw.githubusercontent.com/google/material-design-icons/master/LICENSE
 Local copy for offline use.
+El sitio carga material-symbols-subset.woff2 (solo los iconos usados), generado desde material-symbols-0.ttf con scripts/subset-icons.py.

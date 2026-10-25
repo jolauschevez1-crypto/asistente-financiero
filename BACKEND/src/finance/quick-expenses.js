@@ -7,7 +7,7 @@ function parseExpenses(text) {
  return parts.map((part,i)=>{
   const match=part.match(/^(.+?)\s+(\d{1,9}(?:\.\d{1,2})?)(k)?$/i);
   if(!match)v.fail(`Gasto ${i+1}: usa concepto e importe, por ejemplo café 2.50. Separa los gastos con coma; usa punto para decimales.`);
-  const descripcion=v.text(match[1],'Concepto',200);
+  const descripcion=v.text(match[1],'Concepto',200,true);
   const cents=v.cents(match[2])*(match[3]?1000:1);
   const monto=v.money(cents);v.cents(monto);
   return {descripcion,monto};

@@ -4,14 +4,22 @@ const {verificarToken}=require('../middlewares/authMiddleware');
 const service=require('../finance/service');
 const currency=require('../finance/currency');
 const {id}=require('../finance/validation');
+const mc=require('../finance/multicurrency');
+const fx=require('../finance/fx');
 router.use(verificarToken);
 router.use((req,res,next)=>{if(['POST','PUT','PATCH'].includes(req.method)){if(!req.body||typeof req.body!=='object'||Array.isArray(req.body))return res.status(400).json({success:false,message:'Envía un objeto JSON con los datos de la operación.',code:'VALIDACION'});}next();});
-function endpoint(fn){return async(req,res)=>{try{const uid=id(req.usuario.id);const data=await fn(uid,req);res.json({success:true,data});}catch(e){let status=e.status||500,message=e.message,code=e.code||'ERROR';if(e.code==='23505'){status=409;message='Ya existe un registro con esos datos.';code='DUPLICADO';}if(status===500){message='No se pudo completar la operación. Inténtalo nuevamente.';code='ERROR_INTERNO';console.error('[finanzas]',e.code||e.name);}res.status(status).json({success:false,message,code});}};}
-router.get('/panel',endpoint((u,r)=>service.panel(u,r.query.mes)));
+function endpoint(fn){return async(req,res)=>{try{const uid=id(req.usuario.id);const data=await fn(uid,req);res.json({success:true,data});}catch(e){let status=e.status||500,message=e.message,code=e.code||'ERROR';if(e.code==='23505'){status=409;message='Ya existe un registro con esos datos.';code='DUPLICADO';}if(e.code==='P0001'){status=409;code='REGLA_MONEDA';}if(status===500){message='No se pudo completar la operación. Inténtalo nuevamente.';code='ERROR_INTERNO';console.error('[finanzas]',e.code||e.name);}res.status(status).json({success:false,message,code,...(e.cotizacion?{cotizacion:e.cotizacion}:{})});}};}
+router.get('/panel',endpoint((u,r)=>service.panel(u,r.query.mes,r.query.moneda)));
+router.get('/tasas',endpoint(async()=>{await fx.maybeRefresh();const snap=await fx.snapshot();return {...fx.status(snap,require('../finance/validation').today()),base:fx.BASE,monedas_con_tasa:fx.CON_TASA,tasas:[...snap.rates].filter(([c])=>c!==fx.BASE).map(([c,r])=>({par:`${fx.BASE}/${c}`,tasa:fx.decimal(r)}))};}));
 router.get('/preferencias',endpoint(u=>currency.getPreferences(u)));
 router.patch('/preferencias',endpoint((u,r)=>currency.updatePreferences(u,r.body)));
 router.get('/carteras',endpoint(u=>service.listWallets(u)));
 router.post('/carteras',endpoint((u,r)=>service.createWallet(u,r.body)));
+router.get('/carteras/:id/conversion',endpoint((u,r)=>mc.previewConversion(u,id(r.params.id),r.query.moneda)));
+router.post('/carteras/:id/conversion',endpoint((u,r)=>mc.convertWallet(u,id(r.params.id),r.body)));
+router.get('/carteras/:id/conversiones',endpoint((u,r)=>mc.listConversions(u,id(r.params.id))));
+router.post('/transferencias/preview',endpoint((u,r)=>mc.previewTransfer(u,r.body)));
+router.post('/transferencias',endpoint((u,r)=>mc.transfer(u,r.body,service.movement)));
 router.post('/carga-rapida/preview',endpoint((u,r)=>require('../finance/quick-expenses').parseExpenses(r.body.texto)));
 router.post('/carga-rapida',endpoint((u,r)=>service.quickExpenses(u,r.body)));
 router.get('/categorias',endpoint(u=>service.listCategories(u)));
