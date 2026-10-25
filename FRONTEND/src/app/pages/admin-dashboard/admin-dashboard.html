@@ -173,7 +173,7 @@
     <!-- ============================================================ -->
     @if (vistaActiva() === 'usuarios') {
     <section class="workspace">
-        <aside class="users-pane users-pane--wide">
+        <section class="users-pane users-pane--wide" aria-label="Lista de usuarios">
             <div class="section-title">
                 <h2>Usuarios</h2>
                 <button mat-icon-button type="button" matTooltip="Recargar usuarios" (click)="cargarUsuarios()">
@@ -301,23 +301,17 @@
                 (paginaCambiada)="onPageChange($event)"
             />
             }
-        </aside>
+        </section>
 
         <section class="detail-pane">
             @if (usuarioSeleccionado(); as usuario) {
             <div class="detail-shell">
-                <aside class="section-sidebar" aria-label="Funciones del administrador">
-                    <button type="button" [class.active]="seccionActiva() === 'balances'" (click)="cambiarSeccion('balances')">
-              <mat-icon>account_balance_wallet</mat-icon>
-              <span>Cuentas y balances</span>
-            </button>
-                    <button type="button" [class.active]="seccionActiva() === 'movimientos'" (click)="cambiarSeccion('movimientos')">
-              <mat-icon>receipt_long</mat-icon>
-              <span>Movimientos</span>
-            </button>
-                </aside>
+                <div class="detail-tabs" role="tablist" aria-label="Información del usuario">
+                    <button type="button" role="tab" id="tab-balances" [attr.aria-selected]="seccionActiva() === 'balances'" [class.active]="seccionActiva() === 'balances'" (click)="cambiarSeccion('balances')">Cuentas y saldos</button>
+                    <button type="button" role="tab" id="tab-movimientos" [attr.aria-selected]="seccionActiva() === 'movimientos'" [class.active]="seccionActiva() === 'movimientos'" (click)="cambiarSeccion('movimientos')">Movimientos</button>
+                </div>
 
-                <div class="detail-body">
+                <div class="detail-body" role="tabpanel" [attr.aria-labelledby]="seccionActiva() === 'balances' ? 'tab-balances' : 'tab-movimientos'">
                     <div class="detail-header">
                         <div>
                             <p>Usuario #{{ usuario.id }}</p>
@@ -335,15 +329,16 @@
                         @if (seccionActiva() === 'balances') {
                         <section class="panel-section">
                             <div class="balance-summary">
-                                <span>Balance total</span>
-                                <strong>{{ money(balanceTotalSeleccionado(), balanceSeleccionado()?.moneda || usuarioSeleccionado()?.moneda) }}</strong>
+                                <span>Saldo por moneda</span>
+                                @for (b of balanceSeleccionado()?.balances_por_moneda || []; track b.moneda) {<strong class="num">{{ money(b.total, b.moneda) }}</strong>} @empty {<strong class="num">{{ money(0, usuarioSeleccionado()?.moneda) }}</strong>}
+                                @if ((balanceSeleccionado()?.balances_por_moneda?.length || 0) > 1) {<small>Las monedas distintas no se suman.</small>}
                             </div>
 
                             <div class="accounts-grid">
                                 @for (cuenta of cuentasSeleccionadas(); track cuenta.nombre) {
                                 <article class="account-card">
-                                    <span>{{ cuenta.nombre }}</span>
-                                    <strong [class.negative]="saldoCuenta(cuenta) < 0">{{ money(saldoCuenta(cuenta), balanceSeleccionado()?.moneda || usuarioSeleccionado()?.moneda) }}</strong>
+                                    <span class="clamp" [title]="cuenta.nombre">{{ cuenta.nombre }} · {{ cuenta.moneda }}</span>
+                                    <strong class="num" [class.negative]="saldoCuenta(cuenta) < 0">{{ money(saldoCuenta(cuenta), cuenta.moneda || usuarioSeleccionado()?.moneda) }}</strong>
                                 </article>
                                 } @empty {
                                 <p class="empty">Este usuario no tiene cuentas registradas.</p>

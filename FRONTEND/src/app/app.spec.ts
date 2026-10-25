@@ -20,9 +20,16 @@ describe('Aplicación local y navegación', () => {
   it('navegación contiene módulos y accesibilidad conserva la preferencia', () => {
     TestBed.inject(AuthService).usuario.set({id:1,nombre:'Prueba',correo:'prueba@local.test',rol:'USUARIO'} as any);
     const fixture=create();const app=fixture.componentInstance;
-    expect((fixture.nativeElement as HTMLElement).querySelector('nav')?.textContent).toContain('Carteras');
+    TestBed.inject(HttpTestingController).expectOne('/api/finanzas/preferencias').flush({success:true,data:{moneda:'USD',puede_cambiar:true,motivo:null,monedas:[],monedas_con_tasa:['USD','EUR','MXN']}});fixture.detectChanges();
+    const html=fixture.nativeElement as HTMLElement;
+    expect(html.querySelector('nav')?.textContent).toContain('Carteras');
+    expect(html.querySelector('aside')).toBeNull();
+    expect(Array.from(html.querySelectorAll('.currency-select option')).map(o=>o.textContent)).toEqual(['USD','MXN','EUR']);
+    app.toggleMobile();fixture.detectChanges();
+    expect(html.querySelector('#mobile-navigation')).toBeTruthy();
+    expect(document.body.classList.contains('af-menu-open')).toBeTrue();
     app.toggleText();expect(document.documentElement.classList.contains('af-large-text')).toBeTrue();
     expect(localStorage.getItem('af_large_text')).toBe('true');
-    app.toggleMobile();app.closeMenus();expect(app.mobileOpen()).toBeFalse();
+    app.closeMenus();expect(app.mobileOpen()).toBeFalse();expect(document.body.classList.contains('af-menu-open')).toBeFalse();
   });
 });

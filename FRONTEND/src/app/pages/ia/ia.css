@@ -81,7 +81,7 @@
 
 .burbuja-user {
     align-self: flex-end;
-    background: var(--app-accent-on-surface, #38bdf8);
+    background: var(--app-accent-on-surface, var(--af-accent));
     color: #04121f;
     border-bottom-right-radius: 4px;
 }

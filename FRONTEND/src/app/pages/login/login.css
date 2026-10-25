@@ -1,3 +1,44 @@
-:host{display:block;color:#172c3a}.login-page{min-height:100dvh;display:grid;grid-template-columns:1fr 1fr;background:#f4f7f8;padding:clamp(24px,5vw,80px);gap:clamp(30px,7vw,100px);align-items:center}.intro{max-width:580px}.eyebrow{font-size:.76rem;font-weight:800;letter-spacing:.14em;color:#22705b}.intro h1{font-size:clamp(2.8rem,5vw,4.8rem);line-height:1.07;letter-spacing:-.045em;margin:24px 0}.intro p{font-size:1.15rem;line-height:1.75;max-width:460px;color:#536976}.intro-features{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}.intro-features span{padding:10px 14px;background:#e3efea;border-radius:24px;font-size:.82rem;color:#235c49}.login-panel{background:white;padding:clamp(24px,4vw,48px);border:1px solid #e0e8ec;border-radius:24px;max-width:530px;box-shadow:0 20px 60px #1732470c;width:100%;box-sizing:border-box}.brand-block{display:flex;align-items:center;gap:16px;margin-bottom:24px}.mark{width:48px;height:48px;flex-shrink:0;display:grid;place-items:center;background:#173c36;color:white;border-radius:14px;font-weight:800}.brand-block h2{margin:0;font-size:1.55rem}.brand-block p{margin:7px 0 0;font-size:.85rem;color:#536976;line-height:1.5}.login-form{display:flex;flex-direction:column;gap:10px}.login-form>label{font-weight:650;font-size:.88rem;margin-top:8px}.login-form input:not([type=checkbox]){font:inherit;width:100%;box-sizing:border-box;border:1px solid #bacbd3;border-radius:10px;background:#fcfdfd;padding:12px 14px;min-height:46px;color:#172c3a}.login-form input:focus-visible,button:focus-visible{outline:3px solid #2c8d79;outline-offset:3px}.login-form button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:13px 18px;background:#17654f;color:white;font-weight:700;margin-top:12px;min-height:44px}.login-form button:disabled{opacity:.65;cursor:wait}.login-form .link-btn{background:transparent;color:#17654f;margin-top:0;padding:8px}.login-form small,.helper,.optional{color:#526773;line-height:1.5;font-size:.8rem}.show-password{display:flex;align-items:center;gap:8px;font-weight:400!important}.show-password input{width:18px;height:18px}.alert{background:#fff0ef;color:#982f28;padding:12px 16px;border-radius:10px;line-height:1.5;font-size:.88rem;border:1px solid #f4c1bb}.success{background:#eaf7f0;border-color:#b5dbca;color:#225d47}.field-error{color:#a02b28;font-size:.8rem}@media(max-width:780px){.login-page{grid-template-columns:1fr;padding:24px;gap:26px}.intro h1{font-size:2.6rem;margin:14px 0}.intro-features{display:none}.intro p{font-size:1rem;margin:0}.login-panel{max-width:none}}
-.password-checks { list-style: none; margin: 4px 0 8px; padding: 0; display: grid; gap: 2px; font-size: 13px; color: var(--app-text-secondary, #5f6368); }
-.password-checks li.ok { color: var(--app-success-text, #247b50); }
+:host{display:block;color:var(--app-text-primary)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.login-page{min-height:100dvh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--app-bg-page-start)}
+
+/* Lado de marca: bosque con titular lima (9,4:1) */
+.intro{display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,6vw,96px);background:#163300;color:#e8f6dd}
+.eyebrow{font-size:.875rem;font-weight:700;color:#9fe870}
+.intro h1{margin:24px 0;max-width:12ch;font-size:clamp(2.5rem,5vw,4.25rem);line-height:1.02;letter-spacing:-.035em;font-weight:800;color:#9fe870}
+.intro p{max-width:440px;margin:0;font-size:1.125rem;line-height:1.6}
+.intro-features{display:flex;flex-wrap:wrap;gap:8px;margin:32px 0 0;padding:0;list-style:none}
+.intro-features li{padding:8px 14px;border:1px solid #9fe87066;border-radius:999px;font-size:.875rem}
+
+/* Formulario */
+.login-panel{align-self:center;justify-self:center;width:min(480px,100% - 32px);margin:32px 0;padding:clamp(24px,4vw,40px);background:var(--app-bg-card);border:1px solid var(--af-border);border-radius:20px;box-sizing:border-box}
+.brand-block{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.mark{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;border-radius:12px;background:#9fe870;color:#163300;font-weight:800}
+.brand-block h2{margin:0;font-size:1.5rem;letter-spacing:-.02em}
+.brand-block p{margin:4px 0 0;font-size:.875rem;color:var(--af-muted);line-height:1.5}
+.login-form{display:flex;flex-direction:column;gap:8px}
+.login-form>label{margin-top:8px;font-size:.875rem;font-weight:650}
+.login-form input:not([type=checkbox]),.login-form select{width:100%;min-height:48px;box-sizing:border-box;padding:12px 14px;border:1px solid var(--af-border-strong);border-radius:12px;background:var(--af-input);color:var(--app-text-primary);font:inherit}
+.login-form input:focus-visible,.login-form select:focus-visible,button:focus-visible{outline:3px solid var(--af-focus);outline-offset:2px}
+.login-form button{min-height:48px;margin-top:12px;padding:12px 20px;border:0;border-radius:999px;background:var(--af-primary-bg);color:var(--af-primary-text);font:inherit;font-weight:700;cursor:pointer}
+.login-form button:hover:not(:disabled){background:var(--af-primary-hover)}
+.login-form button:disabled{opacity:.6;cursor:wait}
+.login-form .link-btn{min-height:44px;margin-top:0;padding:8px;background:transparent;color:var(--af-accent);text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.login-form .link-btn:hover:not(:disabled){background:var(--af-soft)}
+.login-form small,.helper,.optional{color:var(--af-muted);line-height:1.5;font-size:.8125rem}
+.show-password{display:flex;align-items:center;gap:8px;font-weight:400!important}
+.show-password input{width:20px;height:20px;accent-color:var(--af-accent)}
+.alert{margin:0 0 12px;padding:12px 16px;border-radius:12px;border:1px solid currentColor;background:var(--af-danger-soft);color:var(--af-danger);font-size:.875rem;line-height:1.5}
+.alert.success{background:var(--af-accent-soft);color:var(--af-accent)}
+.field-error{color:var(--af-danger);font-size:.8125rem}
+.password-checks{list-style:none;margin:4px 0 8px;padding:0;display:grid;gap:2px;font-size:.8125rem;color:var(--af-muted)}
+.password-checks li.ok{color:var(--af-accent);font-weight:600}
+
+@media (max-width:860px){
+  .login-page{grid-template-columns:1fr}
+  .intro{padding:32px 24px}
+  .intro h1{margin:12px 0;font-size:2.25rem;max-width:none}
+  .intro p{font-size:1rem}
+  .intro-features{display:none}
+  .login-panel{margin:24px 0 40px}
+}

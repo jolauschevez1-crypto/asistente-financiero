@@ -38,8 +38,8 @@ mat-chip.chip-gasto {
 }
 
 mat-chip.chip-transferencia {
-    --mat-chip-label-text-color: #38bdf8;
-    background: rgba(56, 189, 248, 0.14) !important;
+    --mat-chip-label-text-color: var(--af-accent);
+    background: var(--af-accent-soft) !important;
 }
 
 mat-chip.status-up {

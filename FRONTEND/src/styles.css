@@ -262,7 +262,7 @@ html.af-high-contrast .wallet-card {
   background-image: none !important;
 }
 
-html.af-high-contrast :is(.surface, .entry-panel, .wallet-card, .summary-card, .badge, .navbar a.active, input, select, textarea) {
+html.af-high-contrast :is(.surface, .entry-panel, .wallet-card, .summary-card, .badge, .nav-desktop a.active, .nav-mobile a.active, input, select, textarea) {
   border: 2px solid currentColor;
 }
 
@@ -306,7 +306,7 @@ html:not(.af-high-contrast){
   --app-accent-on-surface:#163300;
   --af-accent:#163300;--af-on-accent:#ffffff;--af-accent-soft:#e8f6dd;
   --af-primary-bg:#9fe870;--af-primary-text:#163300;--af-primary-hover:#8edb5d;
-  --af-muted:#4b4f47;--af-border:#dfe3da;--af-border-strong:#9aa093;--af-input:#ffffff;--af-soft:#f1f3ee;
+  --af-muted:#4b4f47;--af-border:#dfe3da;--af-border-strong:#80867a;--af-input:#ffffff;--af-soft:#f1f3ee;
   --af-danger:#a3260f;--af-danger-soft:#fdeeea;--af-warn:#6e4500;--af-warn-soft:#fff4dc;--af-focus:#163300;
   --mat-sys-primary:#163300;--mat-sys-on-primary:#ffffff;
 }
@@ -320,7 +320,7 @@ html[data-theme='oscuro']:not(.af-high-contrast){
   --app-accent-on-surface:#9fe870;
   --af-accent:#9fe870;--af-on-accent:#163300;--af-accent-soft:#1f2d16;
   --af-primary-bg:#9fe870;--af-primary-text:#163300;--af-primary-hover:#b3f08c;
-  --af-muted:#b9bdb3;--af-border:#30352b;--af-border-strong:#5d6457;--af-input:#12140f;--af-soft:#1d211a;
+  --af-muted:#b9bdb3;--af-border:#30352b;--af-border-strong:#737a6d;--af-input:#12140f;--af-soft:#1d211a;
   --af-danger:#ff9e8c;--af-danger-soft:#3a1c16;--af-warn:#ffd48a;--af-warn-soft:#33270f;--af-focus:#9fe870;
   --mat-sys-primary:#9fe870;--mat-sys-on-primary:#163300;
 }
@@ -336,3 +336,10 @@ strong{font-weight:650}
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
+
+/* Menú móvil abierto: el fondo no se desplaza. */
+body.af-menu-open{overflow:hidden}
+
+/* Gráficos: textos de ejes y leyendas con el color de texto del tema (contraste en claro y oscuro). */
+.apexcharts-text,.apexcharts-legend-text,.apexcharts-xaxis-label,.apexcharts-yaxis-label{fill:var(--app-text-secondary)!important;color:var(--app-text-secondary)!important}
+.apexcharts-gridline{stroke:var(--af-border)!important}

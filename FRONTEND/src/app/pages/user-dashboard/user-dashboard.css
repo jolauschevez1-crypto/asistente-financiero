@@ -69,8 +69,8 @@ h2 {
 }
 
 .navbar button.active {
-    border-color: var(--app-brand-accent, #38bdf8);
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.24), rgba(56, 189, 248, 0.24));
+    border-color: var(--app-brand-accent, var(--af-accent));
+    background: var(--af-accent-soft);
     color: var(--app-accent-on-surface, #0284c7);
 }
 
@@ -91,7 +91,7 @@ h2 {
 .recent-list article {
     border: 1px solid var(--app-border-color, rgba(15, 23, 42, 0.12));
     border-radius: var(--radius-sm, 8px);
-    background: linear-gradient(135deg, var(--app-bg-card-start, #fff) 0%, var(--app-bg-card-end, #fff) 100%);
+    background: var(--app-bg-card);
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -181,7 +181,7 @@ tbody tr {
 }
 
 tbody tr:hover {
-    background-color: var(--app-overlay-soft, rgba(56, 189, 248, 0.05));
+    background-color: var(--app-overlay-soft, var(--af-accent-soft));
 }
 
 th {
@@ -237,8 +237,8 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-    outline: 3px solid rgba(56, 189, 248, 0.18);
-    border-color: var(--app-brand-accent, #38bdf8);
+    outline: 3px solid var(--af-accent-soft);
+    border-color: var(--app-brand-accent, var(--af-accent));
 }
 
 .field-error {
@@ -260,7 +260,7 @@ button {
     padding: 0 14px;
     border: 0;
     border-radius: var(--radius-sm, 6px);
-    background: linear-gradient(135deg, var(--app-brand-gradient-start, #2563eb), var(--app-brand-accent, #38bdf8));
+    background: #163300;
     color: white;
     font-weight: 800;
     cursor: pointer;
@@ -292,7 +292,7 @@ button:disabled {
     min-height: 22px;
     padding: 3px 7px;
     border-radius: var(--radius-sm, 6px);
-    background: rgba(56, 189, 248, 0.16);
+    background: var(--af-accent-soft);
     color: var(--app-accent-on-surface, #0284c7);
     font-size: 11px;
     font-weight: 800;
@@ -446,3 +446,21 @@ button:disabled {
 .conversion{display:block;font-size:.75rem;font-weight:500;color:var(--af-muted)}
 .quote{padding:14px 16px;border-radius:12px;border:1px solid var(--af-accent);background:var(--af-accent-soft);font-size:.875rem}
 .quote p{margin:0 0 6px}
+
+/* Sistema visual v3: tarjetas planas, color solo en datos, lima como relleno detrás de texto bosque */
+.account-card,.account-card:nth-child(3n+2),.account-card:nth-child(3n+3){background:var(--app-bg-card);color:var(--app-text-primary);border:1px solid var(--af-border);box-shadow:none;border-radius:16px;min-height:0;padding:20px}
+.account-card span,.account-card strong{color:var(--app-text-primary)}
+.account-card strong{font-size:1.75rem;font-weight:700;letter-spacing:-.025em}
+.account-card .badge-low-balance{background:var(--af-warn-soft);border-color:transparent;color:var(--af-warn)}
+.navbar button{background:transparent;color:var(--app-text-primary);border:1px solid var(--af-border-strong);border-radius:999px;min-height:44px}
+.navbar button.active{background:var(--af-soft)}
+.navbar button:last-child,.movement-dialog button[type=submit],.form-panel button[type=submit]{background:var(--af-primary-bg);color:var(--af-primary-text);border-color:transparent}
+.type-segments button[aria-pressed=true]{background:var(--af-primary-bg);color:var(--af-primary-text);box-shadow:none}
+.movement-icon{background:var(--af-soft);color:var(--app-text-primary)}
+.movement-icon.income{background:var(--af-accent-soft);color:var(--af-accent)}
+.positive{color:var(--af-accent)}
+.preset-btn.active{background:var(--af-primary-bg);color:var(--af-primary-text);border-color:transparent}
+.movement-overlay{background:#0e0f0c99;backdrop-filter:none}
+.movement-dialog{box-shadow:none;border-radius:20px}
+.metrics{border-radius:16px}
+.balance-card strong+strong{font-size:1.25rem}

@@ -1,9 +1,9 @@
 <main class="login-page">
   <section class="intro">
-    <span class="eyebrow">ASISTENTE FINANCIERO</span>
-    <h1>Tu dinero,<br>más claro.</h1>
-    <p>Organiza tus carteras, planifica gastos y avanza hacia tus metas desde un mismo lugar.</p>
-    <div class="intro-features"><span>Carteras y movimientos</span><span>Presupuestos y metas</span><span>Gastos compartidos</span></div>
+    <span class="eyebrow">Asistente Financiero</span>
+    <h1>Tu dinero, en todas sus monedas, más claro.</h1>
+    <p>Carteras en USD, EUR y más, un panel consolidado con tasas de referencia y metas que avanzan contigo.</p>
+    <ul class="intro-features"><li>Carteras multidivisa</li><li>Presupuestos y metas</li><li>Gastos compartidos</li></ul>
   </section>
   <section class="login-panel" aria-label="Acceso al asistente financiero">
     <div class="brand-block"><span class="mark" aria-hidden="true">AF</span><div><h2>{{ modo() === 'registro' ? 'Crea tu cuenta' : modo() === 'login' ? 'Bienvenido' : 'Recupera tu acceso' }}</h2><p>Tus finanzas, organizadas en tu propia cuenta.</p></div></div>
@@ -23,9 +23,9 @@
       <span class="field-error" *ngIf="registroForm.controls.nombre.touched && registroForm.controls.nombre.invalid">Escribe de 2 a 100 caracteres: solo letras, espacios, guiones y apóstrofes.</span>
       <label for="register-email">Correo electrónico</label><input id="register-email" type="email" formControlName="correo" autocomplete="email" maxlength="254" />
       <span class="field-error" *ngIf="registroForm.controls.correo.touched && registroForm.controls.correo.invalid">Ingresa un correo válido, por ejemplo nombre@dominio.com.</span>
-      <label for="register-currency">País o moneda de tus finanzas</label>
+      <label for="register-currency">Moneda principal</label>
       <select id="register-currency" formControlName="moneda" aria-describedby="currency-help">@for(moneda of monedas;track moneda.codigo){<option [value]="moneda.codigo">{{moneda.region}} · {{moneda.codigo}} — {{moneda.nombre}}</option>}</select>
-      <small id="currency-help">Registrarás tus importes en esta moneda, sin conversiones automáticas. Podrás cambiarla antes de tener actividad financiera.</small>
+      <small id="currency-help">Será la moneda de tus nuevas carteras. Podrás crear carteras en otras monedas y elegir en cuál ver el panel (USD, EUR o MXN).</small>
       <label for="birth-date">Fecha de nacimiento <span class="optional">(opcional)</span></label><input id="birth-date" type="date" formControlName="fechaNacimiento" [max]="hoy" aria-describedby="birth-help" />
       <small id="birth-help">No se exige una edad mínima. Si la indicas, debe ser una fecha real y no futura.</small>
       <span class="field-error" *ngIf="registroForm.controls.fechaNacimiento.touched && registroForm.controls.fechaNacimiento.invalid">Revisa la fecha de nacimiento.</span>

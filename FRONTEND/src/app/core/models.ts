@@ -64,6 +64,7 @@ export interface BalanceUsuario {
   balanceTotal?: number | string | null;
   /** Un total por moneda: los saldos de monedas distintas nunca se suman. */
   balances?: { moneda: string; total: number | string }[];
+  balances_por_moneda?: { moneda: string; total: number | string }[];
   cuentas: Cuenta[];
 }
 
@@ -235,6 +236,7 @@ export interface GastoCategoriaMes {
 export interface EstadisticasUsuario {
   moneda?: string;
   balanceTotal: number;
+  balancesPorMoneda?: { moneda: string; total: number | string }[];
   resumenMes: ResumenMesMovimiento[];
   gastosCategoriaMes: GastoCategoriaMes[];
 }

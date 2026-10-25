@@ -10,12 +10,13 @@ import {
   UsuarioTop,
 } from '../../core/models';
 
-const COLOR_CYAN = '#38bdf8';
-const COLOR_TEAL = '#0f766e';
-const COLOR_BLUE = '#2563eb';
-const COLOR_DANGER = '#f87171';
-const COLOR_VIOLET = '#a78bfa';
-const COLOR_AMBER = '#fbbf24';
+// Paleta v3: cada color alcanza 3:1 sobre la tarjeta clara (#fff) y la oscura (#171a14).
+const COLOR_CYAN = '#1d6fa5';
+const COLOR_TEAL = '#3d7a1a';
+const COLOR_BLUE = '#3f5bd1';
+const COLOR_DANGER = '#c2410c';
+const COLOR_VIOLET = '#8a4fd8';
+const COLOR_AMBER = '#9a6700';
 
 const BASE_OPTIONS: Partial<ApexOptions> = {
   chart: {
