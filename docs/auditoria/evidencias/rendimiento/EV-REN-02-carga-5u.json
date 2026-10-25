@@ -1,0 +1,196 @@
+{
+ "fecha": "2026-10-25T14:46:49.629Z",
+ "base": "http://127.0.0.1:3102",
+ "usuarios": 5,
+ "iteraciones": 40,
+ "duracion_s": 2.8,
+ "peticiones": 675,
+ "rps": 239.9,
+ "latencia_global": {
+  "p50": 12.2,
+  "p95": 35,
+  "max": 861.7
+ },
+ "por_ruta": {
+  "POST /auth/registro": {
+   "n": 5,
+   "p50": 770.6,
+   "p95": 861.7,
+   "max": 861.7
+  },
+  "POST /auth/login": {
+   "n": 5,
+   "p50": 289.4,
+   "p95": 374.1,
+   "max": 374.1
+  },
+  "POST /finanzas/carteras": {
+   "n": 15,
+   "p50": 17.3,
+   "p95": 380.1,
+   "max": 380.1
+  },
+  "GET /finanzas/panel": {
+   "n": 200,
+   "p50": 13.8,
+   "p95": 22.8,
+   "max": 39.1
+  },
+  "GET /finanzas/carteras": {
+   "n": 205,
+   "p50": 5.9,
+   "p95": 11.4,
+   "max": 24.7
+  },
+  "POST /finanzas/transferencias": {
+   "n": 245,
+   "p50": 14.8,
+   "p95": 51.5,
+   "max": 68.3
+  }
+ },
+ "errores_red": 0,
+ "fallos": [],
+ "usuarios_detalle": [
+  {
+   "vu": 0,
+   "estado": {
+    "Efectivo": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta A": {
+     "servidor": 50300,
+     "esperado": 50300
+    },
+    "Cuenta B": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta C": {
+     "servidor": 0,
+     "esperado": 0
+    }
+   },
+   "saldos_cuadran": true,
+   "sin_negativos": true,
+   "rafaga": {
+    "aceptadas": 3,
+    "rechazadas_409": 2,
+    "otras": 0
+   }
+  },
+  {
+   "vu": 1,
+   "estado": {
+    "Efectivo": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta A": {
+     "servidor": 50300,
+     "esperado": 50300
+    },
+    "Cuenta B": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta C": {
+     "servidor": 0,
+     "esperado": 0
+    }
+   },
+   "saldos_cuadran": true,
+   "sin_negativos": true,
+   "rafaga": {
+    "aceptadas": 3,
+    "rechazadas_409": 2,
+    "otras": 0
+   }
+  },
+  {
+   "vu": 2,
+   "estado": {
+    "Efectivo": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta A": {
+     "servidor": 50300,
+     "esperado": 50300
+    },
+    "Cuenta B": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta C": {
+     "servidor": 0,
+     "esperado": 0
+    }
+   },
+   "saldos_cuadran": true,
+   "sin_negativos": true,
+   "rafaga": {
+    "aceptadas": 3,
+    "rechazadas_409": 2,
+    "otras": 0
+   }
+  },
+  {
+   "vu": 3,
+   "estado": {
+    "Efectivo": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta A": {
+     "servidor": 50300,
+     "esperado": 50300
+    },
+    "Cuenta B": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta C": {
+     "servidor": 0,
+     "esperado": 0
+    }
+   },
+   "saldos_cuadran": true,
+   "sin_negativos": true,
+   "rafaga": {
+    "aceptadas": 3,
+    "rechazadas_409": 2,
+    "otras": 0
+   }
+  },
+  {
+   "vu": 4,
+   "estado": {
+    "Efectivo": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta A": {
+     "servidor": 50300,
+     "esperado": 50300
+    },
+    "Cuenta B": {
+     "servidor": 0,
+     "esperado": 0
+    },
+    "Cuenta C": {
+     "servidor": 0,
+     "esperado": 0
+    }
+   },
+   "saldos_cuadran": true,
+   "sin_negativos": true,
+   "rafaga": {
+    "aceptadas": 3,
+    "rechazadas_409": 2,
+    "otras": 0
+   }
+  }
+ ]
+}

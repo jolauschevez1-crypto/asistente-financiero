@@ -1,0 +1,56 @@
+{
+ "fecha": "2026-10-25T14:50:54.971Z",
+ "base": "http://127.0.0.1:3102",
+ "resultados": [
+  {
+   "perfil": "escritorio sin limitar",
+   "vista": "login (carga en frío)",
+   "ttfb_ms": 10,
+   "dom_listo_ms": 176,
+   "lcp_ms": 288,
+   "cls": 0.005,
+   "recursos": 22,
+   "kb_transferidos": 627
+  },
+  {
+   "perfil": "escritorio sin limitar",
+   "vista": "panel tras login (navegación SPA)",
+   "ms_hasta_red_inactiva": 209
+  },
+  {
+   "perfil": "escritorio sin limitar",
+   "vista": "panel (recarga completa)",
+   "ttfb_ms": 3,
+   "dom_listo_ms": 144,
+   "lcp_ms": 316,
+   "cls": 0.064,
+   "recursos": 31,
+   "kb_transferidos": 630
+  },
+  {
+   "perfil": "móvil 4G lento + CPU ×4",
+   "vista": "login (carga en frío)",
+   "ttfb_ms": 4,
+   "dom_listo_ms": 3603,
+   "lcp_ms": 4568,
+   "cls": 0,
+   "recursos": 22,
+   "kb_transferidos": 627
+  },
+  {
+   "perfil": "móvil 4G lento + CPU ×4",
+   "vista": "panel tras login (navegación SPA)",
+   "ms_hasta_red_inactiva": 1299
+  },
+  {
+   "perfil": "móvil 4G lento + CPU ×4",
+   "vista": "panel (recarga completa)",
+   "ttfb_ms": 10,
+   "dom_listo_ms": 1164,
+   "lcp_ms": 1612,
+   "cls": 0.089,
+   "recursos": 31,
+   "kb_transferidos": 630
+  }
+ ]
+}
