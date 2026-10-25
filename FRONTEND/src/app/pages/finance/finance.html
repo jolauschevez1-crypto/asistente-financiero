@@ -4,7 +4,7 @@
     <div class="heading-actions">
       @if(section==='panel'||section==='presupuestos'){<label class="month-filter">Mes<input type="month" [(ngModel)]="month" (change)="setMonth()" required></label>}
       @if(section==='carteras'){<app-quick-load (saved)="load()" /><button type="button" class="secondary" (click)="openTransfer()" [disabled]="wallets.length<2">Transferir</button>}
-      @if(section!=='panel'&&!formOpen&&!group){<button type="button" class="primary" (click)="openForm()">{{section==='carteras'?'Crear nueva cartera':section==='presupuestos'?'Nuevo presupuesto':section==='recurrentes'?'Nuevo recordatorio':section==='deudas'?'Nueva deuda o cobro':section==='metas'?'Nueva meta':'Nuevo grupo'}}</button>}
+      @if(section!=='panel'&&!group){<button type="button" class="primary" (click)="openForm()">{{section==='carteras'?'Crear nueva cartera':section==='presupuestos'?'Nuevo presupuesto':section==='recurrentes'?'Nuevo recordatorio':section==='deudas'?'Nueva deuda o cobro':section==='metas'?'Nueva meta':'Nuevo grupo'}}</button>}
       <button type="button" class="secondary" (click)="group ? openGroup(group.grupo.id) : load()" [disabled]="loading||busy">Actualizar</button>
     </div>
   </header>
@@ -189,7 +189,7 @@
     @case('carteras'){
       <div class="card-grid">@for(w of wallets;track w.id){
         <article class="card wallet">
-          <header class="wallet-head"><h2 class="clamp" [title]="w.nombre">{{w.nombre}}</h2><span class="tag" [attr.aria-label]="'Moneda: '+currencyName(w.moneda)">{{w.moneda}}</span></header>
+          <header class="wallet-head"><h2 class="clamp" [title]="w.nombre">{{w.nombre}}</h2><span class="tag" [title]="currencyName(w.moneda)"><span aria-hidden="true">{{w.moneda}}</span><span class="sr-only">Moneda: {{currencyName(w.moneda)}}</span></span></header>
           <p class="wallet-amount num" [class.negative]="isNegative(w.saldo_actual)">{{fmt(w.saldo_actual,w.moneda)}}</p>
           <div class="card-actions"><button type="button" class="secondary" (click)="openTransfer(w)" [disabled]="busy||wallets.length<2">Transferir</button><button type="button" class="secondary" (click)="openConversion(w)" [disabled]="busy">Convertir moneda</button><a routerLink="/usuario" class="text-link">Movimientos</a></div>
         </article>

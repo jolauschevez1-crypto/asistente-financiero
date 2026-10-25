@@ -52,3 +52,26 @@ describe('Panel multidivisa', () => {
     expect(page.minus(page.liquid.total, page.payable.total)).toBe('133.34');
   });
 });
+
+describe('Diálogo Crear nueva cartera (accesibilidad)', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FinancePage],
+      providers: [
+        provideHttpClient(), provideHttpClientTesting(), provideRouter([]),
+        { provide: ActivatedRoute, useValue: { data: of({ section: 'carteras' }) } },
+        { provide: AuthService, useValue: { usuario: signal({ id: 1, nombre: 'Prueba', correo: 'p@local.test', moneda: 'USD' }), actualizarUsuarioLocal: () => {} } },
+        { provide: FinanceService, useValue: { get: (path: string) => of(path.startsWith('panel') ? panel : []) } },
+      ],
+    }).compileComponents();
+  });
+
+  it('mantiene el botón que abre el diálogo para que el foco vuelva a él al cerrar', () => {
+    const fixture = TestBed.createComponent(FinancePage); fixture.detectChanges();
+    const opener = () => Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('button')).find(b => b.textContent?.trim() === 'Crear nueva cartera');
+    const before = opener();
+    expect(before).toBeTruthy();
+    fixture.componentInstance.openForm(); fixture.detectChanges();
+    expect(opener()).toBe(before);
+  });
+});
