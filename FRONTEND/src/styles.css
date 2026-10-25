@@ -309,6 +309,7 @@ html:not(.af-high-contrast){
   --af-muted:#4b4f47;--af-border:#dfe3da;--af-border-strong:#80867a;--af-input:#ffffff;--af-soft:#f1f3ee;
   --af-danger:#a3260f;--af-danger-soft:#fdeeea;--af-warn:#6e4500;--af-warn-soft:#fff4dc;--af-focus:#163300;
   --mat-sys-primary:#163300;--mat-sys-on-primary:#ffffff;
+  --af-seg-0:#2c6a10;--af-seg-1:#2f6fb0;--af-seg-2:#8a4fd8;--af-seg-3:#9a6700;--af-ok:#2f7d12;--af-warn-dot:#b77900;--af-hero-tint:#2c6a10;
 }
 html[data-theme='oscuro']:not(.af-high-contrast){
   color-scheme:dark;
@@ -323,7 +324,10 @@ html[data-theme='oscuro']:not(.af-high-contrast){
   --af-muted:#b9bdb3;--af-border:#30352b;--af-border-strong:#737a6d;--af-input:#12140f;--af-soft:#1d211a;
   --af-danger:#ff9e8c;--af-danger-soft:#3a1c16;--af-warn:#ffd48a;--af-warn-soft:#33270f;--af-focus:#9fe870;
   --mat-sys-primary:#9fe870;--mat-sys-on-primary:#163300;
+  --af-seg-0:#9fe870;--af-seg-1:#6fb3ff;--af-seg-2:#c49bff;--af-seg-3:#ffc861;--af-ok:#7ad15a;--af-warn-dot:#ffc861;--af-hero-tint:#9fe870;
 }
+/* Tema oscuro: un halo verde muy tenue arriba a la derecha da profundidad sin restar contraste. */
+html[data-theme='oscuro']:not(.af-high-contrast) body{background:radial-gradient(1100px 600px at 85% -10%,#9fe8701a,transparent 60%),radial-gradient(900px 500px at 100% 30%,#6fb3ff0f,transparent 60%),var(--app-bg-page-start);background-attachment:fixed}
 body{font-family:Inter,'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;color:var(--app-text-primary);background:var(--app-bg-page-start)}
 button,input,select,textarea{font-family:inherit}
 h1,h2,h3{font-weight:650;letter-spacing:-.02em}

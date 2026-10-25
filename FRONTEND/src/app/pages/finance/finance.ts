@@ -132,7 +132,39 @@ export class FinancePage {
   get freePercent(): number {return compare(this.liquid.total,'0')>0?Math.max(0,Math.min(100,ratio(this.available,this.liquid.total))):0;}
   fixedMonthly(type: string): Estimate {return this.estimate((this.panel?.recurrentes||[]).filter(r=>r.activo&&r.tipo===type).map(r=>({monto:this.monthly(r),moneda:r.moneda})));}
   get fixedCategories(){const map=new Map<string,{monto:Money;moneda:string}[]>();for(const r of this.panel?.recurrentes||[]){if(r.activo&&r.tipo==='GASTO')map.set(r.categoria,[...(map.get(r.categoria)||[]),{monto:this.monthly(r),moneda:r.moneda}]);}return [...map].map(([name,items])=>({name,amount:this.estimate(items)}));}
-  get projectedExpense(): string {const today=localDate();const days=new Date(Number(this.month.slice(0,4)),Number(this.month.slice(5,7)),0).getDate();const elapsed=this.month===today.slice(0,7)?Number(today.slice(8)):days;return scale(this.panel?.gastos||0,days,elapsed)||'0.00';}
+  /** Días del mes seleccionado y días ya transcurridos (todo el mes si no es el actual). */
+  private get monthDays(): {days: number; elapsed: number} {const today=localDate();const days=new Date(Number(this.month.slice(0,4)),Number(this.month.slice(5,7)),0).getDate();return {days,elapsed:this.month===today.slice(0,7)?Number(today.slice(8)):days};}
+  get projectedExpense(): string {const {days,elapsed}=this.monthDays;return scale(this.panel?.gastos||0,days,elapsed)||'0.00';}
+  /** Reparto del patrimonio por moneda, solo de las monedas con tasa (las demás no entran en el total). */
+  get currencyShares(): {moneda: string; saldo: Money; convertido: Money; pct: number}[] {
+    const total=this.panel?.saldo_total;if(!this.panel||compare(total,'0')<=0)return [];
+    return this.panel.saldos_por_moneda.filter(s=>s.convertido!==null&&compare(s.convertido,'0')>0).map(s=>({moneda:s.moneda,saldo:s.saldo,convertido:s.convertido as Money,pct:this.percent(ratio(s.convertido,total))}));
+  }
+  /** Frases cortas del mes, calculadas solo con datos del panel; nada se inventa ni se estima fuera de la proyección lineal. */
+  get insights(): {tono: 'info'|'ok'|'warn'|'danger'; titulo: string; detalle: string}[] {
+    const p=this.panel;if(!p)return [];const out:{tono:'info'|'ok'|'warn'|'danger';titulo:string;detalle:string}[]=[];
+    if(compare(p.gastos,'0')>0){const {elapsed}=this.monthDays;
+      out.push({tono:'info',titulo:`Llevas ${this.fmt(p.gastos)} gastados este mes`,detalle:`Unos ${this.fmt(scale(p.gastos,1,elapsed)||'0')} por día`});
+      out.push({tono:'info',titulo:`Al ritmo actual cerrarías el mes en ${this.fmt(this.projectedExpense)}`,detalle:'Proyección lineal según los días transcurridos'});
+    }else out.push({tono:'ok',titulo:'Aún no registras gastos este mes',detalle:compare(p.ingresos,'0')>0?`Ingresos del mes: ${this.fmt(p.ingresos)}`:'Cuando registres uno, verás aquí tu ritmo de gasto'});
+    const top=[...p.gastos_categoria].sort((a,b)=>compare(b.monto_total,a.monto_total))[0];
+    if(top&&compare(top.monto_total,'0')>0)out.push({tono:'info',titulo:`Tu mayor gasto es ${top.categoria}`,detalle:`${this.fmt(top.monto_total)} en ${top.cantidad} ${Number(top.cantidad)===1?'movimiento':'movimientos'}`});
+    const over=p.presupuestos.filter(b=>compare(b.restante,'0')<0);
+    if(over.length)out.push({tono:'danger',titulo:over.length===1?`Te pasaste en el presupuesto de ${over[0].categoria}`:`Te pasaste en ${over.length} presupuestos`,detalle:over.map(b=>`${b.categoria}: ${this.fmt(b.gastado,b.moneda)} de ${this.fmt(b.limite,b.moneda)}`).join(' · ')});
+    for(const a of p.alertas)out.push({tono:'warn',titulo:this.alertText(a),detalle:'Revisa el detalle en su sección'});
+    return out;
+  }
+  get walletCurrencies(): number {return new Set(this.wallets.map(w=>w.moneda)).size;}
+  /** Frente de la tarjeta de cartera: un tono por moneda para distinguirlas de un vistazo. */
+  walletTone(code: string): string {return ({USD:'tone-forest',EUR:'tone-ocean',MXN:'tone-clay',COP:'tone-plum'} as Record<string,string>)[code]||'tone-slate';}
+  get liquidBar(): number {return compare(this.liquid.total,'0')>0?100:0;}
+  get sharesLabel(): string {return this.currencyShares.map(s=>`${s.moneda} ${s.pct.toFixed(0)} %`).join(', ');}
+  /** Color de la leyenda: el mismo segmento que en la barra, o gris si la moneda no tiene tasa. */
+  legendClass(code: string): string {const i=this.currencyShares.findIndex(s=>s.moneda===code);return i<0?'none':'seg-'+(i%4);}
+  get monthLabel(): string {const [y,m]=this.month.split('-').map(Number);return y&&m?new Intl.DateTimeFormat('es',{month:'long',year:'numeric'}).format(new Date(y,m-1,1)):this.month;}
+  /** Ancho de la barra de compromisos frente al dinero disponible (máximo 100 %). */
+  get commitmentsBar(): number {return compare(this.liquid.total,'0')>0?Math.min(100,this.percent(ratio(this.commitments.total,this.liquid.total))):(compare(this.commitments.total,'0')>0?100:0);}
+  budgetTone(b: Budget): 'ok'|'warn'|'danger' {return compare(b.restante,'0')<0?'danger':this.percent(b.porcentaje)>=80?'warn':'ok';}
   walletShare(w: Wallet): number {const v=this.toBase(w.saldo_actual,w.moneda);return v===null?0:this.percent(ratio(v,this.panel?.saldo_total));}
   isNegative(value: Money | null | undefined): boolean {return compare(value,'0')<0;}
   abs(value: Money): string {return sum([value]).replace('-','');}

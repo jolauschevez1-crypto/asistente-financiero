@@ -8,7 +8,7 @@
   "wcag22aa"
  ],
  "base": "http://127.0.0.1:3102",
- "fecha": "2026-10-25T15:27:26.168Z",
+ "fecha": "2026-10-25T15:46:04.226Z",
  "resumen": {},
  "resultados": [
   {
@@ -26,19 +26,19 @@
    "incomplete": [
     {
      "id": "color-contrast",
-     "nodes": 11,
+     "nodes": 58,
      "targets": [
-      "text[y=\"33.666666666666664\"] > tspan",
-      "text[y=\"61.455\"] > tspan",
-      "text[y=\"89.24333333333333\"] > tspan",
-      "text[y=\"117.03166666666665\"] > tspan"
+      ".heading-text > .eyebrow",
+      "h1",
+      ".subtitle",
+      ".month-filter"
      ],
      "html": [
-      "<tspan>1.200</tspan>",
-      "<tspan>1.000</tspan>"
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Panel general</h1>"
      ],
      "msg": [
-      "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
      ]
     }
    ]
@@ -48,42 +48,150 @@
    "tema": "oscuro",
    "vista": "escritorio",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 22,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/presupuestos",
    "tema": "oscuro",
    "vista": "escritorio",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 7,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".month-filter"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Presupuestos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/recurrentes",
    "tema": "oscuro",
    "vista": "escritorio",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Ingresos y gastos fijos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/deudas",
    "tema": "oscuro",
    "vista": "escritorio",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Deudas y cobros</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/metas",
    "tema": "oscuro",
    "vista": "escritorio",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Metas de ahorro</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/grupos",
    "tema": "oscuro",
    "vista": "escritorio",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Gastos compartidos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/usuario",
@@ -93,18 +201,19 @@
    "incomplete": [
     {
      "id": "color-contrast",
-     "nodes": 3,
+     "nodes": 16,
      "targets": [
-      ".diary-row:nth-child(1) > .movement-icon.income[aria-hidden=\"true\"]",
-      ".diary-row:nth-child(2) > .movement-icon.income[aria-hidden=\"true\"]",
-      ".diary-row:nth-child(3) > .movement-icon.income[aria-hidden=\"true\"]"
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
      ],
      "html": [
-      "<span _ngcontent-ng-c3288567634=\"\" aria-hidden=\"true\" class=\"movement-icon income\">↓</span>",
-      "<span _ngcontent-ng-c3288567634=\"\" aria-hidden=\"true\" class=\"movement-icon income\">↓</span>"
+      "<p _ngcontent-ng-c3288567634=\"\" class=\"eyebrow\">Compañero de prueba</p>",
+      "<h1 _ngcontent-ng-c3288567634=\"\">Mis carteras y diario</h1>"
      ],
      "msg": [
-      "Fix any of the following:\n  Element content contains only non-text characters"
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
      ]
     }
    ]
@@ -114,14 +223,50 @@
    "tema": "oscuro",
    "vista": "escritorio",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 5,
+     "targets": [
+      ".active",
+      ".tab-btn[type=\"button\"]:nth-child(2)",
+      ".tab-btn[type=\"button\"]:nth-child(3)",
+      "footer > span:nth-child(1)"
+     ],
+     "html": [
+      "<button _ngcontent-ng-c1596769753=\"\" type=\"button\" class=\"tab-btn active\">",
+      "<button _ngcontent-ng-c1596769753=\"\" type=\"button\" class=\"tab-btn\">"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/ia",
    "tema": "oscuro",
    "vista": "escritorio",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 5,
+     "targets": [
+      "div > p",
+      "h1",
+      ".ia-subtitle",
+      "footer > span:nth-child(1)"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c4069684152=\"\">TU COPILOTO FINANCIERO</p>",
+      "<h1 _ngcontent-ng-c4069684152=\"\">Entiende tu dinero.</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/carteras#dialogo-crear",
@@ -146,15 +291,19 @@
     },
     {
      "id": "color-contrast",
-     "nodes": 1,
+     "nodes": 23,
      "targets": [
-      ".form-note"
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
      ],
      "html": [
-      "<p _ngcontent-ng-c1664781119=\"\" class=\"form-note full\">Si indicas un saldo inicial, se registrará un ingreso de apertura en el historial de esta cartera.</p>"
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
      ],
      "msg": [
-      "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
      ]
     }
    ]
@@ -178,6 +327,23 @@
      ],
      "msg": [
       "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 22,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
      ]
     }
    ]
@@ -205,17 +371,19 @@
     },
     {
      "id": "color-contrast",
-     "nodes": 2,
+     "nodes": 24,
      "targets": [
-      ".quote > p:nth-child(3)",
-      ".check"
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
      ],
      "html": [
-      "<p _ngcontent-ng-c1664781119=\"\">Los movimientos anteriores se conservan en su moneda original y dejarán de poder editarse o anularse.</p>",
-      "<label _ngcontent-ng-c1664781119=\"\" class=\"check full\"><input _ngcontent-ng-c1664781119=\"\" type=\"checkbox\" name=\"accept\" class=\"ng-untouched ng-pristine ng-vali"
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
      ],
      "msg": [
-      "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
      ]
     }
    ]
@@ -228,19 +396,19 @@
    "incomplete": [
     {
      "id": "color-contrast",
-     "nodes": 4,
+     "nodes": 23,
      "targets": [
-      ".primary",
-      ".secondary:nth-child(4)",
-      "article:nth-child(3) > .wallet-head > h2",
-      "span[title=\"Euro\"] > span[aria-hidden=\"true\"]"
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
      ],
      "html": [
-      "<button _ngcontent-ng-c1664781119=\"\" type=\"button\" class=\"primary\">Crear nueva cartera</button>",
-      "<button _ngcontent-ng-c1664781119=\"\" type=\"button\" class=\"secondary\">Actualizar</button>"
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
      ],
      "msg": [
-      "Fix any of the following:\n  Element's background color could not be determined because it is overlapped by another element"
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
      ]
     }
    ]
@@ -260,19 +428,19 @@
    "incomplete": [
     {
      "id": "color-contrast",
-     "nodes": 11,
+     "nodes": 58,
      "targets": [
-      "text[y=\"33.666666666666664\"] > tspan",
-      "text[y=\"61.455\"] > tspan",
-      "text[y=\"89.24333333333333\"] > tspan",
-      "text[y=\"117.03166666666665\"] > tspan"
+      ".heading-text > .eyebrow",
+      "h1",
+      ".subtitle",
+      ".month-filter"
      ],
      "html": [
-      "<tspan>1.200</tspan>",
-      "<tspan>1.000</tspan>"
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Panel general</h1>"
      ],
      "msg": [
-      "Fix any of the following:\n  Element's background color could not be determined because element contains an image node"
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
      ]
     }
    ]
@@ -282,42 +450,150 @@
    "tema": "oscuro",
    "vista": "movil",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 22,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/presupuestos",
    "tema": "oscuro",
    "vista": "movil",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 7,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".month-filter"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Presupuestos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/recurrentes",
    "tema": "oscuro",
    "vista": "movil",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Ingresos y gastos fijos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/deudas",
    "tema": "oscuro",
    "vista": "movil",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Deudas y cobros</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/metas",
    "tema": "oscuro",
    "vista": "movil",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Metas de ahorro</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/grupos",
    "tema": "oscuro",
    "vista": "movil",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Gastos compartidos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/usuario",
@@ -327,18 +603,19 @@
    "incomplete": [
     {
      "id": "color-contrast",
-     "nodes": 3,
+     "nodes": 16,
      "targets": [
-      ".diary-row:nth-child(1) > .movement-icon.income[aria-hidden=\"true\"]",
-      ".diary-row:nth-child(2) > .movement-icon.income[aria-hidden=\"true\"]",
-      ".diary-row:nth-child(3) > .movement-icon.income[aria-hidden=\"true\"]"
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
      ],
      "html": [
-      "<span _ngcontent-ng-c3288567634=\"\" aria-hidden=\"true\" class=\"movement-icon income\">↓</span>",
-      "<span _ngcontent-ng-c3288567634=\"\" aria-hidden=\"true\" class=\"movement-icon income\">↓</span>"
+      "<p _ngcontent-ng-c3288567634=\"\" class=\"eyebrow\">Compañero de prueba</p>",
+      "<h1 _ngcontent-ng-c3288567634=\"\">Mis carteras y diario</h1>"
      ],
      "msg": [
-      "Fix any of the following:\n  Element content contains only non-text characters"
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
      ]
     }
    ]
@@ -348,14 +625,50 @@
    "tema": "oscuro",
    "vista": "movil",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 5,
+     "targets": [
+      ".active",
+      ".tab-btn[type=\"button\"]:nth-child(2)",
+      ".tab-btn[type=\"button\"]:nth-child(3)",
+      "footer > span:nth-child(1)"
+     ],
+     "html": [
+      "<button _ngcontent-ng-c1596769753=\"\" type=\"button\" class=\"tab-btn active\">",
+      "<button _ngcontent-ng-c1596769753=\"\" type=\"button\" class=\"tab-btn\">"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/ia",
    "tema": "oscuro",
    "vista": "movil",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 5,
+     "targets": [
+      "div > p",
+      "h1",
+      ".ia-subtitle",
+      "footer > span:nth-child(1)"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c4069684152=\"\">TU COPILOTO FINANCIERO</p>",
+      "<h1 _ngcontent-ng-c4069684152=\"\">Entiende tu dinero.</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   },
   {
    "ruta": "/carteras#dialogo-crear",
@@ -380,15 +693,19 @@
     },
     {
      "id": "color-contrast",
-     "nodes": 1,
+     "nodes": 23,
      "targets": [
-      ".form-note"
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
      ],
      "html": [
-      "<p _ngcontent-ng-c1664781119=\"\" class=\"form-note full\">Si indicas un saldo inicial, se registrará un ingreso de apertura en el historial de esta cartera.</p>"
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
      ],
      "msg": [
-      "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
      ]
     }
    ]
@@ -412,6 +729,23 @@
      ],
      "msg": [
       "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 22,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
      ]
     }
    ]
@@ -439,19 +773,19 @@
     },
     {
      "id": "color-contrast",
-     "nodes": 4,
+     "nodes": 26,
      "targets": [
-      "#conversion-title",
-      ".muted.clamp",
-      ".quote > p:nth-child(3)",
-      ".check"
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
      ],
      "html": [
-      "<h2 _ngcontent-ng-c1664781119=\"\" id=\"conversion-title\">Convertir la moneda de la cartera</h2>",
-      "<p _ngcontent-ng-c1664781119=\"\" class=\"muted clamp\" title=\"Cuenta de ahorro en euros para el viaje de fin de año con la familia\">Cuenta de ahorro en euros para "
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
      ],
      "msg": [
-      "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
      ]
     }
    ]
@@ -461,7 +795,25 @@
    "tema": "oscuro",
    "vista": "movil",
    "violations": [],
-   "incomplete": []
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 22,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
   }
  ]
 }

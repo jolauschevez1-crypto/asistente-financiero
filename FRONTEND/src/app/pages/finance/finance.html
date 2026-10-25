@@ -114,15 +114,16 @@
         <section class="hero" aria-labelledby="hero-title">
           <div class="hero-main">
             <p class="eyebrow" id="hero-title">Patrimonio en {{panel.moneda}}</p>
-            @if(panel.saldo_total_completo){<p class="hero-amount num">{{fmt(panel.saldo_total)}}</p>}
-            @else{<p class="hero-amount num partial">{{fmt(panel.saldo_total)}}</p><p class="partial-note">Total parcial: no incluye {{panel.saldos_sin_convertir.length===1?'el saldo':'los saldos'}} en {{codes(panel.saldos_sin_convertir)}}, que no tienen tasa de referencia.</p>}
-            <p class="hero-sub">Menos deudas por pagar: <strong class="num" [class.negative]="isNegative(minus(panel.saldo_total,payable.total))">{{fmt(minus(panel.saldo_total,payable.total))}}</strong></p>
+            <p class="hero-amount num">{{fmt(panel.saldo_total)}}</p>
+            @if(!panel.saldo_total_completo){<p class="partial-note">Total parcial: no incluye {{panel.saldos_sin_convertir.length===1?'el saldo':'los saldos'}} en {{codes(panel.saldos_sin_convertir)}}, que no tienen tasa de referencia.</p>}
+            <p class="hero-sub"><span class="status-dot" [class.negative-dot]="availableIsNegative" aria-hidden="true"></span>{{availableIsNegative?'Tras tus pendientes te faltan':'Tras tus pendientes te quedan'}} <strong class="num" [class.negative]="availableIsNegative">{{fmt(abs(available))}}</strong>.</p>
             @if(multiCurrency||panel.tasas.estado!=='vigente'){<p class="rate-stamp" [class.stale]="panel.tasas.estado!=='vigente'">{{rateLabel}}. Valores de referencia, no en tiempo real.</p>}
           </div>
           <div class="hero-side">
-            <table class="currency-table"><caption class="sr-only">Saldos por moneda</caption><thead><tr><th scope="col">Moneda</th><th scope="col" class="num">Saldo</th><th scope="col" class="num">En {{panel.moneda}}</th></tr></thead>
-              <tbody>@for(s of panel.saldos_por_moneda;track s.moneda){<tr><th scope="row">{{s.moneda}}</th><td class="num">{{fmt(s.saldo,s.moneda)}}</td><td class="num">{{s.convertido===null?'Sin tasa':fmt(s.convertido)}}</td></tr>}@empty{<tr><td colspan="3" class="muted">Aún no tienes carteras.</td></tr>}</tbody>
-            </table>
+            @if(currencyShares.length){<div class="stack-bar" role="img" [attr.aria-label]="'Reparto por moneda: '+sharesLabel">@for(s of currencyShares;track s.moneda;let i=$index){<span [class]="'seg seg-'+(i%4)" [style.width.%]="s.pct"></span>}</div>}
+            <ul class="legend" aria-label="Saldos por moneda">
+              @for(s of panel.saldos_por_moneda;track s.moneda){<li><span [class]="'legend-dot '+legendClass(s.moneda)" aria-hidden="true"></span><span class="legend-code">{{s.moneda}}</span><strong class="num">{{fmt(s.saldo,s.moneda)}}</strong><small class="num">{{s.convertido===null?'Sin tasa':s.moneda===panel.moneda?'':'≈ '+fmt(s.convertido)}}</small></li>}@empty{<li class="muted">Aún no tienes carteras.</li>}
+            </ul>
           </div>
         </section>
 
@@ -130,74 +131,117 @@
           <div><span>Ingresos del mes</span><strong class="num">{{fmt(panel.ingresos)}}</strong></div>
           <div><span>Gastos del mes</span><strong class="num">{{fmt(panel.gastos)}}</strong></div>
           <div><span>Resultado</span><strong class="num" [class.negative]="isNegative(panel.neto)" [class.positive]="!isNegative(panel.neto)">{{fmt(panel.neto)}}</strong></div>
+          <div><span>Deudas por pagar</span><strong class="num">{{fmt(payable.total)}}</strong></div>
           <div><span>Disponible tras pendientes</span><strong class="num">{{freePercent.toFixed(0)}} %</strong></div>
         </section>
         @if(!panel.flujos_completos||multiCurrency){<div class="footnotes">@if(!panel.flujos_completos){<p class="muted note">Ingresos y gastos sin tasa, no incluidos: {{flowsWithoutRate}}.</p>}
         @if(multiCurrency){<p class="muted note">Ingresos y gastos de otras monedas se valoran con la tasa de referencia del día de cada movimiento; los saldos y pendientes, con la última tasa disponible.</p>}</div>}
 
-        <div class="grid-2">
-          <section class="card"><header class="card-head"><h2>Balance disponible</h2></header>
-            <dl class="ledger">
-              <div><dt>Dinero fuera de metas</dt><dd class="num">{{fmt(liquid.total)}}</dd></div>
-              <div><dt>Fijos pendientes y deudas</dt><dd class="num">{{fmt(commitments.total)}}</dd></div>
-              <div class="total"><dt>{{availableIsNegative?'Te faltan':'Te quedan'}}</dt><dd class="num" [class.negative]="availableIsNegative">{{fmt(abs(available))}}</dd></div>
-            </dl>
-            <div class="meter" role="img" [attr.aria-label]="'Disponible tras pendientes: '+freePercent.toFixed(0)+' por ciento'"><span [style.width.%]="freePercent"></span></div>
-            @if(liquid.sinTasa.length||commitments.sinTasa.length){<p class="muted note">Sin tasa, no incluidos: {{missingText(liquid)}} {{commitments.sinTasa.length?'· pendientes '+missingText(commitments):''}}</p>}
-            <small class="muted">Fijos: vencimientos hasta el mes seleccionado. Deudas: saldo total por pagar. Es una estimación: no mueve dinero.</small>
-          </section>
-          <section class="card"><header class="card-head"><h2>Compromisos estimados por mes</h2><a routerLink="/recurrentes">Administrar</a></header>
-            <dl class="ledger">
-              <div><dt>Ingresos fijos</dt><dd class="num">{{fmt(fixedMonthly('INGRESO').total)}}</dd></div>
-              <div><dt>Gastos fijos</dt><dd class="num">{{fmt(fixedMonthly('GASTO').total)}}</dd></div>
-              <div><dt>Deudas por pagar</dt><dd class="num">{{fmt(payable.total)}}</dd></div>
-              <div><dt>Te deben</dt><dd class="num">{{fmt(receivable.total)}}</dd></div>
-              <div><dt>Gasto proyectado al cierre</dt><dd class="num">{{fmt(projectedExpense)}}</dd></div>
-            </dl>
-            <small class="muted">Semanales × 52/12 y anuales ÷ 12. La proyección es lineal según los días transcurridos.</small>
-          </section>
-        </div>
-
-        <section class="card"><header class="card-head"><div><h2>Pagos por confirmar</h2><p class="muted">{{dueFixed.length}} recordatorios hasta {{month}}.</p></div><a routerLink="/recurrentes">Ver fijos</a></header>
-          @for(r of dueFixed;track r.id){<div class="row"><div class="row-text"><strong class="clamp" [title]="r.nombre">{{r.nombre}}</strong><small class="clamp">{{r.cuenta}} · {{date(r.proxima_fecha)}}</small></div><strong class="num">{{fmt(r.monto,r.moneda)}}</strong><button type="button" class="secondary" (click)="confirmRecurring(r)" [disabled]="busy||!r.vencido">{{r.vencido?'Confirmar pago':'Programado'}}</button></div>}
-          @empty{<p class="empty">No hay pagos pendientes en este período.</p>}
+        <section class="block" aria-labelledby="insights-title">
+          <header class="block-head"><div><h2 id="insights-title">Lo destacado del mes</h2><p class="muted">Con tus gastos, presupuestos y avisos de {{monthLabel}}.</p></div></header>
+          <ul class="insights">@for(i of insights;track $index){<li><span class="insight-dot" [class]="'insight-dot '+i.tono" aria-hidden="true"></span><div><strong>{{i.titulo}}</strong><small>{{i.detalle}}</small></div></li>}</ul>
         </section>
 
         <div class="grid-2">
-          <section class="card"><header class="card-head"><h2>Tu dinero, por cartera</h2><a routerLink="/carteras">Ver carteras</a></header>
-            @for(w of panel.carteras;track w.id){<div class="share"><div class="share-line"><span class="clamp" [title]="w.nombre">{{w.nombre}}</span><strong class="num">{{fmt(w.saldo_actual,w.moneda)}}</strong></div><div class="bar" aria-hidden="true"><span [style.width.%]="walletShare(w)"></span></div>@if(w.moneda!==panel.moneda){<small class="muted">{{toBase(w.saldo_actual,w.moneda)===null?'Sin tasa de referencia':'≈ '+fmt(toBase(w.saldo_actual,w.moneda))}}</small>}</div>}
-            @empty{<p class="empty">Aún no tienes carteras. <a routerLink="/carteras">Crea la primera</a>.</p>}
+          <section class="block" aria-labelledby="balance-title">
+            <header class="block-head"><div><h2 id="balance-title">Balance real</h2><p class="muted">Tu dinero fuera de metas frente a lo que debes pagar.</p></div></header>
+            <div class="card">
+              <div class="bar-line"><span>Dinero fuera de metas</span><strong class="num">{{fmt(liquid.total)}}</strong></div>
+              <div class="bar big" aria-hidden="true"><span [style.width.%]="liquidBar"></span></div>
+              <div class="bar-line"><span>Fijos pendientes y deudas</span><strong class="num">{{fmt(commitments.total)}}</strong></div>
+              <div class="bar big danger" aria-hidden="true"><span [style.width.%]="commitmentsBar"></span></div>
+              <p class="bar-summary" [class.negative]="availableIsNegative">{{availableIsNegative?'Te faltan '+fmt(abs(available))+' para cubrir todo.':'Cubres todo y te sobran '+fmt(available)+'.'}}</p>
+              @if(liquid.sinTasa.length||commitments.sinTasa.length){<p class="muted note-in">Sin tasa, no incluidos: {{missingText(liquid)}} {{commitments.sinTasa.length?'· pendientes '+missingText(commitments):''}}</p>}
+              <small class="muted">Fijos: vencimientos hasta el mes seleccionado. Deudas: saldo total por pagar. Es una estimación: no mueve dinero.</small>
+            </div>
           </section>
-          <section class="card"><header class="card-head"><h2>Requieren tu atención</h2></header>
-            @for(alert of panel.alertas;track $index){<p class="alert-line">{{alertText(alert)}}</p>}@empty{<p class="empty">Todo al día. No hay alertas.</p>}
+          <section class="block" aria-labelledby="commit-title">
+            <header class="block-head"><div><h2 id="commit-title">Compromisos por mes</h2><p class="muted">Estimación mensual de tus fijos y deudas.</p></div><a routerLink="/recurrentes">Administrar</a></header>
+            <div class="card">
+              <dl class="ledger">
+                <div><dt>Ingresos fijos</dt><dd class="num">{{fmt(fixedMonthly('INGRESO').total)}}</dd></div>
+                <div><dt>Gastos fijos</dt><dd class="num">{{fmt(fixedMonthly('GASTO').total)}}</dd></div>
+                <div><dt>Deudas por pagar</dt><dd class="num">{{fmt(payable.total)}}</dd></div>
+                <div><dt>Te deben</dt><dd class="num">{{fmt(receivable.total)}}</dd></div>
+                <div><dt>Gasto proyectado al cierre</dt><dd class="num">{{fmt(projectedExpense)}}</dd></div>
+              </dl>
+              <small class="muted">Semanales × 52/12 y anuales ÷ 12. La proyección es lineal según los días transcurridos.</small>
+            </div>
           </section>
-          <section class="card"><header class="card-head"><h2>Presupuestos del mes</h2><a routerLink="/presupuestos">Administrar</a></header>
-            @for(b of panel.presupuestos;track b.id){<div class="share"><div class="share-line"><span class="clamp">{{b.categoria}}</span><span class="num" [class.negative]="isNegative(b.restante)">{{fmt(b.gastado,b.moneda)}} / {{fmt(b.limite,b.moneda)}}</span></div><progress max="100" [value]="percent(b.porcentaje)" [attr.aria-label]="'Uso de presupuesto '+b.categoria"></progress></div>}@empty{<p class="empty">Define presupuestos para ver aquí tu progreso.</p>}
+        </div>
+
+        <section class="block" aria-labelledby="due-title">
+          <header class="block-head"><div><h2 id="due-title">Pagos por confirmar</h2><p class="muted">{{dueFixed.length}} {{dueFixed.length===1?'recordatorio':'recordatorios'}} hasta {{monthLabel}}.</p></div><a routerLink="/recurrentes">Ver fijos</a></header>
+          <div class="card list-card">
+            @for(r of dueFixed;track r.id){<div class="row"><div class="row-text"><strong class="clamp" [title]="r.nombre">{{r.nombre}}</strong><small class="clamp">{{r.cuenta}} · {{date(r.proxima_fecha)}}</small></div><strong class="num">{{fmt(r.monto,r.moneda)}}</strong><button type="button" class="secondary" (click)="confirmRecurring(r)" [disabled]="busy||!r.vencido">{{r.vencido?'Confirmar pago':'Programado'}}</button></div>}
+            @empty{<p class="empty">No hay pagos pendientes en este período.</p>}
+          </div>
+        </section>
+
+        <div class="grid-2">
+          <section class="block" aria-labelledby="wallets-title">
+            <header class="block-head"><h2 id="wallets-title">Tu dinero, por cartera</h2><a routerLink="/carteras">Ver carteras</a></header>
+            <div class="card">
+              @for(w of panel.carteras;track w.id){<div class="share"><div class="share-line"><span class="clamp" [title]="w.nombre">{{w.nombre}}</span><strong class="num">{{fmt(w.saldo_actual,w.moneda)}}</strong></div><div class="bar" aria-hidden="true"><span [style.width.%]="walletShare(w)"></span></div>@if(w.moneda!==panel.moneda){<small class="muted">{{toBase(w.saldo_actual,w.moneda)===null?'Sin tasa de referencia':'≈ '+fmt(toBase(w.saldo_actual,w.moneda))}}</small>}</div>}
+              @empty{<p class="empty">Aún no tienes carteras. <a routerLink="/carteras">Crea la primera</a>.</p>}
+            </div>
           </section>
-          <section class="card"><header class="card-head"><h2>Metas en marcha</h2><a routerLink="/metas">Ver metas</a></header>
-            @for(g of panel.metas;track g.id){<div class="share"><div class="share-line"><span class="clamp" [title]="g.nombre">{{g.nombre}}</span><span class="num">{{fmt(g.ahorrado,g.moneda)}} / {{fmt(g.objetivo,g.moneda)}}</span></div><progress max="100" [value]="percent(g.porcentaje)" [attr.aria-label]="'Progreso de '+g.nombre"></progress></div>}@empty{<p class="empty">Elige una meta y empieza a ahorrar a tu ritmo.</p>}
-          </section>
+          <div class="stack">
+            <section class="block" aria-labelledby="budgets-title">
+              <header class="block-head"><h2 id="budgets-title">Presupuestos del mes</h2><a routerLink="/presupuestos">Administrar</a></header>
+              <div class="card">
+                @for(b of panel.presupuestos;track b.id){<div class="share"><div class="share-line"><span class="clamp">{{b.categoria}}</span><span class="num" [class.negative]="isNegative(b.restante)">{{fmt(b.gastado,b.moneda)}} / {{fmt(b.limite,b.moneda)}}</span></div><div class="bar" [class]="'bar '+budgetTone(b)" role="img" [attr.aria-label]="'Uso de presupuesto '+b.categoria+': '+percent(b.porcentaje).toFixed(0)+' por ciento'"><span [style.width.%]="percent(b.porcentaje)"></span></div></div>}@empty{<p class="empty">Define presupuestos para ver aquí tu progreso.</p>}
+              </div>
+            </section>
+            <section class="block" aria-labelledby="goals-title">
+              <header class="block-head"><h2 id="goals-title">Metas en marcha</h2><a routerLink="/metas">Ver metas</a></header>
+              <div class="card">
+                @for(g of panel.metas;track g.id){<div class="share"><div class="share-line"><span class="clamp" [title]="g.nombre">{{g.nombre}}</span><span class="num">{{fmt(g.ahorrado,g.moneda)}} / {{fmt(g.objetivo,g.moneda)}}</span></div><div class="bar" role="img" [attr.aria-label]="'Progreso de '+g.nombre+': '+percent(g.porcentaje).toFixed(0)+' por ciento'"><span [style.width.%]="percent(g.porcentaje)"></span></div></div>}@empty{<p class="empty">Elige una meta y empieza a ahorrar a tu ritmo.</p>}
+              </div>
+            </section>
+          </div>
         </div>
         <div class="grid-2">
           <app-chart-card [titulo]="'Ingresos y gastos en '+panel.moneda+' · últimos 6 meses'" icon="bar_chart" [options]="trendOptions" [loading]="loading" />
           <app-chart-card [titulo]="'Gastos por categoría en '+panel.moneda" icon="pie_chart" [options]="categoryOptions" [loading]="loading" />
         </div>
         @if(trendIncomplete){<p class="muted note">Los gráficos no incluyen movimientos en monedas sin tasa de referencia.</p>}
-        <section class="card"><header class="card-head"><h2>Tus grupos</h2><a routerLink="/grupos">Administrar</a></header>@for(g of panel.grupos;track g.id){<div class="row"><span class="row-text clamp" [title]="g.nombre">{{g.nombre}} · {{g.miembros}} miembros</span><strong class="num">{{fmt(g.total_gastos,g.moneda)}}</strong></div>}@empty{<p class="empty">Crea un grupo para repartir gastos de casa o de un viaje.</p>}<small class="muted">Totales compartidos en la moneda de cada grupo; no se suman a tus gastos personales.</small></section>
+        <section class="block" aria-labelledby="groups-title">
+          <header class="block-head"><div><h2 id="groups-title">Tus grupos</h2><p class="muted">Totales compartidos en la moneda de cada grupo; no se suman a tus gastos personales.</p></div><a routerLink="/grupos">Administrar</a></header>
+          <div class="card list-card">@for(g of panel.grupos;track g.id){<div class="row"><span class="row-text clamp" [title]="g.nombre">{{g.nombre}} · {{g.miembros}} miembros</span><strong class="num">{{fmt(g.total_gastos,g.moneda)}}</strong></div>}@empty{<p class="empty">Crea un grupo para repartir gastos de casa o de un viaje.</p>}</div>
+        </section>
       }
     }
     @case('carteras'){
+      @if(wallets.length){<p class="muted section-summary">{{wallets.length}} {{wallets.length===1?'cartera':'carteras'}} en {{walletCurrencies}} {{walletCurrencies===1?'moneda':'monedas'}}.</p>}
       <div class="card-grid">@for(w of wallets;track w.id){
-        <article class="card wallet">
-          <header class="wallet-head"><h2 class="clamp" [title]="w.nombre">{{w.nombre}}</h2><span class="tag" [title]="currencyName(w.moneda)"><span aria-hidden="true">{{w.moneda}}</span><span class="sr-only">Moneda: {{currencyName(w.moneda)}}</span></span></header>
-          <p class="wallet-amount num" [class.negative]="isNegative(w.saldo_actual)">{{fmt(w.saldo_actual,w.moneda)}}</p>
+        <article class="wallet">
+          <div [class]="'wallet-face '+walletTone(w.moneda)">
+            <header class="wallet-head"><h2 class="clamp" [title]="w.nombre">{{w.nombre}}</h2><span class="tag" [title]="currencyName(w.moneda)"><span aria-hidden="true">{{w.moneda}}</span><span class="sr-only">Moneda: {{currencyName(w.moneda)}}</span></span></header>
+            <p class="wallet-amount num" [class.negative]="isNegative(w.saldo_actual)">{{fmt(w.saldo_actual,w.moneda)}}</p>
+          </div>
           <div class="card-actions"><button type="button" class="secondary" (click)="openTransfer(w)" [disabled]="busy||wallets.length<2">Transferir</button><button type="button" class="secondary" (click)="openConversion(w)" [disabled]="busy">Convertir moneda</button><a routerLink="/usuario" class="text-link">Movimientos</a></div>
         </article>
       }@empty{<div class="empty-state"><h2>Tu primera cartera</h2><p>Agrega efectivo, una cuenta bancaria o una cuenta en otra moneda.</p><button type="button" class="primary" (click)="openForm()">Crear nueva cartera</button></div>}</div>
       <p class="muted note">Convertir una cartera cambia su saldo a otra moneda con la tasa de referencia que confirmes. Los movimientos anteriores se conservan en su moneda original.</p>
     }
     @case('presupuestos'){
-      <div class="card-grid">@for(b of budgets;track b.id){<article class="card"><header class="card-head"><h2 class="clamp">{{b.categoria}}</h2><span class="tag" [class.danger]="isNegative(b.restante)">{{isNegative(b.restante)?'Excedido':b.moneda}}</span></header><p class="wallet-amount num">{{fmt(b.gastado,b.moneda)}}<small> de {{fmt(b.limite,b.moneda)}}</small></p><progress max="100" [value]="percent(b.porcentaje)" [attr.aria-label]="'Uso de presupuesto '+b.categoria"></progress><p [class.negative]="isNegative(b.restante)">{{isNegative(b.restante)?'Exceso: '+fmt(abs(b.restante),b.moneda):'Te quedan '+fmt(b.restante,b.moneda)}}</p>@if(b.gastado_sin_tasa?.length){<small class="muted">Sin tasa, no incluido: {{listText(b.gastado_sin_tasa)}}</small>}<div class="card-actions"><button type="button" class="secondary" (click)="editBudget(b)" [disabled]="busy">Editar límite</button><button type="button" class="danger-button" (click)="remove('presupuestos',b.id,b.categoria)" [disabled]="busy">Eliminar</button></div></article>}@empty{<div class="empty-state"><h2>Un plan para tus gastos</h2><p>No hay presupuestos para el mes seleccionado.</p><button type="button" class="primary" (click)="openForm()">Crear presupuesto</button></div>}</div>
+      @if(budgets.length){
+        <div class="card list-card budget-list">@for(b of budgets;track b.id){
+          <article class="budget-row">
+            <div class="budget-top">
+              <div class="budget-name"><span class="budget-icon" aria-hidden="true">{{b.categoria.slice(0,1).toUpperCase()}}</span><h2 class="clamp" [title]="b.categoria">{{b.categoria}}</h2><span class="tag" [class.danger]="isNegative(b.restante)">{{isNegative(b.restante)?'Excedido':b.moneda}}</span></div>
+              <p class="budget-figures num"><strong [class.negative]="isNegative(b.restante)">{{fmt(b.gastado,b.moneda)}}</strong><small> de {{fmt(b.limite,b.moneda)}}</small></p>
+            </div>
+            <div [class]="'bar big '+budgetTone(b)" role="img" [attr.aria-label]="'Uso de presupuesto '+b.categoria+': '+percent(b.porcentaje).toFixed(0)+' por ciento'"><span [style.width.%]="percent(b.porcentaje)"></span></div>
+            <div class="budget-foot">
+              <p [class.negative]="isNegative(b.restante)">Llevas {{fmt(b.gastado,b.moneda)}} de {{fmt(b.limite,b.moneda)}}. {{isNegative(b.restante)?'Te pasaste por '+fmt(abs(b.restante),b.moneda)+'.':'Te quedan '+fmt(b.restante,b.moneda)+'.'}}</p>
+              <div class="budget-actions"><button type="button" class="secondary small" (click)="editBudget(b)" [disabled]="busy">Editar límite</button><button type="button" class="danger-button small" (click)="remove('presupuestos',b.id,b.categoria)" [disabled]="busy">Eliminar</button></div>
+            </div>
+            @if(b.gastado_sin_tasa?.length){<small class="muted">Sin tasa, no incluido: {{listText(b.gastado_sin_tasa)}}</small>}
+          </article>
+        }</div>
+      }@else{<div class="card-grid"><div class="empty-state"><h2>Un plan para tus gastos</h2><p>No hay presupuestos para el mes seleccionado.</p><button type="button" class="primary" (click)="openForm()">Crear presupuesto</button></div></div>}
     }
     @case('recurrentes'){
       <p class="info-strip">Los recordatorios no mueven dinero automáticamente. Usa <strong>Confirmar movimiento</strong> cuando hayas recibido o pagado el importe.</p>

@@ -2,21 +2,21 @@
  {
   "vista": "desktop",
   "tipo": "tiempo-login-ms",
-  "valor": 810
+  "valor": 755
  },
  {
   "vista": "desktop",
   "tipo": "tiempo-panel-ms",
-  "valor": 268
+  "valor": 256
  },
  {
   "vista": "movil",
   "tipo": "tiempo-login-ms",
-  "valor": 784
+  "valor": 743
  },
  {
   "vista": "movil",
   "tipo": "tiempo-panel-ms",
-  "valor": 224
+  "valor": 185
  }
 ]

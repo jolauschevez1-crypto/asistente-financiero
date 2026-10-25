@@ -1,4 +1,4 @@
-:host{display:block;min-height:100vh;background:var(--app-bg-page-start);color:var(--app-text-primary)}
+:host{display:block;min-height:100vh;background:transparent;color:var(--app-text-primary)}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .skip-link{position:fixed;top:-100px;left:16px;z-index:99999;padding:12px 20px;border-radius:999px;background:#163300;color:#9fe870;font-weight:650}
 .skip-link:focus{top:8px}
