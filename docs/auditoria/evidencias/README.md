@@ -15,3 +15,9 @@ Los datos de prueba son ficticios (usuario `amigo@local.test`, base PostgreSQL l
 - La URL de producción no es accesible desde el contenedor de trabajo (proxy), así que la línea base se tomó localmente con el mismo commit que está desplegado en producción (f3504d3, despliegue `dpl_DXhimEwhkZdoV2Txosgmg6vmRwKT`).
 - Las capturas "antes" de producción las aporta el usuario en la carpeta compartida `antes`; se incorporarán sin sobrescribir estas.
 - Los tiempos son de una sola ejecución en local, no una medición estadística.
+
+## Evidencias manuales reportadas por el usuario
+
+| ID | Fecha | Versión | Entorno | Requisito / riesgo | Resultado | Fuente |
+|---|---|---|---|---|---|---|
+| EV-MAN-01 | 2026-10-25 05:45Z | f3504d3 (despliegue de producción vigente) | Producción, https://asistente-financiero-seven.vercel.app | Inicio de sesión con Google tras agregar el origen autorizado en Google Cloud | El usuario informa: "si me deja iniciar nomas sin fallos". No hay captura; la verificación es testimonial, no automatizada | Mensaje del usuario en el hilo del proyecto |
