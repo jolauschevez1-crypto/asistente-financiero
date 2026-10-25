@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
-import { nonBlank, passwordLength, passwordMatchesIdentity, validBirthDate } from '../../core/input-validation';
+import { nonBlank, passwordChecks, passwordLength, passwordMatchesIdentity, PERSON_NAME, validBirthDate } from '../../core/input-validation';
 import { CURRENCIES } from '../../core/currency.service';
 
 type LoginModo = 'login' | 'registro' | 'recuperar' | 'codigo' | 'nueva';
@@ -31,7 +31,7 @@ export class Login implements OnInit {
     password: ['', Validators.required],
   });
   readonly registroForm = this.fb.nonNullable.group({
-    nombre: ['', [Validators.required, nonBlank, Validators.pattern(/^[\p{L}\p{M}]+(?:[ '’-][\p{L}\p{M}]+)*$/u), Validators.minLength(2), Validators.maxLength(100)]],
+    nombre: ['', [Validators.required, nonBlank, Validators.pattern(PERSON_NAME), Validators.minLength(2), Validators.maxLength(100)]],
     correo: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
     password: ['', [Validators.required, passwordLength]],
     confirmarPassword: ['', Validators.required],
@@ -49,6 +49,10 @@ export class Login implements OnInit {
       this.mensaje.set('Tu sesión expiró. Inicia sesión nuevamente para continuar.');
   }
   toggleVerPassword(): void { this.verPassword.update(v => !v); }
+  registroChecks() { const v = this.registroForm.getRawValue(); return passwordChecks(v.password, v.nombre, v.correo); }
+  nuevaChecks() { return passwordChecks(this.nuevaPasswordForm.getRawValue().nuevaContrasena, '', this.correoRecuperacion()); }
+  /** En campos de nombre solo se admiten letras, espacios, guiones y apóstrofes al escribir. */
+  soloLetras(event: InputEvent): void { if (event.data && !/^[\p{L}\p{M} '’-]+$/u.test(event.data)) event.preventDefault(); }
   private failure(err: any, fallback: string): void {
     this.cargando.set(false);
     this.error.set(err?.status === 0 ? 'No se puede conectar al servidor. Revisa tu conexión o comprueba que el servidor local esté iniciado.' :
@@ -75,10 +79,10 @@ export class Login implements OnInit {
   registrar(): void {
     if (this.cargando()) return;
     this.error.set('');
-    if (this.registroForm.invalid) { this.registroForm.markAllAsTouched(); this.error.set('Revisa los campos. La contraseña necesita al menos 10 caracteres y como máximo 72 bytes.'); return; }
+    if (this.registroForm.invalid) { this.registroForm.markAllAsTouched(); this.error.set('Revisa los campos marcados. La contraseña debe cumplir todos los requisitos de la lista.'); return; }
     const { nombre, correo, password, confirmarPassword, fechaNacimiento, moneda } = this.registroForm.getRawValue();
     if (password !== confirmarPassword) { this.error.set('Las contraseñas no coinciden.'); return; }
-    if (passwordMatchesIdentity(password, nombre, correo)) { this.error.set('La contraseña no puede ser igual a tu nombre ni a tu correo o nombre de usuario.'); return; }
+    if (passwordMatchesIdentity(password, nombre, correo)) { this.error.set('La contraseña no puede ser igual ni contener tu nombre, tu correo o tu nombre de usuario.'); return; }
     this.cargando.set(true);
     this.auth.registrar(nombre.trim(), correo.trim(), password, fechaNacimiento || undefined, moneda).subscribe({
       next: response => {
@@ -116,9 +120,10 @@ export class Login implements OnInit {
   cambiarPassword(): void {
     if (this.cargando()) return;
     this.error.set('');
-    if (this.nuevaPasswordForm.invalid) { this.nuevaPasswordForm.markAllAsTouched(); this.error.set('Usa al menos 10 caracteres y como máximo 72 bytes.'); return; }
+    if (this.nuevaPasswordForm.invalid) { this.nuevaPasswordForm.markAllAsTouched(); this.error.set('La nueva contraseña debe cumplir todos los requisitos de la lista.'); return; }
     const { nuevaContrasena, confirmarContrasena } = this.nuevaPasswordForm.getRawValue();
     if (nuevaContrasena !== confirmarContrasena) { this.error.set('Las contraseñas no coinciden.'); return; }
+    if (passwordMatchesIdentity(nuevaContrasena, '', this.correoRecuperacion())) { this.error.set('La contraseña no puede contener tu correo o nombre de usuario.'); return; }
     if (!this.resetToken) { this.error.set('Solicita un nuevo código de recuperación.'); return; }
     this.cargando.set(true);
     this.auth.cambiarPassword(this.correoRecuperacion(), nuevaContrasena, this.resetToken).subscribe({

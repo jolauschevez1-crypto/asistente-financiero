@@ -34,7 +34,7 @@ after(async()=>{if(server)await new Promise(resolve=>server.close(resolve));awai
 test('registro conserva COP/MXN, USD por defecto y rechaza monedas fuera del catálogo',async()=>{
  for(const moneda of ['COP','MXN',undefined]) {
   const correo=`registro${++sequence}@example.test`;
-  const reg=await request('/auth/registro',{method:'POST',token:null,body:{nombre:'Registro de prueba',correo,password:'RegistroSeguro2026!',...(moneda?{moneda}:{})}});
+  const reg=await request('/auth/registro',{method:'POST',token:null,body:{nombre:'Persona Moneda',correo,password:'RegistroSeguro2026!',...(moneda?{moneda}:{})}});
   assert.equal(reg.status,201,JSON.stringify(reg.data));
   const login=await request('/auth/login',{method:'POST',token:null,body:{correo,password:'RegistroSeguro2026!'}});
   assert.equal(login.data.usuario.moneda,moneda||'USD');

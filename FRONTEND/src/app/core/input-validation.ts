@@ -5,10 +5,25 @@ export function normalizedIdentity(value: string): string {
 }
 export const nonBlank: ValidatorFn = (control: AbstractControl): ValidationErrors | null =>
   typeof control.value === 'string' && !control.value.trim() ? { blank: true } : null;
-export const passwordLength: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const value = String(control.value ?? '');
-  return value.length >= 10 && new TextEncoder().encode(value).length <= 72 ? null : { passwordLength: true };
-};
+/** Requisitos de contraseña, iguales a los del backend (BACKEND/src/utils/validation.js). */
+export interface PasswordCheck { id: string; label: string; ok: boolean }
+export function passwordChecks(value: string, name = '', email = ''): PasswordCheck[] {
+  const v = String(value ?? '');
+  return [
+    { id: 'length', label: 'Entre 10 caracteres y 72 bytes', ok: v.length >= 10 && new TextEncoder().encode(v).length <= 72 },
+    { id: 'upper', label: 'Una letra mayúscula', ok: /\p{Lu}/u.test(v) },
+    { id: 'lower', label: 'Una letra minúscula', ok: /\p{Ll}/u.test(v) },
+    { id: 'digit', label: 'Un número', ok: /\d/.test(v) },
+    { id: 'special', label: 'Un carácter especial (! @ # $ %…)', ok: /[^\p{L}\p{N}\s]/u.test(v) },
+    { id: 'spaces', label: 'Sin espacios', ok: v.length > 0 && !/\s/.test(v) },
+    { id: 'identity', label: 'Que no sea ni contenga tu nombre o correo', ok: v.length > 0 && !passwordMatchesIdentity(v, name, email) },
+  ];
+}
+/** Valida fuerza (sin identidad); la identidad se comprueba con passwordMatchesIdentity. */
+export const passwordStrength: ValidatorFn = (control: AbstractControl): ValidationErrors | null =>
+  passwordChecks(String(control.value ?? '')).filter(c => c.id !== 'identity').every(c => c.ok) ? null : { passwordStrength: true };
+/** @deprecated nombre histórico; aplica ya la política completa de fuerza. */
+export const passwordLength = passwordStrength;
 export const validBirthDate: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   const value = String(control.value ?? '');
   if (!value) return null;
@@ -26,5 +41,13 @@ export const moneyAmount: ValidatorFn = (control: AbstractControl): ValidationEr
 };
 export function passwordMatchesIdentity(password: string, name: string, email: string): boolean {
   const candidate = normalizedIdentity(password);
-  return [name, email, email.split('@')[0]].filter(Boolean).some(v => normalizedIdentity(v) === candidate);
+  const ids = [name, email, (email || '').split('@')[0], ...(name || '').split(/\s+/)]
+    .filter(Boolean).map(normalizedIdentity).filter(v => v.length >= 4);
+  return ids.some(v => candidate === v || candidate.includes(v));
 }
+/** Nombres de personas: solo letras, espacios, guiones y apóstrofes. */
+export const PERSON_NAME = /^[\p{L}\p{M}]+(?:[ '’-][\p{L}\p{M}]+)*$/u;
+/** Nombres de carteras, metas y grupos: letras, números y signos básicos, sin emojis ni marcado. */
+export const ITEM_NAME = /^[\p{L}\p{M}\p{N}][\p{L}\p{M}\p{N} .,:;'’()#&\/+-]*$/u;
+export const itemName: ValidatorFn = (control: AbstractControl): ValidationErrors | null =>
+  !control.value || ITEM_NAME.test(String(control.value).trim()) ? null : { itemName: true };

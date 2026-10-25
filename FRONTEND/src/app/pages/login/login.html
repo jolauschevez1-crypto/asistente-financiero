@@ -19,7 +19,7 @@
     </form>
     @if(modo() === 'login'){<app-google-signin />}
     <form *ngIf="modo() === 'registro'" [formGroup]="registroForm" (ngSubmit)="registrar()" class="login-form">
-      <label for="register-name">Nombre</label><input id="register-name" formControlName="nombre" autocomplete="name" minlength="2" maxlength="100" />
+      <label for="register-name">Nombre</label><input id="register-name" formControlName="nombre" autocomplete="name" minlength="2" maxlength="100" (beforeinput)="soloLetras($event)" />
       <span class="field-error" *ngIf="registroForm.controls.nombre.touched && registroForm.controls.nombre.invalid">Escribe de 2 a 100 caracteres: solo letras, espacios, guiones y apóstrofes.</span>
       <label for="register-email">Correo electrónico</label><input id="register-email" type="email" formControlName="correo" autocomplete="email" maxlength="254" />
       <span class="field-error" *ngIf="registroForm.controls.correo.touched && registroForm.controls.correo.invalid">Ingresa un correo válido, por ejemplo nombre@dominio.com.</span>
@@ -30,7 +30,7 @@
       <small id="birth-help">No se exige una edad mínima. Si la indicas, debe ser una fecha real y no futura.</small>
       <span class="field-error" *ngIf="registroForm.controls.fechaNacimiento.touched && registroForm.controls.fechaNacimiento.invalid">Revisa la fecha de nacimiento.</span>
       <label for="register-password">Contraseña</label><input id="register-password" [type]="verPassword() ? 'text' : 'password'" formControlName="password" autocomplete="new-password" aria-describedby="password-help" />
-      <small id="password-help">De 10 caracteres a 72 bytes. Debe ser distinta de tu nombre y correo.</small>
+      <ul id="password-help" class="password-checks" aria-label="Requisitos de la contraseña">@for(check of registroChecks();track check.id){<li [class.ok]="check.ok"><span aria-hidden="true">{{check.ok?'✓':'○'}}</span> {{check.label}}<span class="sr-only">{{check.ok?': cumplido':': pendiente'}}</span></li>}</ul>
       <label for="register-confirm">Confirmar contraseña</label><input id="register-confirm" [type]="verPassword() ? 'text' : 'password'" formControlName="confirmarPassword" autocomplete="new-password" />
       <label class="show-password"><input type="checkbox" [checked]="verPassword()" (change)="toggleVerPassword()" /> Mostrar contraseñas</label>
       <button type="submit" [disabled]="cargando()">{{ cargando() ? 'Creando…' : 'Crear cuenta' }}</button>
@@ -46,7 +46,7 @@
       <button type="submit" [disabled]="cargando()">{{ cargando() ? 'Verificando…' : 'Verificar código' }}</button><button class="link-btn" type="button" (click)="mostrarRecuperacion()">Solicitar otro código</button>
     </form>
     <form *ngIf="modo() === 'nueva'" [formGroup]="nuevaPasswordForm" (ngSubmit)="cambiarPassword()" class="login-form">
-      <label for="new-password">Nueva contraseña</label><input id="new-password" type="password" formControlName="nuevaContrasena" autocomplete="new-password" /><small>Al menos 10 caracteres; como máximo 72 bytes.</small>
+      <label for="new-password">Nueva contraseña</label><input id="new-password" type="password" formControlName="nuevaContrasena" autocomplete="new-password" /><ul class="password-checks" aria-label="Requisitos de la contraseña">@for(check of nuevaChecks();track check.id){<li [class.ok]="check.ok"><span aria-hidden="true">{{check.ok?'✓':'○'}}</span> {{check.label}}<span class="sr-only">{{check.ok?': cumplido':': pendiente'}}</span></li>}</ul>
       <label for="new-confirm">Confirmar contraseña</label><input id="new-confirm" type="password" formControlName="confirmarContrasena" autocomplete="new-password" />
       <button type="submit" [disabled]="cargando()">{{ cargando() ? 'Guardando…' : 'Guardar contraseña' }}</button><button class="link-btn" type="button" (click)="mostrarLogin()">Volver al inicio</button>
     </form>

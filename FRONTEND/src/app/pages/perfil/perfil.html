@@ -150,7 +150,7 @@
       <section class="section-card">
         <div class="card-header">
           <h2>Cambiar Contraseña</h2>
-          <p>Te recomendamos usar una contraseña segura de al menos 10 caracteres y como máximo 72 bytes.</p>
+          <p>Usa al menos 10 caracteres con mayúscula, minúscula, número y un carácter especial, sin espacios y sin tu nombre ni tu correo.</p>
         </div>
 
         <form [formGroup]="passwordForm" (ngSubmit)="cambiarPassword()" class="perfil-form">
@@ -163,7 +163,7 @@
             <label for="passNueva">Nueva Contraseña</label>
             <input id="passNueva" type="password" formControlName="nuevaPassword" placeholder="••••••••" />
             <span *ngIf="passwordForm.get('nuevaPassword')?.invalid && passwordForm.get('nuevaPassword')?.touched" class="field-error">
-              La contraseña debe tener al menos 10 caracteres y como máximo 72 bytes.
+              Debe tener 10 caracteres o más (máximo 72 bytes), con mayúscula, minúscula, número y carácter especial, sin espacios.
             </span>
           </div>
 

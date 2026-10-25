@@ -52,7 +52,7 @@ async function previewTransfer(uid,b){
 // de destino, la tasa, su fuente y su fecha en el propio movimiento.
 async function transfer(uid,b,movement){
  const amount=v.cents(b.monto),key=v.key(b.idempotencia),origen=v.id(b.origen_id),destino=v.id(b.destino_id);
- const descripcion=b.descripcion==null||b.descripcion===''?null:v.text(b.descripcion,'Descripción',250);
+ const descripcion=b.descripcion==null||b.descripcion===''?null:v.text(b.descripcion,'Descripción',250,true);
  const request=JSON.stringify({amount,origen,destino,descripcion});
  const peek=await previewTransfer(uid,b);let q=null;
  if(peek.conversion){q=await currentQuote(peek.moneda_origen,peek.moneda_destino);checkConfirmed(b,q);}
