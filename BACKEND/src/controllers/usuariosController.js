@@ -166,12 +166,14 @@ class UsuariosController {
 
             const cuentas = await movimientosModel.listarCuentas(idUsuario);
             const balanceTotal = await movimientosModel.obtenerBalanceTotal(idUsuario);
+            const balances = await movimientosModel.obtenerBalancesPorMoneda(idUsuario);
 
             res.status(200).json({
                 success: true,
                 data: {
                     moneda: existe.rows[0].moneda,
                     balance_total: balanceTotal,
+                    balances_por_moneda: balances,
                     cuentas
                 }
             });
@@ -313,8 +315,9 @@ class UsuariosController {
             const existe = await usuariosModel.ObtenerUsuarioPorIdAdmin(idUsuario);
             if (existe.rows.length === 0) return res.status(404).json({ message: 'Usuario no encontrado' });
 
-            const [balanceTotal, resumenMes, gastosCategoriaMes] = await Promise.all([
+            const [balanceTotal, balancesPorMoneda, resumenMes, gastosCategoriaMes] = await Promise.all([
                 movimientosModel.obtenerBalanceTotal(idUsuario),
+                movimientosModel.obtenerBalancesPorMoneda(idUsuario),
                 movimientosModel.obtenerResumenMes(idUsuario),
                 movimientosModel.obtenerGastosCategoriaMes(idUsuario),
             ]);
@@ -326,6 +329,7 @@ class UsuariosController {
                 data: {
                     moneda: existe.rows[0].moneda,
                     balanceTotal: valorO(balanceTotal, 0),
+                    balancesPorMoneda,
                     resumenMes: valorO(resumenMes, []),
                     gastosCategoriaMes: valorO(gastosCategoriaMes, []),
                 },

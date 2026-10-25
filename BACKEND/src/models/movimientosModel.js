@@ -107,12 +107,24 @@ class MovimientosModel {
     }
 
     /**
-     * Obtiene el balance total (suma de todas las cuentas).
+     * Saldos por moneda de cartera. Nunca se suman monedas distintas.
+     * @param {number} usuarioId ID del usuario.
+     * @returns {Promise<{moneda:string,total:string}[]>}
+     */
+    async obtenerBalancesPorMoneda(usuarioId) {
+        const res = await db.query(movimientosQueries.OBTENER_BALANCE_TOTAL, [usuarioId]);
+        return res.rows.map(r => ({ moneda: r.moneda, total: String(r.total) }));
+    }
+
+    /**
+     * Balance total solo si todas las carteras comparten moneda; con varias monedas devuelve null
+     * (el total consolidado con tasas está en /api/finanzas/panel).
      * @param {number} usuarioId ID del usuario.
      */
     async obtenerBalanceTotal(usuarioId) {
-        const res = await db.query(movimientosQueries.OBTENER_BALANCE_TOTAL, [usuarioId]);
-        return parseFloat(res.rows[0]?.balance_total || 0);
+        const balances = await this.obtenerBalancesPorMoneda(usuarioId);
+        if (balances.length === 0) return 0;
+        return balances.length === 1 ? parseFloat(balances[0].total) : null;
     }
 
     /**
@@ -203,7 +215,7 @@ class MovimientosModel {
         // estado === 'todos' -> sin condición sobre deleted_at
 
         if (usuarioId) agregar('u.id = ?', usuarioId);
-        if (moneda) agregar('u.moneda = ?', require('../finance/currency').validate(moneda));
+        if (moneda) agregar('m.moneda = ?', require('../finance/currency').validate(moneda));
         if (categoria) agregar('cat.nombre = ?', categoria);
         if (tipo) agregar('tm.nombre = ?', String(tipo).toUpperCase());
         if (montoMin !== undefined && montoMin !== null && montoMin !== '' && !isNaN(montoMin)) {

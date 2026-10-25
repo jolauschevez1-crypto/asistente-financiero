@@ -137,11 +137,16 @@ class MovimientosService {
             usuario = await movimientosModel.buscarOCrearUsuario(identificador);
         }
 
+        // Cada cartera tiene su moneda: los saldos se agrupan por moneda y nunca se suman entre sí.
         const cuentas = await movimientosModel.listarCuentas(usuario.id);
-        const balanceTotal = await movimientosModel.obtenerBalanceTotal(usuario.id);
+        const porMoneda = new Map();
+        for (const c of cuentas) porMoneda.set(c.moneda, (porMoneda.get(c.moneda) || 0) + Math.round(Number(c.saldo_actual) * 100));
+        const balances = [...porMoneda].map(([moneda, centavos]) => ({ moneda, total: require('../finance/validation').money(centavos) }));
+        const balanceTotal = balances.length === 1 ? Number(balances[0].total) : (balances.length ? null : 0);
 
         return {
             cuentas,
+            balances,
             balanceTotal
         };
     }
