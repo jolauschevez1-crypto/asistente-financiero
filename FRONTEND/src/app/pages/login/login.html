@@ -6,7 +6,7 @@
     <ul class="intro-features"><li>Carteras multidivisa</li><li>Presupuestos y metas</li><li>Gastos compartidos</li></ul>
   </section>
   <section class="login-panel" aria-label="Acceso al asistente financiero">
-    <div class="brand-block"><span class="mark" aria-hidden="true">AF</span><div><h2>{{ modo() === 'registro' ? 'Crea tu cuenta' : modo() === 'login' ? 'Bienvenido' : 'Recupera tu acceso' }}</h2><p>Tus finanzas, organizadas en tu propia cuenta.</p></div></div>
+    <div class="brand-block"><img class="mark" src="favicon.svg" alt="" width="44" height="44"><div><h2>{{ modo() === 'registro' ? 'Crea tu cuenta' : modo() === 'login' ? 'Bienvenido' : 'Recupera tu acceso' }}</h2><p>Tus finanzas, organizadas en tu propia cuenta.</p></div></div>
     <p *ngIf="mensaje()" class="alert success" role="status">{{ mensaje() }}</p>
     <p *ngIf="error()" class="alert" role="alert">{{ error() }}</p>
     <form *ngIf="modo() === 'login'" [formGroup]="form" (ngSubmit)="ingresar()" class="login-form">

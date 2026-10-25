@@ -36,7 +36,8 @@ export class FinancePage {
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
   readonly currencies = CURRENCIES;
-  readonly namePattern = ITEM_NAME.source;
+  // D-15: se pasa la RegExp (con la bandera u). Con ITEM_NAME.source, Angular la recompilaba sin «u» y \p{L} no reconocía letras: rechazaba nombres como «Ecuabet».
+  readonly namePattern = ITEM_NAME;
   section: FinanceSection = 'panel';
   month = localDate().slice(0,7);
   loading = false; busy = false; error = ''; notice = ''; formOpen = false;

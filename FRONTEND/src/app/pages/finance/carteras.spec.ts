@@ -59,6 +59,17 @@ describe('Carteras con moneda elegida', () => {
     expect(post).toHaveBeenCalledWith('carteras', { nombre: 'Ahorros', saldo_inicial: '20', moneda: 'EUR' });
   });
 
+  it('D-15: el formulario acepta nombres válidos como «Ecuabet» y rechaza símbolos no permitidos', async () => {
+    const fixture = TestBed.createComponent(FinancePage); fixture.detectChanges();
+    fixture.componentInstance.openForm(); fixture.detectChanges(); await fixture.whenStable();
+    const input = (fixture.nativeElement as HTMLElement).querySelector('input[name=nombre]') as HTMLInputElement;
+    const type = async (value: string) => { input.value = value; input.dispatchEvent(new Event('input')); fixture.detectChanges(); await fixture.whenStable(); return input.classList.contains('ng-valid'); };
+    expect(await type('Ecuabet')).toBeTrue();
+    expect(await type('Ahorro casa #2 (Quito)')).toBeTrue();
+    expect(await type('Cuenta ñandú')).toBeTrue();
+    expect(await type('<script>')).toBeFalse();
+  });
+
   it('transferencia entre monedas: pide la cotización y solo registra al confirmar con la misma tasa', () => {
     const fixture = TestBed.createComponent(FinancePage); fixture.detectChanges();
     const page = fixture.componentInstance;
