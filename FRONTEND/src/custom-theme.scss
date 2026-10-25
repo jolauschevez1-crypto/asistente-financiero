@@ -18,8 +18,8 @@ html {
   @include mat.theme((
     color: (
       theme-type: light,
-      primary: mat.$cyan-palette,
-      tertiary: mat.$green-palette,
+      primary: mat.$green-palette,
+      tertiary: mat.$chartreuse-palette,
     ),
     typography: Inter,
     density: 0,
@@ -112,8 +112,8 @@ $config-temas: (
     @include mat.theme((
       color: (
         theme-type: $tema-tipo,
-        primary: mat.$cyan-palette,
-        tertiary: mat.$green-palette,
+        primary: mat.$green-palette,
+        tertiary: mat.$chartreuse-palette,
       ),
       typography: Inter,
       density: 0,

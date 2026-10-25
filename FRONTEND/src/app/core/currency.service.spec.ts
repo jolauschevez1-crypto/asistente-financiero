@@ -24,9 +24,12 @@ describe('Moneda de la cuenta',()=>{
   req.flush({success:true,data:{moneda:'MXN',puede_cambiar:true,motivo:null,monedas:[]}});
   expect(usuario().moneda).toBe('MXN');expect(service.guardando()).toBeFalse();
  });
- it('conserva COP y muestra rechazo cuando ya existe actividad',()=>{
-  service.save('MXN');http.expectOne('/api/finanzas/preferencias').flush({message:'Hay movimientos registrados',code:'MONEDA_BLOQUEADA'},{status:409,statusText:'Conflict'});
-  expect(usuario().moneda).toBe('COP');expect(service.error()).toContain('movimientos');
+ it('conserva la moneda anterior si el servidor rechaza el cambio',()=>{
+  service.save('MXN');http.expectOne('/api/finanzas/preferencias').flush({message:'Moneda no válida'},{status:400,statusText:'Bad Request'});
+  expect(usuario().moneda).toBe('COP');expect(service.error()).toContain('Moneda');
+ });
+ it('solo ofrece como presentación las monedas con tasa de referencia',()=>{
+  expect(service.presentables().map(c=>c.codigo)).toEqual(['USD','MXN','EUR']);
  });
  it('descarta respuestas de una sesión anterior',()=>{
   service.load();usuario.set({id:2,moneda:'PEN'});

@@ -4,7 +4,7 @@
       <p>{{ usuario()?.nombre || usuario()?.correo }}</p>
       <h1>Mis carteras y diario</h1>
     </div>
-    <span class="currency-label">{{usuario()?.moneda || 'USD'}} · Moneda de tu cuenta</span>
+    <span class="currency-label">Cada cartera muestra su propia moneda</span>
   </header>
 
   <app-notice tipo="danger" [mensaje]="error()" />
@@ -27,8 +27,9 @@
 
   <section class="metrics">
     <article class="balance-card">
-      <span>Balance total</span>
-      <strong>{{ money(balanceTotal(), usuario()?.moneda) }}</strong>
+      <span>Saldo por moneda</span>
+      @for (b of balances(); track b.moneda) {<strong class="num">{{ money(b.total, b.moneda) }}</strong>} @empty {<strong class="num">{{ money(0, usuario()?.moneda) }}</strong>}
+      @if (balances().length > 1) {<small>No se suman monedas distintas. El total convertido está en el Panel.</small>}
     </article>
     <article>
       <span>Cuentas</span>
@@ -54,10 +55,10 @@
           @for (cuenta of cuentas(); track cuenta.nombre) {
             <article class="account-card" [class.low-balance-card]="esSaldoBajo(cuenta)">
               <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                <span>{{ cuenta.nombre }}</span>
-                <span *ngIf="esSaldoBajo(cuenta)" class="badge-low-balance" [title]="'Saldo menor a '+money(10, usuario()?.moneda)">Saldo Bajo</span>
+                <span class="clamp" [title]="cuenta.nombre">{{ cuenta.nombre }}</span>
+                <span *ngIf="esSaldoBajo(cuenta)" class="badge-low-balance" [title]="'Saldo menor a '+money(10, cuenta.moneda)">Saldo bajo</span>
               </div>
-              <strong [class.negative]="saldoCuenta(cuenta) < 0">{{ money(saldoCuenta(cuenta), usuario()?.moneda) }}</strong>
+              <strong class="num" [class.negative]="saldoCuenta(cuenta) < 0">{{ money(saldoCuenta(cuenta), cuenta.moneda) }}</strong>
             </article>
           } @empty {
             <p class="empty">Aun no tienes cuentas registradas.</p>
@@ -86,7 +87,7 @@
       <label class="search-field">Buscar movimientos<input [formControl]="busquedaControl" placeholder="Concepto o categoría" maxlength="100"></label>
       <div class="diary">
         @for (m of movimientosFiltrados(); track m.id) {
-          <article class="diary-row"><span class="movement-icon" [class.income]="m.tipo==='INGRESO'" aria-hidden="true">{{m.tipo==='INGRESO'?'↓':m.tipo==='TRANSFERENCIA'?'↔':'↑'}}</span><div><strong>{{m.descripcion || m.categoria || tipoMovimiento(m)}}</strong><small>{{m.cuenta_origen || m.cuenta_destino}} · {{m.categoria}} · {{m.fecha | date:'dd MMM yyyy'}}</small></div><strong [class.positive]="m.tipo==='INGRESO'">{{m.tipo==='GASTO'?'−':m.tipo==='INGRESO'?'+':''}}{{money(m.monto,usuario()?.moneda)}}</strong></article>
+          <article class="diary-row"><span class="movement-icon" [class.income]="m.tipo==='INGRESO'" aria-hidden="true">{{m.tipo==='INGRESO'?'↓':m.tipo==='TRANSFERENCIA'?'↔':'↑'}}</span><div><strong>{{m.descripcion || m.categoria || tipoMovimiento(m)}}</strong><small>{{m.cuenta_origen || m.cuenta_destino}} · {{m.categoria}} · {{m.fecha | date:'dd MMM yyyy'}}</small></div><strong class="num" [class.positive]="m.tipo==='INGRESO'">{{m.tipo==='GASTO'?'−':m.tipo==='INGRESO'?'+':''}}{{money(m.monto,m.moneda)}}@if(m.monto_destino && m.moneda_destino && m.moneda_destino!==m.moneda){<small class="conversion">→ {{money(m.monto_destino,m.moneda_destino)}} · tasa {{m.tasa}}</small>}</strong></article>
         } @empty {<p class="empty">No hay movimientos con estos filtros.</p>}
       </div>
     </section>
@@ -101,8 +102,10 @@
           <input formControlName="nombre" placeholder="Efectivo, Banco, Ahorros" />
           <span *ngIf="cuentaForm.controls.nombre.touched && cuentaForm.controls.nombre.hasError('required')" class="field-error">El nombre de la cuenta es obligatorio.</span>
           <span *ngIf="cuentaForm.controls.nombre.touched && cuentaForm.controls.nombre.hasError('minlength')" class="field-error">El nombre debe tener al menos 2 caracteres.</span>
+          <span *ngIf="cuentaForm.controls.nombre.touched && cuentaForm.controls.nombre.hasError('itemName')" class="field-error">Usa letras, números, espacios y signos básicos.</span>
         </label>
-        <label>Saldo inicial · {{usuario()?.moneda || 'USD'}}<input type="number" inputmode="decimal" min="0" max="999999999.99" step="0.01" formControlName="saldo_inicial" placeholder="0.00"></label><small>El saldo inicial se registra como ingreso de apertura.</small><div class="movement-actions"><button type="button" class="cancel-movement" [disabled]="guardandoCuenta()" (click)="cambiarSeccion('cuentas')">Cancelar</button><button type="submit" [disabled]="guardandoCuenta()">
+        <label>Moneda de la cartera<select formControlName="moneda">@for (c of currencies; track c.codigo) {<option [value]="c.codigo">{{c.codigo}} · {{c.nombre}}</option>}</select></label>
+        <label>Saldo inicial · {{cuentaForm.controls.moneda.value}}<input type="number" inputmode="decimal" min="0" max="999999999.99" step="0.01" formControlName="saldo_inicial" placeholder="0.00"></label><small>El saldo inicial se registra como ingreso de apertura.</small><div class="movement-actions"><button type="button" class="cancel-movement" [disabled]="guardandoCuenta()" (click)="cambiarSeccion('cuentas')">Cancelar</button><button type="submit" [disabled]="guardandoCuenta()">
           {{ guardandoCuenta() ? 'Creando...' : 'Guardar cartera' }}
         </button></div>
       </form>
@@ -142,7 +145,7 @@
           </label>
         }
         <label>
-          Monto · {{usuario()?.moneda || 'USD'}}
+          Monto · {{monedaCuenta(movimientoForm.controls.cuenta_origen.value)}}
           <input type="number" inputmode="decimal" min="0.01" max="999999999.99" step="0.01" formControlName="monto" />
           <span *ngIf="movimientoForm.controls.monto.touched && movimientoForm.controls.monto.hasError('required')" class="field-error">El monto es obligatorio.</span>
           <span *ngIf="movimientoForm.controls.monto.touched && (movimientoForm.controls.monto.hasError('min') || movimientoForm.controls.monto.value <= 0)" class="field-error">El monto debe ser mayor a 0.</span>
@@ -152,7 +155,7 @@
           <select formControlName="cuenta_origen">
             <option value="">Selecciona una cuenta</option>
             @for (cuenta of cuentas(); track cuenta.nombre) {
-              <option [value]="cuenta.nombre">{{ cuenta.nombre }} · {{money(saldoCuenta(cuenta), usuario()?.moneda)}}</option>
+              <option [value]="cuenta.nombre">{{ cuenta.nombre }} · {{money(saldoCuenta(cuenta), cuenta.moneda)}}</option>
             }
           </select>
           <span *ngIf="movimientoForm.controls.cuenta_origen.touched && movimientoForm.controls.cuenta_origen.hasError('required')" class="field-error">La cuenta origen es obligatoria.</span>
@@ -162,7 +165,7 @@
           <select formControlName="cuenta_destino">
             <option value="">Sin destino</option>
             @for (cuenta of cuentas(); track cuenta.nombre) {
-              <option [value]="cuenta.nombre">{{ cuenta.nombre }} · {{money(saldoCuenta(cuenta), usuario()?.moneda)}}</option>
+              <option [value]="cuenta.nombre">{{ cuenta.nombre }} · {{money(saldoCuenta(cuenta), cuenta.moneda)}}</option>
             }
           </select>
           <span *ngIf="movimientoForm.controls.tipo.value === 'TRANSFERENCIA' && movimientoForm.controls.cuenta_destino.touched && !movimientoForm.controls.cuenta_destino.value" class="field-error">Debes seleccionar una cuenta destino para transferencias.</span>
@@ -173,8 +176,11 @@
           <select formControlName="metodo_pago"><option value="EFECTIVO">Efectivo</option><option value="TARJETA">Tarjeta</option><option value="TRANSFERENCIA">Transferencia</option></select>
         </label>
 
+        @if (cotizacion()?.cotizacion; as q) {
+          <div class="quote" role="status"><p>Salen <strong>{{money(cotizacion()!.monto_origen, cotizacion()!.moneda_origen)}}</strong> y llegan <strong>{{money(cotizacion()!.monto_destino, cotizacion()!.moneda_destino)}}</strong>.</p><small>1 {{cotizacion()!.moneda_origen}} = {{q.tasa}} {{cotizacion()!.moneda_destino}} · tasa de referencia BCE del {{q.fecha_cotizacion}}{{q.estado==='desactualizada' ? ' (de hace '+q.antiguedad_dias+' días)' : ''}}. No es una tasa en tiempo real.</small></div>
+        }
         <div class="movement-actions"><button type="button" class="cancel-movement" [disabled]="guardandoMovimiento()" (click)="cambiarSeccion('cuentas')">Cancelar</button><button type="submit" [disabled]="guardandoMovimiento() || cuentas().length === 0">
-          {{ guardandoMovimiento() ? 'Registrando...' : 'Aplicar movimiento' }}
+          {{ guardandoMovimiento() ? 'Procesando...' : cotizacion() ? 'Confirmar con esta tasa' : 'Aplicar movimiento' }}
         </button></div>
       </form>
     </section></div>
@@ -188,7 +194,7 @@
       @for (movimiento of ultimosMovimientos(); track movimiento.id) {
         <article>
           <span class="chip">{{ movimiento.descripcion || movimiento.categoria || tipoMovimiento(movimiento) }}</span>
-          <strong>{{ money(movimiento.monto, usuario()?.moneda) }}</strong>
+          <strong class="num">{{ money(movimiento.monto, movimiento.moneda) }}</strong>
           <small>{{ movimiento.fecha ? (movimiento.fecha | date: 'dd/MM/yyyy, hh:mm a') : '-' }}</small>
         </article>
       } @empty {

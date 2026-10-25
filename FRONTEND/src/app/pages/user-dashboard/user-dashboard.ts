@@ -1,11 +1,12 @@
 import { QuickLoad } from '../../shared/quick-load';
 import { DecimalInput } from '../../shared/decimal-input';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
-import { formatCurrency } from '../../core/currency.service';
+import { CURRENCIES, currencyCode, formatCurrency } from '../../core/currency.service';
+import { TransferPreview } from '../../core/finance.models';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { debounceTime } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs';
 import { ApiService } from '../../core/api.service';
 import { AuthService } from '../../core/auth.service';
 import { CategoriaUsada, Cuenta, Movimiento, TendenciaMensual } from '../../core/models';
@@ -13,7 +14,7 @@ import { SnackbarService } from '../../core/snackbar.service';
 import { buildCategoriasOptions, buildIngresosVsGastosOptions } from '../../shared/chart-card/chart-builders';
 import { Notice } from '../../shared/notice/notice';
 import { csvDocument } from '../../core/csv';
-import { nonBlank, moneyAmount } from '../../core/input-validation';
+import { nonBlank, moneyAmount, itemName } from '../../core/input-validation';
 import { FinanceService } from '../../core/finance.service';
 import { buildCategoryOptions, CUSTOM_CATEGORY_VALUE } from '../../core/category-options';
 
@@ -36,9 +37,13 @@ export class UserDashboard implements OnInit {
 
   readonly usuario = this.auth.usuario;
   readonly money = formatCurrency;
+  readonly currencies = CURRENCIES;
+  /** Totales por moneda: nunca se suman saldos de monedas distintas. */
+  readonly balances = signal<{ moneda: string; total: number | string }[]>([]);
+  /** Cotización de un traspaso entre carteras de distinta moneda, pendiente de confirmar. */
+  readonly cotizacion = signal<TransferPreview | null>(null);
   readonly cuentas = signal<Cuenta[]>([]);
   readonly movimientos = signal<Movimiento[]>([]);
-  readonly balanceTotal = signal(0);
   readonly seccionActiva = signal<UserSection>('cuentas');
   readonly cargando = signal(false);
   readonly guardandoCuenta = signal(false);
@@ -143,7 +148,8 @@ export class UserDashboard implements OnInit {
   );
 
   readonly cuentaForm = this.fb.nonNullable.group({
-    nombre: ['', [Validators.required, nonBlank, Validators.minLength(2), Validators.maxLength(100)]],
+    nombre: ['', [Validators.required, nonBlank, itemName, Validators.minLength(2), Validators.maxLength(100)]],
+    moneda: [currencyCode(this.auth.usuario()?.moneda) as string, Validators.required],
     saldo_inicial: [0, [Validators.required, Validators.min(0), Validators.max(999999999.99)]],
   });
 
@@ -161,6 +167,9 @@ export class UserDashboard implements OnInit {
   ngOnInit(): void {
     this.cargarDatos();
     this.cargarCategorias();
+    // Cualquier cambio en el formulario invalida una cotización mostrada antes.
+    // (las revalidaciones emiten el mismo valor; solo cuenta un valor distinto).
+    this.movimientoForm.valueChanges.pipe(map(v => JSON.stringify(v)), distinctUntilChanged()).subscribe(() => { if (this.cotizacion()) this.cotizacion.set(null); });
     this.busquedaControl.valueChanges.pipe(debounceTime(300)).subscribe((val) => {
       this.filtroBusqueda.set(val || '');
     });
@@ -177,7 +186,7 @@ export class UserDashboard implements OnInit {
     this.api.obtenerMisCuentas().subscribe({
       next: (balance) => {
         this.cuentas.set(balance.cuentas || []);
-        this.balanceTotal.set(Number(balance.balance_total || 0));
+        this.balances.set(balance.balances?.length ? balance.balances : []);
         this.cargando.set(false);
       },
       error: (err) => {
@@ -230,7 +239,7 @@ export class UserDashboard implements OnInit {
       m.tipo || '',
       m.categoria || '',
       m.monto || 0,
-      this.usuario()?.moneda || 'USD',
+      m.moneda || this.usuario()?.moneda || 'USD',
       m.descripcion || '',
       m.metodo_pago || '',
     ]);
@@ -256,12 +265,12 @@ export class UserDashboard implements OnInit {
     this.guardandoCuenta.set(true);
     this.error.set('');
 
-    const { nombre, saldo_inicial } = this.cuentaForm.getRawValue();
-    this.financeApi.post('carteras', {nombre:nombre.trim(),saldo_inicial}).subscribe({
+    const { nombre, moneda, saldo_inicial } = this.cuentaForm.getRawValue();
+    this.financeApi.post('carteras', {nombre:nombre.trim(),moneda,saldo_inicial}).subscribe({
       next: () => {
         this.guardandoCuenta.set(false);
-        this.snackbar.exito('Cuenta creada correctamente.');
-        this.cuentaForm.reset({ nombre: '', saldo_inicial:0 });
+        this.snackbar.exito(`Cartera creada en ${moneda}.`);
+        this.cuentaForm.reset({ nombre: '', moneda: currencyCode(this.usuario()?.moneda), saldo_inicial:0 });
         this.cargarMovimientos();
         this.cargarCuentas();
         this.seccionActiva.set('cuentas');
@@ -296,6 +305,11 @@ export class UserDashboard implements OnInit {
       return;
     }
 
+    if (requiereDestino && this.monedaCuenta(payload.cuenta_origen) !== this.monedaCuenta(payload.cuenta_destino)) {
+      this.transferirConConversion(payload.cuenta_origen, payload.cuenta_destino, String(payload.monto), payload.descripcion);
+      return;
+    }
+
     this.guardandoMovimiento.set(true);
     this.error.set('');
 
@@ -313,21 +327,7 @@ export class UserDashboard implements OnInit {
         next: () => {
           this.guardandoMovimiento.set(false);
           this.snackbar.exito('Movimiento registrado correctamente.');
-          this.movimientoForm.reset({
-            tipo: 'GASTO',
-            categoria: 'Otros',
-            categoriaPersonalizada: '',
-            monto: 0,
-            cuenta_origen: '',
-            cuenta_destino: '',
-            descripcion: '',
-            metodo_pago: 'EFECTIVO',
-          });
-          this.actualizarCategoriaPersonalizada();
-          this.cargarCuentas();
-          this.cargarMovimientos();
-          this.cargarCategorias();
-          this.seccionActiva.set('movimientos');
+          this.reiniciarMovimiento();
         },
         error: (err) => {
           this.guardandoMovimiento.set(false);
@@ -335,6 +335,66 @@ export class UserDashboard implements OnInit {
           this.snackbar.error(this.error());
         },
       });
+  }
+
+  /** Moneda de la cartera elegida por nombre (el formulario identifica la cartera por su nombre). */
+  monedaCuenta(nombre: string | null | undefined): string {
+    return this.cuentas().find(c => c.nombre === nombre)?.moneda || this.usuario()?.moneda || 'USD';
+  }
+
+  /**
+   * Traspaso entre monedas distintas: primero se muestra la tasa de referencia y el importe que llega;
+   * solo se registra cuando la persona confirma esa misma tasa.
+   */
+  transferirConConversion(origen: string, destino: string, monto: string, descripcion: string): void {
+    const o = this.cuentas().find(c => c.nombre === origen), d = this.cuentas().find(c => c.nombre === destino);
+    if (!o?.id || !d?.id) { this.error.set('No se encontraron las carteras seleccionadas. Recarga e inténtalo otra vez.'); return; }
+    const datos = { origen_id: o.id, destino_id: d.id, monto, ...(descripcion?.trim() ? { descripcion: descripcion.trim() } : {}) };
+    const previa = this.cotizacion();
+    this.guardandoMovimiento.set(true);
+    this.error.set('');
+    if (!previa?.cotizacion) {
+      this.financeApi.post<TransferPreview>('transferencias/preview', datos).subscribe({
+        next: (q) => { this.guardandoMovimiento.set(false); this.cotizacion.set(q); },
+        error: (err) => { this.guardandoMovimiento.set(false); this.error.set(err?.error?.message || 'No se pudo obtener la tasa de referencia.'); },
+      });
+      return;
+    }
+    const clave = `af_pending:${this.usuario()?.id}:transferencias:${JSON.stringify(datos)}`;
+    const idempotencia = sessionStorage.getItem(clave) || crypto.randomUUID();
+    sessionStorage.setItem(clave, idempotencia);
+    this.financeApi.post('transferencias', { ...datos, confirmar: true, tasa: previa.cotizacion.tasa, idempotencia }).subscribe({
+      next: () => {
+        sessionStorage.removeItem(clave);
+        this.guardandoMovimiento.set(false);
+        this.snackbar.exito('Traspaso registrado con la tasa confirmada.');
+        this.reiniciarMovimiento();
+      },
+      error: (err) => {
+        this.guardandoMovimiento.set(false);
+        this.error.set(err?.error?.message || 'No se pudo registrar el traspaso.');
+        if (err?.error?.code === 'TASA_CAMBIADA') this.cotizacion.set(null);
+      },
+    });
+  }
+
+  private reiniciarMovimiento(): void {
+    this.cotizacion.set(null);
+    this.movimientoForm.reset({
+      tipo: 'GASTO',
+      categoria: 'Otros',
+      categoriaPersonalizada: '',
+      monto: 0,
+      cuenta_origen: '',
+      cuenta_destino: '',
+      descripcion: '',
+      metodo_pago: 'EFECTIVO',
+    });
+    this.actualizarCategoriaPersonalizada();
+    this.cargarCuentas();
+    this.cargarMovimientos();
+    this.cargarCategorias();
+    this.seccionActiva.set('movimientos');
   }
 
   cerrarSesion(): void {

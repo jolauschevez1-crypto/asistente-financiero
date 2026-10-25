@@ -4,18 +4,17 @@ import { CurrencyService } from '../../core/currency.service';
 @Component({
   selector:'app-currency-settings',standalone:true,changeDetection:ChangeDetectionStrategy.OnPush,
   template:`
-    <section class="currency-settings" aria-label="Moneda de tu cuenta">
-      <h2>Moneda de tu cuenta</h2>
-      <p>Elige la moneda en la que registras tus finanzas. Esta opción no convierte importes ni utiliza tipos de cambio.</p>
+    <section class="currency-settings" aria-label="Moneda de presentación">
+      <h2>Moneda de presentación</h2>
+      <p>Es la moneda en la que ves el panel consolidado. Cada cartera conserva su propia moneda: cambiar esta opción no modifica saldos ni historial.</p>
       @if(currency.cargando()){<p role="status">Consultando preferencia…</p>}
-      <label>País o moneda
-        <select [value]="selected()" (change)="selected.set($any($event.target).value)" [disabled]="currency.cargando()||currency.guardando()||currency.preferencias()?.puede_cambiar===false">
-          @for(option of currency.opciones;track option.codigo){<option [value]="option.codigo">{{option.region}} · {{option.codigo}} — {{option.nombre}}</option>}
+      <label>Moneda
+        <select [value]="selected()" (change)="selected.set($any($event.target).value)" [disabled]="currency.cargando()||currency.guardando()">
+          @for(option of currency.presentables();track option.codigo){<option [value]="option.codigo">{{option.codigo}} · {{option.nombre}}</option>}
         </select>
       </label>
-      @if(currency.preferencias();as preferences){<p class="rule">{{preferences.motivo || 'Puedes cambiar la moneda antes de registrar actividad financiera.'}}</p>}
-      <p class="rule">Después de registrar actividad financiera, la moneda queda fija para conservar el significado de tus saldos e historial.</p>
-      <div class="actions"><button type="button" (click)="currency.save(selected())" [disabled]="currency.cargando()||currency.guardando()||!currency.preferencias()||currency.preferencias()?.puede_cambiar===false||selected()===currency.codigo()">{{currency.guardando()?'Guardando…':'Guardar moneda'}}</button><button type="button" class="secondary" (click)="currency.load(true)" [disabled]="currency.cargando()||currency.guardando()">Actualizar</button></div>
+      <p class="rule">Las conversiones usan tasas de referencia del Banco Central Europeo, publicadas una vez por día hábil. No son tasas en tiempo real ni de una casa de cambio.</p>
+      <div class="actions"><button type="button" (click)="currency.save(selected())" [disabled]="currency.cargando()||currency.guardando()||selected()===currency.codigo()">{{currency.guardando()?'Guardando…':'Guardar moneda'}}</button><button type="button" class="secondary" (click)="currency.load(true)" [disabled]="currency.cargando()||currency.guardando()">Actualizar</button></div>
       @if(currency.error()){<p class="feedback error" role="alert">{{currency.error()}}</p>}
       @if(currency.mensaje()){<p class="feedback success" role="status">{{currency.mensaje()}}</p>}
     </section>

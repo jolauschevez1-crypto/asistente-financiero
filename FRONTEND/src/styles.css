@@ -139,9 +139,7 @@ button, .mat-mdc-button-base {
               border-color 0.2s ease !important;
 }
 
-button:active:not(:disabled) {
-  transform: scale(0.97) !important;
-}
+
 
 /* Elevación interactiva para tarjetas y paneles */
 .card-hover, article, .panel-card {
@@ -296,12 +294,42 @@ html.af-high-contrast .inactive {
 }
 
 
-/* v2.3 visual system */
-
-html:not(.af-high-contrast){--af-accent:#0969ce;--af-on-accent:#fff;--af-accent-soft:#e4f0ff;--af-border:#dae1ed;--af-input:#f4f6fa;--af-muted:#59677c;--af-soft:#edf2fa}
-html[data-theme='oscuro']:not(.af-high-contrast){--app-bg-page-start:#080b12;--app-bg-page-end:#10182a;--app-bg-card:#131823;--app-bg-card-start:#131823;--app-bg-card-end:#171d29;--app-text-primary:#f4f6fb;--app-text-muted:#a5afc0;--app-text-secondary:#a5afc0;--app-border-color:#2a3241;--af-accent:#69b4ff;--af-on-accent:#05182b;--af-accent-soft:#132b44;--af-muted:#a5afc0;--af-border:#2a3241;--af-input:#0e131d;--af-soft:#1a2130;--app-accent-on-surface:#69b4ff}
-body{font-family:Inter,'Segoe UI Variable','Segoe UI',system-ui,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.012em}button,input,select,textarea{font-family:inherit}h1,h2,h3{font-weight:650;letter-spacing:-.04em}strong{font-weight:650}button:focus-visible,a:focus-visible{outline:3px solid var(--af-accent);outline-offset:4px}input,textarea,select{transition:border-color .15s,box-shadow .15s}input:focus,textarea:focus,select:focus{box-shadow:0 0 0 4px #258bff18}::selection{background:#268bff45}
-
+/* Sistema visual v3 (referencias: Wise y Steep).
+   Verde bosque #163300 para texto y acentos; lima #9fe870 solo como relleno detrás de texto bosque
+   (sobre blanco no alcanza 3:1). Superficies planas con borde de 1px, números tabulares. */
+html:not(.af-high-contrast){
+  --app-bg-page-start:#f6f7f4;--app-bg-page-mid:#f6f7f4;--app-bg-page-end:#f6f7f4;
+  --app-bg-card:#ffffff;--app-bg-card-start:#ffffff;--app-bg-card-end:#ffffff;--app-bg-card-alt-start:#f6f7f4;--app-bg-card-alt-end:#f6f7f4;
+  --app-bg-navbar-start:#ffffff;--app-bg-navbar-end:#ffffff;
+  --app-text-primary:#0e0f0c;--app-text-muted:#4b4f47;--app-text-secondary:#4b4f47;--app-text-dim:#6b7066;
+  --app-border-color:#dfe3da;--app-border-color-soft:#e9ece5;--app-overlay-soft:#f1f3ee;--app-overlay-strong:#e9ece5;
+  --app-accent-on-surface:#163300;
+  --af-accent:#163300;--af-on-accent:#ffffff;--af-accent-soft:#e8f6dd;
+  --af-primary-bg:#9fe870;--af-primary-text:#163300;--af-primary-hover:#8edb5d;
+  --af-muted:#4b4f47;--af-border:#dfe3da;--af-border-strong:#9aa093;--af-input:#ffffff;--af-soft:#f1f3ee;
+  --af-danger:#a3260f;--af-danger-soft:#fdeeea;--af-warn:#6e4500;--af-warn-soft:#fff4dc;--af-focus:#163300;
+  --mat-sys-primary:#163300;--mat-sys-on-primary:#ffffff;
+}
+html[data-theme='oscuro']:not(.af-high-contrast){
+  color-scheme:dark;
+  --app-bg-page-start:#0e0f0c;--app-bg-page-mid:#0e0f0c;--app-bg-page-end:#0e0f0c;
+  --app-bg-card:#171a14;--app-bg-card-start:#171a14;--app-bg-card-end:#171a14;--app-bg-card-alt-start:#1d211a;--app-bg-card-alt-end:#1d211a;
+  --app-bg-navbar-start:#121410;--app-bg-navbar-end:#121410;
+  --app-text-primary:#f2f4ef;--app-text-muted:#b9bdb3;--app-text-secondary:#b9bdb3;--app-text-dim:#8f9489;
+  --app-border-color:#30352b;--app-border-color-soft:#262a22;--app-overlay-soft:#1d211a;--app-overlay-strong:#262a22;
+  --app-accent-on-surface:#9fe870;
+  --af-accent:#9fe870;--af-on-accent:#163300;--af-accent-soft:#1f2d16;
+  --af-primary-bg:#9fe870;--af-primary-text:#163300;--af-primary-hover:#b3f08c;
+  --af-muted:#b9bdb3;--af-border:#30352b;--af-border-strong:#5d6457;--af-input:#12140f;--af-soft:#1d211a;
+  --af-danger:#ff9e8c;--af-danger-soft:#3a1c16;--af-warn:#ffd48a;--af-warn-soft:#33270f;--af-focus:#9fe870;
+  --mat-sys-primary:#9fe870;--mat-sys-on-primary:#163300;
+}
+body{font-family:Inter,'Segoe UI Variable','Segoe UI',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;color:var(--app-text-primary);background:var(--app-bg-page-start)}
+button,input,select,textarea{font-family:inherit}
+h1,h2,h3{font-weight:650;letter-spacing:-.02em}
+strong{font-weight:650}
+.num{font-variant-numeric:tabular-nums}
+::selection{background:#9fe87080}
 
 /* Texto solo para lectores de pantalla. */
 .sr-only {

@@ -35,6 +35,10 @@ export interface UsuarioListado extends Usuario {
 
 export interface Movimiento {
   moneda?: string;
+  monto_destino?: number | string | null;
+  moneda_destino?: string | null;
+  tasa?: string | null;
+  tasa_fecha?: string | null;
   id: number;
   tipo?: string;
   tipo_movimiento?: string;
@@ -50,13 +54,16 @@ export interface Movimiento {
 export interface Cuenta {
   id?: number;
   nombre: string;
+  moneda?: string;
   saldo_actual: number | string;
 }
 
 export interface BalanceUsuario {
   moneda?: string;
   balance_total: number | string;
-  balanceTotal?: number | string;
+  balanceTotal?: number | string | null;
+  /** Un total por moneda: los saldos de monedas distintas nunca se suman. */
+  balances?: { moneda: string; total: number | string }[];
   cuentas: Cuenta[];
 }
 
