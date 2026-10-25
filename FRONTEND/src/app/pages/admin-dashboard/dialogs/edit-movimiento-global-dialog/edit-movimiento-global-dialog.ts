@@ -41,6 +41,7 @@ export class EditMovimientoGlobalDialog implements OnInit {
     cuenta_origen: [this.data.movimiento.cuenta_origen || ''],
     cuenta_destino: [this.data.movimiento.cuenta_destino || ''],
     descripcion: [this.data.movimiento.descripcion || ''],
+    // Sin campo visible: se conserva el valor guardado para que editar no lo sobrescriba.
     metodo_pago: [this.data.movimiento.metodo_pago || ''],
   });
 

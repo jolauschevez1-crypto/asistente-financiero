@@ -1,0 +1,12 @@
+[
+ {
+  "vista": "desktop",
+  "tipo": "url-tras-/usuario",
+  "valor": "http://127.0.0.1:3102/carteras"
+ },
+ {
+  "vista": "movil",
+  "tipo": "url-tras-/usuario",
+  "valor": "http://127.0.0.1:3102/carteras"
+ }
+]

@@ -1,0 +1,567 @@
+{
+ "herramienta": "axe-core 4.10.3",
+ "etiquetas": [
+  "wcag2a",
+  "wcag2aa",
+  "wcag21a",
+  "wcag21aa",
+  "wcag22aa"
+ ],
+ "base": "http://127.0.0.1:3102",
+ "fecha": "2026-10-25T15:46:48.362Z",
+ "resumen": {},
+ "resultados": [
+  {
+   "ruta": "/login",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/panel",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 17,
+     "targets": [
+      ".hero-amount",
+      "text[y=\"33.666666666666664\"] > tspan",
+      "text[y=\"61.455\"] > tspan",
+      "text[y=\"89.24333333333333\"] > tspan"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"hero-amount num\">USD&nbsp;951,54</p>",
+      "<tspan>1.200</tspan>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 12,
+     "targets": [
+      "h2[title=\"Efectivo\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-head > .tag[title=\"Dólar estadounidense\"] > span[aria-hidden=\"true\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-amount.num",
+      "h2[title=\"Cartera prueba base\"]"
+     ],
+     "html": [
+      "<h2 _ngcontent-ng-c3041083054=\"\" class=\"clamp\" title=\"Efectivo\">Efectivo</h2>",
+      "<span _ngcontent-ng-c3041083054=\"\" aria-hidden=\"true\">USD</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/metas",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/usuario",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 6,
+     "targets": [
+      ".diary-row:nth-child(1) > .movement-icon[aria-hidden=\"true\"]",
+      ".diary-row:nth-child(2) > .movement-icon[aria-hidden=\"true\"]",
+      ".diary-row:nth-child(3) > .movement-icon[aria-hidden=\"true\"]",
+      ".diary-row:nth-child(4) > .income.movement-icon[aria-hidden=\"true\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3288567634=\"\" aria-hidden=\"true\" class=\"movement-icon\">↑</span>",
+      "<span _ngcontent-ng-c3288567634=\"\" aria-hidden=\"true\" class=\"movement-icon\">↑</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element content contains only non-text characters"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/ia",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 13,
+     "targets": [
+      ".form-note",
+      "h2[title=\"Efectivo\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-head > .tag[title=\"Dólar estadounidense\"] > span[aria-hidden=\"true\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-amount.num"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"form-note full\">Si indicas un saldo inicial, se registrará un ingreso de apertura en el historial de esta cartera.</p>",
+      "<h2 _ngcontent-ng-c3041083054=\"\" class=\"clamp\" title=\"Efectivo\">Efectivo</h2>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 12,
+     "targets": [
+      "h2[title=\"Efectivo\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-head > .tag[title=\"Dólar estadounidense\"] > span[aria-hidden=\"true\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-amount.num",
+      "h2[title=\"Cartera prueba base\"]"
+     ],
+     "html": [
+      "<h2 _ngcontent-ng-c3041083054=\"\" class=\"clamp\" title=\"Efectivo\">Efectivo</h2>",
+      "<span _ngcontent-ng-c3041083054=\"\" aria-hidden=\"true\">USD</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 14,
+     "targets": [
+      ".quote > p:nth-child(3)",
+      ".check",
+      "h2[title=\"Efectivo\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-head > .tag[title=\"Dólar estadounidense\"] > span[aria-hidden=\"true\"]"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\">Los movimientos anteriores se conservan en su moneda original y dejarán de poder editarse o anularse.</p>",
+      "<label _ngcontent-ng-c3041083054=\"\" class=\"check full\"><input _ngcontent-ng-c3041083054=\"\" type=\"checkbox\" name=\"accept\" class=\"ng-untouched ng-pristine ng-vali"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-usuario",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 14,
+     "targets": [
+      ".primary",
+      ".secondary:nth-child(4)",
+      "h2[title=\"Efectivo\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-head > .tag[title=\"Dólar estadounidense\"] > span[aria-hidden=\"true\"]"
+     ],
+     "html": [
+      "<button _ngcontent-ng-c3041083054=\"\" type=\"button\" class=\"primary\">Crear nueva cartera</button>",
+      "<button _ngcontent-ng-c3041083054=\"\" type=\"button\" class=\"secondary\">Actualizar</button>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because it is overlapped by another element"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/login",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/panel",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 17,
+     "targets": [
+      ".hero-amount",
+      "text[y=\"33.666666666666664\"] > tspan",
+      "text[y=\"61.455\"] > tspan",
+      "text[y=\"89.24333333333333\"] > tspan"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"hero-amount num\">USD&nbsp;951,54</p>",
+      "<tspan>1.200</tspan>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 12,
+     "targets": [
+      "h2[title=\"Efectivo\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-head > .tag[title=\"Dólar estadounidense\"] > span[aria-hidden=\"true\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-amount.num",
+      "h2[title=\"Cartera prueba base\"]"
+     ],
+     "html": [
+      "<h2 _ngcontent-ng-c3041083054=\"\" class=\"clamp\" title=\"Efectivo\">Efectivo</h2>",
+      "<span _ngcontent-ng-c3041083054=\"\" aria-hidden=\"true\">USD</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/metas",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/usuario",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 6,
+     "targets": [
+      ".diary-row:nth-child(1) > .movement-icon[aria-hidden=\"true\"]",
+      ".diary-row:nth-child(2) > .movement-icon[aria-hidden=\"true\"]",
+      ".diary-row:nth-child(3) > .movement-icon[aria-hidden=\"true\"]",
+      ".diary-row:nth-child(4) > .income.movement-icon[aria-hidden=\"true\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3288567634=\"\" aria-hidden=\"true\" class=\"movement-icon\">↑</span>",
+      "<span _ngcontent-ng-c3288567634=\"\" aria-hidden=\"true\" class=\"movement-icon\">↑</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element content contains only non-text characters"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/ia",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 13,
+     "targets": [
+      ".form-note",
+      "h2[title=\"Efectivo\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-head > .tag[title=\"Dólar estadounidense\"] > span[aria-hidden=\"true\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-amount.num"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"form-note full\">Si indicas un saldo inicial, se registrará un ingreso de apertura en el historial de esta cartera.</p>",
+      "<h2 _ngcontent-ng-c3041083054=\"\" class=\"clamp\" title=\"Efectivo\">Efectivo</h2>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 12,
+     "targets": [
+      "h2[title=\"Efectivo\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-head > .tag[title=\"Dólar estadounidense\"] > span[aria-hidden=\"true\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-amount.num",
+      "h2[title=\"Cartera prueba base\"]"
+     ],
+     "html": [
+      "<h2 _ngcontent-ng-c3041083054=\"\" class=\"clamp\" title=\"Efectivo\">Efectivo</h2>",
+      "<span _ngcontent-ng-c3041083054=\"\" aria-hidden=\"true\">USD</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 16,
+     "targets": [
+      "#conversion-title",
+      ".muted.clamp",
+      ".quote > p:nth-child(3)",
+      ".check"
+     ],
+     "html": [
+      "<h2 _ngcontent-ng-c3041083054=\"\" id=\"conversion-title\">Convertir la moneda de la cartera</h2>",
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"muted clamp\" title=\"Cuenta de ahorro en euros para el viaje de fin de año con la familia\">Cuenta de ahorro en euros para "
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-movil",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 12,
+     "targets": [
+      "h2[title=\"Efectivo\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-head > .tag[title=\"Dólar estadounidense\"] > span[aria-hidden=\"true\"]",
+      "article:nth-child(1) > .tone-forest.wallet-face > .wallet-amount.num",
+      "h2[title=\"Cartera prueba base\"]"
+     ],
+     "html": [
+      "<h2 _ngcontent-ng-c3041083054=\"\" class=\"clamp\" title=\"Efectivo\">Efectivo</h2>",
+      "<span _ngcontent-ng-c3041083054=\"\" aria-hidden=\"true\">USD</span>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  }
+ ]
+}

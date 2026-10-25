@@ -1,0 +1,22 @@
+[
+ {
+  "vista": "desktop",
+  "tipo": "tiempo-login-ms",
+  "valor": 755
+ },
+ {
+  "vista": "desktop",
+  "tipo": "tiempo-panel-ms",
+  "valor": 256
+ },
+ {
+  "vista": "movil",
+  "tipo": "tiempo-login-ms",
+  "valor": 743
+ },
+ {
+  "vista": "movil",
+  "tipo": "tiempo-panel-ms",
+  "valor": 185
+ }
+]

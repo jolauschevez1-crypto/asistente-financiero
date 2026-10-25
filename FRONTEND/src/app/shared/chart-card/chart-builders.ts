@@ -10,9 +10,9 @@ import {
   UsuarioTop,
 } from '../../core/models';
 
-// Paleta v3: cada color alcanza 3:1 sobre la tarjeta clara (#fff) y la oscura (#171a14).
-const COLOR_CYAN = '#1d6fa5';
-const COLOR_TEAL = '#3d7a1a';
+// Paleta v4 (azul sobre negro): cada color alcanza 3:1 sobre la tarjeta clara (#fff) y la oscura (#111214).
+const COLOR_CYAN = '#0e8fb0';
+const COLOR_TEAL = '#2a7de1';
 const COLOR_BLUE = '#3f5bd1';
 const COLOR_DANGER = '#c2410c';
 const COLOR_VIOLET = '#8a4fd8';
@@ -29,6 +29,12 @@ const BASE_OPTIONS: Partial<ApexOptions> = {
   grid: { borderColor: 'rgba(148, 163, 184, 0.16)', strokeDashArray: 4 },
   tooltip: { theme: 'dark' },
   legend: { labels: { colors: '#9fb1c8' } },
+  noData: { text: 'Sin datos en este período', style: { color: '#80867a', fontSize: '14px' } },
+};
+
+/** Ejes de importes sin decimales y con separador de miles ("1.200"). */
+const AMOUNT_AXIS: ApexOptions['yaxis'] = {
+  labels: { formatter: (v: number) => Math.round(v).toLocaleString('es-ES', { useGrouping: true }) },
 };
 
 function formatMes(mes: string): string {
@@ -49,9 +55,11 @@ export function buildIngresosVsGastosOptions(tendenciaMensual: TendenciaMensual[
     ...BASE_OPTIONS,
     chart: { ...BASE_OPTIONS.chart, type: 'bar', height: 260 },
     colors: [COLOR_TEAL, COLOR_DANGER],
-    plotOptions: { bar: { columnWidth: '55%', borderRadius: 4 } },
+    // Con uno o dos meses, barras estrechas para que no ocupen todo el ancho.
+    plotOptions: { bar: { columnWidth: categorias.length < 3 ? '28%' : '55%', borderRadius: 4 } },
     dataLabels: { enabled: false },
     xaxis: { categories: categorias, labels: { style: { colors: '#9fb1c8' } } },
+    yaxis: AMOUNT_AXIS,
     series: [
       { name: 'Ingresos', data: tendenciaMensual.map((t) => Number(t.ingresos)) },
       { name: 'Gastos', data: tendenciaMensual.map((t) => Number(t.gastos)) },

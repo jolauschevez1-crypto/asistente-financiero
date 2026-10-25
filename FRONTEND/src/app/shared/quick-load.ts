@@ -11,7 +11,7 @@ import { sum } from '../core/money';
 @Component({selector:'app-quick-load',imports:[FormsModule,CdkTrapFocus],template:`
 <button type="button" class="quick-trigger" (click)="open()">Carga rápida</button>
 @if(opened){<div class="quick-overlay"><section class="quick-dialog" role="dialog" aria-modal="true" aria-labelledby="quick-title" cdkTrapFocus [cdkTrapFocusAutoCapture]="true" (keydown.escape)="!busy && close()">
- <header><div><span class="quick-kicker">MENOS TIEMPO, MÁS CONTROL</span><h2 id="quick-title">Carga rápida</h2></div><button type="button" aria-label="Cerrar carga rápida" (click)="close()" [disabled]="busy">×</button></header>
+ <header><div><span class="quick-kicker">Varios gastos de una vez</span><h2 id="quick-title">Carga rápida</h2></div><button type="button" aria-label="Cerrar carga rápida" (click)="close()" [disabled]="busy">×</button></header>
  <p>Escribe varios gastos separados por coma o por línea. Usa punto para decimales y <strong>k</strong> para miles.</p>
  @if(error){<p class="quick-error" role="alert">{{error}}</p>}
  <label>Gastos<textarea [(ngModel)]="text" (ngModelChange)="preview=[]" maxlength="4000" rows="4" placeholder="Supermercado 42, café 2.50, gasolina 20" [disabled]="busy"></textarea></label>

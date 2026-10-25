@@ -24,7 +24,12 @@ describe('Aplicación local y navegación', () => {
     const html=fixture.nativeElement as HTMLElement;
     expect(html.querySelector('nav')?.textContent).toContain('Carteras');
     expect(html.querySelector('aside')).toBeNull();
-    expect(Array.from(html.querySelectorAll('.currency-select option')).map(o=>o.textContent)).toEqual(['USD','MXN','EUR']);
+    TestBed.inject(HttpTestingController).match(r=>r.url.startsWith('/api/finanzas/tasas')).forEach(r=>r.flush({success:true,data:{}}));
+    // CR-04: la barra ya no tiene selector de moneda; lleva los botones de accesibilidad.
+    expect(html.querySelector('.bar select')).toBeNull();
+    const tools=Array.from(html.querySelectorAll('.a11y-tools button')).map(b=>b.textContent?.trim());
+    expect(tools).toEqual(['Tema oscuro','Texto grande','Alto contraste']);
+    expect(html.querySelector('nav')?.textContent).not.toContain('Movimientos');
     app.toggleMobile();fixture.detectChanges();
     expect(html.querySelector('#mobile-navigation')).toBeTruthy();
     expect(document.body.classList.contains('af-menu-open')).toBeTrue();

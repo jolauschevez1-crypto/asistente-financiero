@@ -8,16 +8,19 @@
         @for(link of visibleLinks;track link.route){<a [routerLink]="link.route" routerLinkActive="active" ariaCurrentWhenActive="page">{{link.label}}</a>}
       </nav>
       <div class="bar-actions">
-        @if(!auth.isAdmin()){<label class="currency-select"><span class="sr-only">Moneda de presentación</span><select [value]="currency.presentacion()" (change)="setCurrency($any($event.target).value)" [disabled]="currency.guardando()" title="Moneda de presentación del panel">@for(c of currency.presentables();track c.codigo){<option [value]="c.codigo">{{c.codigo}}</option>}</select></label>}
+        <div class="a11y-tools" role="group" aria-label="Accesibilidad">
+          <button type="button" class="tool" (click)="toggleTheme()" [attr.aria-pressed]="tema()==='oscuro'" [title]="tema()==='oscuro'?'Cambiar a tema claro':'Cambiar a tema oscuro'"><span class="sr-only">Tema oscuro</span>
+            @if(tema()==='oscuro'){<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>}@else{<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>}
+          </button>
+          <button type="button" class="tool" (click)="toggleText()" [attr.aria-pressed]="largeText()" title="Texto grande"><span class="sr-only">Texto grande</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19 8 6l5 13M4.8 14.5h6.4M14 19l3.5-9 3.5 9M15.2 16h4.6"/></svg></button>
+          <button type="button" class="tool" (click)="toggleContrast()" [attr.aria-pressed]="contrast()" title="Alto contraste"><span class="sr-only">Alto contraste</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18Z" class="fill"/></svg></button>
+        </div>
         <div class="user-menu">
           <button id="user-menu-button" type="button" class="avatar-button" (click)="toggleUserMenu()" [attr.aria-expanded]="userMenuOpen()" aria-controls="user-menu" [attr.aria-label]="'Menú de '+displayName"><span class="avatar" aria-hidden="true">{{displayName.slice(0,1).toUpperCase()}}</span></button>
           @if(userMenuOpen()){
             <div id="user-menu" class="menu-panel" role="group" aria-label="Opciones de cuenta">
               <p class="menu-name" [title]="displayName">{{displayName}}</p>
-              <a routerLink="/perfil">Perfil y preferencias</a>
-              <button type="button" (click)="toggleTheme()" [attr.aria-pressed]="tema()==='oscuro'">Tema oscuro: {{tema()==='oscuro'?'activado':'desactivado'}}</button>
-              <button type="button" (click)="toggleText()" [attr.aria-pressed]="largeText()">Texto grande: {{largeText()?'activado':'desactivado'}}</button>
-              <button type="button" (click)="toggleContrast()" [attr.aria-pressed]="contrast()">Alto contraste: {{contrast()?'activado':'desactivado'}}</button>
+              <a routerLink="/perfil">Mi perfil</a>
               <button type="button" class="logout" (click)="logout()">Cerrar sesión</button>
             </div>
           }
@@ -28,7 +31,12 @@
     @if(mobileOpen()){
       <nav id="mobile-navigation" class="nav-mobile" aria-label="Navegación principal">
         @for(link of visibleLinks;track link.route){<a [routerLink]="link.route" routerLinkActive="active" ariaCurrentWhenActive="page">{{link.label}}</a>}
-        <a routerLink="/perfil" routerLinkActive="active" ariaCurrentWhenActive="page">Perfil y preferencias</a>
+        <a routerLink="/perfil" routerLinkActive="active" ariaCurrentWhenActive="page">Mi perfil</a>
+        <div class="mobile-tools" role="group" aria-label="Accesibilidad">
+          <button type="button" (click)="toggleTheme()" [attr.aria-pressed]="tema()==='oscuro'">Tema oscuro</button>
+          <button type="button" (click)="toggleText()" [attr.aria-pressed]="largeText()">Texto grande</button>
+          <button type="button" (click)="toggleContrast()" [attr.aria-pressed]="contrast()">Alto contraste</button>
+        </div>
         <button type="button" class="mobile-logout" (click)="logout()">Cerrar sesión</button>
       </nav>
     }

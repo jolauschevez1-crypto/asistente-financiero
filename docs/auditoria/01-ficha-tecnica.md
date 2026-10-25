@@ -56,5 +56,5 @@ El resto de los commits son de documentación y evidencias.
 ## 5. Desvíos respecto de la consigna
 
 - **Ramas:** la consigna pide `feature/multidivisa`, `feature/redesign-ui`, `audit/baseline` y `audit/lab`. El entorno de trabajo solo autoriza a subir la rama `claude/project-thread-noiuro`, así que todo el trabajo está ahí, en commits pequeños con los prefijos pedidos.
-- **Rama `audit/lab`:** no se creó porque no hizo falta sembrar defectos. Hubo 10 defectos reales (ver `04-registro-defectos.csv`).
+- **Rama `audit/lab`:** no se creó porque no hizo falta sembrar defectos. Hubo 14 defectos reales (ver `04-registro-defectos.csv`).
 - **Preview de Vercel:** el proyecto no tiene variables para Preview, así que una vista previa no tendría base de datos. Las pruebas de sistema y de carga se hicieron en local.

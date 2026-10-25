@@ -3,41 +3,38 @@
     height: 100%;
 }
 
+/* Misma tarjeta plana que el resto de la app: borde de 1 px, sin elevación ni movimiento al pasar el ratón. */
 .panel-card {
     display: flex;
     flex-direction: column;
     min-width: 0;
     height: 100%;
-    padding: var(--space-lg, 16px) var(--space-xl, 24px) 18px;
-    border: 1px solid var(--app-border-color, rgba(148, 163, 184, 0.24));
-    border-radius: var(--radius-lg, 16px);
+    padding: 24px;
+    border: 1px solid var(--af-border, var(--app-border-color));
+    border-radius: 16px;
     background: var(--app-bg-card);
-    box-shadow: var(--shadow-elevation-3, 0 18px 45px rgba(2, 8, 23, 0.35));
-    transition: transform var(--motion-base, 0.2s) ease, box-shadow var(--motion-base, 0.2s) ease, border-color var(--motion-base, 0.2s) ease;
-}
-
-.panel-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--af-accent-soft);
-    box-shadow: var(--shadow-elevation-2, 0 8px 20px rgba(2, 8, 23, 0.35)), 0 14px 30px var(--af-accent-soft);
 }
 
 .panel-card-header {
     display: flex;
     align-items: center;
-    gap: var(--space-sm, 8px);
-    margin-bottom: var(--space-md, 12px);
-    color: var(--app-text-primary, #f8fafc);
+    gap: 8px;
+    margin-bottom: 12px;
+    color: var(--app-text-primary);
 }
 
 .panel-card-header mat-icon {
-    color: var(--app-accent-on-surface, var(--af-accent));
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    color: var(--af-muted, var(--app-text-secondary));
 }
 
 .panel-card-header h2 {
     margin: 0;
-    font-size: var(--text-md, 16px);
-    font-weight: var(--font-weight-black, 800);
+    font-size: 1.0625rem;
+    line-height: 1.35;
+    font-weight: 650;
 }
 
 .panel-card-body {

@@ -10,7 +10,11 @@ router.use(verificarToken);
 router.use((req,res,next)=>{if(['POST','PUT','PATCH'].includes(req.method)){if(!req.body||typeof req.body!=='object'||Array.isArray(req.body))return res.status(400).json({success:false,message:'Envía un objeto JSON con los datos de la operación.',code:'VALIDACION'});}next();});
 function endpoint(fn){return async(req,res)=>{try{const uid=id(req.usuario.id);const data=await fn(uid,req);res.json({success:true,data});}catch(e){let status=e.status||500,message=e.message,code=e.code||'ERROR';if(e.code==='23505'){status=409;message='Ya existe un registro con esos datos.';code='DUPLICADO';}if(e.code==='P0001'){status=409;code='REGLA_MONEDA';}if(status===500){message='No se pudo completar la operación. Inténtalo nuevamente.';code='ERROR_INTERNO';console.error('[finanzas]',e.code||e.name);}res.status(status).json({success:false,message,code,...(e.cotizacion?{cotizacion:e.cotizacion}:{})});}};}
 router.get('/panel',endpoint((u,r)=>service.panel(u,r.query.mes,r.query.moneda)));
-router.get('/tasas',endpoint(async()=>{await fx.maybeRefresh();const snap=await fx.snapshot();return {...fx.status(snap,require('../finance/validation').today()),base:fx.BASE,monedas_con_tasa:fx.CON_TASA,tasas:[...snap.rates].filter(([c])=>c!==fx.BASE).map(([c,r])=>({par:`${fx.BASE}/${c}`,tasa:fx.decimal(r)}))};}));
+// Con ?moneda=EUR añade `tasas_a`: el factor (12 decimales, igual que en el panel) para llevar cada moneda a la elegida.
+// Solo sirve para presentar importes; nunca cambia lo guardado.
+router.get('/tasas',endpoint(async(u,r)=>{await fx.maybeRefresh();const snap=await fx.snapshot();const destino=fx.CON_TASA.includes(r.query.moneda)?r.query.moneda:null;
+ return {...fx.status(snap,require('../finance/validation').today()),base:fx.BASE,monedas_con_tasa:fx.CON_TASA,tasas:[...snap.rates].filter(([c])=>c!==fx.BASE).map(([c,x])=>({par:`${fx.BASE}/${c}`,tasa:fx.decimal(x)})),
+  ...(destino?{moneda:destino,tasas_a:Object.fromEntries(fx.CON_TASA.map(c=>[c,fx.quote(snap,c,destino)?.tasa??null]))}:{})};}));
 router.get('/preferencias',endpoint(u=>currency.getPreferences(u)));
 router.patch('/preferencias',endpoint((u,r)=>currency.updatePreferences(u,r.body)));
 router.get('/carteras',endpoint(u=>service.listWallets(u)));

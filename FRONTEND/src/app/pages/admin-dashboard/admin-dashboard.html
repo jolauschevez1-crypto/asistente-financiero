@@ -225,10 +225,6 @@
                         <td mat-cell *matCellDef="let u" (click)="seleccionarUsuario(u)">{{ u.correo }}</td>
                     </ng-container>
 
-                    <ng-container matColumnDef="telegram">
-                        <th mat-header-cell *matHeaderCellDef>Telegram</th>
-                        <td mat-cell *matCellDef="let u">{{ u.telegram_id || '-' }}</td>
-                    </ng-container>
 
                     <ng-container matColumnDef="estado">
                         <th mat-header-cell *matHeaderCellDef>Estado</th>
@@ -734,10 +730,6 @@
             <mat-form-field appearance="outline">
                 <mat-label>Cuenta destino</mat-label>
                 <input matInput formControlName="cuenta_destino" />
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Metodo de pago</mat-label>
-                <input matInput formControlName="metodo_pago" />
             </mat-form-field>
             <mat-form-field appearance="outline" class="full">
                 <mat-label>Descripcion</mat-label>

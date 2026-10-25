@@ -1,9 +1,13 @@
 // Regression cases from the original audit, applied to the improved version. Services remain doubles.
 import { TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
-import { signal } from '@angular/core';
+import { ChangeDetectorRef, signal } from '@angular/core';
 import { of, throwError } from 'rxjs';
-import { UserDashboard } from '../app/pages/user-dashboard/user-dashboard';
+import { MovementJournal } from '../app/pages/finance/movement-journal';
+import { FinancePage } from '../app/pages/finance/finance';
+import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { CurrencyService, formatCurrency } from '../app/core/currency.service';
 import { Estadisticas } from '../app/pages/estadisticas/estadisticas';
 import { ApiService } from '../app/core/api.service';
 import { AuthService } from '../app/core/auth.service';
@@ -44,8 +48,11 @@ function parseCsv(text: string): string[][] {
   return rows;
 }
 
+// El antiguo módulo Movimientos (UserDashboard) se retiró por CR-04: gastos e ingresos se registran
+// desde el diario de Carteras (MovementJournal) y los traspasos con «Transferir» (FinancePage).
+// Los casos FE-T01..FE-T08 conservan su identificador y su intención sobre los componentes nuevos.
 describe('Regresión de defectos originales', () => {
-  let api: any, snack: any, user: UserDashboard;
+  let api: any, snack: any, user: MovementJournal, finance: any;
   beforeEach(() => {
     api = {
       registrarMovimiento: jasmine.createSpy('registrarMovimiento').and.returnValue(of({})),
@@ -55,88 +62,106 @@ describe('Regresión de defectos originales', () => {
       generarReporte: jasmine.createSpy('generarReporte'),
     };
     snack = { error: jasmine.createSpy('error'), exito: jasmine.createSpy('exito') };
+    finance = { get: jasmine.createSpy('get').and.returnValue(of([])), post: jasmine.createSpy('post').and.returnValue(of({})) };
     TestBed.configureTestingModule({ providers: [
       FormBuilder,
       { provide: ApiService, useValue: api },
       { provide: AuthService, useValue: { usuario: signal({ id: 9001, rol: 'USUARIO', nombre: 'Auditoria' }) } },
       { provide: SnackbarService, useValue: snack },
       { provide: DashboardCacheService, useValue: { obtenerDashboardAdmin: () => of({}) } },
-      { provide: FinanceService, useValue: {get: () => of([])} },
+      { provide: FinanceService, useValue: finance },
+      { provide: CurrencyService, useValue: { presentacion: signal('USD'), codigo: signal('USD'), presentables: signal([]), tasasFecha: signal(null), display: (v: unknown, c: string) => formatCurrency(v as string, c), converted: () => null } },
+      { provide: ActivatedRoute, useValue: { data: of({ section: 'carteras' }) } },
+      { provide: ChangeDetectorRef, useValue: { markForCheck: () => {} } },
     ] });
-    user = TestBed.runInInjectionContext(() => new UserDashboard());
-    user.movimientoForm.setValue({ tipo: 'GASTO', categoria: 'Prueba', categoriaPersonalizada: '', monto: 10, cuenta_origen: 'A', cuenta_destino: '', descripcion: 'Dato ficticio', metodo_pago: 'EFECTIVO' });
+    user = TestBed.runInInjectionContext(() => new MovementJournal());
+    user.wallets = [{ id: 1, nombre: 'A', moneda: 'USD', saldo_actual: '100.00' }, { id: 2, nombre: 'B', moneda: 'USD', saldo_actual: '5.00' }];
+    user.form.setValue({ tipo: 'GASTO', descripcion: 'Dato ficticio', categoria: 'Prueba', categoriaPersonalizada: '', monto: '10', cuenta: 'A' });
   });
+  const validForm = { control: { markAllAsTouched: () => {} }, invalid: false } as unknown as NgForm;
+  function walletsPage(): FinancePage {
+    const page = TestBed.runInInjectionContext(() => new FinancePage());
+    page.wallets = [{ id: 1, nombre: 'A', moneda: 'USD', saldo_actual: '100.00' }, { id: 2, nombre: 'B', moneda: 'USD', saldo_actual: '5.00' }];
+    return page;
+  }
 
   it('FE-T01 [RF-MOV] gasto valido solicita registro una vez', () => {
-    user.registrarMovimiento();
+    user.submit();
     observation('FE-T01', 1, api.registrarMovimiento.calls.count());
     expect(api.registrarMovimiento).toHaveBeenCalledTimes(1);
     expect(api.registrarMovimiento.calls.mostRecent().args[0].monto).toBe(10);
+    expect('metodo_pago' in api.registrarMovimiento.calls.mostRecent().args[0]).toBeFalse();
   });
 
-  it('FE-T02 [FE-01/RF-MOV] cambiar transferencia invalida a gasto permite registrar', () => {
-    user.movimientoForm.controls.tipo.setValue('TRANSFERENCIA');
-    user.registrarMovimiento();
-    expect(api.registrarMovimiento).not.toHaveBeenCalled();
-    user.movimientoForm.controls.tipo.setValue('GASTO');
-    user.registrarMovimiento();
-    observation('FE-T02', { requests: 1, destinationErrors: null }, { requests: api.registrarMovimiento.calls.count(), destinationErrors: user.movimientoForm.controls.cuenta_destino.errors });
+  it('FE-T02 [FE-01/RF-MOV] cambiar de ingreso a gasto permite registrar sin cartera destino', () => {
+    user.form.controls.tipo.setValue('INGRESO');
+    user.form.controls.tipo.setValue('GASTO');
+    user.submit();
+    const body = api.registrarMovimiento.calls.mostRecent()?.args[0];
+    observation('FE-T02', { requests: 1, destination: null }, { requests: api.registrarMovimiento.calls.count(), destination: body?.cuenta_destino });
     expect(api.registrarMovimiento).toHaveBeenCalledTimes(1);
+    expect(body.tipo).toBe('GASTO');
+    expect(body.cuenta_destino).toBeNull();
   });
 
   it('FE-T03 [RF-TRANSFER] transferencia entre dos cuentas solicita registro', () => {
-    user.movimientoForm.patchValue({ tipo: 'TRANSFERENCIA', cuenta_destino: 'B' });
-    user.registrarMovimiento();
-    observation('FE-T03', 1, api.registrarMovimiento.calls.count());
-    expect(api.registrarMovimiento).toHaveBeenCalledTimes(1);
+    const page = walletsPage();
+    page.transfer = { origen_id: '1', destino_id: '2', monto: '10', descripcion: '' };
+    page.submitTransfer(validForm);
+    const calls = finance.post.calls.allArgs().filter((a: unknown[]) => a[0] === 'transferencias');
+    observation('FE-T03', 1, calls.length);
+    expect(calls.length).toBe(1);
+    expect(calls[0][1]).toEqual(jasmine.objectContaining({ origen_id: 1, destino_id: 2, monto: '10' }));
   });
 
   it('FE-T04 [RF-TRANSFER] origen igual a destino se rechaza con mensaje', () => {
-    user.movimientoForm.patchValue({ tipo: 'TRANSFERENCIA', cuenta_destino: 'A' });
-    user.registrarMovimiento();
-    observation('FE-T04', { requests: 0, errorVisible: true }, { requests: api.registrarMovimiento.calls.count(), errorVisible: !!user.error() });
-    expect(api.registrarMovimiento).not.toHaveBeenCalled();
-    expect(user.error()).toContain('diferente');
+    const page = walletsPage();
+    page.transfer = { origen_id: '1', destino_id: '1', monto: '10', descripcion: '' };
+    page.submitTransfer(validForm);
+    observation('FE-T04', { requests: 0, errorVisible: true }, { requests: finance.post.calls.count(), errorVisible: !!page.error });
+    expect(finance.post).not.toHaveBeenCalled();
+    expect(page.error).toContain('diferente');
   });
 
   it('FE-T05 [RF-MOV] monto cero se rechaza sin solicitud', () => {
-    user.movimientoForm.controls.monto.setValue(0);
-    user.registrarMovimiento();
+    user.form.controls.monto.setValue('0');
+    user.submit();
     observation('FE-T05', 0, api.registrarMovimiento.calls.count());
     expect(api.registrarMovimiento).not.toHaveBeenCalled();
-    expect(user.movimientoForm.controls.monto.invalid).toBeTrue();
+    expect(user.form.controls.monto.invalid).toBeTrue();
   });
 
-  async function exportRows(method: string, date?: string, description = 'Dato ficticio'): Promise<string[][]> {
+  async function exportRows(wallet: string, date?: string, description = 'Dato ficticio'): Promise<string[][]> {
     let captured: Blob | null = null;
     spyOn(URL, 'createObjectURL').and.callFake(blob => { captured = blob as Blob; return 'blob:auditoria-ficticia'; });
     spyOn(URL, 'revokeObjectURL');
     spyOn(HTMLAnchorElement.prototype, 'click');
-    user.movimientos.set([{ id: 1, tipo: 'INGRESO', categoria: 'Salario', monto: 100, descripcion: description, metodo_pago: method, fecha: date }]);
-    user.exportarCsv();
+    user.movimientos.set([{ id: 1, tipo: 'INGRESO', categoria: 'Salario', monto: 100, moneda: 'USD', cuenta_origen: wallet, descripcion: description, fecha: date }]);
+    user.exportCsv();
     if (!captured) throw new Error('No CSV blob captured');
     return parseCsv(await (captured as Blob).text());
   }
 
-  it('FE-T06 [FE-02/RF-EXPORT] CSV preserva metodo con coma y columna de moneda', async () => {
-    const rows = await exportRows('TARJETA, VISA');
-    observation('FE-T06', { columns: 8, payment: 'TARJETA, VISA' }, { columns: rows[1].length, row: rows[1] });
+  it('FE-T06 [FE-02/RF-EXPORT] CSV preserva cartera con coma y columna de moneda, sin método de pago', async () => {
+    const rows = await exportRows('Banco, ahorro');
+    observation('FE-T06', { columns: 8, wallet: 'Banco, ahorro' }, { columns: rows[1].length, row: rows[1] });
     expect(rows[1].length).toBe(rows[0].length);
     expect(rows[1][5]).toBe('USD');
-    expect(rows[1][7]).toBe('TARJETA, VISA');
+    expect(rows[1][6]).toBe('Banco, ahorro');
+    expect(rows[0].join(' ')).not.toMatch(/m[eé]todo/i);
   });
 
   it('FE-T07 [RF-EXPORT] CSV preserva comillas comas y salto de linea de descripcion', async () => {
     const description = 'Texto "citado", línea 1\nlínea 2';
-    const rows = await exportRows('EFECTIVO', undefined, description);
-    observation('FE-T07', { columns: 8, description }, { columns: rows[1].length, description: rows[1][6] });
+    const rows = await exportRows('Banco', undefined, description);
+    observation('FE-T07', { columns: 8, description }, { columns: rows[1].length, description: rows[1][7] });
     expect(rows.length).toBe(2);
     expect(rows[1].length).toBe(8);
-    expect(rows[1][6]).toBe(description);
+    expect(rows[1][7]).toBe(description);
   });
 
   it('FE-T08 [FE-02/RF-EXPORT] CSV con fecha conserva ocho columnas incluida moneda', async () => {
-    const rows = await exportRows('EFECTIVO', '2026-10-16T17:00:00Z');
+    const rows = await exportRows('Banco', '2026-10-16T17:00:00Z');
     observation('FE-T08', { columns: 8 }, { columns: rows[1].length, row: rows[1] });
     expect(rows[1].length).toBe(8);
   });

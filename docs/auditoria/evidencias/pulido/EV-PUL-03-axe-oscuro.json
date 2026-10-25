@@ -1,0 +1,819 @@
+{
+ "herramienta": "axe-core 4.10.3",
+ "etiquetas": [
+  "wcag2a",
+  "wcag2aa",
+  "wcag21a",
+  "wcag21aa",
+  "wcag22aa"
+ ],
+ "base": "http://127.0.0.1:3102",
+ "fecha": "2026-10-25T15:46:04.226Z",
+ "resumen": {},
+ "resultados": [
+  {
+   "ruta": "/login",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/panel",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 58,
+     "targets": [
+      ".heading-text > .eyebrow",
+      "h1",
+      ".subtitle",
+      ".month-filter"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Panel general</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 22,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 7,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".month-filter"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Presupuestos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Ingresos y gastos fijos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Deudas y cobros</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/metas",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Metas de ahorro</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Gastos compartidos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/usuario",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 16,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3288567634=\"\" class=\"eyebrow\">Compañero de prueba</p>",
+      "<h1 _ngcontent-ng-c3288567634=\"\">Mis carteras y diario</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 5,
+     "targets": [
+      ".active",
+      ".tab-btn[type=\"button\"]:nth-child(2)",
+      ".tab-btn[type=\"button\"]:nth-child(3)",
+      "footer > span:nth-child(1)"
+     ],
+     "html": [
+      "<button _ngcontent-ng-c1596769753=\"\" type=\"button\" class=\"tab-btn active\">",
+      "<button _ngcontent-ng-c1596769753=\"\" type=\"button\" class=\"tab-btn\">"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/ia",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 5,
+     "targets": [
+      "div > p",
+      "h1",
+      ".ia-subtitle",
+      "footer > span:nth-child(1)"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c4069684152=\"\">TU COPILOTO FINANCIERO</p>",
+      "<h1 _ngcontent-ng-c4069684152=\"\">Entiende tu dinero.</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 23,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 22,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 24,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-usuario",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 23,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/login",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": []
+  },
+  {
+   "ruta": "/panel",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 58,
+     "targets": [
+      ".heading-text > .eyebrow",
+      "h1",
+      ".subtitle",
+      ".month-filter"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Panel general</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 22,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 7,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".month-filter"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Presupuestos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Ingresos y gastos fijos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Deudas y cobros</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/metas",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Metas de ahorro</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".secondary"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Gastos compartidos</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/usuario",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 16,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3288567634=\"\" class=\"eyebrow\">Compañero de prueba</p>",
+      "<h1 _ngcontent-ng-c3288567634=\"\">Mis carteras y diario</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 5,
+     "targets": [
+      ".active",
+      ".tab-btn[type=\"button\"]:nth-child(2)",
+      ".tab-btn[type=\"button\"]:nth-child(3)",
+      "footer > span:nth-child(1)"
+     ],
+     "html": [
+      "<button _ngcontent-ng-c1596769753=\"\" type=\"button\" class=\"tab-btn active\">",
+      "<button _ngcontent-ng-c1596769753=\"\" type=\"button\" class=\"tab-btn\">"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/ia",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 5,
+     "targets": [
+      "div > p",
+      "h1",
+      ".ia-subtitle",
+      "footer > span:nth-child(1)"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c4069684152=\"\">TU COPILOTO FINANCIERO</p>",
+      "<h1 _ngcontent-ng-c4069684152=\"\">Entiende tu dinero.</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 23,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 22,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-visually-hidden.cdk-focus-trap-anchor[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 26,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-movil",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 22,
+     "targets": [
+      ".eyebrow",
+      "h1",
+      ".subtitle",
+      ".quick-trigger"
+     ],
+     "html": [
+      "<p _ngcontent-ng-c3041083054=\"\" class=\"eyebrow\">domingo, 25 de octubre de 2026</p>",
+      "<h1 _ngcontent-ng-c3041083054=\"\">Mis carteras</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  }
+ ]
+}
