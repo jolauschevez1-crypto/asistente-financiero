@@ -9,6 +9,7 @@
     <div class="brand-block"><img class="mark" src="favicon.svg" alt="" width="44" height="44"><div><h2>{{ modo() === 'registro' ? 'Crea tu cuenta' : modo() === 'login' ? 'Bienvenido' : 'Recupera tu acceso' }}</h2><p>Tus finanzas, organizadas en tu propia cuenta.</p></div></div>
     <p *ngIf="mensaje()" class="alert success" role="status">{{ mensaje() }}</p>
     <p *ngIf="error()" class="alert" role="alert">{{ error() }}</p>
+    @if(modo() === 'login'){<app-google-signin />}
     <form *ngIf="modo() === 'login'" [formGroup]="form" (ngSubmit)="ingresar()" class="login-form">
       <label for="login-email">Correo electrónico</label><input id="login-email" type="email" formControlName="correo" autocomplete="email" maxlength="254" placeholder="tu@correo.com" />
       <label for="login-password">Contraseña</label><input id="login-password" [type]="verPassword() ? 'text' : 'password'" formControlName="password" autocomplete="current-password" />
@@ -17,7 +18,6 @@
       <button class="link-btn" type="button" (click)="mostrarRegistro()">Crear una cuenta</button>
       <button class="link-btn" type="button" (click)="mostrarRecuperacion()">Olvidé mi contraseña</button>
     </form>
-    @if(modo() === 'login'){<app-google-signin />}
     <form *ngIf="modo() === 'registro'" [formGroup]="registroForm" (ngSubmit)="registrar()" class="login-form">
       <label for="register-name">Nombre</label><input id="register-name" formControlName="nombre" autocomplete="name" minlength="2" maxlength="100" (beforeinput)="soloLetras($event)" />
       <span class="field-error" *ngIf="registroForm.controls.nombre.touched && registroForm.controls.nombre.invalid">Escribe de 2 a 100 caracteres: solo letras, espacios, guiones y apóstrofes.</span>
