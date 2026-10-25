@@ -33,6 +33,7 @@
       </nav>
     }
   </header>
-  <main id="main-content" tabindex="-1" class="main-content"><router-outlet /></main>
-  <footer class="site-footer"><span>{{brand()}}</span><span>Tasas de referencia del BCE vía Frankfurter. No son tasas en tiempo real.</span></footer>
-} @else {<main id="main-content" tabindex="-1"><router-outlet /></main>}
+}
+<!-- Un único router-outlet: si estuviera dentro de cada rama, al pasar del login al panel la página se crearía dos veces y se cancelarían sus primeras peticiones. -->
+<main id="main-content" tabindex="-1" [class.main-content]="showLayout"><router-outlet /></main>
+@if (showLayout) {<footer class="site-footer"><span>{{brand()}}</span><span>Tasas de referencia del BCE vía Frankfurter. No son tasas en tiempo real.</span></footer>}
