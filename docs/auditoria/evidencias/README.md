@@ -21,3 +21,13 @@ Los datos de prueba son ficticios (usuario `amigo@local.test`, base PostgreSQL l
 | ID | Fecha | Versión | Entorno | Requisito / riesgo | Resultado | Fuente |
 |---|---|---|---|---|---|---|
 | EV-MAN-01 | 2026-10-25 05:45Z | f3504d3 (despliegue de producción vigente) | Producción, https://asistente-financiero-seven.vercel.app | Inicio de sesión con Google tras agregar el origen autorizado en Google Cloud | El usuario informa: "si me deja iniciar nomas sin fallos". No hay captura; la verificación es testimonial, no automatizada | Mensaje del usuario en el hilo del proyecto |
+
+## Evidencias "después" (rediseño v3 y multidivisa)
+
+Datos ficticios: usuario `amigo@local.test` en una copia local de la base de la línea base (`af_after`), con carteras de prueba en USD, EUR (nombre largo) y COP. Las tasas provienen de un proveedor simulado local con valores ficticios (USD/EUR 0,9 y USD/MXN 18, fecha de ayer); no son tasas reales del BCE, porque el proxy del contenedor bloquea api.frankfurter.dev. El código ejercitado es el mismo flujo de refresco perezoso que usa producción.
+
+| ID | Fecha | Versión | Entorno | Requisito / riesgo | Resultado | Ruta |
+|---|---|---|---|---|---|---|
+| EV-DESP-01 | 2026-10-25 06:24Z | 7ba309a | Local, Chromium 1366×850 (tema oscuro por defecto y claro) | Rediseño, barra superior, panel multidivisa, modal Crear nueva cartera, conversión, transferencia | 12 capturas. Total parcial rotulado y COP mostrado aparte; sello de tasa con antigüedad; nombre largo visible | despues/local-7ba309a/DESP-desktop-*.png |
+| EV-DESP-02 | 2026-10-25 06:24Z | 7ba309a | Local, Chromium 390×844 | Responsive y menú hamburguesa | 11 capturas, incluida la del menú a pantalla completa | despues/local-7ba309a/DESP-movil-*.png |
+| EV-DESP-03 | 2026-10-25 06:24Z | 7ba309a | Local, Chromium | Rendimiento percibido y errores | Login 733 ms (escritorio) y 720 ms (móvil); panel tras login 174 ms y 177 ms. Sin errores de consola ni HTTP ≥400. Tres peticiones ERR_ABORTED tras el login (panel, carteras, categorías), por investigar | despues/local-7ba309a/DESP-registro-navegador.json |
