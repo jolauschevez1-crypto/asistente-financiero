@@ -307,7 +307,7 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{border-color:var(--af-d
 .wallets-head h2{font-size:1.375rem;font-weight:700;letter-spacing:-.02em}
 .wallets-head p{margin:4px 0 0;font-size:.875rem}
 .wallet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:18px}
-.wallet-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:168px;padding:22px 22px 24px;border-radius:24px;color:#fff;overflow:hidden;box-shadow:0 14px 34px #1f6fe540;border:1px solid #ffffff26;transition:transform .2s ease,box-shadow .2s ease}
+.wallet-card{container-type:inline-size;position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:168px;padding:22px 22px 24px;border-radius:24px;color:#fff;overflow:hidden;box-shadow:0 14px 34px #1f6fe540;border:1px solid #ffffff26;transition:transform .2s ease,box-shadow .2s ease}
 .wallet-card::after{content:'';position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:#ffffff14;pointer-events:none}
 .wallet-card:hover{transform:translateY(-2px);box-shadow:0 18px 40px #1f6fe559}
 .wallet-card .wallet-head{position:relative;z-index:1}
@@ -322,3 +322,15 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{border-color:var(--af-d
 .wallet-origin{position:relative;z-index:1;margin-top:-20px;font-size:.8125rem;color:#ffffffd9}
 html.af-high-contrast .wallet-card{background:#fff!important;color:#000;border:2px solid #000;box-shadow:none}
 html.af-high-contrast .wallet-card :is(h3,.wallet-amount,.wallet-origin,.wallet-icon){color:#000!important}
+
+/* D-17: los saldos largos (COP, ARS, millones) reducen su tamaño según el ancho de la tarjeta en vez de cortarse. */
+.wallet-card .wallet-amount.long{font-size:clamp(1.125rem,9cqi,2.125rem)}
+
+@media (max-width:600px){
+  /* El botón Actualizar queda junto al mes o a las acciones, no solo en una fila aparte. */
+  .month-filter{width:auto;flex:1 1 0!important;min-width:0}
+  .heading-actions.is-wallets>*{order:2;flex:1 1 45%;white-space:nowrap}
+  .heading-actions.is-wallets>button{padding-left:12px;padding-right:12px}
+  .heading-actions.is-wallets>app-quick-load,.heading-actions.is-wallets>.secondary{order:0;flex:1 1 35%}
+  .heading-actions.is-wallets>.icon-action{order:1}
+}

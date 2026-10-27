@@ -47,6 +47,19 @@ describe('Carteras con moneda elegida', () => {
     expect(text).not.toContain('Movimientos');           // ya no hay enlace al módulo retirado
   });
 
+  it('un saldo largo se muestra completo con letra más pequeña, sin puntos suspensivos (D-17)', () => {
+    wallets.push({ id: 3, nombre: 'Pesos', moneda: 'COP', saldo_actual: '250000.00' });
+    try {
+      const fixture = TestBed.createComponent(FinancePage); fixture.detectChanges();
+      const amounts = Array.from((fixture.nativeElement as HTMLElement).querySelectorAll('.wallet-card .wallet-amount')) as HTMLElement[];
+      const cop = amounts.find(a => a.textContent!.includes('COP'))!;
+      expect(cop.textContent!.trim()).toBe(formatCurrency('250000.00', 'COP'));
+      expect(cop.classList).toContain('long');
+      expect(cop.title).toBe(cop.textContent!.trim());
+      expect(amounts.find(a => a.textContent!.trim() === formatCurrency('90.00', 'EUR'))!.classList).not.toContain('long');
+    } finally { wallets.pop(); }
+  });
+
   it('crear cartera solo pide nombre y saldo inicial y usa la moneda elegida', () => {
     const fixture = TestBed.createComponent(FinancePage); fixture.detectChanges();
     const page = fixture.componentInstance;
