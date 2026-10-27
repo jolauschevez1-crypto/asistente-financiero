@@ -1,0 +1,24 @@
+1366 /panel {"url":"/panel","sw":1366,"w":1366,"h1":"Panel general","spin":0} 
+1366 /carteras {"url":"/carteras","sw":1366,"w":1366,"h1":"Mis carteras y diario","spin":0} 
+1366 /presupuestos {"url":"/presupuestos","sw":1366,"w":1366,"h1":"Presupuestos","spin":0} 
+1366 /recurrentes {"url":"/recurrentes","sw":1366,"w":1366,"h1":"Ingresos y gastos fijos","spin":0} 
+1366 /deudas {"url":"/deudas","sw":1366,"w":1366,"h1":"Deudas y cobros","spin":0} 
+1366 /metas {"url":"/metas","sw":1366,"w":1366,"h1":"Metas de ahorro","spin":0} 
+1366 /grupos {"url":"/grupos","sw":1366,"w":1366,"h1":"Gastos compartidos","spin":0} 
+1366 /estadisticas {"url":"/panel","sw":1366,"w":1366,"h1":"Panel general","spin":0} 
+1366 /ia {"url":"/ia","sw":1366,"w":1366,"h1":"Entiende tu dinero.","spin":0} 
+1366 /configuracion {"url":"/panel","sw":1366,"w":1366,"h1":"Panel general","spin":0} 
+1366 /perfil {"url":"/perfil","sw":1366,"w":1366,"h1":"Compañero de prueba","spin":0} 
+1366 /admin {"url":"/panel","sw":1366,"w":1366,"h1":"Panel general","spin":0} 
+390 /panel {"url":"/panel","sw":390,"w":390,"h1":"Panel general","spin":0} 
+390 /carteras {"url":"/carteras","sw":390,"w":390,"h1":"Mis carteras y diario","spin":0} 
+390 /presupuestos {"url":"/presupuestos","sw":390,"w":390,"h1":"Presupuestos","spin":0} 
+390 /recurrentes {"url":"/recurrentes","sw":390,"w":390,"h1":"Ingresos y gastos fijos","spin":0} 
+390 /deudas {"url":"/deudas","sw":390,"w":390,"h1":"Deudas y cobros","spin":0} 
+390 /metas {"url":"/metas","sw":390,"w":390,"h1":"Metas de ahorro","spin":0} 
+390 /grupos {"url":"/grupos","sw":390,"w":390,"h1":"Gastos compartidos","spin":0} 
+390 /estadisticas {"url":"/panel","sw":390,"w":390,"h1":"Panel general","spin":0} 
+390 /ia {"url":"/ia","sw":390,"w":390,"h1":"Entiende tu dinero.","spin":0} 
+390 /configuracion {"url":"/panel","sw":390,"w":390,"h1":"Panel general","spin":0} 
+390 /perfil {"url":"/perfil","sw":390,"w":390,"h1":"Compañero de prueba","spin":0} 
+390 /admin {"url":"/panel","sw":390,"w":390,"h1":"Panel general","spin":0} 

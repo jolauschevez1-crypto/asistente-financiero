@@ -1,0 +1,128 @@
+[
+ {
+  "id": "K-01",
+  "desc": "El primer Tab en login enfoca un control visible con foco visible",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"A\",\"id\":\"\",\"cls\":\"skip-link\",\"texto\":\"Saltar al contenido\",\"foco\":true,\"visible\":true,\"enDialogo\":false}"
+ },
+ {
+  "id": "K-02",
+  "desc": "Tab pasa del correo a la contraseña",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"INPUT\",\"id\":\"login-password\",\"cls\":\"ng-untouched ng-pristine ng-invalid\",\"texto\":\"\",\"foco\":true,\"visible\":true,\"enDialogo\":false}"
+ },
+ {
+  "id": "K-03",
+  "desc": "Enter en el formulario inicia sesión solo con teclado",
+  "resultado": "PASA",
+  "detalle": "http://127.0.0.1:3102/panel"
+ },
+ {
+  "id": "K-04",
+  "desc": "El primer Tab enfoca el enlace \"Saltar al contenido\" y es visible",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"A\",\"id\":\"\",\"cls\":\"skip-link\",\"texto\":\"Saltar al contenido\",\"foco\":true,\"visible\":true,\"enDialogo\":false}"
+ },
+ {
+  "id": "K-05",
+  "desc": "El enlace de salto lleva el foco al contenido principal",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"MAIN\",\"id\":\"main-content\",\"cls\":\"\",\"texto\":\"Asistente Financiero\\nTu dinero, en todas\",\"foco\":true,\"visible\":true,\"enDialogo\":false}"
+ },
+ {
+  "id": "K-06",
+  "desc": "Recorrido con Tab por Carteras: cada elemento enfocado muestra indicador de foco",
+  "resultado": "PASA",
+  "detalle": "35 paradas; sin indicador: []"
+ },
+ {
+  "id": "K-07",
+  "desc": "Sin trampa de teclado: el recorrido avanza por elementos distintos",
+  "resultado": "PASA",
+  "detalle": "35 elementos distintos"
+ },
+ {
+  "id": "K-08",
+  "desc": "Enter abre el menú de usuario",
+  "resultado": "PASA",
+  "detalle": ""
+ },
+ {
+  "id": "K-09",
+  "desc": "Escape cierra el menú de usuario y devuelve el foco al botón",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"BUTTON\",\"id\":\"user-menu-button\",\"cls\":\"avatar-button\",\"texto\":\"C\",\"foco\":true,\"visible\":true,\"enDialogo\":false}"
+ },
+ {
+  "id": "K-10",
+  "desc": "Al abrir \"Crear nueva cartera\" el foco entra en el diálogo (botón «Nueva cartera» desde CR-04)",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"INPUT\",\"id\":\"entry-first\",\"cls\":\"ng-untouched ng-pristine ng-invalid\",\"texto\":\"\",\"foco\":true,\"visible\":true,\"enDialogo\":true}"
+ },
+ {
+  "id": "K-11",
+  "desc": "Tab queda contenido dentro del diálogo modal",
+  "resultado": "PASA",
+  "detalle": "0 focos fuera en 25 Tabs"
+ },
+ {
+  "id": "K-12",
+  "desc": "Escape cierra el diálogo y devuelve el foco al botón que lo abrió",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"BUTTON\",\"id\":\"\",\"cls\":\"outline-accent\",\"texto\":\"+\\nNueva cartera\",\"foco\":true,\"visible\":true,\"enDialogo\":false}"
+ },
+ {
+  "id": "K-01",
+  "desc": "El primer Tab en login enfoca un control visible con foco visible",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"A\",\"id\":\"\",\"cls\":\"skip-link\",\"texto\":\"Saltar al contenido\",\"foco\":true,\"visible\":true,\"enDialogo\":false}"
+ },
+ {
+  "id": "K-02",
+  "desc": "Tab pasa del correo a la contraseña",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"INPUT\",\"id\":\"login-password\",\"cls\":\"ng-untouched ng-pristine ng-invalid\",\"texto\":\"\",\"foco\":true,\"visible\":true,\"enDialogo\":false}"
+ },
+ {
+  "id": "K-03",
+  "desc": "Enter en el formulario inicia sesión solo con teclado",
+  "resultado": "PASA",
+  "detalle": "http://127.0.0.1:3102/panel"
+ },
+ {
+  "id": "K-13",
+  "desc": "Enter abre el menú móvil y aria-expanded=true",
+  "resultado": "PASA",
+  "detalle": ""
+ },
+ {
+  "id": "K-14",
+  "desc": "Escape cierra el menú móvil y devuelve el foco al botón",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"BUTTON\",\"id\":\"menu-toggle\",\"cls\":\"menu-toggle\",\"texto\":\"Abrir menú\",\"foco\":true,\"visible\":true,\"enDialogo\":false}"
+ },
+ {
+  "id": "K-01",
+  "desc": "El primer Tab en login enfoca un control visible con foco visible",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"A\",\"id\":\"\",\"cls\":\"skip-link\",\"texto\":\"Saltar al contenido\",\"foco\":true,\"visible\":true,\"enDialogo\":false}"
+ },
+ {
+  "id": "K-02",
+  "desc": "Tab pasa del correo a la contraseña",
+  "resultado": "PASA",
+  "detalle": "{\"tag\":\"INPUT\",\"id\":\"login-password\",\"cls\":\"ng-untouched ng-pristine ng-invalid\",\"texto\":\"\",\"foco\":true,\"visible\":true,\"enDialogo\":false}"
+ },
+ {
+  "id": "K-03",
+  "desc": "Enter en el formulario inicia sesión solo con teclado",
+  "resultado": "PASA",
+  "detalle": "http://127.0.0.1:3102/panel"
+ },
+ {
+  "id": "K-15",
+  "desc": "Reflujo a 320 px sin desplazamiento horizontal en las 10 vistas",
+  "resultado": "PASA",
+  "detalle": "todas 320 px"
+ }
+]

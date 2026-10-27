@@ -52,7 +52,6 @@ export class Configuracion implements OnInit {
   readonly moneda = signal('PEN');
   readonly iaModelo = signal('');
   readonly iaApiKey = signal('');
-  readonly telegramToken = signal('');
 
   readonly confirmacionRestaurar = signal('');
   readonly archivoRestaurar = signal<File | null>(null);
@@ -78,7 +77,6 @@ export class Configuracion implements OnInit {
         this.moneda.set(config.moneda || 'PEN');
         this.iaModelo.set(config.ia_modelo || '');
         this.iaApiKey.set(config.ia_api_key || '');
-        this.telegramToken.set(config.telegram_bot_token || '');
         this.cargando.set(false);
       },
       error: (err) => {
@@ -98,10 +96,6 @@ export class Configuracion implements OnInit {
 
   guardarIa(): void {
     this.guardar({ ia_modelo: this.iaModelo(), ia_api_key: this.iaApiKey() });
-  }
-
-  guardarTelegram(): void {
-    this.guardar({ telegram_bot_token: this.telegramToken() });
   }
 
   private guardar(cambios: Partial<ConfiguracionModel>): void {

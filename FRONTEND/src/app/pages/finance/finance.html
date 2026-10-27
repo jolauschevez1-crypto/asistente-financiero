@@ -6,7 +6,7 @@
     </div>
     <div class="heading-bar">
       <p class="subtitle">{{descriptions[section]}}</p>
-      <div class="heading-actions">
+      <div class="heading-actions" [class.is-wallets]="section==='carteras'">
         @if(section==='panel'||section==='presupuestos'){<label class="month-filter">Mes<input type="month" [(ngModel)]="month" (change)="setMonth()" required></label>}
         @if(section==='carteras'){<app-quick-load (saved)="load()" /><button type="button" class="secondary" (click)="openTransfer()" [disabled]="wallets.length<2">Transferir</button>}
         @if(section!=='panel'&&!group){<button type="button" [class]="section==='carteras'?'outline-accent':'primary'" (click)="openForm()">@if(section==='carteras'){<span aria-hidden="true">+</span> }{{section==='carteras'?'Nueva cartera':section==='presupuestos'?'Nuevo presupuesto':section==='recurrentes'?'Nuevo recordatorio':section==='deudas'?'Nueva deuda o cobro':section==='metas'?'Nueva meta':'Nuevo grupo'}}</button>}
@@ -226,7 +226,7 @@
               <button type="button" class="wallet-icon" (click)="openConversion(w)" [disabled]="busy" [attr.aria-label]="'Cambiar la moneda guardada de '+w.nombre" title="Cambiar moneda guardada"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2A3 3 0 0 0 12 8c-1.7 0-3 .9-3 2s1.3 1.7 3 2 3 .9 3 2-1.3 2-3 2a3 3 0 0 1-2.8-1.2M12 6v2M12 16v2"/></svg></button>
             </div>
           </header>
-          <p class="wallet-amount num" [class.negative]="isNegative(w.saldo_actual)">{{show(w.saldo_actual,w.moneda)}}</p>
+          <p class="wallet-amount num" [class.negative]="isNegative(w.saldo_actual)" [class.long]="show(w.saldo_actual,w.moneda).length>11" [title]="show(w.saldo_actual,w.moneda)">{{show(w.saldo_actual,w.moneda)}}</p>
           @if(w.moneda!==moneda.presentacion()){<small class="wallet-origin">{{moneda.converted(w.saldo_actual,w.moneda)===null?'Sin tasa: se muestra en '+w.moneda:'Guardada en '+fmt(w.saldo_actual,w.moneda)}}</small>}
         </article>
       }@empty{<div class="empty-state"><h2>Tu primera cartera</h2><p>Agrega efectivo, una cuenta bancaria o tus ahorros.</p><button type="button" class="primary" (click)="openForm()">Nueva cartera</button></div>}</div>

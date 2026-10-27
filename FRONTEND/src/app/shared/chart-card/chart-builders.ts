@@ -10,6 +10,9 @@ import {
   UsuarioTop,
 } from '../../core/models';
 
+/** Porcentaje de los gráficos circulares con coma decimal, como el resto de la aplicación. */
+const percentLabel = (v: number) => `${Number(v).toLocaleString('es-ES', { maximumFractionDigits: 1 })} %`;
+
 // Paleta v4 (azul sobre negro): cada color alcanza 3:1 sobre la tarjeta clara (#fff) y la oscura (#111214).
 const COLOR_CYAN = '#0e8fb0';
 const COLOR_TEAL = '#2a7de1';
@@ -108,7 +111,7 @@ export function buildCategoriasOptions(categoriasMasUsadas: CategoriaUsada[]): A
     chart: { ...BASE_OPTIONS.chart, type: 'donut', height: 260 },
     colors: [COLOR_CYAN, COLOR_TEAL, COLOR_BLUE, COLOR_VIOLET, COLOR_AMBER, COLOR_DANGER],
     labels: categoriasMasUsadas.map((c) => c.categoria),
-    dataLabels: { enabled: true, style: { colors: ['#f8fafc'] } },
+    dataLabels: { enabled: true, formatter: percentLabel, style: { colors: ['#f8fafc'] } },
     series: categoriasMasUsadas.map((c) => Number(c.cantidad)),
   };
 }
@@ -119,7 +122,7 @@ export function buildUserGastosCategoriaOptions(gastosCategoriaMes: GastoCategor
     chart: { ...BASE_OPTIONS.chart, type: 'donut', height: 220 },
     colors: [COLOR_CYAN, COLOR_TEAL, COLOR_BLUE, COLOR_VIOLET, COLOR_AMBER, COLOR_DANGER],
     labels: gastosCategoriaMes.map((g) => g.categoria),
-    dataLabels: { enabled: true, style: { colors: ['#f8fafc'] } },
+    dataLabels: { enabled: true, formatter: percentLabel, style: { colors: ['#f8fafc'] } },
     series: gastosCategoriaMes.map((g) => Number(g.total)),
   };
 }
@@ -177,7 +180,7 @@ export function buildCategoriasPieOptions(categoriasMasUsadas: CategoriaUsada[])
     chart: { ...BASE_OPTIONS.chart, type: 'pie', height: 260 },
     colors: [COLOR_CYAN, COLOR_TEAL, COLOR_BLUE, COLOR_VIOLET, COLOR_AMBER, COLOR_DANGER],
     labels: categoriasMasUsadas.map((c) => c.categoria),
-    dataLabels: { enabled: true, style: { colors: ['#f8fafc'] } },
+    dataLabels: { enabled: true, formatter: percentLabel, style: { colors: ['#f8fafc'] } },
     series: categoriasMasUsadas.map((c) => Number(c.cantidad)),
   };
 }
@@ -214,7 +217,7 @@ export function buildUsuariosDonutOptions(topUsuarios: UsuarioTop[]): ApexOption
     chart: { ...BASE_OPTIONS.chart, type: 'donut', height: 260 },
     colors: [COLOR_CYAN, COLOR_TEAL, COLOR_BLUE, COLOR_VIOLET, COLOR_AMBER, COLOR_DANGER],
     labels: topUsuarios.map((u) => u.nombre || u.correo || `Usuario #${u.id}`),
-    dataLabels: { enabled: true, style: { colors: ['#f8fafc'] } },
+    dataLabels: { enabled: true, formatter: percentLabel, style: { colors: ['#f8fafc'] } },
     series: topUsuarios.map((u) => Number(u.monto_total)),
   };
 }

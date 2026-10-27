@@ -10,6 +10,11 @@ export const adminGuard: CanActivateFn = () => {
     return true;
   }
 
+  // Un usuario con sesión pero sin rol de administrador vuelve a su panel (D-16).
+  if (auth.getToken() && auth.isUser()) {
+    return router.createUrlTree(['/panel']);
+  }
+
   return router.createUrlTree(['/login'], {
     queryParams: { motivo: 'admin' },
   });
