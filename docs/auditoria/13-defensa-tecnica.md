@@ -1,42 +1,123 @@
-# 13 · Guía de defensa técnica
+# 13 · Defensa técnica
 
-Sigue el formato de defensa de 3 minutos del taller (MAT-21). Cada respuesta indica dónde está la prueba.
+Sigue el formato de defensa de 3 minutos del taller (MAT-21). La sección 2 responde, una por una, las preguntas de la consigna; cada respuesta enlaza al archivo y a la fila donde está la prueba.
 
-## Guion de 3 minutos
+**Equipo:** Jolaus Chévez, Steven González, Manuel Hurtado, Pablo Jara. **Fecha de corte:** 2026-10-27 03:45Z.
 
-1. **Qué juzgamos (20 s).** Asistente Financiero, desde la línea base `f3504d3` hasta la versión publicada `5514da0`. Ver 01 y EV-PROD-01.
-2. **El cambio inesperado (30 s).** Pasamos de "una moneda por usuario, bloqueada" a "una moneda por cartera, con panel consolidado y conversión explícita" (CR-01). Requisitos nuevos y cambiados, pruebas invalidadas y nuevas: ver 11.
-3. **Cómo lo medimos (40 s).**
-   - Tres modelos de calidad (03): Garvin con 8 dimensiones, McCall con 11 factores e ISO/IEC 9126 con 27 subcaracterísticas.
-   - 48 casos (09): 44 aprobados, 1 parcial y 3 pendientes.
-   - 129 pruebas automáticas en verde.
-   - Carga ×5 con 0 descuadres.
-   - OWASP 20/20 y axe con 0 violaciones.
-4. **Qué encontramos (40 s).**
-   - 15 defectos reales, 0 críticos (04). Cinco (D-11 a D-15, de interfaz) llegaron a producción: por eso la DRE es 67 %, bajo el umbral de 90 %.
-   - Los dos de severidad Alta: D-01 (dependencias vulnerables, origen en la configuración) y D-15 (el formulario rechazaba cualquier nombre con letras y no dejaba crear carteras; origen en el código de `finance.ts`, lo encontró el usuario en producción).
-   - El de mayor impacto funcional fue D-03: la cotización se perdía y el usuario no podía terminar un traspaso entre monedas. Lo detectó una prueba unitaria nueva antes de integrar.
-5. **Decisión (30 s).** CONDITIONAL GO. Publicado con el OK del usuario y verificado sin sesión; faltan la tasa real, el cron, el LCP móvil y confirmar D-15 en producción. Los riesgos críticos no se promedian. Ver 12.
-6. **Pendientes (20 s).** RTF con el equipo, lector de pantalla, Firefox y Safari.
+## 1. Guion de 3 minutos
 
-## Dónde encontrar cada cosa
+1. **Qué juzgamos (20 s).** Asistente Financiero, desde la línea base `f3504d3` hasta la versión publicada `5c7c8c5` ([01](01-ficha-tecnica.md), [EV-PROD-01](evidencias/produccion/EV-PROD-01-despliegues.md)).
+2. **El cambio inesperado (30 s).** Multidivisa con carga ×5: de «una moneda por usuario, bloqueada» a «una moneda por cartera, panel consolidado con tasa fechada y conversión explícita», con cinco usuarios simultáneos ([11 §1 y §4](11-impacto-cambio.md)).
+3. **Cómo lo medimos (40 s).** Tres modelos de calidad con 46 criterios ([03](03-matriz-modelos-calidad.csv)); 53 casos, 49 aprobados, 1 parcial y 3 no ejecutados ([09](09-casos-prueba.csv)); 133 pruebas automáticas en verde; carga ×5 en local con 0 descuadres; OWASP 20/20; axe con 0 violaciones.
+4. **Qué encontramos (40 s).** 20 defectos reales, 0 críticos, 2 de severidad Alta ([04](04-registro-defectos.csv)). 10 se encontraron con la versión ya publicada, por eso la DRE es 50 %. D-15 impedía crear carteras.
+5. **Decisión (30 s).** CONDITIONAL GO: lo que mueve dinero está probado y publicado; falta verificar con sesión en producción y no alcanzamos los umbrales de proceso ([12](12-informe-liberacion.md)).
+6. **Pendientes (20 s).** Verificación con sesión, RTF-01, lector de pantalla, Firefox y Safari.
 
-| Pregunta probable | Respuesta corta | Dónde |
+## 2. Preguntas de la consigna
+
+### 2.1 ¿Qué requisito justifica cada caso de prueba?
+
+Cada caso de [09-casos-prueba.csv](09-casos-prueba.csv) tiene en su segunda columna el requisito que lo origina, y [10-trazabilidad-maestra.csv](10-trazabilidad-maestra.csv) recorre el camino inverso: requisito → criterio → métrica → caso → resultado → defecto → evidencia. Los 25 requisitos de [02](02-requisitos.csv) tienen al menos un caso. Ejemplos:
+
+| Caso | Requisito | Por qué existe |
 |---|---|---|
-| ¿De dónde sale cada requisito? | Del catálogo, con su origen y el CR que lo cambió | 02, 11 |
-| ¿Cómo se prueba RF-09 (conversión)? | CP-18 → BE 60 | 09; evidencias/pruebas/EV-PRU-01 |
-| ¿Qué evidencia hay de que no se suman monedas? | CP-08, CP-15, CP-21 y la prueba de componente del total parcial | 09, 10 |
-| ¿Por qué NO APLICA en Reutilización y Coexistencia? | Es un producto final que no se reutiliza fuera del sistema, y corre aislado en su propio proyecto de Vercel | 03 (MQ-M10, MQ-I25) |
-| ¿Por qué NO EVALUADO y no NO APLICA en Calidad percibida y Aprendizaje? | Sí aplican, pero no hubo usuarios reales. Marcarlas NO APLICA ocultaría la falta de prueba | 03 (MQ-G08, MQ-I11) |
-| ¿Cuál es el defecto crítico? | No hubo críticos. Hubo dos de severidad Alta. D-01 (configuración): dependencias vulnerables arrastradas desde la línea base (A03). D-15 (código): el patrón del nombre se pasaba como texto y Angular lo compilaba sin la bandera `u`, así que `\p{L}` no reconocía letras; nació en `067caac`, se propagó a carteras, metas, deudas y grupos, y falló en producción | 04; EV-D15-01; CP-48 |
-| Fórmula de densidad | defectos / KLOC = 15 / 16,658 = 0,90 | 05 §1 |
-| Fórmula de DRE | detectados / (detectados + escapados) × 100 = 10 / 15 = 67 % (no cumple ≥ 90 %) | 05 §1 |
-| Cobertura de requisitos | 21/25 = 84 %; los 4 restantes dependen de producción o de un lector de pantalla | 05 §2, 10 |
-| ¿Cuántas revisiones y por qué? | 7 (R1–R7), una por fuente de defectos más la revisión de la versión publicada. Fueron individuales con herramientas; la RTF queda pendiente porque no hubo reunión | 06 |
-| ¿Cómo sabemos que la corrección no rompió nada? | Cada defecto tiene una regresión: D-06 tiene una prueba que falla con el código anterior, D-02 un registro de red sin peticiones canceladas | 04 (columna "Regresión") |
-| ¿Por qué 48 casos? | 25 requisitos más los casos de riesgo: monedas, límites, concurrencia, seguridad, accesibilidad y regresión | 05 §2 |
-| ¿Las tasas son reales? | En producción, sí: BCE vía Frankfurter, una vez al día, sin llamarlas "tiempo real". En local se usó un proveedor simulado con tasas ficticias, como está declarado | 01 §3, evidencias/README |
-| ¿Qué pasa si Frankfurter cae? | Se usa la última tasa válida con su antigüedad. Sin tasa, se muestran los saldos separados y el total como parcial | CP-14, CP-15 |
-| ¿Hubo defectos sembrados? | No. Los 15 reales eran suficientes | 01 §5 |
-| ¿Qué pasa con la decisión si EV-PROD-01 fuera inválida? | CP-46 volvería a NO EJECUTADO, RNF-08 quedaría sin evidencia y la decisión pasaría a NO-GO para aceptación, porque no se podría afirmar que lo probado es lo que corre en producción | 12 §1, EV-PROD-01 |
-| ¿El cambio dejó requisitos críticos sin probar? | No en local: RF-04, RF-07..RF-10, RF-13, RNF-01 y RNF-05 tienen todos sus casos aprobados. En producción falta RF-06 (tasa real) | 10, 11 §4 |
+| CP-18 | RF-09 conversión explícita | Riesgo de doble cargo o tasa cambiada entre la vista y la confirmación |
+| CP-41 | RNF-01 integridad | Ráfaga de 5 transferencias simultáneas (carga ×5) |
+| CP-48 | RF-04 carteras | Regresión de D-15: escribir un nombre con letras en el formulario real |
+| CP-49 | RF-15 administración | Tabla de decisión sesión × rol × ruta (D-16) |
+| CP-53 | RF-17 conformidad | Mensajes del servidor sin «modo local» (D-20) |
+
+Hay 53 casos y no 25 porque a cada requisito se suman los casos que exige su riesgo: monedas, límites, concurrencia, seguridad, accesibilidad y la regresión de cada defecto ([05 §2](05-metricas.md)).
+
+### 2.2 ¿Qué evidencia demuestra que se evaluó cada atributo?
+
+La matriz [03-matriz-modelos-calidad.csv](03-matriz-modelos-calidad.csv) tiene una fila por atributo de Garvin, McCall e ISO/IEC 9126 con método, métrica, umbral, resultado, evidencia, caso y defecto. Ejemplos:
+
+| Atributo | Evidencia |
+|---|---|
+| Rendimiento (MQ-G01) | [EV-REN-02](evidencias/rendimiento/): p95 35 ms con 5 usuarios |
+| Seguridad | [EV-SEG-01..03](evidencias/seguridad/): OWASP 20/20, npm audit |
+| Accesibilidad | [EV-REG-02](evidencias/regresion/) axe 60 escaneos y [EV-REG-03](evidencias/regresion/) teclado 21/21 |
+| Exactitud | CP-08, CP-15, CP-21, CP-30 en [09](09-casos-prueba.csv) |
+
+Cuatro filas no se evaluaron y lo decimos: Reutilización y Coexistencia son NO APLICA (producto final aislado en su propio proyecto de Vercel); Calidad percibida y Facilidad de aprendizaje son NO EVALUADO, porque aplican pero no hubo usuarios reales ([03b](03b-conclusion-modelos.md)).
+
+### 2.3 ¿Cuál es el defecto más crítico, dónde se originó y qué impacto tiene?
+
+No hubo defectos de severidad Crítica. El más grave por impacto es **D-15** (Alta):
+
+- **Qué:** el formulario de carteras rechazaba cualquier nombre con letras («Ecuabet»), así que no se podía crear una cartera desde la interfaz.
+- **Dónde se originó:** en el código de `finance.ts`, commit `067caac`. El patrón se pasaba a Angular como texto; Angular lo compilaba sin la bandera `u` y `\p{L}` dejaba de reconocer letras. Se propagó a metas, deudas y grupos.
+- **Por qué escapó:** ninguna prueba escribía en el formulario real; las pruebas llamaban al servicio directamente.
+- **Impacto:** bloqueo funcional de la operación principal. Ningún saldo ni dato se alteró.
+- **Corrección y regresión:** `2445d2c`; CP-48 y [EV-D15-01](evidencias/cr04/EV-D15-01-crear-cartera-ecuabet.png). Publicado; falta confirmarlo con sesión en producción.
+
+El otro de severidad Alta es D-01 (dependencias vulnerables heredadas de la línea base, origen en la configuración), cerrado. Autopsia completa de los 20 en [04b](04b-autopsia-defectos.csv).
+
+### 2.4 ¿Cómo se calcularon las métricas?
+
+Cada métrica de [05-metricas.md](05-metricas.md) indica datos fuente, fórmula con denominador, resultado, umbral fijado en [07](07-plan-sqa.md) y limitación.
+
+| Métrica | Cálculo | Resultado | Umbral |
+|---|---|---|---|
+| Densidad | 20 defectos / 15,715 KLOC (líneas no vacías de `5514da0`, comando en 05 §5) | 1,27 | ≤ 1,0 · no cumple |
+| DRE | 10 detectados antes de publicar / (10 + 10 encontrados ya publicados) | 50 % | ≥ 90 % · no cumple |
+| Cierre | 8 cerrados / 20 | 40 % | ≥ 90 % · no cumple |
+| Cobertura | 21 requisitos con todos sus casos aprobados / 25 | 84 % | 100 % · no cumple |
+| Esfuerzo de revisión | Σ duración de R1–R8 × 1 persona = 195 min | 3,25 horas-persona | — |
+| Pruebas automáticas | 133 aprobadas / 133 | 100 % | 100 % · cumple |
+
+Los resultados negativos se conservan. Esta métrica sostiene la conclusión porque separa lo que funciona (0 críticos, 100 % de pruebas, 0 descuadres) de lo que falta (cierre y cobertura dependen de la verificación con sesión).
+
+### 2.5 ¿Qué efecto tiene el cambio inesperado?
+
+[11-impacto-cambio.md](11-impacto-cambio.md) §4 lo detalla por aspecto: saldos, historial, precisión, conversión, tasas, persistencia, seguridad, reportes, rendimiento y regresión. En resumen:
+
+- 11 requisitos nuevos y 8 cambiados (11 §2).
+- Las pruebas de la línea base que exigían el bloqueo de moneda quedaron invalidadas y se reescribieron para comprobar lo contrario (11 §5).
+- Migración aditiva e idempotente, aplicada en producción sin pérdida de datos (CP-45, CP-46).
+- Carga ×5: p95 de 23,3 ms a 35,0 ms, 0 errores y 0 descuadres, **solo en local**.
+- Es la fuente del defecto más grave (D-15) y del de mayor impacto funcional antes de integrar (D-03).
+
+### 2.6 ¿Qué requisitos críticos siguen sin verificar?
+
+| Requisito | Qué falta | Caso |
+|---|---|---|
+| RF-06 tasas reales y fechadas | Ver en producción el sello de tasa BCE con fecha ≤ 4 días y el cron con respuesta 200 | CP-13; D-08 |
+| RNF-04 rendimiento | LCP móvil ≤ 4 s en la URL oficial | CP-40 |
+| RNF-03 accesibilidad | Prueba con lector de pantalla | CP-37 |
+| RNF-08 liberación | Verificación con sesión (la verificación sin sesión está hecha) | CP-46 parcial |
+
+Además, D-09 y D-11 a D-19 están publicados pero sin verificar con sesión, y D-20 no está publicado. Ver [10](10-trazabilidad-maestra.csv) y [05 §2](05-metricas.md).
+
+### 2.7 ¿Por qué corresponde GO, CONDITIONAL GO o NO-GO?
+
+**CONDITIONAL GO** ([12 §1](12-informe-liberacion.md)):
+
+- **No es NO-GO** porque no hay defectos críticos, la integridad de saldos y la exactitud están probadas con 0 descuadres, las pruebas pasan 133/133 y lo publicado es exactamente lo probado.
+- **No es GO** porque faltan los cuatro requisitos de 2.6 y no se alcanzan DRE, cierre ni densidad. Los riesgos críticos se evaluaron uno por uno, sin promediar.
+- **Pasa a GO** cuando se cumplen las cuatro condiciones de 12 §1. **Vuelve a NO-GO** si en producción falla el inicio de sesión, la integridad de saldos o las tasas.
+
+### 2.8 ¿Qué ocurriría si una evidencia fuera inválida?
+
+Depende de qué sostiene. Ejemplos:
+
+- **EV-PROD-01 inválida:** CP-46 volvería a NO EJECUTADO, RNF-08 quedaría sin evidencia y la decisión pasaría a NO-GO, porque no se podría afirmar que lo probado es lo que corre en producción.
+- **EV-REN-02 inválida:** RNF-01 y la carga ×5 quedarían sin evidencia; la integridad de saldos bajo concurrencia se apoyaría solo en las pruebas BE 10, 42, 59 y 60, que usan PGlite. La decisión bajaría a NO-GO hasta repetir la carga.
+- **Una captura de regresión inválida (por ejemplo EV-D17-02):** el defecto volvería a ABIERTO y bajaría la tasa de cierre; la decisión no cambia porque es severidad Media.
+
+Para reducir ese riesgo, cada evidencia tiene fecha, versión, entorno y comando o script en [evidencias/README.md](evidencias/README.md), y las de pruebas son registros completos que se pueden reproducir.
+
+### 2.9 ¿Qué elemento, si estuviera mal definido, haría más débil la conclusión?
+
+El umbral de vigencia de la tasa (4 días). Si fuera demasiado largo, el panel podría consolidar con una tasa vieja y la exactitud del total consolidado dejaría de estar garantizada. Lo fijamos en el diseño, antes de las pruebas, para cubrir un fin de semana más un festivo, días en que el BCE no publica tasas ([`fx.js`](../../BACKEND/src/finance/fx.js) línea 9; [07](07-plan-sqa.md)). La segunda debilidad es que la carga ×5 se midió solo en local.
+
+## 3. Otras preguntas probables
+
+| Pregunta | Respuesta corta | Dónde |
+|---|---|---|
+| ¿Hubo defectos sembrados? | No. Los 20 reales bastaban para el análisis | [01 §6](01-ficha-tecnica.md) |
+| ¿Las tasas son reales? | En producción sí: BCE vía Frankfurter, una vez al día, sin llamarlas «tiempo real». En local usamos un proveedor simulado con tasas ficticias, como está declarado | [01 §2](01-ficha-tecnica.md) |
+| ¿Qué pasa si Frankfurter cae? | Se usa la última tasa válida con su antigüedad; sin tasa, el total se muestra como parcial | CP-14, CP-15 |
+| ¿Cuántas revisiones y por qué? | 8 rondas individuales (R1–R8); la RTF-01 con reunión y acta está planificada y no celebrada | [06](06-revision-tecnica/README.md) |
+| ¿Cómo sabemos que una corrección no rompió nada? | Cada defecto tiene su regresión. D-06 y D-20 tienen pruebas que fallan con el código anterior y pasan con el corregido | [04](04-registro-defectos.csv), columna «Regresión» |

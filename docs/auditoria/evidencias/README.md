@@ -15,14 +15,14 @@ Los datos de prueba son ficticios (usuario `amigo@local.test`, base PostgreSQL l
 ## Limitaciones
 
 - La URL de producción no es accesible desde el contenedor de trabajo (proxy), así que la línea base se tomó localmente con el mismo commit que está desplegado en producción (f3504d3, despliegue `dpl_DXhimEwhkZdoV2Txosgmg6vmRwKT`).
-- Las capturas "antes" de producción las aporta el usuario en la carpeta compartida `antes`; se incorporarán sin sobrescribir estas.
+- Las capturas «antes» de producción están en `antes/produccion-f3504d3/` (EV-ANTES-02), separadas de estas y con los correos difuminados.
 - Los tiempos son de una sola ejecución en local, no una medición estadística.
 
-## Evidencias manuales reportadas por el usuario
+## Evidencias manuales
 
 | ID | Fecha | Versión | Entorno | Requisito / riesgo | Resultado | Fuente |
 |---|---|---|---|---|---|---|
-| EV-MAN-01 | 2026-10-25 05:45Z | f3504d3 (despliegue de producción vigente) | Producción, https://asistente-financiero-seven.vercel.app | Inicio de sesión con Google tras agregar el origen autorizado en Google Cloud | El usuario informa: "si me deja iniciar nomas sin fallos". No hay captura; la verificación es testimonial, no automatizada | Mensaje del usuario en el hilo del proyecto |
+| EV-MAN-01 | 2026-10-25 05:45Z | f3504d3 (despliegue de producción vigente) | Producción, https://asistente-financiero-seven.vercel.app | Inicio de sesión con Google tras agregar el origen autorizado en Google Cloud | Prueba manual del equipo: el inicio con Google funcionó sin errores. No hay captura; la verificación es manual, no automatizada | Registro del equipo |
 
 ## Evidencias "después" (rediseño v3 y multidivisa)
 
@@ -56,4 +56,21 @@ Datos ficticios: usuario `amigo@local.test` en una copia local de la base de la 
 | EV-D15-01 | 2026-10-25 | rama D-15 | Local, Chromium | Crear la cartera «Ecuabet» con saldo 40 desde la interfaz tras la corrección | Cartera creada (POST 200, aviso «Cartera creada en USD.») | cr04/EV-D15-01-crear-cartera-ecuabet.png |
 | EV-LOGO-01/02 | 2026-10-25 | rama D-15 + logo | Local, Chromium | Logo propio en pestaña (favicon.svg/.ico), navbar e inicio de sesión; axe 60 escaneos 0 violaciones, teclado 21/21, desborde 0 | Imágenes cargadas; sin regresiones | cr04/EV-LOGO-01-login.png, cr04/EV-LOGO-02-navbar.png |
 | EV-LOGIN-01 | 2026-10-25 | rama login-google | Local, Chromium, Google simulado | Botón de Google primero, ancho completo, separador «o con tu correo», tema filled_black en oscuro y outline en claro | Orden y tema correctos; axe 0 violaciones en ambos temas; axe 60/0 y teclado 21/21 en el resto. El iframe real de Google no se pudo cargar en local: se comprueba en producción | cr04/EV-LOGIN-google-escritorio.png, cr04/EV-LOGIN-google-movil.png |
-| EV-PROD-01 | 2026-10-25 15:10Z–17:50Z | d185b19, b24d805, 7192a02, 5514da0 | Producción (Vercel), sin sesión | RNF-08, CP-46 | 4 despliegues READY con OK del usuario; migración aplicada («Esquema público verificado»); `/api/health` UP; el paquete servido coincide con el build probado en local. No incluye tasa real, cron ni LCP móvil | produccion/EV-PROD-01-despliegues.md |
+| EV-PROD-01 | 2026-10-25 15:10Z–2026-10-27 03:34Z | d185b19, b24d805, 7192a02, 5514da0, 5c7c8c5 | Producción (Vercel), sin sesión | RNF-08, CP-46 | 5 despliegues READY autorizados por el equipo (el quinto, `5c7c8c5`, el 2026-10-27 03:32Z); migración aplicada («Esquema público verificado»); `/api/health` UP; el paquete servido coincide con el build probado en local. No incluye tasa real, cron ni LCP móvil | produccion/EV-PROD-01-despliegues.md |
+
+## Evidencias del 2026-10-27 (auditoría integral)
+
+| ID | Fecha | Versión | Entorno | Requisito / riesgo | Resultado | Ruta |
+|---|---|---|---|---|---|---|
+| EV-ANTES-02 | Archivos guardados el 2026-10-25 05:18Z–05:28Z | f3504d3 | Producción, escritorio | Línea base visual de la versión publicada | 70 capturas (AP-01 a AP-70); 4 excluidas y 13 con correos difuminados | antes/produccion-f3504d3/README.md |
+| EV-PRU-03 | 2026-10-27 | 742fdc9 | Local, PGlite | Regresión del backend antes de D-16 a D-19 | 69/69 | pruebas/EV-PRU-03-backend-tests-742fdc9.tap |
+| EV-PRU-04 | 2026-10-27 | 742fdc9 | Local, Chromium headless | Regresión del frontend antes de D-16 a D-19 | 60/60 | pruebas/EV-PRU-04-frontend-tests-742fdc9.txt |
+| EV-D16-01/02 | 2026-10-27 | código de 5514da0 y d4badd7 | Local, Chromium 1366 y 390 px | RF-15: rutas según sesión y rol (D-16) | Barrido de 12 rutas × 2 anchos antes y después; después, ninguna ruta de administración muestra el login a un usuario con sesión | regresion/EV-D16-01-barrido-antes.txt, regresion/EV-D16-02-barrido-despues.txt, regresion/barrido.cjs |
+| EV-D17-01/02 | 2026-10-27 | código de 5514da0 y 05e0b01 | Local, Chromium | RF-16: saldos largos completos (D-17) | Antes, saldo recortado; después, completo | regresion/EV-D17-01-tarjetas-antes.png, regresion/EV-D17-02-tarjetas-despues.png |
+| EV-D19-01/02 | 2026-10-27 | código de 5514da0 y c2d4c82 | Local, Chromium 1366 px | RF-05: porcentajes con coma decimal (D-19) | «67.2%» antes; «67,2 %» después | regresion/EV-D19-01-porcentajes-antes.png, regresion/EV-D19-02-porcentajes-despues.png |
+| EV-UI-01/02 | 2026-10-27 | código de 5514da0 y 05e0b01 | Local, Chromium 390 px | Acciones de Carteras en móvil | Antes, «Nuevo movimiento» partido; después, dos filas sin cortes | regresion/EV-UI-01-acciones-movil-antes.png, regresion/EV-UI-02-acciones-movil-despues.png |
+| EV-REG-01 | 2026-10-27 | c2d4c82 | Local, PGlite y Chromium headless | Regresión completa tras D-16 a D-19 | Backend 69/69; frontend 64/64 | regresion/EV-REG-01-backend-tests.tap, regresion/EV-REG-01-frontend-tests.txt |
+| EV-REG-02 | 2026-10-27 | c2d4c82 | Local, axe-core 4.10.3 | RNF-03 tras D-16 a D-19 | 60 escaneos, 0 violaciones | regresion/EV-REG-02-axe.json |
+| EV-REG-03 | 2026-10-27 | c2d4c82 | Local, Chromium | Teclado, foco y reflujo | 21 de 21 PASA | regresion/EV-REG-03-teclado.json |
+| EV-REG-04 | 2026-10-27 | c2d4c82 | Local, Chromium 390 px | Desborde horizontal | 0 elementos fuera del ancho | regresion/EV-REG-04-desborde-390px.txt |
+| EV-D20-01/02 | 2026-10-27 03:40Z | c9c33b4 | Local, PGlite y Chromium headless | RF-17: mensajes del servidor sin «modo local» (D-20) | Backend 69/69 con la prueba ampliada (falla con el código anterior); frontend 64/64 | regresion/EV-D20-01-backend-tests.tap, regresion/EV-D20-02-frontend-tests.txt |
