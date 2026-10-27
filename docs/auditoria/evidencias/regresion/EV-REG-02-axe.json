@@ -1,0 +1,1753 @@
+{
+ "herramienta": "axe-core 4.10.3",
+ "etiquetas": [
+  "wcag2a",
+  "wcag2aa",
+  "wcag21a",
+  "wcag21aa",
+  "wcag22aa"
+ ],
+ "base": "http://127.0.0.1:3102",
+ "fecha": "2026-10-27T03:30:05.371Z",
+ "resumen": {},
+ "resultados": [
+  {
+   "ruta": "/login",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 6,
+     "targets": [
+      "span",
+      "h1",
+      ".intro > p",
+      "li:nth-child(1)"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c4174904165=\"\" class=\"eyebrow\">Asistente Financiero</span>",
+      "<h1 _ngcontent-ng-c4174904165=\"\">Tu dinero, en todas sus monedas, más claro.</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/panel",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 66,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"carteras\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"presupuestos\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/carteras\">Carteras</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 40,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 14,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 15,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 15,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/metas",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 15,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 15,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 14,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/ia",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 13,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 40,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-movimiento",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 40,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 40,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 41,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-usuario",
+   "tema": "oscuro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 41,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/login",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 3,
+     "targets": [
+      "span",
+      "h1",
+      ".intro > p"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c4174904165=\"\" class=\"eyebrow\">Asistente Financiero</span>",
+      "<h1 _ngcontent-ng-c4174904165=\"\">Tu dinero, en todas sus monedas, más claro.</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/panel",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 59,
+     "targets": [
+      ".brand-name",
+      ".heading-text > .eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 33,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 7,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/metas",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 6,
+     "targets": [
+      ".brand-name",
+      ".active",
+      ".tab-btn[type=\"button\"]:nth-child(2)",
+      ".tab-btn[type=\"button\"]:nth-child(3)"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<button _ngcontent-ng-c3533960120=\"\" type=\"button\" class=\"tab-btn active\">"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/ia",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 6,
+     "targets": [
+      ".brand-name",
+      "div > p",
+      "h1",
+      ".ia-subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c4069684152=\"\">TU COPILOTO FINANCIERO</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 33,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-movimiento",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 34,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 34,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 37,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-movil",
+   "tema": "oscuro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 33,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/login",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 6,
+     "targets": [
+      "span",
+      "h1",
+      ".intro > p",
+      "li:nth-child(1)"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c4174904165=\"\" class=\"eyebrow\">Asistente Financiero</span>",
+      "<h1 _ngcontent-ng-c4174904165=\"\">Tu dinero, en todas sus monedas, más claro.</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/panel",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 66,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"carteras\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"presupuestos\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/carteras\">Carteras</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 40,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 14,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 15,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 15,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/metas",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 15,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 15,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 14,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/ia",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 13,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"carteras\"]",
+      "a[href$=\"grupos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 40,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-movimiento",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 40,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 40,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 42,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-usuario",
+   "tema": "claro",
+   "vista": "escritorio",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 41,
+     "targets": [
+      ".brand-name",
+      "a[href$=\"panel\"][routerlinkactive=\"active\"][ariacurrentwhenactive=\"page\"]",
+      "a[href$=\"grupos\"]",
+      "a[href$=\"presupuestos\"]"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<a _ngcontent-ng-c3555812767=\"\" routerlinkactive=\"active\" ariacurrentwhenactive=\"page\" href=\"/panel\">Panel</a>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/login",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 3,
+     "targets": [
+      "span",
+      "h1",
+      ".intro > p"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c4174904165=\"\" class=\"eyebrow\">Asistente Financiero</span>",
+      "<h1 _ngcontent-ng-c4174904165=\"\">Tu dinero, en todas sus monedas, más claro.</h1>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/panel",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 59,
+     "targets": [
+      ".brand-name",
+      ".heading-text > .eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 33,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/presupuestos",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 7,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/recurrentes",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/deudas",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/metas",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/grupos",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 8,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/perfil",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 6,
+     "targets": [
+      ".brand-name",
+      ".active",
+      ".tab-btn[type=\"button\"]:nth-child(2)",
+      ".tab-btn[type=\"button\"]:nth-child(3)"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<button _ngcontent-ng-c3533960120=\"\" type=\"button\" class=\"tab-btn active\">"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/ia",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 6,
+     "targets": [
+      ".brand-name",
+      "div > p",
+      "h1",
+      ".ia-subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c4069684152=\"\">TU COPILOTO FINANCIERO</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-crear",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 33,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-movimiento",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 34,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-transferir",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 34,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "/carteras#dialogo-convertir",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "aria-hidden-focus",
+     "nodes": 2,
+     "targets": [
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(1)",
+      ".cdk-focus-trap-anchor.cdk-visually-hidden[aria-hidden=\"true\"]:nth-child(3)"
+     ],
+     "html": [
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>",
+      "<div tabindex=\"0\" class=\"cdk-visually-hidden cdk-focus-trap-anchor\" aria-hidden=\"true\"></div>"
+     ],
+     "msg": [
+      "Fix all of the following:\n  Check that focusable elements are not tabbable in the current state"
+     ]
+    },
+    {
+     "id": "color-contrast",
+     "nodes": 37,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  },
+  {
+   "ruta": "menu-movil",
+   "tema": "claro",
+   "vista": "movil",
+   "violations": [],
+   "incomplete": [
+    {
+     "id": "color-contrast",
+     "nodes": 33,
+     "targets": [
+      ".brand-name",
+      ".eyebrow",
+      "h1",
+      ".subtitle"
+     ],
+     "html": [
+      "<span _ngcontent-ng-c3555812767=\"\" class=\"brand-name\">Asistente Financiero</span>",
+      "<p _ngcontent-ng-c273563473=\"\" class=\"eyebrow\">martes, 27 de octubre de 2026</p>"
+     ],
+     "msg": [
+      "Fix any of the following:\n  Element's background color could not be determined due to a background gradient"
+     ]
+    }
+   ]
+  }
+ ]
+}

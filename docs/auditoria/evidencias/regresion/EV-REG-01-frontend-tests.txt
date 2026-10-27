@@ -1,0 +1,339 @@
+❯ Building...
+✔ Building...
+Initial chunk files                               | Names                                          |  Raw size
+chunk-EGHNIV2Z.js                                 | -                                              |   1.38 MB | 
+chunk-X5VPMHCL.js                                 | -                                              |   1.18 MB | 
+polyfills.js                                      | polyfills                                      |   1.04 MB | 
+chunk-CQ3N6KWL.js                                 | -                                              | 366.93 kB | 
+chunk-4NT34WEP.js                                 | -                                              | 358.29 kB | 
+chunk-LQTLJ4O7.js                                 | -                                              | 342.20 kB | 
+chunk-YK56CKFQ.js                                 | -                                              | 242.87 kB | 
+chunk-S3HCSEWN.js                                 | -                                              | 190.99 kB | 
+chunk-SLTZI7E2.js                                 | -                                              | 129.01 kB | 
+chunk-PTYAYEGJ.js                                 | -                                              |  73.20 kB | 
+jasmine-cleanup-1.js                              | jasmine-cleanup-1                              |  67.20 kB | 
+spec-app-app.spec.js                              | spec-app-app.spec                              |  25.02 kB | 
+test_main.js                                      | test_main                                      |  21.83 kB | 
+chunk-REXCL3AL.js                                 | -                                              |  12.24 kB | 
+styles.css                                        | styles                                         |  11.59 kB | 
+spec-audit-quality-regression.spec.js             | spec-audit-quality-regression.spec             |  11.56 kB | 
+chunk-3SVIJE6Z.js                                 | -                                              |   9.88 kB | 
+spec-app-pages-finance-carteras.spec.js           | spec-app-pages-finance-carteras.spec           |   8.56 kB | 
+chunk-PYGIPG3M.js                                 | -                                              |   8.39 kB | 
+chunk-XZ7KLFFG.js                                 | -                                              |   7.56 kB | 
+spec-app-pages-finance-finance.spec.js            | spec-app-pages-finance-finance.spec            |   5.93 kB | 
+spec-app-core-auth.interceptor.spec.js            | spec-app-core-auth.interceptor.spec            |   5.59 kB | 
+spec-app-pages-finance-movement-journal.spec.js   | spec-app-pages-finance-movement-journal.spec   |   5.19 kB | 
+spec-app-core-currency.service.spec.js            | spec-app-core-currency.service.spec            |   4.05 kB | 
+chunk-NQK7NL6R.js                                 | -                                              |   3.41 kB | 
+chunk-CTTGE257.js                                 | -                                              |   3.05 kB | 
+spec-app-core-input-validation.spec.js            | spec-app-core-input-validation.spec            |   2.56 kB | 
+spec-app-shared-chart-card-chart-builders.spec.js | spec-app-shared-chart-card-chart-builders.spec |   2.37 kB | 
+spec-app-pages-estadisticas-estadisticas.spec.js  | spec-app-pages-estadisticas-estadisticas.spec  |   2.29 kB | 
+chunk-7L6VH5FG.js                                 | -                                              |   2.15 kB | 
+chunk-3FMBEB3S.js                                 | -                                              |   2.13 kB | 
+spec-app-core-admin.guard.spec.js                 | spec-app-core-admin.guard.spec                 |   1.91 kB | 
+spec-app-core-password-policy.spec.js             | spec-app-core-password-policy.spec             |   1.85 kB | 
+spec-app-core-session-expiry.spec.js              | spec-app-core-session-expiry.spec              |   1.81 kB | 
+spec-app-core-money.spec.js                       | spec-app-core-money.spec                       |   1.49 kB | 
+chunk-C5USNE45.js                                 | -                                              | 536 bytes | 
+jasmine-cleanup-0.js                              | jasmine-cleanup-0                              | 519 bytes | 
+                                                  | Initial total                                  |   5.54 MB
+Lazy chunk files                                  | Names                                          |  Raw size
+chunk-CSC3CRRG.js                                 | apexcharts-ssr-esm                             |   1.47 MB | 
+chunk-J47GXFKO.js                                 | apexcharts-esm                                 |   1.46 MB | 
+chunk-NATJX77X.js                                 | core-esm                                       | 894.93 kB | 
+Application bundle generation complete. [3.340 seconds] - 2026-10-27T03:30:58.780Z
+27 10 2026 03:30:58.945:INFO [karma-server]: Karma v6.4.4 server started at http://localhost:9876/
+27 10 2026 03:30:58.946:INFO [launcher]: Launching browsers ChromeHeadlessNoSandbox with concurrency unlimited
+27 10 2026 03:30:58.949:INFO [launcher]: Starting browser ChromeHeadless
+27 10 2026 03:30:59.334:INFO [Chrome Headless 153.0.0.0 (Linux 0.0.0)]: Connected on socket UX8IHsF3rLKlDPYIAAAA with id 55724496
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 0 of 64 SUCCESS (0 secs / 0 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Estadísticas separadas por moneda pide ambos conjuntos en COP al elegir Colombia","status":"passed","durationMs":10.300000000046566,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 0 of 64 SUCCESS (0 secs / 0 secs)
+LOG: 'AUDIT_RESULT {"name":"Estadísticas separadas por moneda pide ambos conjuntos en COP al elegir Colombia","status":"passed","durationMs":10.300000000046566,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 1 of 64 SUCCESS (0 secs / 0.01 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Estadísticas separadas por moneda una respuesta USD tardía no reemplaza los indicadores MXN","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 1 of 64 SUCCESS (0 secs / 0.01 secs)
+LOG: 'AUDIT_RESULT {"name":"Estadísticas separadas por moneda una respuesta USD tardía no reemplaza los indicadores MXN","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 2 of 64 SUCCESS (0 secs / 0.012 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Límite absoluto de sesión cierra a los 30 minutos aunque el token declare una vigencia mayor","status":"passed","durationMs":5.599999999976717,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 2 of 64 SUCCESS (0 secs / 0.012 secs)
+LOG: 'AUDIT_RESULT {"name":"Límite absoluto de sesión cierra a los 30 minutos aunque el token declare una vigencia mayor","status":"passed","durationMs":5.599999999976717,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 3 of 64 SUCCESS (0 secs / 0.017 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Límite absoluto de sesión no reinicia el reloj al recargar una sesión vencida","status":"passed","durationMs":2.099999999976717,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 3 of 64 SUCCESS (0 secs / 0.017 secs)
+LOG: 'AUDIT_RESULT {"name":"Límite absoluto de sesión no reinicia el reloj al recargar una sesión vencida","status":"passed","durationMs":2.099999999976717,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 4 of 64 SUCCESS (0 secs / 0.019 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida cambiar el monto descarta la cotización anterior","status":"passed","durationMs":254,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 4 of 64 SUCCESS (0 secs / 0.019 secs)
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida cambiar el monto descarta la cotización anterior","status":"passed","durationMs":254,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 5 of 64 SUCCESS (0 secs / 0.273 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida transferencia entre monedas: pide la cotización y solo registra al confirmar con la misma tasa","status":"passed","durationMs":62.89999999990687,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 5 of 64 SUCCESS (0 secs / 0.273 secs)
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida transferencia entre monedas: pide la cotización y solo registra al confirmar con la misma tasa","status":"passed","durationMs":62.89999999990687,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 6 of 64 SUCCESS (0 secs / 0.336 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida crear cartera solo pide nombre y saldo inicial y usa la moneda elegida","status":"passed","durationMs":28.400000000023283,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 6 of 64 SUCCESS (0 secs / 0.336 secs)
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida crear cartera solo pide nombre y saldo inicial y usa la moneda elegida","status":"passed","durationMs":28.400000000023283,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 7 of 64 SUCCESS (0 secs / 0.365 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida D-15: el formulario acepta nombres válidos como «Ecuabet» y rechaza símbolos no permitidos","status":"passed","durationMs":41.70000000006985,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 7 of 64 SUCCESS (0 secs / 0.365 secs)
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida D-15: el formulario acepta nombres válidos como «Ecuabet» y rechaza símbolos no permitidos","status":"passed","durationMs":41.70000000006985,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 8 of 64 SUCCESS (0 secs / 0.407 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida muestra cada cartera y el total en la moneda elegida, con el importe guardado al lado","status":"passed","durationMs":10.5,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 8 of 64 SUCCESS (0 secs / 0.407 secs)
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida muestra cada cartera y el total en la moneda elegida, con el importe guardado al lado","status":"passed","durationMs":10.5,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 9 of 64 SUCCESS (0 secs / 0.418 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida un saldo largo se muestra completo con letra más pequeña, sin puntos suspensivos (D-17)","status":"passed","durationMs":10.20000000006985,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 9 of 64 SUCCESS (0 secs / 0.418 secs)
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida un saldo largo se muestra completo con letra más pequeña, sin puntos suspensivos (D-17)","status":"passed","durationMs":10.20000000006985,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 10 of 64 SUCCESS (0 secs / 0.428 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) acepta una contraseña que cumple todo","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 10 of 64 SUCCESS (0 secs / 0.428 secs)
+LOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) acepta una contraseña que cumple todo","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 11 of 64 SUCCESS (0 secs / 0.429 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) señala cada requisito pendiente","status":"passed","durationMs":0.5,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 11 of 64 SUCCESS (0 secs / 0.429 secs)
+LOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) señala cada requisito pendiente","status":"passed","durationMs":0.5,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 12 of 64 SUCCESS (0 secs / 0.429 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) rechaza contraseñas iguales o que contienen nombre, usuario o correo","status":"passed","durationMs":0.2999999999301508,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 12 of 64 SUCCESS (0 secs / 0.429 secs)
+LOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) rechaza contraseñas iguales o que contienen nombre, usuario o correo","status":"passed","durationMs":0.2999999999301508,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 13 of 64 SUCCESS (0 secs / 0.43 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) nombres de persona solo letras; nombres de carteras sin emojis ni marcado","status":"passed","durationMs":2.199999999953434,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 13 of 64 SUCCESS (0 secs / 0.43 secs)
+LOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) nombres de persona solo letras; nombres de carteras sin emojis ni marcado","status":"passed","durationMs":2.199999999953434,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 14 of 64 SUCCESS (0 secs / 0.432 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Panel multidivisa convierte pendientes con BigInt y deja aparte lo que no tiene tasa","status":"passed","durationMs":30.300000000046566,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 14 of 64 SUCCESS (0 secs / 0.432 secs)
+LOG: 'AUDIT_RESULT {"name":"Panel multidivisa convierte pendientes con BigInt y deja aparte lo que no tiene tasa","status":"passed","durationMs":30.300000000046566,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 15 of 64 SUCCESS (0 secs / 0.462 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Panel multidivisa marca el total como parcial y nombra la moneda sin tasa","status":"passed","durationMs":14.900000000023283,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 15 of 64 SUCCESS (0 secs / 0.462 secs)
+LOG: 'AUDIT_RESULT {"name":"Panel multidivisa marca el total como parcial y nombra la moneda sin tasa","status":"passed","durationMs":14.900000000023283,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 16 of 64 SUCCESS (0 secs / 0.478 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros proporción para barras","status":"passed","durationMs":0.19999999995343387,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 16 of 64 SUCCESS (0 secs / 0.478 secs)
+LOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros proporción para barras","status":"passed","durationMs":0.19999999995343387,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 17 of 64 SUCCESS (0 secs / 0.479 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros escala y compara sin coma flotante","status":"passed","durationMs":0.40000000002328306,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 17 of 64 SUCCESS (0 secs / 0.479 secs)
+LOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros escala y compara sin coma flotante","status":"passed","durationMs":0.40000000002328306,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 18 of 64 SUCCESS (0 secs / 0.479 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros suma exacta","status":"passed","durationMs":0.2000000000698492,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 18 of 64 SUCCESS (0 secs / 0.479 secs)
+LOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros suma exacta","status":"passed","durationMs":0.2000000000698492,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 19 of 64 SUCCESS (0 secs / 0.479 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros convierte con la misma regla half-up que el servidor","status":"passed","durationMs":0.2000000000698492,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 19 of 64 SUCCESS (0 secs / 0.479 secs)
+LOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros convierte con la misma regla half-up que el servidor","status":"passed","durationMs":0.2000000000698492,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 20 of 64 SUCCESS (0 secs / 0.48 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros convierte texto y números sin errores de coma flotante","status":"passed","durationMs":0.19999999995343387,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 20 of 64 SUCCESS (0 secs / 0.48 secs)
+LOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros convierte texto y números sin errores de coma flotante","status":"passed","durationMs":0.19999999995343387,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 21 of 64 SUCCESS (0 secs / 0.48 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diálogo Nueva cartera (accesibilidad) mantiene el botón que abre el diálogo para que el foco vuelva a él al cerrar","status":"passed","durationMs":12.300000000046566,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 21 of 64 SUCCESS (0 secs / 0.48 secs)
+LOG: 'AUDIT_RESULT {"name":"Diálogo Nueva cartera (accesibilidad) mantiene el botón que abre el diálogo para que el foco vuelva a él al cerrar","status":"passed","durationMs":12.300000000046566,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 22 of 64 SUCCESS (0 secs / 0.492 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento el diario muestra el importe en la moneda elegida y el original al lado","status":"passed","durationMs":17.400000000023283,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 22 of 64 SUCCESS (0 secs / 0.492 secs)
+LOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento el diario muestra el importe en la moneda elegida y el original al lado","status":"passed","durationMs":17.400000000023283,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 23 of 64 SUCCESS (0 secs / 0.51 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento registra el nombre personalizado en la cartera elegida y cierra el diálogo","status":"passed","durationMs":12.5,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 23 of 64 SUCCESS (0 secs / 0.51 secs)
+LOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento registra el nombre personalizado en la cartera elegida y cierra el diálogo","status":"passed","durationMs":12.5,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 24 of 64 SUCCESS (0 secs / 0.523 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento rechaza categoría personalizada en blanco sin registrar un movimiento","status":"passed","durationMs":15.599999999976717,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 24 of 64 SUCCESS (0 secs / 0.523 secs)
+LOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento rechaza categoría personalizada en blanco sin registrar un movimiento","status":"passed","durationMs":15.599999999976717,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 25 of 64 SUCCESS (0 secs / 0.539 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento no ofrece método de pago ni traspasos: solo gasto o ingreso","status":"passed","durationMs":12.199999999953434,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 25 of 64 SUCCESS (0 secs / 0.539 secs)
+LOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento no ofrece método de pago ni traspasos: solo gasto o ingreso","status":"passed","durationMs":12.199999999953434,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 26 of 64 SUCCESS (0 secs / 0.551 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento muestra combo accesible con catálogo guardado, sugerencias y opción personalizada","status":"passed","durationMs":11.800000000046566,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 26 of 64 SUCCESS (0 secs / 0.551 secs)
+LOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento muestra combo accesible con catálogo guardado, sugerencias y opción personalizada","status":"passed","durationMs":11.800000000046566,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 27 of 64 SUCCESS (0 secs / 0.563 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales impide usar nombre o correo como contraseña, ignorando caso y espacios","status":"passed","durationMs":0.2000000000698492,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 27 of 64 SUCCESS (0 secs / 0.563 secs)
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales impide usar nombre o correo como contraseña, ignorando caso y espacios","status":"passed","durationMs":0.2000000000698492,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 28 of 64 SUCCESS (0 secs / 0.564 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales controla mínimo de caracteres y límite real de bytes bcrypt","status":"passed","durationMs":0.5,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 28 of 64 SUCCESS (0 secs / 0.564 secs)
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales controla mínimo de caracteres y límite real de bytes bcrypt","status":"passed","durationMs":0.5,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 29 of 64 SUCCESS (0 secs / 0.565 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales escapa CSV incluyendo comas, comillas, saltos y fórmulas de hoja","status":"passed","durationMs":0.40000000002328306,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 29 of 64 SUCCESS (0 secs / 0.565 secs)
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales escapa CSV incluyendo comas, comillas, saltos y fórmulas de hoja","status":"passed","durationMs":0.40000000002328306,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 30 of 64 SUCCESS (0 secs / 0.565 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales valida fecha opcional, bisiesto, fecha inexistente y futura","status":"passed","durationMs":0.7000000000698492,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 30 of 64 SUCCESS (0 secs / 0.565 secs)
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales valida fecha opcional, bisiesto, fecha inexistente y futura","status":"passed","durationMs":0.7000000000698492,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 31 of 64 SUCCESS (0 secs / 0.565 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales valida centavos sin redondear datos inválidos","status":"passed","durationMs":0.40000000002328306,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 31 of 64 SUCCESS (0 secs / 0.565 secs)
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales valida centavos sin redondear datos inválidos","status":"passed","durationMs":0.40000000002328306,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 32 of 64 SUCCESS (0 secs / 0.565 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales rechaza nombre con espacios y permite nombres con acentos","status":"passed","durationMs":0.30000000004656613,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 32 of 64 SUCCESS (0 secs / 0.565 secs)
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales rechaza nombre con espacios y permite nombres con acentos","status":"passed","durationMs":0.30000000004656613,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 33 of 64 SUCCESS (0 secs / 0.566 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta muestra código y valor nominal sin conversión","status":"passed","durationMs":1.8000000000465661,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 33 of 64 SUCCESS (0 secs / 0.566 secs)
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta muestra código y valor nominal sin conversión","status":"passed","durationMs":1.8000000000465661,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 34 of 64 SUCCESS (0 secs / 0.568 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta pone siempre el código delante, también en euros y en negativos","status":"passed","durationMs":1.599999999976717,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 34 of 64 SUCCESS (0 secs / 0.568 secs)
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta pone siempre el código delante, también en euros y en negativos","status":"passed","durationMs":1.599999999976717,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 35 of 64 SUCCESS (0 secs / 0.57 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta guarda en servidor y actualiza el usuario solamente al confirmar","status":"passed","durationMs":2,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 35 of 64 SUCCESS (0 secs / 0.57 secs)
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta guarda en servidor y actualiza el usuario solamente al confirmar","status":"passed","durationMs":2,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 36 of 64 SUCCESS (0 secs / 0.572 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta conserva la moneda anterior si el servidor rechaza el cambio","status":"passed","durationMs":7.300000000046566,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 36 of 64 SUCCESS (0 secs / 0.572 secs)
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta conserva la moneda anterior si el servidor rechaza el cambio","status":"passed","durationMs":7.300000000046566,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 37 of 64 SUCCESS (0 secs / 0.579 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta solo ofrece como presentación las monedas con tasa de referencia","status":"passed","durationMs":1.2999999999301508,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 37 of 64 SUCCESS (0 secs / 0.579 secs)
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta solo ofrece como presentación las monedas con tasa de referencia","status":"passed","durationMs":1.2999999999301508,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 38 of 64 SUCCESS (0 secs / 0.581 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta descarta respuestas de una sesión anterior","status":"passed","durationMs":1.5,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 38 of 64 SUCCESS (0 secs / 0.581 secs)
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta descarta respuestas de una sesión anterior","status":"passed","durationMs":1.5,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 39 of 64 SUCCESS (0 secs / 0.583 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta muestra importes en la moneda elegida con la tasa del servidor; sin tasa, en su moneda","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 39 of 64 SUCCESS (0 secs / 0.583 secs)
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta muestra importes en la moneda elegida con la tasa del servidor; sin tasa, en su moneda","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 40 of 64 SUCCESS (0 secs / 0.585 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor identifica sesión expirada cuando ya no puede renovarse","status":"passed","durationMs":2.5,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 40 of 64 SUCCESS (0 secs / 0.585 secs)
+LOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor identifica sesión expirada cuando ya no puede renovarse","status":"passed","durationMs":2.5,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 41 of 64 SUCCESS (0 secs / 0.588 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor conserva la sesión cuando el reintento devuelve error de negocio","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 41 of 64 SUCCESS (0 secs / 0.588 secs)
+LOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor conserva la sesión cuando el reintento devuelve error de negocio","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 42 of 64 SUCCESS (0 secs / 0.59 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor no envía credenciales a otro origen","status":"passed","durationMs":1.400000000023283,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 42 of 64 SUCCESS (0 secs / 0.59 secs)
+LOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor no envía credenciales a otro origen","status":"passed","durationMs":1.400000000023283,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 43 of 64 SUCCESS (0 secs / 0.592 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor renueva token expirado 401 y reintenta con la identidad renovada","status":"passed","durationMs":1.5,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 43 of 64 SUCCESS (0 secs / 0.592 secs)
+LOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor renueva token expirado 401 y reintenta con la identidad renovada","status":"passed","durationMs":1.5,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 44 of 64 SUCCESS (0 secs / 0.594 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor no renueva ni cierra sesión cuando falta permiso 403","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 44 of 64 SUCCESS (0 secs / 0.594 secs)
+LOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor no renueva ni cierra sesión cuando falta permiso 403","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 45 of 64 SUCCESS (0 secs / 0.595 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Guarda de administración devuelve al panel a un usuario con sesión sin rol de administrador","status":"passed","durationMs":1.7999999999301508,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 45 of 64 SUCCESS (0 secs / 0.595 secs)
+LOG: 'AUDIT_RESULT {"name":"Guarda de administración devuelve al panel a un usuario con sesión sin rol de administrador","status":"passed","durationMs":1.7999999999301508,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 46 of 64 SUCCESS (0 secs / 0.597 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Guarda de administración deja pasar al administrador","status":"passed","durationMs":0.9000000000232831,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 46 of 64 SUCCESS (0 secs / 0.597 secs)
+LOG: 'AUDIT_RESULT {"name":"Guarda de administración deja pasar al administrador","status":"passed","durationMs":0.9000000000232831,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 47 of 64 SUCCESS (0 secs / 0.598 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Guarda de administración manda al inicio de sesión a quien no tiene sesión","status":"passed","durationMs":1.2999999999301508,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 47 of 64 SUCCESS (0 secs / 0.598 secs)
+LOG: 'AUDIT_RESULT {"name":"Guarda de administración manda al inicio de sesión a quien no tiene sesión","status":"passed","durationMs":1.2999999999301508,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 48 of 64 SUCCESS (0 secs / 0.6 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Aplicación local y navegación navegación contiene módulos y accesibilidad conserva la preferencia","status":"passed","durationMs":41.70000000006985,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 48 of 64 SUCCESS (0 secs / 0.6 secs)
+LOG: 'AUDIT_RESULT {"name":"Aplicación local y navegación navegación contiene módulos y accesibilidad conserva la preferencia","status":"passed","durationMs":41.70000000006985,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 49 of 64 SUCCESS (0 secs / 0.642 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Aplicación local y navegación ofrece acceso al contenido y oculta menús privados sin sesión","status":"passed","durationMs":4.099999999976717,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 49 of 64 SUCCESS (0 secs / 0.642 secs)
+LOG: 'AUDIT_RESULT {"name":"Aplicación local y navegación ofrece acceso al contenido y oculta menús privados sin sesión","status":"passed","durationMs":4.099999999976717,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 50 of 64 SUCCESS (0 secs / 0.646 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Report calendar labels keeps October in all monthly charts, including UTC midnight buckets","status":"passed","durationMs":2.300000000046566,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 50 of 64 SUCCESS (0 secs / 0.646 secs)
+LOG: 'AUDIT_RESULT {"name":"Report calendar labels keeps October in all monthly charts, including UTC midnight buckets","status":"passed","durationMs":2.300000000046566,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 51 of 64 SUCCESS (0 secs / 0.648 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Report calendar labels keeps the first day of the month in daily chart labels","status":"passed","durationMs":0.5999999999767169,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 51 of 64 SUCCESS (0 secs / 0.648 secs)
+LOG: 'AUDIT_RESULT {"name":"Report calendar labels keeps the first day of the month in daily chart labels","status":"passed","durationMs":0.5999999999767169,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 52 of 64 SUCCESS (0 secs / 0.648 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Report calendar labels preserves date-only report filters while real timestamps remain local","status":"passed","durationMs":0.9000000000232831,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 52 of 64 SUCCESS (0 secs / 0.648 secs)
+LOG: 'AUDIT_RESULT {"name":"Report calendar labels preserves date-only report filters while real timestamps remain local","status":"passed","durationMs":0.9000000000232831,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 53 of 64 SUCCESS (0 secs / 0.649 secs)
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Report calendar labels assigns heatmap data to its calendar day even late at night","status":"passed","durationMs":2.400000000023283,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 53 of 64 SUCCESS (0 secs / 0.649 secs)
+LOG: 'AUDIT_RESULT {"name":"Report calendar labels assigns heatmap data to its calendar day even late at night","status":"passed","durationMs":2.400000000023283,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 54 of 64 SUCCESS (0 secs / 0.651 secs)
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T02","expected":{"requests":1,"destination":null},"actual":{"requests":1,"destination":null}}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 54 of 64 SUCCESS (0 secs / 0.651 secs)
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T02","expected":{"requests":1,"destination":null},"actual":{"requests":1,"destination":null}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T02 [FE-01/RF-MOV] cambiar de ingreso a gasto permite registrar sin cartera destino","status":"passed","durationMs":2.699999999953434,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 54 of 64 SUCCESS (0 secs / 0.651 secs)
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T02 [FE-01/RF-MOV] cambiar de ingreso a gasto permite registrar sin cartera destino","status":"passed","durationMs":2.699999999953434,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 55 of 64 SUCCESS (0 secs / 0.654 secs)
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T04","expected":{"requests":0,"errorVisible":true},"actual":{"requests":0,"errorVisible":true}}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 55 of 64 SUCCESS (0 secs / 0.654 secs)
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T04","expected":{"requests":0,"errorVisible":true},"actual":{"requests":0,"errorVisible":true}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T04 [RF-TRANSFER] origen igual a destino se rechaza con mensaje","status":"passed","durationMs":2.300000000046566,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 55 of 64 SUCCESS (0 secs / 0.654 secs)
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T04 [RF-TRANSFER] origen igual a destino se rechaza con mensaje","status":"passed","durationMs":2.300000000046566,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 56 of 64 SUCCESS (0 secs / 0.656 secs)
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T05","expected":0,"actual":0}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 56 of 64 SUCCESS (0 secs / 0.656 secs)
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T05","expected":0,"actual":0}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T05 [RF-MOV] monto cero se rechaza sin solicitud","status":"passed","durationMs":2.1000000000931323,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 56 of 64 SUCCESS (0 secs / 0.656 secs)
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T05 [RF-MOV] monto cero se rechaza sin solicitud","status":"passed","durationMs":2.1000000000931323,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 57 of 64 SUCCESS (0 secs / 0.658 secs)
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T06","expected":{"columns":8,"wallet":"Banco, ahorro"},"actual":{"columns":8,"row":["1","","INGRESO","Salario","100","USD","Banco, ahorro","Dato ficticio"]}}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 57 of 64 SUCCESS (0 secs / 0.658 secs)
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T06","expected":{"columns":8,"wallet":"Banco, ahorro"},"actual":{"columns":8,"row":["1","","INGRESO","Salario","100","USD","Banco, ahorro","Dato ficticio"]}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T06 [FE-02/RF-EXPORT] CSV preserva cartera con coma y columna de moneda, sin método de pago","status":"passed","durationMs":4.200000000069849,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 57 of 64 SUCCESS (0 secs / 0.658 secs)
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T06 [FE-02/RF-EXPORT] CSV preserva cartera con coma y columna de moneda, sin método de pago","status":"passed","durationMs":4.200000000069849,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 58 of 64 SUCCESS (0 secs / 0.662 secs)
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T10","expected":{"averagePerActiveDay":75,"maxIncome":100},"actual":{"averagePerActiveDay":75,"maxIncome":100}}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 58 of 64 SUCCESS (0 secs / 0.662 secs)
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T10","expected":{"averagePerActiveDay":75,"maxIncome":100},"actual":{"averagePerActiveDay":75,"maxIncome":100}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T10 [RF-STATS] datos disponibles producen maximo y promedio conocidos","status":"passed","durationMs":2,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 58 of 64 SUCCESS (0 secs / 0.662 secs)
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T10 [RF-STATS] datos disponibles producen maximo y promedio conocidos","status":"passed","durationMs":2,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 59 of 64 SUCCESS (0 secs / 0.664 secs)
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T08","expected":{"columns":8},"actual":{"columns":8,"row":["1","16/10/2026, 17:00:00","INGRESO","Salario","100","USD","Banco","Dato ficticio"]}}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 59 of 64 SUCCESS (0 secs / 0.664 secs)
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T08","expected":{"columns":8},"actual":{"columns":8,"row":["1","16/10/2026, 17:00:00","INGRESO","Salario","100","USD","Banco","Dato ficticio"]}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T08 [FE-02/RF-EXPORT] CSV con fecha conserva ocho columnas incluida moneda","status":"passed","durationMs":3.599999999976717,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 59 of 64 SUCCESS (0 secs / 0.664 secs)
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T08 [FE-02/RF-EXPORT] CSV con fecha conserva ocho columnas incluida moneda","status":"passed","durationMs":3.599999999976717,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 60 of 64 SUCCESS (0 secs / 0.667 secs)
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T09","expected":{"errorVisible":true},"actual":{"errorVisible":true,"promedioDiario":0,"mayorIngreso":null}}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 60 of 64 SUCCESS (0 secs / 0.667 secs)
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T09","expected":{"errorVisible":true},"actual":{"errorVisible":true,"promedioDiario":0,"mayorIngreso":null}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T09 [FE-04/RNF-ERROR] consulta fallida de detalle hace visible el error","status":"passed","durationMs":1.900000000023283,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 60 of 64 SUCCESS (0 secs / 0.667 secs)
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T09 [FE-04/RNF-ERROR] consulta fallida de detalle hace visible el error","status":"passed","durationMs":1.900000000023283,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 61 of 64 SUCCESS (0 secs / 0.668 secs)
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T01","expected":1,"actual":1}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 61 of 64 SUCCESS (0 secs / 0.668 secs)
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T01","expected":1,"actual":1}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T01 [RF-MOV] gasto valido solicita registro una vez","status":"passed","durationMs":1.7999999999301508,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 61 of 64 SUCCESS (0 secs / 0.668 secs)
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T01 [RF-MOV] gasto valido solicita registro una vez","status":"passed","durationMs":1.7999999999301508,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 62 of 64 SUCCESS (0 secs / 0.67 secs)
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T03","expected":1,"actual":1}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 62 of 64 SUCCESS (0 secs / 0.67 secs)
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T03","expected":1,"actual":1}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T03 [RF-TRANSFER] transferencia entre dos cuentas solicita registro","status":"passed","durationMs":2.199999999953434,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 62 of 64 SUCCESS (0 secs / 0.67 secs)
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T03 [RF-TRANSFER] transferencia entre dos cuentas solicita registro","status":"passed","durationMs":2.199999999953434,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 63 of 64 SUCCESS (0 secs / 0.672 secs)
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T07","expected":{"columns":8,"description":"Texto \"citado\", línea 1\nlínea 2"},"actual":{"columns":8,"description":"Texto \"citado\", línea 1\nlínea 2"}}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 63 of 64 SUCCESS (0 secs / 0.672 secs)
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T07","expected":{"columns":8,"description":"Texto \"citado\", línea 1\nlínea 2"},"actual":{"columns":8,"description":"Texto \"citado\", línea 1\nlínea 2"}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T07 [RF-EXPORT] CSV preserva comillas comas y salto de linea de descripcion","status":"passed","durationMs":3.900000000023283,"failures":[]}'
+Chrome Headless 153.0.0.0 (Linux 0.0.0): Executed 63 of 64 SUCCESS (0 secs / 0.672 secs)
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T07 [RF-EXPORT] CSV preserva comillas comas y salto de linea de descripcion","status":"passed","durationMs":3.900000000023283,"failures":[]}'
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 64 of 64 SUCCESS (0 secs / 0.675 secs)
+[1A[2KChrome Headless 153.0.0.0 (Linux 0.0.0): Executed 64 of 64 SUCCESS (0.759 secs / 0.675 secs)
+TOTAL: 64 SUCCESS
