@@ -457,7 +457,7 @@ class UsuariosController {
      * @route POST /api/usuarios/me/vincular-google
      */
     async vincularGoogleMiPerfil(req, res, next) {
-        if(process.env.GOOGLE_ENABLED !== 'true') return res.status(503).json({message:'Google está desactivado en modo local.'});
+        if(process.env.GOOGLE_ENABLED !== 'true') return res.status(503).json({message:'El inicio de sesión con Google no está disponible en esta instalación.'});
         try {
             const idUsuario = req.usuario.id;
             const { credential, token } = req.body;
