@@ -38,5 +38,6 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: '**', redirectTo: 'login' },
+  // Una dirección desconocida lleva al panel; authGuard manda al inicio de sesión si no hay sesión (D-16).
+  { path: '**', redirectTo: 'panel' },
 ];
