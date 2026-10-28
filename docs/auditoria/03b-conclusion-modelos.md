@@ -6,7 +6,7 @@ Fuente: `03-matriz-modelos-calidad.csv` (46 filas). Los conteos salen de la colu
 
 | Modelo | Elementos evaluados | CUMPLE | PENDIENTE | NO EVALUADO | NO APLICA | Matices dentro de CUMPLE |
 |---|---:|---:|---:|---:|---:|---|
-| Garvin (8 dimensiones) | 8 | 7 | 0 | 1 (Calidad percibida) | 0 | Rendimiento solo en local; Estética por juicio del revisor; Conformidad sin lector de pantalla |
+| Garvin (8 dimensiones) | 8 | 7 | 0 | 1 (Calidad percibida) | 0 | Rendimiento solo en local; Estética medida por desborde y contraste (0 defectos visuales abiertos); Conformidad sin lector de pantalla |
 | McCall (11 factores) | 11 | 9 | 1 (Interoperabilidad: Frankfurter real) | 0 | 1 (Reusabilidad) | Usabilidad solo automatizable |
 | ISO/IEC 9126-1 (27 subcaracterísticas) | 27 | 23 | 1 (Interoperabilidad) | 2 (Aprendizaje; Conformidad de portabilidad: Firefox y Safari) | 1 (Coexistencia) | Conformidad de usabilidad parcial; Madurez y Comportamiento temporal solo en local |
 
