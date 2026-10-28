@@ -18,7 +18,7 @@
 **Por qué no es GO**
 1. **Falta evidencia en producción con sesión**: tasa real con fecha ≤ 4 días (CP-13), cron autorizado (D-08) y LCP móvil (CP-40). Cobertura de requisitos: 21/25 = 84 % (umbral 100 %).
 2. **DRE 50 %** (umbral ≥ 90 %): 10 defectos se encontraron con la versión ya publicada (D-11 a D-20). El más grave, D-15 (Alta), impedía crear carteras y se detectó usando la aplicación en producción.
-3. **Tasa de cierre 40 %** (umbral ≥ 90 %): D-08, D-09 y D-11 a D-19 están publicados pero sin verificar con sesión en producción; D-20 está publicado; su texto del perfil se verificó en producción y los mensajes del servidor solo en local.
+3. **Tasa de cierre 45 %** (umbral ≥ 90 %): D-08 y D-11 a D-19 están publicados pero sin verificar con sesión en producción; D-20 está publicado; su texto del perfil se verificó en producción y los mensajes del servidor solo en local.
 4. **Densidad de defectos 1,27/KLOC** (umbral ≤ 1,0).
 5. **Revisión técnica formal RTF-01 no celebrada** (06 §4) y **lector de pantalla no evaluado** (CP-37).
 
@@ -27,7 +27,7 @@ Los riesgos críticos no se promediaron: cada uno se evaluó por separado (§3).
 ### Condiciones para pasar a GO
 1. Con la cuenta de prueba en producción: el panel muestra el sello «Tasas de referencia BCE del …» con fecha ≤ 4 días (CP-13) y el cron responde 200 (D-08).
 2. LCP móvil ≤ 4 s medido en la URL oficial (CP-40).
-3. Crear la cartera «Ecuabet» en producción (D-15) y revisar con sesión D-09 y D-11 a D-19. Verificar en producción los mensajes del servidor de D-20. Con eso la tasa de cierre llega a 100 %.
+3. Crear la cartera «Ecuabet» en producción (D-15) y revisar con sesión D-11 a D-19. Verificar en producción los mensajes del servidor de D-20. Con eso la tasa de cierre llega a 100 %.
 4. RTF-01 con roles, acta y seguimiento (06 §4) y revisión con lector de pantalla (CP-37).
 
 **Vuelve a NO-GO** si en producción falla el inicio de sesión, la integridad de saldos o las tasas.
@@ -64,7 +64,7 @@ Los riesgos críticos no se promediaron: cada uno se evaluó por separado (§3).
 | Migración sin pérdida de datos | CUMPLE (aditiva, aplicada en producción) | CP-45, EV-PROD-01 |
 | Verificación en producción | **PARCIAL** (6 despliegues verificados sin sesión) | CP-46, EV-PROD-01 |
 | DRE ≥ 90 % | **NO CUMPLE** (50 %) | 05 §1 |
-| Cierre de no conformidades ≥ 90 % | **NO CUMPLE** (40 %) | 05 §1 |
+| Cierre de no conformidades ≥ 90 % | **NO CUMPLE** (45 %) | 05 §1 |
 | Densidad ≤ 1,0/KLOC | **NO CUMPLE** (1,27) | 05 §1 |
 
 ## 4. Riesgos que quedan

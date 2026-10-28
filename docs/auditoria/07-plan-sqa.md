@@ -15,7 +15,7 @@ Responsable: el equipo completo (Jolaus Chévez, Steven González, Manuel Hurtad
 | Seguridad | Sondeo OWASP; npm audit | Equipo | Controles fallidos; vulnerabilidades críticas/altas | Conteo | 0 y 0 | EV-SEG-01..03 | VERDE · Cumple |
 | Accesibilidad WCAG 2.2 AA | axe, teclado, reflujo y lector de pantalla | Equipo | Violaciones; controles de teclado aprobados | Conteo; % | 0; 100 % | EV-A11Y-01/02 | AMARILLO · Lector de pantalla no evaluado |
 | Rendimiento | Carga ×5; Core Web Vitals | Equipo | p95 API; LCP; CLS | ms; ms; índice | ≤ 500 ms; escritorio ≤ 2500 ms y móvil ≤ 4000 ms en producción; ≤ 0,1 | EV-REN-01/02 | AMARILLO · Local OK; móvil en producción pendiente |
-| Defectos bajo control | Registro, corrección y regresión | Equipo | Críticos abiertos; tasa de cierre; DRE | Conteo; % | 0; ≥ 90 %; ≥ 90 % | 04, 05 | ROJO para GO · 0 críticos, pero cierre 40 %, DRE 50 % (10 defectos encontrados con la versión ya publicada, D-15 de severidad Alta) y densidad 1,27/KLOC |
+| Defectos bajo control | Registro, corrección y regresión | Equipo | Críticos abiertos; tasa de cierre; DRE | Conteo; % | 0; ≥ 90 %; ≥ 90 % | 04, 05 | ROJO para GO · 0 críticos, pero cierre 45 %, DRE 50 % (10 defectos encontrados con la versión ya publicada, D-15 de severidad Alta) y densidad 1,27/KLOC |
 | Regresión | CI con build, pruebas y verificación de iconos | Equipo | Pruebas en verde | % | 100 % | EV-PRU-01..04; EV-REG-01; EV-D20-01/02; quality.yml | VERDE · Cumple |
 | Cobertura | Matriz de trazabilidad | Equipo | Requisitos con todos sus casos aprobados | % | 100 % para GO | 10 | AMARILLO · 84 % (21/25) |
 | Revisiones | R1–R8 y RTF-01 | Equipo | Revisiones ejecutadas / planificadas | % | 100 % | 06 | AMARILLO · R1–R8 8/8; RTF-01 0/1 (planificada, no celebrada) |

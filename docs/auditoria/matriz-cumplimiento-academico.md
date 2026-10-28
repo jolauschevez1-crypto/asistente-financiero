@@ -107,7 +107,7 @@ Estados: **CUMPLE**, **CUMPLE PARCIALMENTE**, **NO CUMPLE**, **NO EVALUADO**, **
 | F7-03 | Fase 7 | Consolidar calidad, revisión, SQA y pruebas | `12-informe-liberacion.md` | CUMPLE | — | — | — | CUMPLE |
 | F7-04 | Fase 7 | Emitir decisión GO / CONDITIONAL GO / NO-GO | `12` §1 | CUMPLE | — | Revisada con D-16 a D-20: se sostiene CONDITIONAL GO | — | CUMPLE |
 | F7-05 | Fase 7 | Justificación cualitativa y cuantitativa | `12` §1–§3 | CUMPLE | — | — | — | CUMPLE |
-| F7-06 | Fase 7 | Verificación en producción de la versión liberada | EV-PROD-01; CP-46 | CUMPLE PARCIALMENTE | Sin sesión no se verificó tasa real, cron, LCP móvil ni D-09, D-11 a D-19 | Quinto y sexto despliegue (D-20) verificados sin sesión. La verificación con sesión no se pudo hacer: el dominio no responde desde el entorno de verificación y la contraseña de la cuenta de prueba no está disponible | Captura y respuesta de la API con sesión | CUMPLE PARCIALMENTE |
+| F7-06 | Fase 7 | Verificación en producción de la versión liberada | EV-PROD-01; CP-46 | CUMPLE PARCIALMENTE | Sin sesión no se verificó tasa real, cron, LCP móvil ni D-11 a D-19 (D-09 se verificó en las variables de Vercel) | Quinto y sexto despliegue (D-20) verificados sin sesión. La verificación con sesión no se pudo hacer: el dominio no responde desde el entorno de verificación y la contraseña de la cuenta de prueba no está disponible | Captura y respuesta de la API con sesión | CUMPLE PARCIALMENTE |
 
 ### Trazabilidad (§6)
 

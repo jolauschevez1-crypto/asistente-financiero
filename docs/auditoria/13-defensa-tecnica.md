@@ -62,7 +62,7 @@ Cada métrica de [05-metricas.md](05-metricas.md) indica datos fuente, fórmula 
 |---|---|---|---|
 | Densidad | 20 defectos / 15,715 KLOC (líneas no vacías de `5514da0`, comando en 05 §5) | 1,27 | ≤ 1,0 · no cumple |
 | DRE | 10 detectados antes de publicar / (10 + 10 encontrados ya publicados) | 50 % | ≥ 90 % · no cumple |
-| Cierre | 8 cerrados / 20 | 40 % | ≥ 90 % · no cumple |
+| Cierre | 9 cerrados / 20 | 45 % | ≥ 90 % · no cumple |
 | Cobertura | 21 requisitos con todos sus casos aprobados / 25 | 84 % | 100 % · no cumple |
 | Esfuerzo de revisión | Σ duración de R1–R8 × 1 persona = 195 min | 3,25 horas-persona | — |
 | Pruebas automáticas | 133 aprobadas / 133 | 100 % | 100 % · cumple |
@@ -88,7 +88,7 @@ Los resultados negativos se conservan. Esta métrica sostiene la conclusión por
 | RNF-03 accesibilidad | Prueba con lector de pantalla | CP-37 |
 | RNF-08 liberación | Verificación con sesión (la verificación sin sesión está hecha) | CP-46 parcial |
 
-Además, D-09 y D-11 a D-19 están publicados pero sin verificar con sesión, y D-20 está publicado pero sus mensajes del servidor solo se verificaron en local. Ver [10](10-trazabilidad-maestra.csv) y [05 §2](05-metricas.md).
+Además, D-08 está corregido sin verificar en producción, D-11 a D-19 están publicados pero sin verificar con sesión, y D-20 está publicado pero sus mensajes del servidor solo se verificaron en local. Ver [10](10-trazabilidad-maestra.csv) y [05 §2](05-metricas.md).
 
 ### 2.7 ¿Por qué corresponde GO, CONDITIONAL GO o NO-GO?
 
