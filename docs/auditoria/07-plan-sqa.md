@@ -19,7 +19,7 @@ Responsable: el equipo completo (Jolaus Chévez, Steven González, Manuel Hurtad
 | Regresión | CI con build, pruebas y verificación de iconos | Equipo | Pruebas en verde | % | 100 % | EV-PRU-01..04; EV-REG-01; EV-D20-01/02; quality.yml | VERDE · Cumple |
 | Cobertura | Matriz de trazabilidad | Equipo | Requisitos con todos sus casos aprobados | % | 100 % para GO | 10 | AMARILLO · 84 % (21/25) |
 | Revisiones | R1–R8 y RTF-01 | Equipo | Revisiones ejecutadas / planificadas | % | 100 % | 06 | AMARILLO · R1–R8 8/8; RTF-01 0/1 (planificada, no celebrada) |
-| Liberación segura | Migración aditiva, despliegue y verificación en producción | Equipo | Datos perdidos; verificación en la URL | Conteo; sí/no | 0; sí | CP-46; EV-PROD-01 | AMARILLO · 5 despliegues autorizados por el equipo, migración aplicada, paquete igual al probado; falta la verificación con sesión |
+| Liberación segura | Migración aditiva, despliegue y verificación en producción | Equipo | Datos perdidos; verificación en la URL | Conteo; sí/no | 0; sí | CP-46; EV-PROD-01 | AMARILLO · 6 despliegues autorizados por el equipo, migración aplicada, paquete igual al probado; falta la verificación con sesión |
 
 **Semáforo** (Semana 5 Clase 2, d.22):
 - VERDE · cumple el umbral con evidencia;

@@ -1,6 +1,6 @@
 # 12 · Informe ejecutivo de liberación
 
-**Fecha de corte:** 2026-10-27 03:45Z. **Versión en producción:** `5c7c8c5` (https://asistente-financiero-seven.vercel.app, despliegue `dpl_BoCAWYRVjLJ9vHCyVbqGBw3MH81n`, ver EV-PROD-01). La rama auditada tiene además la corrección de D-20 (`c9c33b4`), probada en local y sin publicar.
+**Fecha de corte:** 2026-10-27 03:45Z. **Versión en producción:** `7c09956` desde el 2026-10-28 01:14Z (https://asistente-financiero-seven.vercel.app, despliegue `dpl_goBVsNb2nDbm8dZdALLhp8V9zSao`, ver EV-PROD-01), con la corrección de D-20.
 
 ## 1. Decisión
 
@@ -18,7 +18,7 @@
 **Por qué no es GO**
 1. **Falta evidencia en producción con sesión**: tasa real con fecha ≤ 4 días (CP-13), cron autorizado (D-08) y LCP móvil (CP-40). Cobertura de requisitos: 21/25 = 84 % (umbral 100 %).
 2. **DRE 50 %** (umbral ≥ 90 %): 10 defectos se encontraron con la versión ya publicada (D-11 a D-20). El más grave, D-15 (Alta), impedía crear carteras y se detectó usando la aplicación en producción.
-3. **Tasa de cierre 40 %** (umbral ≥ 90 %): D-08, D-09 y D-11 a D-19 están publicados pero sin verificar con sesión en producción; D-20 está corregido y sin publicar.
+3. **Tasa de cierre 40 %** (umbral ≥ 90 %): D-08, D-09 y D-11 a D-19 están publicados pero sin verificar con sesión en producción; D-20 está publicado; su texto del perfil se verificó en producción y los mensajes del servidor solo en local.
 4. **Densidad de defectos 1,27/KLOC** (umbral ≤ 1,0).
 5. **Revisión técnica formal RTF-01 no celebrada** (06 §4) y **lector de pantalla no evaluado** (CP-37).
 
@@ -27,14 +27,14 @@ Los riesgos críticos no se promediaron: cada uno se evaluó por separado (§3).
 ### Condiciones para pasar a GO
 1. Con la cuenta de prueba en producción: el panel muestra el sello «Tasas de referencia BCE del …» con fecha ≤ 4 días (CP-13) y el cron responde 200 (D-08).
 2. LCP móvil ≤ 4 s medido en la URL oficial (CP-40).
-3. Crear la cartera «Ecuabet» en producción (D-15) y revisar con sesión D-09 y D-11 a D-19. Publicar D-20 y verificarlo. Con eso la tasa de cierre llega a 100 %.
+3. Crear la cartera «Ecuabet» en producción (D-15) y revisar con sesión D-09 y D-11 a D-19. Verificar en producción los mensajes del servidor de D-20. Con eso la tasa de cierre llega a 100 %.
 4. RTF-01 con roles, acta y seguimiento (06 §4) y revisión con lector de pantalla (CP-37).
 
 **Vuelve a NO-GO** si en producción falla el inicio de sesión, la integridad de saldos o las tasas.
 
 ## 2. Línea base y versión evaluada
 
-| | Línea base `f3504d3` | Versión `5c7c8c5` (+ `c9c33b4` en la rama) |
+| | Línea base `f3504d3` | Versión `7c09956` |
 |---|---|---|
 | Moneda | Una por usuario, bloqueada tras la actividad | Una por cartera; selector de moneda de visualización en cada módulo (USD, EUR, MXN); conversión explícita y trazable |
 | Tasas | No había | BCE vía Frankfurter, cron diario y refresco perezoso, última tasa válida con su antigüedad |
@@ -62,7 +62,7 @@ Los riesgos críticos no se promediaron: cada uno se evaluó por separado (§3).
 | Sin defectos críticos abiertos | CUMPLE (0 críticos; D-15 Alta publicado, falta confirmarlo con sesión) | 04 |
 | Escritorio y móvil | CUMPLE en local | CP-27, CP-42, CP-43, CP-50, EV-REG-04 |
 | Migración sin pérdida de datos | CUMPLE (aditiva, aplicada en producción) | CP-45, EV-PROD-01 |
-| Verificación en producción | **PARCIAL** (5 despliegues verificados sin sesión) | CP-46, EV-PROD-01 |
+| Verificación en producción | **PARCIAL** (6 despliegues verificados sin sesión) | CP-46, EV-PROD-01 |
 | DRE ≥ 90 % | **NO CUMPLE** (50 %) | 05 §1 |
 | Cierre de no conformidades ≥ 90 % | **NO CUMPLE** (40 %) | 05 §1 |
 | Densidad ≤ 1,0/KLOC | **NO CUMPLE** (1,27) | 05 §1 |
@@ -98,4 +98,4 @@ Los riesgos críticos no se promediaron: cada uno se evaluó por separado (§3).
 
 - Proyecto `asistente-financiero` y dominio `asistente-financiero-seven.vercel.app`. No se crearon otros proyectos ni se cambió el dominio. Las direcciones sin «seven» están ocupadas por otras cuentas.
 - Variables cambiadas con autorización del equipo: `CRON_SECRET` creada (sensible) y `APP_ORIGIN` apuntando al dominio oficial. Los valores no se copiaron al expediente.
-- Cinco despliegues a producción, cada uno autorizado por el equipo y verificado sin sesión (EV-PROD-01).
+- Seis despliegues a producción, cada uno autorizado por el equipo y verificado sin sesión (EV-PROD-01).

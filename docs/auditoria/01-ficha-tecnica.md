@@ -6,7 +6,7 @@
 | Repositorio | `jolauschevez1-crypto/asistente-financiero` |
 | Rama de trabajo | `claude/project-thread-noiuro` (ver desvío en §6) |
 | Línea base | `f3504d3`, el mismo commit que estaba en producción al empezar (despliegue `dpl_DXhimEwhkZdoV2Txosgmg6vmRwKT`) |
-| Producción | https://asistente-financiero-seven.vercel.app (proyecto de Vercel `asistente-financiero`). Versión en producción a la fecha de corte: `5c7c8c5` (despliegue `dpl_BoCAWYRVjLJ9vHCyVbqGBw3MH81n`, quinto despliegue verificado en EV-PROD-01). La corrección de D-20 (`c9c33b4`) está en la rama y no se ha publicado. Las direcciones sin «seven» (`asistente-financiero.vercel.app` y otras) pertenecen a otras cuentas de Vercel |
+| Producción | https://asistente-financiero-seven.vercel.app (proyecto de Vercel `asistente-financiero`). Versión en producción: `7c09956` (despliegue `dpl_goBVsNb2nDbm8dZdALLhp8V9zSao`, sexto despliegue verificado en EV-PROD-01, 2026-10-28), con la corrección de D-20. Las direcciones sin «seven» (`asistente-financiero.vercel.app` y otras) pertenecen a otras cuentas de Vercel |
 | Equipo | Jolaus Chévez, Steven González, Manuel Hurtado, Pablo Jara |
 | Institución | Universidad Técnica de Machala, Facultad de Ingeniería Civil, carrera de Tecnologías de la Información, 6.º semestre, paralelo A. Docente: Ing. Jimmy Molina Ríos, Ph.D. |
 | Fecha de entrega | 29/06/2026 |
@@ -70,7 +70,7 @@ Ver `git log f3504d3..HEAD`. Los cambios del producto son:
 - `2445d2c`: nombres de cartera con letras (D-15).
 - `e67cb13`, `a43c78f`: logo e inicio con Google primero.
 - `d4badd7`, `05e0b01`, `c2d4c82`: D-16 a D-19 y retiro del botón de Telegram.
-- `c9c33b4`: D-20 (sin publicar).
+- `c9c33b4`: D-20 (publicado en `7c09956`).
 
 El resto de los commits son de documentación y evidencias.
 

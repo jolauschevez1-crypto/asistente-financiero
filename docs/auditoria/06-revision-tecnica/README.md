@@ -23,7 +23,7 @@
 | R7 | Interfaz publicada, pantalla por pantalla | 2026-10-25 15:10–15:47 | 37 min | §3.4 | Playwright (23 capturas antes, 24 después), desborde.cjs, axe-core, keyboard.cjs | Individual | D-11, D-12, D-13, D-14 | Publicados en `b24d805` |
 | R8 | Todas las rutas y tarjetas de la versión `5514da0` | 2026-10-27 03:00–03:28 | 28 min | §3.7 | barrido.cjs (12 rutas × 2 anchos), capturas completas, variables de Vercel (solo nombres) | Individual | D-16, D-17, D-18, D-19 | Publicados en `5c7c8c5` |
 | — | Uso en producción (no es una revisión) | 2026-10-25 17:24 | — | — | Captura de pantalla | — | D-15 | Publicado en `7192a02` |
-| — | Redacción del expediente: mensajes del servidor contra la configuración de producción (no es una ronda) | 2026-10-27 03:35 | — | — | `grep` de textos, variables de Vercel (solo nombres) | Individual | D-20 | Corregido en `c9c33b4`, sin publicar |
+| — | Redacción del expediente: mensajes del servidor contra la configuración de producción (no es una ronda) | 2026-10-27 03:35 | — | — | `grep` de textos, variables de Vercel (solo nombres) | Individual | D-20 | Publicado en `7c09956` |
 
 Las horas salen de los commits y de las marcas de tiempo de las evidencias. Total: 195 minutos (métrica en `05-metricas.md` §4).
 
@@ -68,7 +68,7 @@ Las horas salen de los commits y de las marcas de tiempo de las evidencias. Tota
 - [x] Carga ×5 sin errores ni descuadres.
 - [x] Recursos sin desperdicio. Falló: D-07.
 - [x] Variables de producción completas (falló: D-08) y correctas (falló: D-09).
-- [~] Verificación en producción: 5 despliegues verificados sin sesión (EV-PROD-01); falta la verificación con sesión (CP-13, CP-40).
+- [~] Verificación en producción: 6 despliegues verificados sin sesión (EV-PROD-01); falta la verificación con sesión (CP-13, CP-40).
 
 ### 3.7 R8 Rutas y tarjetas
 - [x] Cada ruta lleva a una pantalla coherente con la sesión y el rol. Falló: D-16.

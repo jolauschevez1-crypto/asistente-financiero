@@ -1,7 +1,7 @@
 # EV-PROD-01 · Despliegues a producción y verificación técnica
 
 Proyecto de Vercel `asistente-financiero` (`prj_rywIXFBeQO5WCjrl6ULyQLqWlRQk`), dominio https://asistente-financiero-seven.vercel.app.
-Consultado con la API de Vercel (lista de despliegues, registro de build) y con peticiones a la URL oficial el 2026-10-25 y el 2026-10-27. Cada fusión a `main` se hizo con autorización escrita del equipo.
+Consultado con la API de Vercel (lista de despliegues, registro de build) y con peticiones a la URL oficial el 2026-10-25, el 2026-10-27 y el 2026-10-28. Cada fusión a `main` se hizo con autorización escrita del equipo.
 
 | Fecha (UTC) | Commit en main | PR | Despliegue | Estado | Qué se publicó | Verificación |
 |---|---|---|---|---|---|---|
@@ -10,6 +10,7 @@ Consultado con la API de Vercel (lista de despliegues, registro de build) y con 
 | 2026-10-25 17:41 | `7192a02` | #3 | `dpl_3LdAvGHSabMtSSp94rE6nWqnf51d` | READY | D-15 (crear cartera) y logo propio | `index.html` carga `main-EB6ACJLE.js`, igual al build local probado; `/favicon.svg` 200 `image/svg+xml`; `/api/health` UP (17:39Z) |
 | 2026-10-25 17:48 | `5514da0` | #4 | `dpl_6ErENcDY1tUXAxgrVnip4Z1KRFSC` | READY | Login: botón de Google primero (CR-05) | `index.html` carga `main-KT33EXTE.js`, igual al build local probado (17:50Z) |
 | 2026-10-27 03:32 | `5c7c8c5` | #5 | `dpl_BoCAWYRVjLJ9vHCyVbqGBw3MH81n` | READY | D-16 a D-19 y retiro del botón de Telegram (CR-06) | `index.html` carga `main-G7GWPR2K.js`, igual al build local probado; `/api/health` UP (03:33:50Z) |
+| 2026-10-28 01:14 | `7c09956` | #6 | `dpl_goBVsNb2nDbm8dZdALLhp8V9zSao` | READY | D-20 (mensajes sin «modo local») y expediente final | `index.html` carga `main-R4RK5IAX.js`, igual al build local de `7c09956`; `chunk-NKXK2436.js` servido contiene el texto nuevo del perfil; `/api/health` UP (01:14:22Z). Los mensajes del servidor de D-20 responden a peticiones POST y no se comprobaron en producción |
 
 ## Qué demuestra y qué no
 

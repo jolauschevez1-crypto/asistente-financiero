@@ -6,7 +6,7 @@ Sigue el formato de defensa de 3 minutos del taller (MAT-21). La sección 2 resp
 
 ## 1. Guion de 3 minutos
 
-1. **Qué juzgamos (20 s).** Asistente Financiero, desde la línea base `f3504d3` hasta la versión publicada `5c7c8c5` ([01](01-ficha-tecnica.md), [EV-PROD-01](evidencias/produccion/EV-PROD-01-despliegues.md)).
+1. **Qué juzgamos (20 s).** Asistente Financiero, desde la línea base `f3504d3` hasta la versión publicada `7c09956` ([01](01-ficha-tecnica.md), [EV-PROD-01](evidencias/produccion/EV-PROD-01-despliegues.md)).
 2. **El cambio inesperado (30 s).** Multidivisa con carga ×5: de «una moneda por usuario, bloqueada» a «una moneda por cartera, panel consolidado con tasa fechada y conversión explícita», con cinco usuarios simultáneos ([11 §1 y §4](11-impacto-cambio.md)).
 3. **Cómo lo medimos (40 s).** Tres modelos de calidad con 46 criterios ([03](03-matriz-modelos-calidad.csv)); 53 casos, 49 aprobados, 1 parcial y 3 no ejecutados ([09](09-casos-prueba.csv)); 133 pruebas automáticas en verde; carga ×5 en local con 0 descuadres; OWASP 20/20; axe con 0 violaciones.
 4. **Qué encontramos (40 s).** 20 defectos reales, 0 críticos, 2 de severidad Alta ([04](04-registro-defectos.csv)). 10 se encontraron con la versión ya publicada, por eso la DRE es 50 %. D-15 impedía crear carteras.
@@ -88,7 +88,7 @@ Los resultados negativos se conservan. Esta métrica sostiene la conclusión por
 | RNF-03 accesibilidad | Prueba con lector de pantalla | CP-37 |
 | RNF-08 liberación | Verificación con sesión (la verificación sin sesión está hecha) | CP-46 parcial |
 
-Además, D-09 y D-11 a D-19 están publicados pero sin verificar con sesión, y D-20 no está publicado. Ver [10](10-trazabilidad-maestra.csv) y [05 §2](05-metricas.md).
+Además, D-09 y D-11 a D-19 están publicados pero sin verificar con sesión, y D-20 está publicado pero sus mensajes del servidor solo se verificaron en local. Ver [10](10-trazabilidad-maestra.csv) y [05 §2](05-metricas.md).
 
 ### 2.7 ¿Por qué corresponde GO, CONDITIONAL GO o NO-GO?
 

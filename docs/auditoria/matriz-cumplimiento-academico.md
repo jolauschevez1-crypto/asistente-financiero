@@ -2,7 +2,7 @@
 
 **Versión:** final · **Fecha de corte:** 2026-10-27 03:45Z
 **Equipo:** Jolaus Chévez, Steven González, Manuel Hurtado, Pablo Jara · Universidad Técnica de Machala, Facultad de Ingeniería Civil, Tecnologías de la Información, 6.º A
-**Código auditado:** rama `claude/project-thread-noiuro` en `c9c33b4`. Producción corre `5c7c8c5`; la única diferencia de código es la corrección de D-20, sin publicar.
+**Código auditado:** `main` en `7c09956`, el mismo que corre en producción desde el 2026-10-28 01:14Z (despliegue `dpl_goBVsNb2nDbm8dZdALLhp8V9zSao`, sexto despliegue, con D-20).
 
 ## 1. Cómo se evaluó
 
@@ -22,7 +22,7 @@ Verificaciones ejecutadas (2026-10-27, entorno local aislado, datos ficticios `*
 | Accesibilidad | axe-core 4.10.3, 60 escaneos; teclado 21 controles | — | 0 violaciones; 21/21 (EV-REG-02/03) |
 | Consistencia del expediente | Script que cruza cada D-, CP-, RF-, RNF- y EV- citado con 02, 04, 09 y el índice de evidencias, y comprueba que cada ruta y enlace exista | No ejecutado | 20 defectos, 53 casos, 25 requisitos; 0 referencias rotas |
 | Voz del expediente | `grep` de menciones a herramientas de asistencia, «OK del usuario», marcadores de integrante e instrucciones a terceros | 18 pasajes en 10 archivos | 0 |
-| Producción | API de Vercel y `/api/health` (sin sesión) | `5514da0` | `5c7c8c5` READY, paquete igual al probado, health UP (EV-PROD-01) |
+| Producción | API de Vercel y `/api/health` (sin sesión) | `5514da0` | `7c09956` READY (2026-10-28), paquete `main-R4RK5IAX.js` igual al probado, texto de D-20 servido, health UP (EV-PROD-01) |
 | Variables de producción | Nombres en Vercel, sin valores | IA configurada, Telegram y SMTP apagados, `CRON_SECRET` presente | Sin cambios |
 
 Estados: **CUMPLE**, **CUMPLE PARCIALMENTE**, **NO CUMPLE**, **NO EVALUADO**, **BLOQUEADO**.
@@ -44,7 +44,7 @@ Estados: **CUMPLE**, **CUMPLE PARCIALMENTE**, **NO CUMPLE**, **NO EVALUADO**, **
 | ID | Fase / sección | Requisito exacto | Archivo, código, prueba o evidencia | Estado | Deficiencia | Acción | Evidencia necesaria | Estado final |
 |---|---|---|---|---|---|---|---|---|
 | F2-01 | Fase 2 | Aplicar las dimensiones de Garvin | `03-matriz-modelos-calidad.csv` (8 filas MQ-G) | CUMPLE | La diferencia entre las 5 perspectivas de clase y las 8 dimensiones está explicada en `00` | — | — | CUMPLE |
-| F2-02 | Fase 2 | Aplicar los factores de McCall | `03` (11 filas MQ-M) | CUMPLE | — | MQ-M09 actualizado a 5 despliegues | — | CUMPLE |
+| F2-02 | Fase 2 | Aplicar los factores de McCall | `03` (11 filas MQ-M) | CUMPLE | — | MQ-M09 actualizado a 6 despliegues | — | CUMPLE |
 | F2-03 | Fase 2 | Aplicar ISO/IEC 9126 | `03` (27 filas MQ-I) | CUMPLE PARCIALMENTE | Se creyó que faltaban filas de conformidad | Comprobado: las 6 características tienen su fila de Conformidad (MQ-I05, I09, I14, I17, I22, I27). 2 NO EVALUADO y 1 PENDIENTE están justificados | `03` | CUMPLE |
 | F2-04 | Fase 2 | Determinar pertinencia | `03` columnas Aplicabilidad y Justificación | CUMPLE | — | — | — | CUMPLE |
 | F2-05 | Fase 2 | Relacionar cada elemento con requisito, criterio, métrica y evidencia | `03` | CUMPLE | — | Script de consistencia | Salida del script | CUMPLE |
@@ -107,7 +107,7 @@ Estados: **CUMPLE**, **CUMPLE PARCIALMENTE**, **NO CUMPLE**, **NO EVALUADO**, **
 | F7-03 | Fase 7 | Consolidar calidad, revisión, SQA y pruebas | `12-informe-liberacion.md` | CUMPLE | — | — | — | CUMPLE |
 | F7-04 | Fase 7 | Emitir decisión GO / CONDITIONAL GO / NO-GO | `12` §1 | CUMPLE | — | Revisada con D-16 a D-20: se sostiene CONDITIONAL GO | — | CUMPLE |
 | F7-05 | Fase 7 | Justificación cualitativa y cuantitativa | `12` §1–§3 | CUMPLE | — | — | — | CUMPLE |
-| F7-06 | Fase 7 | Verificación en producción de la versión liberada | EV-PROD-01; CP-46 | CUMPLE PARCIALMENTE | Sin sesión no se verificó tasa real, cron, LCP móvil ni D-09, D-11 a D-19 | Quinto despliegue verificado sin sesión. La verificación con sesión no se pudo hacer: el dominio no responde desde el entorno de verificación y la contraseña de la cuenta de prueba no está disponible | Captura y respuesta de la API con sesión | CUMPLE PARCIALMENTE |
+| F7-06 | Fase 7 | Verificación en producción de la versión liberada | EV-PROD-01; CP-46 | CUMPLE PARCIALMENTE | Sin sesión no se verificó tasa real, cron, LCP móvil ni D-09, D-11 a D-19 | Quinto y sexto despliegue (D-20) verificados sin sesión. La verificación con sesión no se pudo hacer: el dominio no responde desde el entorno de verificación y la contraseña de la cuenta de prueba no está disponible | Captura y respuesta de la API con sesión | CUMPLE PARCIALMENTE |
 
 ### Trazabilidad (§6)
 
@@ -169,7 +169,7 @@ Estados: **CUMPLE**, **CUMPLE PARCIALMENTE**, **NO CUMPLE**, **NO EVALUADO**, **
 | D-17 | Saldos largos recortados en las tarjetas de Carteras | Media | Introducido durante el trabajo | Publicado en `5c7c8c5`; verificado en local |
 | D-18 | Configuración decía que IA, Google y correo estaban apagados aunque IA y Google funcionan en producción, y mostraba un campo de Telegram que el servidor ignora | Baja | Original | Publicado en `5c7c8c5`; verificado en local |
 | D-19 | Porcentajes de los gráficos con punto decimal | Baja | Original | Publicado en `5c7c8c5`; verificado en local |
-| D-20 | Mensajes del servidor en producción hablan de un «modo local» | Baja | Original | Corregido en `c9c33b4`; sin publicar |
+| D-20 | Mensajes del servidor en producción hablan de un «modo local» | Baja | Original | Publicado en `7c09956` (2026-10-28); texto del perfil verificado en producción; mensajes del servidor verificados en local |
 
 Detalle completo (pasos, esperado, observado, impacto, evidencia, solución y regresión) en `04-registro-defectos.csv` y `04b-autopsia-defectos.csv`.
 
