@@ -6,12 +6,12 @@ const { bad } = require('../utils/validation');
 const digest = value => crypto.createHash('sha256').update(value).digest('hex');
 class AuthService {
  async enviarCorreo(destinatario,mensaje) {
-  if(process.env.SMTP_ENABLED !== 'true') throw bad('El correo está desactivado en modo local. Solicita al administrador local el restablecimiento de tu contraseña.',503);
+  if(process.env.SMTP_ENABLED !== 'true') throw bad('La recuperación por correo no está disponible en esta instalación. Pide al administrador que restablezca tu contraseña.',503);
   const transporter=nodemailer.createTransport({host:process.env.SMTP_HOST,port:Number(process.env.SMTP_PORT||587),secure:process.env.SMTP_SECURE==='true',auth:{user:process.env.SMTP_USER,pass:process.env.SMTP_PASS}});
   return transporter.sendMail({from:process.env.SMTP_FROM||process.env.SMTP_USER,to:destinatario,subject:'Recuperación de Asistente Financiero',text:mensaje});
  }
  async solicitarRecuperacion(correo) {
-  if(process.env.SMTP_ENABLED !== 'true') throw bad('El correo está desactivado en modo local. El administrador puede restablecer la contraseña desde Usuarios o con el comando local.',503);
+  if(process.env.SMTP_ENABLED !== 'true') throw bad('La recuperación por correo no está disponible en esta instalación. Pide al administrador que restablezca tu contraseña desde Usuarios.',503);
   const code=crypto.randomInt(100000,1000000).toString(),hash=await bcrypt.hash(code,10);
   await db.query('UPDATE usuarios SET codigo_recuperacion=$1,codigo_expiracion=NOW()+INTERVAL \'15 minutes\',codigo_verificacion=false,reset_token_hash=NULL,reset_token_expires=NULL WHERE lower(correo)=lower($2) AND deleted_at IS NULL',[hash,correo]);
   await this.enviarCorreo(correo,`Tu código es ${code}. Expira en 15 minutos.`);

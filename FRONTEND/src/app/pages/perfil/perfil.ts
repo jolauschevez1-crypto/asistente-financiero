@@ -169,7 +169,7 @@ export class Perfil implements OnInit {
   }
 
   vincularConGoogleOAuthDirecto(): void {
-    this.snackbar.error('Google está desactivado en esta instalación local.');
+    this.snackbar.error('Vincular Google desde el perfil no está disponible en esta versión.');
   }
 
   cargarPerfil(): void {

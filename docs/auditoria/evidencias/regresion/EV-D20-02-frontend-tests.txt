@@ -1,0 +1,199 @@
+❯ Building...
+✔ Building...
+Initial chunk files                               | Names                                          |  Raw size
+chunk-EGHNIV2Z.js                                 | -                                              |   1.38 MB | 
+chunk-X5VPMHCL.js                                 | -                                              |   1.18 MB | 
+polyfills.js                                      | polyfills                                      |   1.04 MB | 
+chunk-CQ3N6KWL.js                                 | -                                              | 366.93 kB | 
+chunk-4NT34WEP.js                                 | -                                              | 358.29 kB | 
+chunk-LQTLJ4O7.js                                 | -                                              | 342.20 kB | 
+chunk-YK56CKFQ.js                                 | -                                              | 242.87 kB | 
+chunk-S3HCSEWN.js                                 | -                                              | 190.99 kB | 
+chunk-SLTZI7E2.js                                 | -                                              | 129.01 kB | 
+chunk-PTYAYEGJ.js                                 | -                                              |  73.20 kB | 
+jasmine-cleanup-1.js                              | jasmine-cleanup-1                              |  67.20 kB | 
+spec-app-app.spec.js                              | spec-app-app.spec                              |  25.02 kB | 
+test_main.js                                      | test_main                                      |  21.83 kB | 
+chunk-REXCL3AL.js                                 | -                                              |  12.24 kB | 
+styles.css                                        | styles                                         |  11.59 kB | 
+spec-audit-quality-regression.spec.js             | spec-audit-quality-regression.spec             |  11.56 kB | 
+chunk-3SVIJE6Z.js                                 | -                                              |   9.88 kB | 
+spec-app-pages-finance-carteras.spec.js           | spec-app-pages-finance-carteras.spec           |   8.56 kB | 
+chunk-PYGIPG3M.js                                 | -                                              |   8.39 kB | 
+chunk-XZ7KLFFG.js                                 | -                                              |   7.56 kB | 
+spec-app-pages-finance-finance.spec.js            | spec-app-pages-finance-finance.spec            |   5.93 kB | 
+spec-app-core-auth.interceptor.spec.js            | spec-app-core-auth.interceptor.spec            |   5.59 kB | 
+spec-app-pages-finance-movement-journal.spec.js   | spec-app-pages-finance-movement-journal.spec   |   5.19 kB | 
+spec-app-core-currency.service.spec.js            | spec-app-core-currency.service.spec            |   4.05 kB | 
+chunk-NQK7NL6R.js                                 | -                                              |   3.41 kB | 
+chunk-CTTGE257.js                                 | -                                              |   3.05 kB | 
+spec-app-core-input-validation.spec.js            | spec-app-core-input-validation.spec            |   2.56 kB | 
+spec-app-shared-chart-card-chart-builders.spec.js | spec-app-shared-chart-card-chart-builders.spec |   2.37 kB | 
+spec-app-pages-estadisticas-estadisticas.spec.js  | spec-app-pages-estadisticas-estadisticas.spec  |   2.29 kB | 
+chunk-7L6VH5FG.js                                 | -                                              |   2.15 kB | 
+chunk-3FMBEB3S.js                                 | -                                              |   2.13 kB | 
+spec-app-core-admin.guard.spec.js                 | spec-app-core-admin.guard.spec                 |   1.91 kB | 
+spec-app-core-password-policy.spec.js             | spec-app-core-password-policy.spec             |   1.85 kB | 
+spec-app-core-session-expiry.spec.js              | spec-app-core-session-expiry.spec              |   1.81 kB | 
+spec-app-core-money.spec.js                       | spec-app-core-money.spec                       |   1.49 kB | 
+chunk-C5USNE45.js                                 | -                                              | 536 bytes | 
+jasmine-cleanup-0.js                              | jasmine-cleanup-0                              | 519 bytes | 
+                                                  | Initial total                                  |   5.54 MB
+Lazy chunk files                                  | Names                                          |  Raw size
+chunk-CSC3CRRG.js                                 | apexcharts-ssr-esm                             |   1.47 MB | 
+chunk-J47GXFKO.js                                 | apexcharts-esm                                 |   1.46 MB | 
+chunk-NATJX77X.js                                 | core-esm                                       | 894.93 kB | 
+Application bundle generation complete. [3.871 seconds] - 2026-10-27T03:40:44.929Z
+27 10 2026 03:40:45.144:INFO [karma-server]: Karma v6.4.4 server started at http://localhost:9876/
+27 10 2026 03:40:45.145:INFO [launcher]: Launching browsers ChromeHeadlessNoSandbox with concurrency unlimited
+27 10 2026 03:40:45.149:INFO [launcher]: Starting browser ChromeHeadless
+27 10 2026 03:40:45.560:INFO [Chrome Headless 153.0.0.0 (Linux 0.0.0)]: Connected on socket U-xSREAXx3fggUzVAAAA with id 27557377
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T03","expected":1,"actual":1}'
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T03","expected":1,"actual":1}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T03 [RF-TRANSFER] transferencia entre dos cuentas solicita registro","status":"passed","durationMs":34.5,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T03 [RF-TRANSFER] transferencia entre dos cuentas solicita registro","status":"passed","durationMs":34.5,"failures":[]}'
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T10","expected":{"averagePerActiveDay":75,"maxIncome":100},"actual":{"averagePerActiveDay":75,"maxIncome":100}}'
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T10","expected":{"averagePerActiveDay":75,"maxIncome":100},"actual":{"averagePerActiveDay":75,"maxIncome":100}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T10 [RF-STATS] datos disponibles producen maximo y promedio conocidos","status":"passed","durationMs":3.3999999999068677,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T10 [RF-STATS] datos disponibles producen maximo y promedio conocidos","status":"passed","durationMs":3.3999999999068677,"failures":[]}'
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T09","expected":{"errorVisible":true},"actual":{"errorVisible":true,"promedioDiario":0,"mayorIngreso":null}}'
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T09","expected":{"errorVisible":true},"actual":{"errorVisible":true,"promedioDiario":0,"mayorIngreso":null}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T09 [FE-04/RNF-ERROR] consulta fallida de detalle hace visible el error","status":"passed","durationMs":3,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T09 [FE-04/RNF-ERROR] consulta fallida de detalle hace visible el error","status":"passed","durationMs":3,"failures":[]}'
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T06","expected":{"columns":8,"wallet":"Banco, ahorro"},"actual":{"columns":8,"row":["1","","INGRESO","Salario","100","USD","Banco, ahorro","Dato ficticio"]}}'
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T06","expected":{"columns":8,"wallet":"Banco, ahorro"},"actual":{"columns":8,"row":["1","","INGRESO","Salario","100","USD","Banco, ahorro","Dato ficticio"]}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T06 [FE-02/RF-EXPORT] CSV preserva cartera con coma y columna de moneda, sin método de pago","status":"passed","durationMs":8.899999999906868,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T06 [FE-02/RF-EXPORT] CSV preserva cartera con coma y columna de moneda, sin método de pago","status":"passed","durationMs":8.899999999906868,"failures":[]}'
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T08","expected":{"columns":8},"actual":{"columns":8,"row":["1","16/10/2026, 17:00:00","INGRESO","Salario","100","USD","Banco","Dato ficticio"]}}'
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T08","expected":{"columns":8},"actual":{"columns":8,"row":["1","16/10/2026, 17:00:00","INGRESO","Salario","100","USD","Banco","Dato ficticio"]}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T08 [FE-02/RF-EXPORT] CSV con fecha conserva ocho columnas incluida moneda","status":"passed","durationMs":5.600000000093132,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T08 [FE-02/RF-EXPORT] CSV con fecha conserva ocho columnas incluida moneda","status":"passed","durationMs":5.600000000093132,"failures":[]}'
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T04","expected":{"requests":0,"errorVisible":true},"actual":{"requests":0,"errorVisible":true}}'
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T04","expected":{"requests":0,"errorVisible":true},"actual":{"requests":0,"errorVisible":true}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T04 [RF-TRANSFER] origen igual a destino se rechaza con mensaje","status":"passed","durationMs":3,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T04 [RF-TRANSFER] origen igual a destino se rechaza con mensaje","status":"passed","durationMs":3,"failures":[]}'
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T05","expected":0,"actual":0}'
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T05","expected":0,"actual":0}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T05 [RF-MOV] monto cero se rechaza sin solicitud","status":"passed","durationMs":2.6000000000931323,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T05 [RF-MOV] monto cero se rechaza sin solicitud","status":"passed","durationMs":2.6000000000931323,"failures":[]}'
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T07","expected":{"columns":8,"description":"Texto \"citado\", línea 1\nlínea 2"},"actual":{"columns":8,"description":"Texto \"citado\", línea 1\nlínea 2"}}'
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T07","expected":{"columns":8,"description":"Texto \"citado\", línea 1\nlínea 2"},"actual":{"columns":8,"description":"Texto \"citado\", línea 1\nlínea 2"}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T07 [RF-EXPORT] CSV preserva comillas comas y salto de linea de descripcion","status":"passed","durationMs":3.6000000000931323,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T07 [RF-EXPORT] CSV preserva comillas comas y salto de linea de descripcion","status":"passed","durationMs":3.6000000000931323,"failures":[]}'
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T01","expected":1,"actual":1}'
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T01","expected":1,"actual":1}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T01 [RF-MOV] gasto valido solicita registro una vez","status":"passed","durationMs":2.5,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T01 [RF-MOV] gasto valido solicita registro una vez","status":"passed","durationMs":2.5,"failures":[]}'
+[1A[2KLOG: 'AUDIT_OBSERVATION {"id":"FE-T02","expected":{"requests":1,"destination":null},"actual":{"requests":1,"destination":null}}'
+LOG: 'AUDIT_OBSERVATION {"id":"FE-T02","expected":{"requests":1,"destination":null},"actual":{"requests":1,"destination":null}}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T02 [FE-01/RF-MOV] cambiar de ingreso a gasto permite registrar sin cartera destino","status":"passed","durationMs":2.5,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Regresión de defectos originales FE-T02 [FE-01/RF-MOV] cambiar de ingreso a gasto permite registrar sin cartera destino","status":"passed","durationMs":2.5,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta descarta respuestas de una sesión anterior","status":"passed","durationMs":4.400000000139698,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta descarta respuestas de una sesión anterior","status":"passed","durationMs":4.400000000139698,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta muestra código y valor nominal sin conversión","status":"passed","durationMs":3.800000000046566,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta muestra código y valor nominal sin conversión","status":"passed","durationMs":3.800000000046566,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta solo ofrece como presentación las monedas con tasa de referencia","status":"passed","durationMs":1.5999999998603016,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta solo ofrece como presentación las monedas con tasa de referencia","status":"passed","durationMs":1.5999999998603016,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta pone siempre el código delante, también en euros y en negativos","status":"passed","durationMs":2.300000000046566,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta pone siempre el código delante, también en euros y en negativos","status":"passed","durationMs":2.300000000046566,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta muestra importes en la moneda elegida con la tasa del servidor; sin tasa, en su moneda","status":"passed","durationMs":3.3999999999068677,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta muestra importes en la moneda elegida con la tasa del servidor; sin tasa, en su moneda","status":"passed","durationMs":3.3999999999068677,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta conserva la moneda anterior si el servidor rechaza el cambio","status":"passed","durationMs":1.8000000000465661,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta conserva la moneda anterior si el servidor rechaza el cambio","status":"passed","durationMs":1.8000000000465661,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta guarda en servidor y actualiza el usuario solamente al confirmar","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Moneda de la cuenta guarda en servidor y actualiza el usuario solamente al confirmar","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales escapa CSV incluyendo comas, comillas, saltos y fórmulas de hoja","status":"passed","durationMs":0.2999999998137355,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales escapa CSV incluyendo comas, comillas, saltos y fórmulas de hoja","status":"passed","durationMs":0.2999999998137355,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales rechaza nombre con espacios y permite nombres con acentos","status":"passed","durationMs":0.10000000009313226,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales rechaza nombre con espacios y permite nombres con acentos","status":"passed","durationMs":0.10000000009313226,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales impide usar nombre o correo como contraseña, ignorando caso y espacios","status":"passed","durationMs":0.5,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales impide usar nombre o correo como contraseña, ignorando caso y espacios","status":"passed","durationMs":0.5,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales controla mínimo de caracteres y límite real de bytes bcrypt","status":"passed","durationMs":1.2999999998137355,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales controla mínimo de caracteres y límite real de bytes bcrypt","status":"passed","durationMs":1.2999999998137355,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales valida centavos sin redondear datos inválidos","status":"passed","durationMs":0.6999999999534339,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales valida centavos sin redondear datos inválidos","status":"passed","durationMs":0.6999999999534339,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales valida fecha opcional, bisiesto, fecha inexistente y futura","status":"passed","durationMs":1.1000000000931323,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Validaciones de datos reales valida fecha opcional, bisiesto, fecha inexistente y futura","status":"passed","durationMs":1.1000000000931323,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros proporción para barras","status":"passed","durationMs":0.2999999998137355,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros proporción para barras","status":"passed","durationMs":0.2999999998137355,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros convierte con la misma regla half-up que el servidor","status":"passed","durationMs":0.6000000000931323,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros convierte con la misma regla half-up que el servidor","status":"passed","durationMs":0.6000000000931323,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros suma exacta","status":"passed","durationMs":0.30000000004656613,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros suma exacta","status":"passed","durationMs":0.30000000004656613,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros escala y compara sin coma flotante","status":"passed","durationMs":0.2999999998137355,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros escala y compara sin coma flotante","status":"passed","durationMs":0.2999999998137355,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros convierte texto y números sin errores de coma flotante","status":"passed","durationMs":0.19999999995343387,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"dinero en centavos enteros convierte texto y números sin errores de coma flotante","status":"passed","durationMs":0.19999999995343387,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida transferencia entre monedas: pide la cotización y solo registra al confirmar con la misma tasa","status":"passed","durationMs":323.4000000001397,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida transferencia entre monedas: pide la cotización y solo registra al confirmar con la misma tasa","status":"passed","durationMs":323.4000000001397,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida muestra cada cartera y el total en la moneda elegida, con el importe guardado al lado","status":"passed","durationMs":10.5,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida muestra cada cartera y el total en la moneda elegida, con el importe guardado al lado","status":"passed","durationMs":10.5,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida un saldo largo se muestra completo con letra más pequeña, sin puntos suspensivos (D-17)","status":"passed","durationMs":12.400000000139698,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida un saldo largo se muestra completo con letra más pequeña, sin puntos suspensivos (D-17)","status":"passed","durationMs":12.400000000139698,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida D-15: el formulario acepta nombres válidos como «Ecuabet» y rechaza símbolos no permitidos","status":"passed","durationMs":36.199999999953434,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida D-15: el formulario acepta nombres válidos como «Ecuabet» y rechaza símbolos no permitidos","status":"passed","durationMs":36.199999999953434,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida cambiar el monto descarta la cotización anterior","status":"passed","durationMs":9.300000000046566,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida cambiar el monto descarta la cotización anterior","status":"passed","durationMs":9.300000000046566,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida crear cartera solo pide nombre y saldo inicial y usa la moneda elegida","status":"passed","durationMs":16.9000000001397,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Carteras con moneda elegida crear cartera solo pide nombre y saldo inicial y usa la moneda elegida","status":"passed","durationMs":16.9000000001397,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) nombres de persona solo letras; nombres de carteras sin emojis ni marcado","status":"passed","durationMs":2.3999999999068677,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) nombres de persona solo letras; nombres de carteras sin emojis ni marcado","status":"passed","durationMs":2.3999999999068677,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) señala cada requisito pendiente","status":"passed","durationMs":0.5999999998603016,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) señala cada requisito pendiente","status":"passed","durationMs":0.5999999998603016,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) acepta una contraseña que cumple todo","status":"passed","durationMs":0.39999999990686774,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) acepta una contraseña que cumple todo","status":"passed","durationMs":0.39999999990686774,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) rechaza contraseñas iguales o que contienen nombre, usuario o correo","status":"passed","durationMs":0.19999999995343387,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"validación de entradas (requisito 2026-10-25) rechaza contraseñas iguales o que contienen nombre, usuario o correo","status":"passed","durationMs":0.19999999995343387,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diálogo Nueva cartera (accesibilidad) mantiene el botón que abre el diálogo para que el foco vuelva a él al cerrar","status":"passed","durationMs":13.300000000046566,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Diálogo Nueva cartera (accesibilidad) mantiene el botón que abre el diálogo para que el foco vuelva a él al cerrar","status":"passed","durationMs":13.300000000046566,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Aplicación local y navegación ofrece acceso al contenido y oculta menús privados sin sesión","status":"passed","durationMs":20.699999999953434,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Aplicación local y navegación ofrece acceso al contenido y oculta menús privados sin sesión","status":"passed","durationMs":20.699999999953434,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Aplicación local y navegación navegación contiene módulos y accesibilidad conserva la preferencia","status":"passed","durationMs":23.899999999906868,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Aplicación local y navegación navegación contiene módulos y accesibilidad conserva la preferencia","status":"passed","durationMs":23.899999999906868,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Guarda de administración devuelve al panel a un usuario con sesión sin rol de administrador","status":"passed","durationMs":8.5,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Guarda de administración devuelve al panel a un usuario con sesión sin rol de administrador","status":"passed","durationMs":8.5,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Guarda de administración manda al inicio de sesión a quien no tiene sesión","status":"passed","durationMs":1.6000000000931323,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Guarda de administración manda al inicio de sesión a quien no tiene sesión","status":"passed","durationMs":1.6000000000931323,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Guarda de administración deja pasar al administrador","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Guarda de administración deja pasar al administrador","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Panel multidivisa marca el total como parcial y nombra la moneda sin tasa","status":"passed","durationMs":24.600000000093132,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Panel multidivisa marca el total como parcial y nombra la moneda sin tasa","status":"passed","durationMs":24.600000000093132,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Panel multidivisa convierte pendientes con BigInt y deja aparte lo que no tiene tasa","status":"passed","durationMs":14.599999999860302,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Panel multidivisa convierte pendientes con BigInt y deja aparte lo que no tiene tasa","status":"passed","durationMs":14.599999999860302,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor conserva la sesión cuando el reintento devuelve error de negocio","status":"passed","durationMs":2.699999999953434,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor conserva la sesión cuando el reintento devuelve error de negocio","status":"passed","durationMs":2.699999999953434,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor identifica sesión expirada cuando ya no puede renovarse","status":"passed","durationMs":1.9000000001396984,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor identifica sesión expirada cuando ya no puede renovarse","status":"passed","durationMs":1.9000000001396984,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor no renueva ni cierra sesión cuando falta permiso 403","status":"passed","durationMs":1.3000000000465661,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor no renueva ni cierra sesión cuando falta permiso 403","status":"passed","durationMs":1.3000000000465661,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor renueva token expirado 401 y reintenta con la identidad renovada","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor renueva token expirado 401 y reintenta con la identidad renovada","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor no envía credenciales a otro origen","status":"passed","durationMs":1.5,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Sesión y límites del interceptor no envía credenciales a otro origen","status":"passed","durationMs":1.5,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Report calendar labels keeps October in all monthly charts, including UTC midnight buckets","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Report calendar labels keeps October in all monthly charts, including UTC midnight buckets","status":"passed","durationMs":1.6999999999534339,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Report calendar labels keeps the first day of the month in daily chart labels","status":"passed","durationMs":0.5,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Report calendar labels keeps the first day of the month in daily chart labels","status":"passed","durationMs":0.5,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Report calendar labels preserves date-only report filters while real timestamps remain local","status":"passed","durationMs":0.5,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Report calendar labels preserves date-only report filters while real timestamps remain local","status":"passed","durationMs":0.5,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Report calendar labels assigns heatmap data to its calendar day even late at night","status":"passed","durationMs":2.3999999999068677,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Report calendar labels assigns heatmap data to its calendar day even late at night","status":"passed","durationMs":2.3999999999068677,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento el diario muestra el importe en la moneda elegida y el original al lado","status":"passed","durationMs":18.100000000093132,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento el diario muestra el importe en la moneda elegida y el original al lado","status":"passed","durationMs":18.100000000093132,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento muestra combo accesible con catálogo guardado, sugerencias y opción personalizada","status":"passed","durationMs":13.100000000093132,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento muestra combo accesible con catálogo guardado, sugerencias y opción personalizada","status":"passed","durationMs":13.100000000093132,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento no ofrece método de pago ni traspasos: solo gasto o ingreso","status":"passed","durationMs":12.199999999953434,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento no ofrece método de pago ni traspasos: solo gasto o ingreso","status":"passed","durationMs":12.199999999953434,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento rechaza categoría personalizada en blanco sin registrar un movimiento","status":"passed","durationMs":14.5,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento rechaza categoría personalizada en blanco sin registrar un movimiento","status":"passed","durationMs":14.5,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento registra el nombre personalizado en la cartera elegida y cierra el diálogo","status":"passed","durationMs":13.099999999860302,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Diario de Carteras: nuevo movimiento registra el nombre personalizado en la cartera elegida y cierra el diálogo","status":"passed","durationMs":13.099999999860302,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Límite absoluto de sesión cierra a los 30 minutos aunque el token declare una vigencia mayor","status":"passed","durationMs":2.6000000000931323,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Límite absoluto de sesión cierra a los 30 minutos aunque el token declare una vigencia mayor","status":"passed","durationMs":2.6000000000931323,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Límite absoluto de sesión no reinicia el reloj al recargar una sesión vencida","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Límite absoluto de sesión no reinicia el reloj al recargar una sesión vencida","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Estadísticas separadas por moneda una respuesta USD tardía no reemplaza los indicadores MXN","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Estadísticas separadas por moneda una respuesta USD tardía no reemplaza los indicadores MXN","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+[1A[2KLOG: 'AUDIT_RESULT {"name":"Estadísticas separadas por moneda pide ambos conjuntos en COP al elegir Colombia","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+LOG: 'AUDIT_RESULT {"name":"Estadísticas separadas por moneda pide ambos conjuntos en COP al elegir Colombia","status":"passed","durationMs":1.1999999999534339,"failures":[]}'
+TOTAL: 64 SUCCESS

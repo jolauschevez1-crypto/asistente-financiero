@@ -8,7 +8,7 @@
 
 | Campo | Valor |
 |---|---|
-| Artefacto | Código de validación de entradas y conversión multidivisa en la versión publicada `5514da0` |
+| Artefacto | Código de validación de entradas y conversión multidivisa en la versión publicada `5514da0`; los cinco archivos no cambian hasta `c9c33b4` |
 | Archivos | `FRONTEND/src/app/core/input-validation.ts` (53 líneas), `BACKEND/src/finance/validation.js` (34), `BACKEND/src/finance/currency.js` (43), `BACKEND/src/finance/fx.js` (92), `BACKEND/src/finance/multicurrency.js` (107). Total: 329 líneas |
 | Motivo de la elección | Es donde se originaron el defecto de mayor severidad (D-15, Alta: no se podían crear carteras) y el de mayor impacto funcional (D-03: se perdía la cotización en un traspaso entre monedas). Además concentra el requisito crítico del cambio inesperado (RF-04 a RF-10) |
 | Requisitos asociados | RF-03, RF-04, RF-06, RF-07, RF-08, RF-09, RF-10, RNF-01 |
@@ -30,7 +30,7 @@ Con cuatro integrantes, el secretario también puede actuar como revisor.
 
 ## 3. Criterios de entrada (se comprueban antes de empezar)
 
-- [ ] Las pruebas automatizadas pasan: 69 de backend y 60 de frontend (registro del 2026-10-27, EV-PRU-03).
+- [ ] Las pruebas automatizadas pasan: 69 de backend y 64 de frontend en la última ejecución registrada (EV-D20-01/02).
 - [ ] Cada participante tiene acceso a los cinco archivos y a `04-registro-defectos.csv`.
 - [ ] Cada revisor dedicó al menos 10 minutos a leer el artefacto antes de la reunión (anotar minutos reales en §5).
 - [ ] El artefacto no cambia durante la reunión.
@@ -117,6 +117,6 @@ Un hallazgo es **defecto** solo si se puede reproducir o señalar en el código 
 ## 9. Criterios de salida y seguimiento
 
 - Ningún defecto de severidad Alta o Crítica queda sin acción ni responsable.
-- Cada defecto se copia a `04-registro-defectos.csv` con un ID nuevo (D-17 en adelante) y la técnica de detección «RTF-01».
+- Cada defecto se copia a `04-registro-defectos.csv` con un ID nuevo (D-21 en adelante) y la técnica de detección «RTF-01».
 - Cada acción se cierra solo con una prueba de regresión que pase; el seguimiento es defecto → acción → corrección → prueba → cierre.
 - Las métricas de `05-metricas.md` (esfuerzo de revisión, defectos por hora de revisión y DRE) se recalculan con los datos reales del acta.

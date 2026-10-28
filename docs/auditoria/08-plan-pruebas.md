@@ -20,7 +20,7 @@ Demostrar con evidencia ejecutada que el cambio multidivisa no pierde dinero, no
 | Unidad | `money.ts`, política de contraseña, validaciones, `fx.js` (aritmética racional) | Karma/Jasmine; `node --test` | Local | Código compila | 100 % en verde |
 | Integración | Rutas HTTP con base PGlite: panel, tasas, transferencias, conversión, módulos, seguridad de sesión | `node --test` + supertest | PGlite | Unidad en verde | 100 % en verde |
 | Sistema | Navegador real sobre servidor local con PostgreSQL 16: accesibilidad, teclado, reflujo, red, rendimiento, carga ×5, sondeo OWASP | Playwright, axe-core, scripts en `evidencias/` | Local aislado | Integración en verde; build actual | Umbrales de 07 cumplidos |
-| Aceptación | Producción: login, panel, tasa real con fecha, conversión, LCP móvil | Navegador + consultas a la API | https://asistente-financiero-seven.vercel.app | OK del usuario; migración aplicada | Casos CP-13, CP-40 y CP-46 aprobados |
+| Aceptación | Producción: login, panel, tasa real con fecha, conversión, LCP móvil | Navegador + consultas a la API | https://asistente-financiero-seven.vercel.app | Autorización del equipo para publicar; migración aplicada | Casos CP-13, CP-40 y CP-46 aprobados |
 
 ## 3. Técnicas
 
@@ -41,9 +41,26 @@ Demostrar con evidencia ejecutada que el cambio multidivisa no pierde dinero, no
 - **Concurrencia:** dos gastos simultáneos; ráfaga de 5 transferencias.
 - **Pruebas web (Semana 7 Clase 2):** funcional, interfaz, navegación, compatibilidad (solo Chromium) y rendimiento.
 
+### 3.1 Tabla de decisión desarrollada: acceso a rutas de administración (CP-49)
+
+| Regla | ¿Hay sesión? | ¿Rol administrador? | Acción esperada | Prueba |
+|---|---|---|---|---|
+| R1 | Sí | Sí | Entra a la ruta | `admin.guard.spec.ts` «deja pasar al administrador» |
+| R2 | Sí | No | Vuelve a `/panel` | `admin.guard.spec.ts` «devuelve al panel…» (antes de D-16 mostraba el login) |
+| R3 | No | — | Va a `/login?motivo=admin` | `admin.guard.spec.ts` «manda al inicio de sesión…» |
+
+Las tres reglas cubren todas las combinaciones posibles: sin sesión el rol no se puede leer, así que «No / Sí» no existe. El barrido de 12 rutas × 2 anchos (EV-D16-02) comprueba R2 en el navegador.
+
+### 3.2 Particularidades de una aplicación web orientada a objetos
+
+- **Clases como unidad de prueba:** los servicios de Angular (`AuthService`, `CurrencyService`) y del servidor (`AuthService`) son clases; el servicio de movimientos del servidor (`ledgerService`) es un módulo de funciones. Se prueban aislando sus dependencias (base PGlite en memoria, `HttpTestingController`) y comprobando el resultado y el estado de la base después de cada operación.
+- **Composición:** los componentes standalone componen servicios por inyección de dependencias. Una prueba de componente sustituye el servicio por un doble para probar la interfaz sin red (por ejemplo, `carteras.spec.ts`).
+- **Encapsulamiento del dinero:** los importes viajan como texto decimal y se operan en centavos con BigInt dentro de `money.ts`; la prueba comprueba la interfaz pública, no los atributos internos.
+- **Web:** además del código, se prueban navegación, diseño adaptable (1366, 390 y 320 px), accesibilidad, seguridad HTTP (CORS, cabeceras, JWT) y rendimiento percibido en navegador real.
+
 ## 4. Datos y configuración
 
-Solo datos ficticios (`*@local.test`). Las tasas son ficticias porque vienen de un proveedor simulado. La única excepción es la verificación en producción, que usará la cuenta del usuario sin crear movimientos reales y la tasa real de Frankfurter. Las contraseñas de prueba se pasan por variables de entorno y no están en el repositorio.
+Solo datos ficticios (`*@local.test`). Las tasas son ficticias porque vienen de un proveedor simulado. La única excepción es la verificación en producción, que usa una cuenta de prueba del equipo, sin movimientos reales, y la tasa real de Frankfurter. A la fecha de corte esa verificación no se ha ejecutado (CP-13, CP-40). Las contraseñas de prueba se pasan por variables de entorno y no están en el repositorio.
 
 ## 5. Criterios de suspensión y reanudación
 
@@ -60,7 +77,8 @@ Solo datos ficticios (`*@local.test`). Las tasas son ficticias porque vienen de 
 | `services/ledgerService.js` | Saldo negativo | Concurrencia | CP-23, CP-41 |
 | `core/money.ts` | Coma flotante | Límites | CP-30 |
 | Autenticación | Acceso ajeno; contraseña débil | Seguridad; tabla de decisión | CP-03..CP-05, CP-31, CP-32 |
-| Navegación y diálogos | Pérdida de foco; menú inaccesible | Teclado; axe | CP-26, CP-28, CP-35, CP-36 |
+| Navegación y diálogos | Pérdida de foco; menú inaccesible; ruta sin permiso | Teclado; axe; tabla de decisión sesión × rol × ruta | CP-26, CP-28, CP-35, CP-36, CP-49 |
+| Tarjetas, gráficos y textos | Importes recortados; formato inglés; textos que contradicen la configuración | Valores límite (longitud del importe); revisión visual; inspección | CP-50, CP-51, CP-52, CP-53 |
 | Despliegue | Variables o migración | Aceptación en producción | CP-13, CP-46 |
 
 ## 7. Resultados

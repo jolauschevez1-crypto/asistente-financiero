@@ -12,7 +12,7 @@ Fuente: `03-matriz-modelos-calidad.csv` (46 filas). Los conteos salen de la colu
 
 ## 2. Qué aporta cada diagnóstico
 
-- **Garvin** mira el producto desde fuera: prestaciones, estética y calidad percibida. Es el único que obliga a preguntar qué opina el usuario, y ahí está su hallazgo principal: la Calidad percibida queda NO EVALUADA. Ese hueco explica por qué cinco defectos de interfaz (D-11 a D-15) llegaron a producción y el más grave lo encontró el usuario. Su debilidad: las dimensiones no traen métricas propias; Estética y Calidad percibida dependen del juicio.
+- **Garvin** mira el producto desde fuera: prestaciones, estética y calidad percibida. Es el único que obliga a preguntar qué opina el usuario, y ahí está su hallazgo principal: la Calidad percibida queda NO EVALUADA. Ese hueco explica por qué diez defectos de interfaz y de mensajes (D-11 a D-20) se encontraron con la versión ya publicada, y por qué el más grave (D-15) apareció usando la aplicación en producción y no en una prueba. Su debilidad: las dimensiones no traen métricas propias; Estética y Calidad percibida dependen del juicio.
 - **McCall** ordena la calidad por ciclo de vida (operación, revisión y transición). Hace visible lo que falta para entregar: la Interoperabilidad con el proveedor real de tasas sigue PENDIENTE y la Portabilidad depende del despliegue. Es menos fino que ISO dentro de cada factor.
 - **ISO/IEC 9126** es el más granular: cada subcaracterística se pudo atar a un requisito, una métrica con umbral y una evidencia (por ejemplo Exactitud → RNF-01 → coincidencia al centavo → BE 58/60). Detecta los mismos pendientes que McCall y añade dos que los otros no ven: Aprendizaje y compatibilidad con otros navegadores.
 

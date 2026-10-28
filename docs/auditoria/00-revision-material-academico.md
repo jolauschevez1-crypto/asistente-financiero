@@ -1,8 +1,8 @@
 # 00 · Revisión del material académico
 
 **Asignatura:** Ingeniería de Software II · UTMACH · Docente: Ing. Jimmy Molina Ríos, Ph.D.
-**Fecha de revisión:** 2026-10-25 · **Revisor:** asistente (Claude), sesión de auditoría del proyecto Asistente Financiero.
-**Fuente:** carpeta `Ingenieria Sotfware` (copia del proyecto y carpeta local `C:\Users\jolau\Desktop\Ingenieria Sotfware`; mismos 26 archivos, sin subcarpetas). No se modificó ningún original.
+**Fecha de revisión:** 2026-10-25 · **Revisión:** equipo del proyecto Asistente Financiero.
+**Fuente:** carpeta `Ingenieria Sotfware` (26 archivos, sin subcarpetas). No se modificó ningún original.
 
 ## 1. Método y limitaciones
 
