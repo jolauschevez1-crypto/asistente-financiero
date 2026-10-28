@@ -13,7 +13,7 @@
 - Regresión: 133/133 pruebas automáticas (69 backend, 64 frontend) después de la última corrección (EV-D20-01/02).
 - Accesibilidad automatizable: axe 60 escaneos con 0 violaciones; teclado y reflujo 21/21 (EV-REG-02/03).
 - 0 defectos críticos. Ningún defecto afectó saldos, tasas guardadas ni datos.
-- La versión probada es la que corre en producción: mismo paquete `main-G7GWPR2K.js` (EV-PROD-01).
+- La versión probada es la que corre en producción: mismo paquete `main-R4RK5IAX.js` en `7c09956` (EV-PROD-01).
 
 **Por qué no es GO**
 1. **Falta evidencia en producción con sesión**: tasa real con fecha ≤ 4 días (CP-13), cron autorizado (D-08) y LCP móvil (CP-40). Cobertura de requisitos: 21/25 = 84 % (umbral 100 %).
