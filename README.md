@@ -1,6 +1,48 @@
 # Asistente Financiero
 
-Aplicación de finanzas personales con Angular y Express: carteras, movimientos, carga rápida con vista previa, presupuestos, recordatorios, deudas, metas, grupos y asistente Groq.
+Aplicación web de finanzas personales para registrar ingresos y gastos, controlar presupuestos y metas, y consultar el estado de tus cuentas con un asistente de inteligencia artificial.
+
+**Demo en línea:** [asistente-financiero-seven.vercel.app](https://asistente-financiero-seven.vercel.app)
+
+![Angular](https://img.shields.io/badge/Angular-20-DD0031?logo=angular&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-24-339933?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)
+[![Verificar aplicación](https://github.com/jolauschevez1-crypto/asistente-financiero/actions/workflows/quality.yml/badge.svg)](https://github.com/jolauschevez1-crypto/asistente-financiero/actions/workflows/quality.yml)
+
+## Funcionalidades
+
+- **Carteras multidivisa:** cada cartera tiene su moneda (USD, EUR, MXN) y el panel muestra el total convertido con tasas de referencia diarias.
+- **Movimientos y carga rápida:** registro de ingresos y gastos, con carga de hasta 30 gastos a la vez y vista previa antes de guardar.
+- **Presupuestos, metas y deudas:** seguimiento de límites de gasto, objetivos de ahorro y pagos pendientes.
+- **Recordatorios:** avisos de pagos que se confirman antes de mover dinero.
+- **Gastos compartidos:** grupos para dividir gastos entre varias personas.
+- **Estadísticas:** resúmenes del comportamiento financiero.
+- **Asistente con IA:** responde preguntas sobre tus finanzas (solo consulta, no realiza movimientos).
+- **Seguridad:** autenticación con JWT, contraseñas robustas, sesiones con expiración y panel de administración.
+
+## Tecnologías
+
+| Capa | Herramientas |
+|---|---|
+| Frontend | Angular 20, TypeScript |
+| Backend | Node.js, Express |
+| Base de datos | PostgreSQL (PGlite embebido para desarrollo local) |
+| Inteligencia artificial | Groq |
+| Despliegue | Vercel (frontend, API y tareas programadas) |
+| Calidad | Pruebas automatizadas y GitHub Actions en cada cambio |
+
+## Estructura del proyecto
+
+```
+asistente-financiero/
+├── FRONTEND/   Aplicación Angular (páginas, servicios y componentes)
+├── BACKEND/    API REST en Express (rutas, controladores, servicios y pruebas)
+├── api/        Punto de entrada para las funciones de Vercel
+├── docs/       Documentación y auditoría del proyecto
+└── vercel.json Configuración de despliegue
+```
 
 ## Desarrollo local
 
@@ -39,3 +81,9 @@ Configura las variables privadas directamente en Vercel: `DATABASE_URL`, `JWT_SE
 - Google requiere configurar el Client ID y los orígenes autorizados. Su presencia en la interfaz no acredita que la autorización externa esté completada.
 
 El expediente de auditoría está en `docs/auditoria` (sin secretos ni datos reales). Los datos de prueba son ficticios.
+
+
+## Autor
+
+**Anthony Jolaus Chevez Romero** · Estudiante de Tecnologías de la Información, Universidad Técnica de Machala  
+GitHub: [@jolauschevez1-crypto](https://github.com/jolauschevez1-crypto)
