@@ -29,17 +29,25 @@ function mapConfiguracionAdmin(config) {
 }
 
 /**
- * Configuracion publica: igual que la admin, pero con las claves sensibles
- * (`ia_api_key`, `telegram_bot_token`) enmascaradas.
+ * Claves que la pantalla de inicio y el shell global pueden leer sin sesion.
+ * Lista de permitidos (allowlist): cualquier clave nueva queda privada hasta que se agregue aqui.
+ * Hallazgo ZAP H-01 (Exposed Secrets, CWE-522): antes se devolvia toda la configuracion y las
+ * claves sensibles solo se enmascaraban, revelando su existencia y sus ultimos 4 caracteres.
+ */
+const CLAVES_PUBLICAS = ['nombre_sistema', 'logo_url', 'tema', 'color_principal', 'idioma', 'moneda'];
+
+/**
+ * Configuracion publica: solo las claves de CLAVES_PUBLICAS. Nunca incluye
+ * `ia_api_key`, `telegram_bot_token` ni claves desconocidas.
  * @param {Record<string, string>} config
  * @returns {Record<string, string>}
  */
 function mapConfiguracionPublica(config) {
-    const copia = { ...config };
-    CLAVES_SENSIBLES.forEach((clave) => {
-        if (copia[clave]) copia[clave] = enmascarar(copia[clave]);
+    const publica = {};
+    CLAVES_PUBLICAS.forEach((clave) => {
+        if (Object.prototype.hasOwnProperty.call(config || {}, clave)) publica[clave] = config[clave];
     });
-    return copia;
+    return publica;
 }
 
-module.exports = { mapConfiguracionAdmin, mapConfiguracionPublica, enmascarar };
+module.exports = { mapConfiguracionAdmin, mapConfiguracionPublica, enmascarar, CLAVES_PUBLICAS, CLAVES_SENSIBLES };
